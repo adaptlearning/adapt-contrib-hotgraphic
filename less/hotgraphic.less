@@ -1,0 +1,132 @@
+.hotgraphic-component {
+
+  .hotgraphic-graphic {
+    position:relative;
+    border:1px solid #fbfbfb;
+
+    .hotgraphic-graphic-pin {
+      display:block;
+      position:absolute;
+      top:0%;
+      left:0%;
+
+      .hotgraphic-graphic-pin-icon {
+        background-position: -96px -48px;
+          &:hover {
+            background-position:-96px -96px;
+        }
+      }
+
+      &.visited {
+        .hotgraphic-graphic-pin-icon {
+          background-position: -96px -144px;
+        }
+      }
+
+    }
+  }
+
+  .hotgraphic-popup {
+
+    display: none;
+    z-index: 299;
+    width:auto;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height:auto;
+    margin:40px;
+    background-color:#ffffff;
+    border:1px solid #b9b9b9;
+
+    .hotgraphic-popup-toolbar {
+      padding:10px;
+      position:relative;
+      background-color:#8fc344;
+
+      .hotgraphic-popup-close {
+        background-position: -768px 0;
+
+        &:hover {
+          background-position:-816px 0;
+        }
+      }
+    }
+
+    .hotgraphic-popup-nav {
+      background-color:#989898;
+    }
+
+    .hotgraphic-popup-done {
+      position:absolute;
+      top:10px;
+      color:#ffffff;
+      right:10px;
+    }
+
+    .hotgraphic-popup-count {
+      color: #FFFFFF;
+      float: left;
+      height: 30px;
+      line-height: 30px;
+      margin-right: 10px;
+      vertical-align: baseline;
+    }
+    .hotgraphic-popup-inner {
+      padding:20px;
+      margin:0px;
+    }
+
+    .hotgraphic-popup-controls {
+      float:left;
+      margin-right:10px;
+
+      .hotgraphic-popup-arrow-r {
+        background-position: -96px -192px;
+        &:hover {
+          background-position:-96px -240px;
+        }
+      }
+      .hotgraphic-popup-arrow-l {
+        background-position: -96px -288px;
+        &:hover {
+          background-position:-96px -336px;
+        }
+      }
+    }
+
+    .h5, .p {
+      font-size:19px;
+      margin-bottom:8px
+      color:#333333;
+    }
+
+    .a {
+      outline: none;
+    }
+  }
+
+  .hotgraphic-item-graphic {
+    width:50%;
+    float:right;
+
+    .hotgraphic-item-graphic-inner{
+      padding-left:5px;
+    }
+  }
+
+  .hotgraphic-item-body {
+    width:50%;
+    float:left;
+  }
+
+  .hotgraphic-icon {
+    background-image: url("adapt-sprite-sheet-24.png");
+    background-repeat: no-repeat;
+    display: block;
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+
+}
