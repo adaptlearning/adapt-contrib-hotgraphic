@@ -6,12 +6,7 @@ define(function(require) {
     
     init: function () {
       this.listenTo(Adapt, 'device:changed', this.reRender, this);
-      
-      if (Adapt.device.touch==true) {
-        this.model.set('touch',true);
-      } else {
-        this.model.set('touch',false);
-      }
+      this.model.set('touch', Adapt.device.touch);
     },
 
     events: function () {
@@ -34,7 +29,7 @@ define(function(require) {
     },
     
     reRender: function() {
-      if (Adapt.device.screenWidth < 700) {
+      if (Adapt.device.screenSize == 'small') {
         new Adapt.narrative({model:this.model, $parent:this.$parent}).reRender();
         this.remove();
       }
@@ -48,7 +43,6 @@ define(function(require) {
 
     openHotGraphic: function (event) {
       event.preventDefault();
-      this.$currentItem = $(event.currentTarget);
       var currentHotSpot = $(event.currentTarget).addClass('visited').data('id');
       this.$('.hotgraphic-item').hide().removeClass('active');
       this.$('.'+currentHotSpot).show().addClass('active');
@@ -66,19 +60,22 @@ define(function(require) {
       event.preventDefault();
       var currentIndex = this.$('.hotgraphic-item.active').index();
       this.$('.hotgraphic-popup').hide();
-      // return focus to active item hotspot
       this.$('.hotgraphic-item').eq(currentIndex).focus();
     },
 
     swipeHotGraphic:function(event){
       event.preventDefault();
-      var $that = this,x = event.originalEvent.touches[0].pageX, X;
-      this.$('.hotgraphic-popup-inner').one('touchmove', function (event) {
-        event.preventDefault();
-        X = event.originalEvent.touches[0].pageX;
-        if (X < x) $that.nextHotGraphic();
-        else $that.previousHotGraphic();
-      });
+      var originalX = event.originalEvent.touches[0].pageX
+      this.$('.hotgraphic-popup-inner').one('touchmove', _.bind(
+        function (event) {
+          event.preventDefault();
+          if (event.originalEvent.touches[0].pageX < originalX) {
+            this.nextHotGraphic(event);
+          } else {
+            this.previousHotGraphic(event);
+          }
+        }, this)
+      );
     },
 
     previousHotGraphic: function (event) {

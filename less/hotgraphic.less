@@ -1,20 +1,17 @@
 .hotgraphic-component {
 
   .hotgraphic-graphic {
-    position:relative;
-    border:1px solid #fbfbfb;
+    position: relative;
+    border: 1px solid #fbfbfb;
 
     .hotgraphic-graphic-pin {
-      display:block;
-      position:absolute;
-      top:0%;
-      left:0%;
+      display: block;
+      position: absolute;
+      top: 0%;
+      left: 0%;
 
       .hotgraphic-graphic-pin-icon {
         background-position: -96px -48px;
-          &:hover {
-            background-position:-96px -96px;
-        }
       }
 
       &.visited {
@@ -22,102 +19,96 @@
           background-position: -96px -144px;
         }
       }
-
     }
   }
 
   .hotgraphic-popup {
-
     display: none;
-    z-index: 299;
-    width:auto;
+    width: auto;
     position: absolute;
     left: 0px;
+    right: 0px;
     top: 0px;
-    height:auto;
-    margin:40px;
-    background-color:#ffffff;
-    border:1px solid #b9b9b9;
+    height: auto;
+    margin: 40px;
+    background-color: #ffffff;
+    border: 1px solid #b9b9b9;
+    z-index: 299;
 
     .hotgraphic-popup-toolbar {
-      padding:10px;
-      position:relative;
-      background-color:#8fc344;
+      padding: 10px;
+      position: relative;
+      background-color: #8fc344;
 
       .hotgraphic-popup-close {
         background-position: -768px 0;
-
-        &:hover {
-          background-position:-816px 0;
+      }
+    
+      .hotgraphic-popup-nav {
+        background-color: #989898;
+      }
+  
+      .hotgraphic-popup-done {
+        position: absolute;
+        top: 10px;
+        color: #ffffff;
+        right: 10px;
+      }
+  
+      .hotgraphic-popup-count {
+        color: #FFFFFF;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 10px;
+        vertical-align: baseline;
+      }
+  
+      .hotgraphic-popup-controls {
+        float: left;
+        margin-right: 10px;
+        padding: 2px;
+        
+        .hotgraphic-popup-arrow-r {
+          background-position: -96px -192px;
+        }
+        
+        .hotgraphic-popup-arrow-l {
+          background-position: -96px -288px;
         }
       }
     }
-
-    .hotgraphic-popup-nav {
-      background-color:#989898;
-    }
-
-    .hotgraphic-popup-done {
-      position:absolute;
-      top:10px;
-      color:#ffffff;
-      right:10px;
-    }
-
-    .hotgraphic-popup-count {
-      color: #FFFFFF;
-      float: left;
-      height: 30px;
-      line-height: 30px;
-      margin-right: 10px;
-      vertical-align: baseline;
-    }
+    
     .hotgraphic-popup-inner {
-      padding:20px;
-      margin:0px;
+      padding: 20px;
+      margin: 0px;
     }
 
-    .hotgraphic-popup-controls {
-      float:left;
-      margin-right:10px;
-
-      .hotgraphic-popup-arrow-r {
-        background-position: -96px -192px;
-        &:hover {
-          background-position:-96px -240px;
-        }
-      }
-      .hotgraphic-popup-arrow-l {
-        background-position: -96px -288px;
-        &:hover {
-          background-position:-96px -336px;
-        }
+    .hotgraphic-item-body-inner {
+      h5, p {
+        font-size: 19px;
+        margin-bottom: 8px
+        color: #333333;
       }
     }
 
-    .h5, .p {
-      font-size:19px;
-      margin-bottom:8px
-      color:#333333;
-    }
-
-    .a {
+    a {
       outline: none;
     }
   }
 
   .hotgraphic-item-graphic {
-    width:50%;
-    float:right;
+    width: 50%;
+    float: right;
 
     .hotgraphic-item-graphic-inner{
-      padding-left:5px;
+      padding-left: 10px;
     }
   }
 
   .hotgraphic-item-body {
-    width:50%;
-    float:left;
+    width: 50%;
+    float: left;
   }
 
   .hotgraphic-icon {
@@ -129,4 +120,39 @@
     width: 24px;
   }
 
+}
+
+.no-touch {
+  .hotgraphic-component {
+    .hotgraphic-graphic {
+      .hotgraphic-graphic-pin {
+        .hotgraphic-graphic-pin-icon {
+          &:hover {
+            background-position: -96px -96px;
+          }
+        }
+      }
+    }
+    .hotgraphic-popup {
+      .hotgraphic-popup-toolbar {
+        .hotgraphic-popup-close {
+          &:hover {
+            background-position: -816px 0;
+          }
+        }
+      }
+      .hotgraphic-popup-controls {
+        .hotgraphic-popup-arrow-r {
+          &:hover {
+            background-position: -96px -240px;
+          }
+        }
+        .hotgraphic-popup-arrow-l {
+          &:hover {
+            background-position: -96px -336px;
+          }
+        }
+      }
+    }
+  }
 }
