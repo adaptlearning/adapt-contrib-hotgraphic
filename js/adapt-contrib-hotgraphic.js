@@ -1,3 +1,8 @@
+/*
+* adapt-contrib-hotgraphic
+* License - http://github.com/adaptlearning/adapt_framework/LICENSE
+* Maintainers - Kevin Corry <kevinc@learningpool.com>
+*/
 define(function(require) {
   var ComponentView = require('coreViews/componentView');
   var Adapt = require('coreJS/adapt');
@@ -25,7 +30,9 @@ define(function(require) {
     },
 
     postRender: function() {
-      this.setReadyStatus();
+      this.$('.hotgraphic-widget').imageready(_.bind(function() {
+        this.setReadyStatus();
+      }, this));
     },
     
     reRender: function() {
@@ -33,12 +40,6 @@ define(function(require) {
         new Adapt.narrative({model:this.model, $parent:this.$parent}).reRender();
         this.remove();
       }
-    },
-
-    setReadyStatus: function() {
-      this.$('.hotgraphic-widget').imageready(_.bind(function() {
-        this.model.set('_isReady', true);
-      }, this));
     },
 
     openHotGraphic: function (event) {
@@ -52,7 +53,7 @@ define(function(require) {
       this.$('.hotgraphic-popup').show();
       this.$('.hotgraphic-popup a.next').focus();
       if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
-        this.model.set('_isComplete',true);
+        this.setCompletionStatus();
       }
     },
 
@@ -87,7 +88,7 @@ define(function(require) {
         this.$('.hotgraphic-graphic-pin').eq(currentIndex-1).addClass('visited');
         this.$('.hotgraphic-popup-count .current').html(currentIndex);
         if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
-          this.model.set('_isComplete',true);
+          this.setCompletionStatus();
         }
       }
     },
@@ -101,7 +102,7 @@ define(function(require) {
         this.$('.hotgraphic-graphic-pin').eq(currentIndex+1).addClass('visited');
         this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
         if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
-          this.model.set('_isComplete',true);
+          this.setCompletionStatus();
         }
       }
     }
