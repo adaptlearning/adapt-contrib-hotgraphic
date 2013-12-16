@@ -1,14 +1,15 @@
+{{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner">
   {{#if title}}
   <div class="hotgraphic-title component-title">
-    <h4 class="hotgraphic-title-inner">
+    <h4 class="hotgraphic-title-inner component-title-inner">
       {{{title}}}
     </h4>
   </div>
   {{/if}}
   {{#if body}}
   <div class="hotgraphic-body component-body">
-    <div class="hotgraphic-body-inner">
+    <div class="hotgraphic-body-inner component-body-inner">
       {{{body}}}
     </div>
   </div>
@@ -22,17 +23,17 @@
         <div class="hotgraphic-popup-toolbar clearfix">
           <div class="hotgraphic-popup-nav">
             <a href="#" class="hotgraphic-popup-controls back" title="back" alt="back">
-              <div class="hotgraphic-icon hotgraphic-popup-arrow-l"></div>
+              <div class="hotgraphic-popup-arrow-l icon icon-controls-small-left"></div>
             </a>
             <div class="hotgraphic-popup-count">
               <span class="current">1</span>/<span class="total">3</span>
             </div>
             <a href="#" class="hotgraphic-popup-controls next" title="next" alt="next">
-              <div class="hotgraphic-icon hotgraphic-popup-arrow-r"></div>
+              <div class="hotgraphic-popup-arrow-r icon icon-controls-small-right"></div>
             </a>
           </div>
           <a href="#" class="hotgraphic-popup-done" alt="done" title="done">
-            <div class="hotgraphic-icon hotgraphic-popup-close"></div>
+            <div class="hotgraphic-popup-close icon icon-cross"></div>
           </a>
         </div>
 
@@ -63,7 +64,7 @@
       <img src="{{graphic.src}}" alt="{{graphic.alt}}" title="{{{graphic.title}}}"/>
       {{#each items}}
       <a href="#" class="hotgraphic-graphic-pin" data-id="item-{{@index}}" style="top:{{{top}}}%; left:{{{left}}}%;" title="{{graphicTitle}}">
-        <div class="hotgraphic-icon hotgraphic-graphic-pin-icon"></div>
+        <div class="hotgraphic-graphic-pin-icon icon icon-pin"></div>
       </a>
       {{/each}}
     </div>

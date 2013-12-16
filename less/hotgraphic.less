@@ -2,24 +2,23 @@
 
   .hotgraphic-graphic {
     position: relative;
-    border: 1px solid #fbfbfb;
+  }
 
-    .hotgraphic-graphic-pin {
-      display: block;
-      position: absolute;
-      top: 0%;
-      left: 0%;
+  .hotgraphic-graphic-pin {
+    display: block;
+    position: absolute;
+    top: 0%;
+    left: 0%;
 
+    &.visited {
       .hotgraphic-graphic-pin-icon {
-        background-position: -96px -48px;
-      }
-
-      &.visited {
-        .hotgraphic-graphic-pin-icon {
-          background-position: -96px -144px;
-        }
+        color: @item-visited-color;
       }
     }
+  }
+
+  .hotgraphic-graphic-pin-icon {
+    color: @item-color;
   }
 
   .hotgraphic-popup {
@@ -31,79 +30,65 @@
     top: 0px;
     height: auto;
     margin: 40px;
-    background-color: #ffffff;
-    border: 1px solid #b9b9b9;
+    background-color: @background-color;
     z-index: 299;
+  }
 
-    .hotgraphic-popup-toolbar {
-      padding: 10px;
-      position: relative;
-      background-color: #8fc344;
+  .hotgraphic-popup-toolbar {
+    padding: @item-padding;
+    position: relative;
+    background-color: @item-color;
+  }
 
-      .hotgraphic-popup-close {
-        background-position: -768px 0;
-      }
-    
-      .hotgraphic-popup-nav {
-        background-color: #989898;
-      }
-  
-      .hotgraphic-popup-done {
-        position: absolute;
-        top: 10px;
-        color: #ffffff;
-        right: 10px;
-      }
-  
-      .hotgraphic-popup-count {
-        color: #FFFFFF;
-        float: left;
-        height: 30px;
-        line-height: 30px;
-        margin-right: 10px;
-        vertical-align: baseline;
-      }
-  
-      .hotgraphic-popup-controls {
-        float: left;
-        margin-right: 10px;
-        padding: 2px;
-        
-        .hotgraphic-popup-arrow-r {
-          background-position: -96px -192px;
-        }
-        
-        .hotgraphic-popup-arrow-l {
-          background-position: -96px -288px;
-        }
-      }
-    }
-    
-    .hotgraphic-popup-inner {
-      padding: 20px;
-      margin: 0px;
-    }
+  .hotgraphic-popup-nav {
+    background-color: @item-color;
+  }
 
-    .hotgraphic-item-body-inner {
-      h5, p {
-        font-size: 19px;
-        margin-bottom: 8px
-        color: #333333;
-      }
-    }
+  .hotgraphic-popup-done {
+    color: @item-text-color;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 
-    a {
-      outline: none;
-    }
+  .hotgraphic-popup-arrow-l {
+    color: @item-text-color;
+  }
+
+  .hotgraphic-popup-arrow-r {
+    color: @item-text-color;
+  }
+
+  .hotgraphic-popup-close {
+    color: @item-text-color;
+  }
+
+  .hotgraphic-popup-count {
+    color: @item-text-color;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-right: @item-padding-right;
+    vertical-align: baseline;
+  }
+
+  .hotgraphic-popup-controls {
+    float: left;
+    margin-right: @item-padding-right;
+    padding: @item-spacing;
+  }
+
+  .hotgraphic-popup-inner {
+    padding: @item-padding;
   }
 
   .hotgraphic-item-graphic {
     width: 50%;
     float: right;
+  }
 
-    .hotgraphic-item-graphic-inner{
-      padding-left: 10px;
-    }
+  .hotgraphic-item-graphic-inner{
+    padding-left: @item-padding-left;
   }
 
   .hotgraphic-item-body {
@@ -111,13 +96,9 @@
     float: left;
   }
 
-  .hotgraphic-icon {
-    background-image: url("adapt-sprite-sheet-24.png");
-    background-repeat: no-repeat;
-    display: block;
-    font-size: 24px;
-    height: 24px;
-    width: 24px;
+  a {
+    outline: none;
+    text-decoration: none;
   }
 
 }
@@ -128,7 +109,7 @@
       .hotgraphic-graphic-pin {
         .hotgraphic-graphic-pin-icon {
           &:hover {
-            background-position: -96px -96px;
+            color: @item-hover-color;
           }
         }
       }
@@ -137,20 +118,20 @@
       .hotgraphic-popup-toolbar {
         .hotgraphic-popup-close {
           &:hover {
-            background-position: -816px 0;
+            color: @item-hover-color;
           }
         }
       }
-      .hotgraphic-popup-controls {
-        .hotgraphic-popup-arrow-r {
-          &:hover {
-            background-position: -96px -240px;
-          }
+    }
+    .hotgraphic-popup-controls {
+      .hotgraphic-popup-arrow-r {
+        &:hover {
+          color: @item-hover-color;
         }
-        .hotgraphic-popup-arrow-l {
-          &:hover {
-            background-position: -96px -336px;
-          }
+      }
+      .hotgraphic-popup-arrow-l {
+        &:hover {
+          color: @item-hover-color;
         }
       }
     }

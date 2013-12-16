@@ -1,0 +1,53 @@
+{
+      "_id": "c-40",
+      "_parentId":"b-05",
+      "_classes": "",
+      "_type":"component",
+      "_component": "hotgraphic",
+      "_layout": "full",    
+      "title": "Hot graphic",
+      "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
+      "graphic": {
+        "src": "hot_graphic.jpg",
+        "alt": "alt text",
+        "title": "title"
+      },
+      "items": [
+        {
+            "title": "Hotspot 1 title",
+            "body": "This is display text 1.",
+            "graphic": {
+                "src": "image1.jpg",
+                "alt": "alt text",
+                "title": "title text"
+            },
+            "strapline": "strapline...",
+            "top": 5,
+            "left": 20
+        },
+        {
+            "title": "Hotspot 2 title",
+            "body": "This is display text 2.",
+            "graphic": {
+                "src": "image2.jpg",
+                "alt": "alt text",
+                "title": "title text"
+            },
+            "strapline": "strapline...",
+            "top": 25,
+            "left": 60
+        },
+        {
+            "title": "Hotspot 3 title",
+            "body": "This is display text 3.",
+            "graphic": {
+                "src": "image3.jpg",
+                "alt": "alt text",
+                "title": "title text"
+            },
+            "strapline": "strapline...",
+            "top": 85,
+            "left": 40
+        }
+    ]
+  }
