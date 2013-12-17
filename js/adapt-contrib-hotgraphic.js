@@ -8,11 +8,6 @@ define(function(require) {
   var Adapt = require('coreJS/adapt');
 
   var HotGraphic = ComponentView.extend({
-    
-    init: function () {
-      this.listenTo(Adapt, 'device:changed', this.reRender, this);
-      this.model.set('touch', Adapt.device.touch);
-    },
 
     events: function () {
       return Adapt.device.touch==false ? {
@@ -29,12 +24,17 @@ define(function(require) {
       }
     },
 
+    preRender: function () {
+      this.listenTo(Adapt, 'device:changed', this.reRender, this);
+      this.model.set('touch', Adapt.device.touch);
+    },
+
     postRender: function() {
       this.$('.hotgraphic-widget').imageready(_.bind(function() {
         this.setReadyStatus();
       }, this));
     },
-    
+
     reRender: function() {
       if (Adapt.device.screenSize == 'small') {
         new Adapt.narrative({model:this.model, $parent:this.$parent}).reRender();
