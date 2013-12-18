@@ -26,7 +26,6 @@ define(function(require) {
 
     preRender: function () {
       this.listenTo(Adapt, 'device:changed', this.reRender, this);
-      this.model.set('touch', Adapt.device.touch);
     },
 
     postRender: function() {
