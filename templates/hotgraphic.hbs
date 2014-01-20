@@ -63,7 +63,7 @@
 
       <img src="{{graphic.src}}" alt="{{graphic.alt}}" title="{{{graphic.title}}}"/>
       {{#each items}}
-      <a href="#" class="hotgraphic-graphic-pin" data-id="item-{{@index}}" style="top:{{{top}}}%; left:{{{left}}}%;" title="{{graphicTitle}}">
+      <a href="#" class="hotgraphic-graphic-pin {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{top}}}%; left:{{{left}}}%;" title="{{graphicTitle}}">
         <div class="hotgraphic-graphic-pin-icon icon icon-pin"></div>
       </a>
       {{/each}}

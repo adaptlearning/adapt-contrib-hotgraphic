@@ -43,17 +43,15 @@ define(function(require) {
 
     openHotGraphic: function (event) {
       event.preventDefault();
-      var currentHotSpot = $(event.currentTarget).addClass('visited').data('id');
+      var currentHotSpot = $(event.currentTarget).data('id');
       this.$('.hotgraphic-item').hide().removeClass('active');
       this.$('.'+currentHotSpot).show().addClass('active');
       var currentIndex = this.$('.hotgraphic-item.active').index();
+      this.setVisited(currentIndex);
       this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
       this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
       this.$('.hotgraphic-popup').show();
       this.$('.hotgraphic-popup a.next').focus();
-      if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
-        this.setCompletionStatus();
-      }
     },
 
     closeHotGraphic: function (event) {
@@ -84,11 +82,8 @@ define(function(require) {
       if (currentIndex > 0) {
         this.$('.hotgraphic-item.active').hide().removeClass('active');
         this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-        this.$('.hotgraphic-graphic-pin').eq(currentIndex-1).addClass('visited');
+        this.setVisited(currentIndex-1);
         this.$('.hotgraphic-popup-count .current').html(currentIndex);
-        if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
-          this.setCompletionStatus();
-        }
       }
     },
 
@@ -98,9 +93,27 @@ define(function(require) {
       if (currentIndex < (this.$('.hotgraphic-item').length-1)) {
         this.$('.hotgraphic-item.active').hide().removeClass('active');
         this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-        this.$('.hotgraphic-graphic-pin').eq(currentIndex+1).addClass('visited');
+        this.setVisited(currentIndex+1);
         this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
-        if (this.$('.visited').length == this.$('.hotgraphic-item').length) {
+      }
+    },
+
+    setVisited: function(index) {
+      var item = this.model.get('items')[index];
+      item._isVisited = true;
+      this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited');
+      this.checkCompletionStatus();
+    },
+
+    getVisitedItems: function() {
+      return _.filter(this.model.get('items'), function(item) {
+        return item._isVisited;
+      });
+    },
+
+    checkCompletionStatus: function() {
+      if (!this.model.get('_isComplete')) {
+        if (this.getVisitedItems().length == this.model.get('items').length) {
           this.setCompletionStatus();
         }
       }
