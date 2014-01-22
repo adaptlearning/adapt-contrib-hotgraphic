@@ -9,6 +9,17 @@ define(function(require) {
 
   var HotGraphic = ComponentView.extend({
 
+    initialize: function() {
+      this.listenTo(Adapt, 'remove', this.remove);
+      this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+      this.preRender();
+      if (Adapt.device.screenSize!='small') {
+        this.render();
+      } else {
+        this.reRender();
+      }
+    },
+
     events: function () {
       return Adapt.device.touch==false ? {
         'click .hotgraphic-graphic-pin':'openHotGraphic',
@@ -36,9 +47,30 @@ define(function(require) {
 
     reRender: function() {
       if (Adapt.device.screenSize == 'small') {
-        new Adapt.narrative({model:this.model, $parent:this.$parent}).reRender();
-        this.remove();
+        this.replaceWithNarrative();
       }
+    },
+
+    replaceWithNarrative: function() {
+      var Narrative = require('components/adapt-contrib-narrative/js/adapt-contrib-narrative');
+      var model = this.prepareNarrativeModel();
+      var newNarrative = new Narrative({model:model, $parent: this.options.$parent});
+      newNarrative.reRender();
+      newNarrative.setupNarrative();
+      this.options.$parent.append(newNarrative.$el);
+      Adapt.trigger('device:resize');
+      this.remove();
+    },
+
+    prepareNarrativeModel: function() {
+      var model = this.model;
+      model.set('_component', 'narrative');
+      model.set('_wasHotgraphic', true);
+      model.set('originalBody', model.get('body'));
+      if (model.get('mobileBody')) {
+        model.set('body', model.get('mobileBody'));
+      }
+      return model;
     },
 
     openHotGraphic: function (event) {
@@ -122,5 +154,7 @@ define(function(require) {
   });
 
   Adapt.register("hotgraphic", HotGraphic);
+
+  return HotGraphic;
 
 });
