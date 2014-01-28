@@ -13,7 +13,7 @@ define(function(require) {
       this.listenTo(Adapt, 'remove', this.remove);
       this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
       this.preRender();
-      if (Adapt.device.screenSize!='small') {
+      if (Adapt.device.screenSize=='large') {
         this.render();
       } else {
         this.reRender();
@@ -46,7 +46,7 @@ define(function(require) {
     },
 
     reRender: function() {
-      if (Adapt.device.screenSize == 'small') {
+      if (Adapt.device.screenSize != 'large') {
         this.replaceWithNarrative();
       }
     },
