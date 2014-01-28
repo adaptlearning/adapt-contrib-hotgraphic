@@ -21,17 +21,11 @@ define(function(require) {
     },
 
     events: function () {
-      return Adapt.device.touch==false ? {
+      return {
         'click .hotgraphic-graphic-pin':'openHotGraphic',
         'click .hotgraphic-popup-done':'closeHotGraphic',
         'click .hotgraphic-popup-nav .back':'previousHotGraphic',
         'click .hotgraphic-popup-nav .next':'nextHotGraphic'
-      }:{
-        'click .hotgraphic-graphic-pin':'openHotGraphic',
-        'click .hotgraphic-popup-done':'closeHotGraphic',
-        'click .hotgraphic-popup-nav .back':'previousHotGraphic',
-        'click .hotgraphic-popup-nav .next':'nextHotGraphic',
-        'touchstart .hotgraphic-popup-inner':'swipeHotGraphic'
       }
     },
 
@@ -91,21 +85,6 @@ define(function(require) {
       var currentIndex = this.$('.hotgraphic-item.active').index();
       this.$('.hotgraphic-popup').hide();
       this.$('.hotgraphic-item').eq(currentIndex).focus();
-    },
-
-    swipeHotGraphic:function(event){
-      event.preventDefault();
-      var originalX = event.originalEvent.touches[0].pageX
-      this.$('.hotgraphic-popup-inner').one('touchmove', _.bind(
-        function (event) {
-          event.preventDefault();
-          if (event.originalEvent.touches[0].pageX < originalX) {
-            this.nextHotGraphic(event);
-          } else {
-            this.previousHotGraphic(event);
-          }
-        }, this)
-      );
     },
 
     previousHotGraphic: function (event) {
