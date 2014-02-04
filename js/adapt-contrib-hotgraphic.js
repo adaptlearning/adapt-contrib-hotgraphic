@@ -52,8 +52,11 @@ define(function(require) {
       newNarrative.reRender();
       newNarrative.setupNarrative();
       this.options.$parent.append(newNarrative.$el);
-      Adapt.trigger('device:resize');
       this.remove();
+      newNarrative.resizeControl();
+      _.defer(function(){
+        Adapt.trigger('device:resize');
+      });
     },
 
     prepareNarrativeModel: function() {
