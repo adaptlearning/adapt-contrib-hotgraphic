@@ -67,6 +67,18 @@ define(function(require) {
       return model;
     },
 
+    applyNavigationClasses: function (index) {
+      var $nav = this.$('.hotgraphic-popup-nav'),
+          itemCount = this.$('.hotgraphic-item').length;
+
+      $nav.removeClass('first').removeClass('last');
+      if(index === 0) {
+        this.$('.hotgraphic-popup-nav').addClass('first');
+      } else if (index >= itemCount-1) {
+        this.$('.hotgraphic-popup-nav').addClass('last');
+      }
+    },
+
     openHotGraphic: function (event) {
       event.preventDefault();
       var currentHotSpot = $(event.currentTarget).data('id');
@@ -78,6 +90,7 @@ define(function(require) {
       this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
       this.$('.hotgraphic-popup').show();
       this.$('.hotgraphic-popup a.next').focus();
+      this.applyNavigationClasses(currentIndex);
     },
 
     closeHotGraphic: function (event) {
@@ -96,6 +109,7 @@ define(function(require) {
         this.setVisited(currentIndex-1);
         this.$('.hotgraphic-popup-count .current').html(currentIndex);
       }
+      this.applyNavigationClasses(currentIndex-1);
     },
 
     nextHotGraphic: function (event) {
@@ -107,6 +121,7 @@ define(function(require) {
         this.setVisited(currentIndex+1);
         this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
       }
+      this.applyNavigationClasses(currentIndex+1);
     },
 
     setVisited: function(index) {
