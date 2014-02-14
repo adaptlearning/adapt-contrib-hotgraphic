@@ -1,19 +1,6 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner">
-  {{#if title}}
-  <div class="hotgraphic-title component-title">
-    <h4 class="hotgraphic-title-inner component-title-inner">
-      {{{title}}}
-    </h4>
-  </div>
-  {{/if}}
-  {{#if body}}
-  <div class="hotgraphic-body component-body">
-    <div class="hotgraphic-body-inner component-body-inner">
-      {{{body}}}
-    </div>
-  </div>
-  {{/if}}
+  {{> component this}}
   <div class="hotgraphic-widget component-widget">
 
     <div class="hotgraphic-graphic">
