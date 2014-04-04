@@ -7,6 +7,8 @@
   ],
   "description": "A contributed hot graphic component that enables a user to click on hot spots over an image and display a detailed popup that includes an image with text.",
   "main": "/js/adapt-contrib-hotgraphic.js",
+  "displayName" : "Hot Graphic",
+  "component" : "hotgraphic",
   "keywords": [
     "adapt-plugin",
     "adapt-component"
