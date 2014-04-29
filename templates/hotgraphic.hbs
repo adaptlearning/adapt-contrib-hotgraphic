@@ -25,11 +25,11 @@
         </div>
 
         <div class="hotgraphic-popup-inner clearfix">
-          {{#each items}}
+          {{#each _items}}
           <div class="hotgraphic-item item-{{@index}}">
             <div class="hotgraphic-item-graphic">
               <div class="hotgraphic-item-graphic-inner">
-                <img src="{{graphic.src}}" alt="{{graphic.alt}}" title="{{{graphic.title}}}"/>
+                <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
               </div>
             </div>
             <div class="hotgraphic-item-body">
@@ -48,9 +48,9 @@
 
       </div>
 
-      <img src="{{graphic.src}}" alt="{{graphic.alt}}" title="{{{graphic.title}}}"/>
-      {{#each items}}
-      <a href="#" class="hotgraphic-graphic-pin {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{top}}}%; left:{{{left}}}%;" title="{{graphicTitle}}">
+      <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
+      {{#each _items}}
+      <a href="#" class="hotgraphic-graphic-pin {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" title="{{graphicTitle}}">
         <div class="hotgraphic-graphic-pin-icon icon icon-pin"></div>
       </a>
       {{/each}}

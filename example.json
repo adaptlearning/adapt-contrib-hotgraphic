@@ -8,47 +8,47 @@
       "title": "Hot graphic",
       "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
       "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-      "graphic": {
+      "_graphic": {
         "src": "hot_graphic.jpg",
         "alt": "alt text",
         "title": "title"
       },
-      "items": [
+      "_items": [
         {
             "title": "Hotspot 1 title",
             "body": "This is display text 1.",
-            "graphic": {
+            "_graphic": {
                 "src": "image1.jpg",
                 "alt": "alt text",
                 "title": "title text"
             },
             "strapline": "strapline...",
-            "top": 5,
-            "left": 20
+            "_top": 5,
+            "_left": 20
         },
         {
             "title": "Hotspot 2 title",
             "body": "This is display text 2.",
-            "graphic": {
+            "_graphic": {
                 "src": "image2.jpg",
                 "alt": "alt text",
                 "title": "title text"
             },
             "strapline": "strapline...",
-            "top": 25,
-            "left": 60
+            "_top": 25,
+            "_left": 60
         },
         {
             "title": "Hotspot 3 title",
             "body": "This is display text 3.",
-            "graphic": {
+            "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
                 "title": "title text"
             },
             "strapline": "strapline...",
-            "top": 85,
-            "left": 40
+            "_top": 85,
+            "_left": 40
         }
     ]
   }

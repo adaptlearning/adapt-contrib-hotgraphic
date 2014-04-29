@@ -1,7 +1,7 @@
 /*
 * adapt-contrib-hotgraphic
 * License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Kevin Corry <kevinc@learningpool.com>
+* Maintainers - Kevin Corry <kevinc@learningpool.com>, Daryl Hedley <darylhedley@hotmail.com>
 */
 define(function(require) {
   var ComponentView = require('coreViews/componentView');
@@ -125,21 +125,21 @@ define(function(require) {
     },
 
     setVisited: function(index) {
-      var item = this.model.get('items')[index];
+      var item = this.model.get('_items')[index];
       item._isVisited = true;
       this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited');
       this.checkCompletionStatus();
     },
 
     getVisitedItems: function() {
-      return _.filter(this.model.get('items'), function(item) {
+      return _.filter(this.model.get('_items'), function(item) {
         return item._isVisited;
       });
     },
 
     checkCompletionStatus: function() {
       if (!this.model.get('_isComplete')) {
-        if (this.getVisitedItems().length == this.model.get('items').length) {
+        if (this.getVisitedItems().length == this.model.get('_items').length) {
           this.setCompletionStatus();
         }
       }
