@@ -6,8 +6,10 @@
       "_component": "hotgraphic",
       "_layout": "full",    
       "title": "Hot graphic",
+      "displayTitle": "Hot graphic",
       "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
       "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
+      "instruction":"",
       "_graphic": {
         "src": "hot_graphic.jpg",
         "alt": "alt text",
