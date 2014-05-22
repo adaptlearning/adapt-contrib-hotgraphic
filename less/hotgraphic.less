@@ -9,7 +9,7 @@
     position: absolute;
     top: 0%;
     left: 0%;
-    background-color:#fff;
+    background-color:@item-text-color;
     border-radius:50%;
 
     &.visited {
@@ -36,6 +36,7 @@
     height: auto;
     margin: 40px;
     background-color: @background-color;
+    border: @item-border;
     z-index: 5;
   }
 
@@ -111,38 +112,25 @@
 
 .no-touch {
   .hotgraphic-component {
-    .hotgraphic-graphic {
-      .hotgraphic-graphic-pin {
-        .hotgraphic-graphic-pin-icon {
-          &:hover {
-            color: @item-hover-color;
-          }
-        }
+    .hotgraphic-graphic-pin-icon {
+      &:hover {
+        color: @item-hover-color;
       }
     }
-    .hotgraphic-popup {
-      .hotgraphic-popup-toolbar {
-        .hotgraphic-popup-close {
-          &:hover {
-            color: @item-hover-color;
-          }
-        }
+    .hotgraphic-popup-close {
+      &:hover {
+        color: @item-hover-color;
       }
     }
-    .hotgraphic-popup-controls {
-      .hotgraphic-popup-arrow-r {
-        &:hover {
-          color: @item-hover-color;
-        }
-      }
-      .hotgraphic-popup-arrow-l {
-        &:hover {
-          color: @item-hover-color;
-        }
+    .hotgraphic-popup-arrow-r {
+      &:hover {
+        color: @item-hover-color;
       }
     }
-    .hotgraphic-popup {
-      border: @item-border;
+    .hotgraphic-popup-arrow-l {
+      &:hover {
+        color: @item-hover-color;
+      }
     }
   }
 
