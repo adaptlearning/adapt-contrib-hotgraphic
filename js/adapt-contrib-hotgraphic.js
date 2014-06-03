@@ -92,11 +92,6 @@ define(function(require) {
       this.$('.hotgraphic-popup a.next').focus();
       this.applyNavigationClasses(currentIndex);
 
-      if ($('.hotgraphic-popup-done').focus()) {
-        console.log("focus");
-          
-      };
-
     },
 
     closeHotGraphic: function (event) {
