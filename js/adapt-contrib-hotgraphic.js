@@ -91,6 +91,7 @@ define(function(require) {
       this.$('.hotgraphic-popup').show();
       this.$('.hotgraphic-popup a.next').focus();
       this.applyNavigationClasses(currentIndex);
+
     },
 
     closeHotGraphic: function (event) {
