@@ -81,6 +81,8 @@ define(function(require) {
 
     openHotGraphic: function (event) {
       event.preventDefault();
+      Adapt.trigger('popup:opened');
+      this.$('.hotgraphic-popup a').attr('tabindex', 0);
       var currentHotSpot = $(event.currentTarget).data('id');
       this.$('.hotgraphic-item').hide().removeClass('active');
       this.$('.'+currentHotSpot).show().addClass('active');
@@ -89,7 +91,7 @@ define(function(require) {
       this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
       this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
       this.$('.hotgraphic-popup').show();
-      this.$('.hotgraphic-popup a.next').focus();
+      this.$('.hotgraphic-popup-done').focus();
       this.applyNavigationClasses(currentIndex);
     },
 
@@ -97,7 +99,7 @@ define(function(require) {
       event.preventDefault();
       var currentIndex = this.$('.hotgraphic-item.active').index();
       this.$('.hotgraphic-popup').hide();
-      this.$('.hotgraphic-item').eq(currentIndex).focus();
+      Adapt.trigger('popup:closed');
     },
 
     previousHotGraphic: function (event) {
