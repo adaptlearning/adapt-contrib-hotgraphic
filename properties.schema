@@ -4,7 +4,7 @@
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
   "properties":{
-    "graphic": {
+    "_graphic": {
       "type":"object",
       "required":false,
       "properties":{
@@ -26,7 +26,7 @@
       "type":"string",
       "required":false
     },
-    "items": {
+    "_items": {
       "type":"array",
       "required":true,
       "items": {
@@ -45,7 +45,7 @@
             "type":"string",
             "required":true
           },
-          "graphic": {
+          "_graphic": {
             "type":"object",
             "required":true,
             "properties":{
@@ -63,12 +63,12 @@
               }
             }
           },
-          "left": {
+          "_left": {
             "type":"number",
             "required":true,
             "default":0
           },
-          "top": {
+          "_top": {
             "type":"number",
             "required":true,
             "default":0
