@@ -12,6 +12,7 @@ define(function(require) {
     initialize: function() {
       this.listenTo(Adapt, 'remove', this.remove);
       this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+      this.model.set('_accessibility', Adapt.course.get('_accessibility'));
       this.preRender();
       if (Adapt.device.screenSize=='large') {
         this.render();
