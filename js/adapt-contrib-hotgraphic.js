@@ -73,7 +73,7 @@ define(function(require) {
           itemCount = this.$('.hotgraphic-item').length;
 
       $nav.removeClass('first').removeClass('last');
-      if(index === 0) {
+      if(index <= 0) {
         this.$('.hotgraphic-popup-nav').addClass('first');
       } else if (index >= itemCount-1) {
         this.$('.hotgraphic-popup-nav').addClass('last');
