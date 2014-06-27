@@ -49,13 +49,19 @@
   .hotgraphic-popup-nav {
     background-color: @item-color;
 	&.first {
-		.icon-controls-small-left:before {
-			display:none;
+		.hotgraphic-popup-controls.back {
+			cursor: default;
+			.icon-controls-small-left:before {
+				display:none;
+			}
 		}
 	}
 	&.last {
-		.icon-controls-small-right:before {
-			display:none;
+		.hotgraphic-popup-controls.next {
+			cursor: default;
+			.icon-controls-small-right:before {
+				display:none;
+			}
 		}
 	}
   }
