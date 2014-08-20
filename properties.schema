@@ -7,71 +7,91 @@
     "_graphic": {
       "type":"object",
       "required":false,
+      "title":"Main hotgraphic",
       "properties":{
         "alt": {
           "type":"string",
-          "required":false
+          "required":false,
+          "title":"Alternative text"
         },
         "src": {
           "type":"string",
-          "required":false
+          "required":false,
+          "title":"Select hotgraphic"
         },
         "title": {
           "type":"string",
-          "required":false
+          "required":false,
+          "title":"Graphic title"
         }
       }
     },
     "mobileBody": {
       "type":"string",
-      "required":false
+      "required":false,
+      "title":"Mobile only body text"
     },
     "_items": {
       "type":"array",
       "required":true,
+      "minItems": 1,
+      "title":"Hotspots",
       "items": {
         "type":"object",
         "required":true,
         "properties":{
           "title": {
             "type":"string",
-            "required":true
+            "required":true,
+            "minLength": 1,
+            "title":"Hotspot title"
           },
           "body": {
             "type":"string",
-            "required":true
+            "required":true,
+            "minLength": 1,
+            "title":"Hotspot main body text"
           },
           "strapline": {
             "type":"string",
-            "required":true
+            "required":true,
+            "minLength": 1,
+            "title":"Strapline"
           },
           "_graphic": {
             "type":"object",
             "required":true,
+            "title":"Hotspot graphic",
             "properties":{
               "alt": {
                 "type":"string",
-                "required":false
+                "required":false,
+                "title":"Alternative text"
               },
               "src": {
                 "type":"string",
-                "required":true
+                "required":true,
+                "minLength": 1,
+                "title":"Select graphic"
               },
               "title": {
                 "type":"string",
-                "required":false
+                "required":false,
+                "title":"Graphic title"
               }
             }
           },
           "_left": {
             "type":"number",
             "required":true,
-            "default":0
+            "default":0,
+            "title":"Hotspot left positioning"
           },
           "_top": {
             "type":"number",
             "required":true,
-            "default":0
+            "default":0,
+            "title":"Hotspot top positioning"
           }
         }
       }
