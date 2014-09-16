@@ -12,8 +12,7 @@
       "instruction":"",
       "_graphic": {
         "src": "hot_graphic.jpg",
-        "alt": "alt text",
-        "title": "title"
+        "alt": "alt text"
       },
       "_items": [
         {
@@ -21,9 +20,9 @@
             "body": "This is display text 1.",
             "_graphic": {
                 "src": "image1.jpg",
-                "alt": "alt text",
-                "title": "title text"
+                "alt": "alt text"
             },
+            "pinAlt": "alt text",
             "strapline": "strapline...",
             "_top": 5,
             "_left": 20
@@ -33,9 +32,9 @@
             "body": "This is display text 2.",
             "_graphic": {
                 "src": "image2.jpg",
-                "alt": "alt text",
-                "title": "title text"
+                "alt": "alt text"
             },
+            "pinAlt": "alt text",
             "strapline": "strapline...",
             "_top": 25,
             "_left": 60
@@ -45,9 +44,9 @@
             "body": "This is display text 3.",
             "_graphic": {
                 "src": "image3.jpg",
-                "alt": "alt text",
-                "title": "title text"
+                "alt": "alt text"
             },
+            "pinAlt": "alt text",
             "strapline": "strapline...",
             "_top": 85,
             "_left": 40

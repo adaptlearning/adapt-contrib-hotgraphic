@@ -50,7 +50,7 @@
 
       <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
       {{#each _items}}
-      <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="{{_graphic.alt}}">
+      <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="{{pinAlt}}">
         <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin"></div>
       </a>
       {{/each}}
