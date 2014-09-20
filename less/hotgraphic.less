@@ -71,6 +71,10 @@
     position: absolute;
     top: @item-padding-top;
     right: @item-padding-right;
+    .dir-rtl & {
+        right: inherit;
+        left: @item-padding-right;
+    }
   }
 
   .hotgraphic-popup-arrow-l {
@@ -88,15 +92,29 @@
   .hotgraphic-popup-count {
     color: @item-text-color;
     float: left;
+    .dir-rtl & {
+        float: right;
+    }
     height: 30px;
     line-height: 30px;
     margin-right: @item-padding-right;
+    .dir-rtl & {
+        margin-right: inherit;
+        margin-left: @item-padding-right;
+    }
     vertical-align: baseline;
   }
 
   .hotgraphic-popup-controls {
     float: left;
+    .dir-rtl & {
+        float: right;
+    }
     margin-right: @item-padding-right;
+    .dir-rtl & {
+        margin-right: inherit;
+        margin-left: @item-padding-right;
+    }
     padding: @item-spacing;
   }
 
@@ -107,16 +125,26 @@
   .hotgraphic-item-graphic {
     width: 50%;
     float: right;
+    .dir-rtl & {
+        float: left;
+    }
     text-align: center;
   }
 
   .hotgraphic-item-graphic-inner{
     padding-left: @item-padding-left;
+    .dir-rtl & {
+        padding-left: inherit;
+        padding-right: @item-padding-left;
+    }
   }
 
   .hotgraphic-item-body {
     width: 50%;
     float: left;
+    .dir-rtl & {
+        float: right;
+    }
   }
 
   a {
