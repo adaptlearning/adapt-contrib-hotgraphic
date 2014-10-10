@@ -32,6 +32,9 @@ define(function(require) {
 
     preRender: function () {
       this.listenTo(Adapt, 'device:changed', this.reRender, this);
+      _.each(this.model.get('_items'), function(item) {
+        item._isVisited = false;
+      });
     },
 
     postRender: function() {
@@ -142,11 +145,9 @@ define(function(require) {
     },
 
     checkCompletionStatus: function() {
-      if (!this.model.get('_isComplete')) {
         if (this.getVisitedItems().length == this.model.get('_items').length) {
           this.setCompletionStatus();
         }
-      }
     }
 
   });
