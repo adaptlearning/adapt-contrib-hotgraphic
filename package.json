@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-hotgraphic",
-  "version": "0.0.2",
+  "version": "1.1.1",
   "description": "A contributed hot graphic component that enables a user to click on hot spots over an image and display a detailed popup that includes an image with text.",
   "main": "",
   "scripts": {
@@ -16,8 +16,8 @@
     "url": "https://github.com/adaptlearning/adapt-contrib-hotgraphic/issues"
   },
   "devDependencies": {
-    "karma": "~0.10",
-    "karma-mocha": "*",
-    "karma-expect": "*"
+    "karma": "0.10",
+    "karma-mocha": "0.1.0",
+    "karma-expect": "1.1.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-hotgraphic",
-  "version": "0.0.2",
+  "version": "1.1.1",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
   "authors": [
     "Kevin Corry <kevinc@learningpool.com>"
@@ -9,6 +9,10 @@
   "main": "/js/adapt-contrib-hotgraphic.js",
   "displayName" : "Hot Graphic",
   "component" : "hotgraphic",
+  "assetFields" : [
+    "_graphic.src",
+    "_items[]._graphic.src"
+  ],
   "keywords": [
     "adapt-plugin",
     "adapt-component"
