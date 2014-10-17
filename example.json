@@ -24,6 +24,7 @@
                 "alt": "alt text",
                 "title": "title text"
             },
+            "pinAlt": "Pin 1. Select here to open.",
             "strapline": "strapline...",
             "_top": 5,
             "_left": 20
@@ -36,6 +37,7 @@
                 "alt": "alt text",
                 "title": "title text"
             },
+            "pinAlt": "Pin 2. Select here to open.",
             "strapline": "strapline...",
             "_top": 25,
             "_left": 60
@@ -48,6 +50,7 @@
                 "alt": "alt text",
                 "title": "title text"
             },
+            "pinAlt": "Pin 3. Select here to open.",
             "strapline": "strapline...",
             "_top": 85,
             "_left": 40
