@@ -41,6 +41,10 @@ This defines the position of the component in the block. Values can be `full`, `
 
 This is optional body text that will be shown when viewed on mobile.
 
+####mobileInstruction
+
+This is optional instruction text that will be shown when viewed on mobile.
+
 ####_graphic
 
 The main hot graphic image is defined within this element. This element should contain only one value for `src`, `alt` and `title`.
