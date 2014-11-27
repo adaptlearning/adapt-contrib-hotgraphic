@@ -77,6 +77,8 @@ define(function(require) {
       } else if (index >= itemCount-1) {
         this.$('.hotgraphic-popup-nav').addClass('last');
       }
+
+      this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index);
     },
 
     openHotGraphic: function (event) {
@@ -88,6 +90,7 @@ define(function(require) {
       this.setVisited(currentIndex);
       this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
       this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
+      this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + currentIndex);
       this.$('.hotgraphic-popup').show();
       this.$('.hotgraphic-popup a.next').focus();
       this.applyNavigationClasses(currentIndex);
