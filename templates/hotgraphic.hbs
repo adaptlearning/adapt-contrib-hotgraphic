@@ -29,14 +29,16 @@
           <div class="hotgraphic-item component-item item-{{@index}}">
             <div class="hotgraphic-item-graphic">
               <div class="hotgraphic-item-graphic-inner">
-                <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
+                <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
               </div>
             </div>
             <div class="hotgraphic-item-body">
               <div class="hotgraphic-item-body-inner">
+                {{#if title}}
                 <h5>
                   {{{title}}}
                 </h5>
+                {{/if}}
                 <p>
                   {{{body}}}
                 </p>
