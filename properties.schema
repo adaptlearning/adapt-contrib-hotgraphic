@@ -43,6 +43,15 @@
       "validators": [],
       "help": "This body text is displayed on mobile devices when this component turns into a Narrative"
     },
+    "_hidePagination": {
+      "type":"boolean",
+      "required":true,
+      "default": false,
+      "title": "Hide pagination",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'true', the progress indicator and previous and next links will not be shown on the popup toolbar"
+    },
     "_items": {
       "type":"array",
       "required":true,
