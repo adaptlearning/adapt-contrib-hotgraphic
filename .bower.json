@@ -1,0 +1,31 @@
+{
+  "name": "adapt-contrib-hotgraphic",
+  "version": "1.1.3",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
+  "authors": [
+    "Kevin Corry <kevinc@learningpool.com>"
+  ],
+  "description": "A contributed hot graphic component that enables a user to click on hot spots over an image and display a detailed popup that includes an image with text.",
+  "main": "/js/adapt-contrib-hotgraphic.js",
+  "displayName": "Hot Graphic",
+  "component": "hotgraphic",
+  "assetFields": [
+    "_graphic.src",
+    "_items[]._graphic.src"
+  ],
+  "keywords": [
+    "adapt-plugin",
+    "adapt-component"
+  ],
+  "license": "GPLv3",
+  "_release": "1.1.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.3",
+    "commit": "31a632505c2b61b6ed4772dfaf3a98f140a153b4"
+  },
+  "_source": "git://github.com/adaptlearning/adapt-contrib-hotgraphic.git",
+  "_target": "~1.1.3",
+  "_originalSource": "adapt-contrib-hotgraphic",
+  "_direct": true
+}

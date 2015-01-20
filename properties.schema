@@ -65,7 +65,7 @@
             "required":true,
             "default": "",
             "inputType": "Text",
-            "validators": ["required"],
+            "validators": [],
             "help": "Title displayed in the popup"
           },
           "body": {
