@@ -104,8 +104,34 @@
                 "inputType": "Text",
                 "validators": [],
                 "help": "Alternative text for this image"
+              },
+              "title": {
+                "type":"string",
+                "required":true,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Title text for this image"
+              },
+              "classes": {
+                "type":"string",
+                "required": false,
+                "default": "",
+                "title": "Classes",
+                "inputType": "Text",
+                "validators": [],
+                "help": ""
               }
             }
+          },
+          "classes": {
+            "type":"string",
+            "required": false,
+            "default": "",
+            "title": "Classes",
+            "inputType": "Text",
+            "validators": [],
+            "help": ""
           },
           "_left": {
             "type":"number",
