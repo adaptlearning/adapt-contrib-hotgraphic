@@ -52,10 +52,10 @@
 
       </div>
 
-      {{#if _pinNarrative}}
+      {{#if _useGraphicsAsPins}}
         <div class="hotgraphic-narrative">
           {{#each _items}}
-          <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{_graphic._classes}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" title="{{graphicTitle}}">
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" title="{{_graphic.title}}">
             <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
           </a>
           {{/each}}

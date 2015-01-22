@@ -78,7 +78,10 @@ define(function(require) {
         this.$('.hotgraphic-popup-nav').addClass('last');
       }
 
-      var classes = this.model.get("_items")[index]._classes;
+      var classes = this.model.get("_items")[index]._classes 
+        ? this.model.get("_items")[index]._classes
+        : '';  // _classes has not been defined
+        
       this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
     },
 

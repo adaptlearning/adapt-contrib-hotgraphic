@@ -10,7 +10,7 @@
       "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
       "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
       "instruction":"",
-      "_pinNarrative": true, // if true it will use the pins as graphics instead of the large graphic
+      "_useGraphicsAsPins": false, 
       "_graphic": {
         "src": "hot_graphic.jpg",
         "alt": "alt text",
@@ -24,10 +24,10 @@
                 "src": "image1.jpg",
                 "alt": "alt text",
                 "title": "title text",
-                "_classes": "cols-2 rows-1" // Image will be 2 blocks wide, 1 block high
+                "_classes": "cols-2 rows-1" 
             },
             "strapline": "strapline...",
-            "_classes": "top-left", // Position to display the popup
+            "_classes": "top-left", 
             "_top": 5,
             "_left": 20
         },
@@ -38,7 +38,7 @@
                 "src": "image2.jpg",
                 "alt": "alt text",
                 "title": "title text",
-                "_classes": "cols-2 rows-1" // Image will be 2 blocks wide, 1 block high
+                "_classes": "cols-2 rows-1"
             },
             "strapline": "strapline...",
             "_classes": "center",
@@ -52,7 +52,7 @@
                 "src": "image3.jpg",
                 "alt": "alt text",
                 "title": "title text",
-                "_classes": "cols-1 rows-1" // Image will be 2 blocks wide, 1 block high
+                "_classes": "cols-1 rows-1" 
             },
             "strapline": "strapline...",
             "_classes": "bottom-right",
