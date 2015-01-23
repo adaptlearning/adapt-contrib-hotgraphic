@@ -133,7 +133,7 @@
               }
             }
           },
-          "classes": {
+          "_classes": {
             "type":"string",
             "required": false,
             "default": "",
