@@ -65,6 +65,7 @@ define(function(require) {
       model.set('_component', 'narrative');
       model.set('_wasHotgraphic', true);
       model.set('originalBody', model.get('body'));
+      model.set('originalInstruction', model.get('instruction'));
       if (model.get('mobileBody')) {
         model.set('body', model.get('mobileBody'));
       }
