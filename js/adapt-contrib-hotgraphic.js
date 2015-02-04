@@ -1,162 +1,178 @@
 /*
-* adapt-contrib-hotgraphic
-* License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Kevin Corry <kevinc@learningpool.com>, Daryl Hedley <darylhedley@hotmail.com>
-*/
+ * adapt-contrib-hotgraphic
+ * License - http://github.com/adaptlearning/adapt_framework/blob/master/LICENSE
+ * Maintainers - Kevin Corry <kevinc@learningpool.com>, Daryl Hedley <darylhedley@hotmail.com>
+ */
 define(function(require) {
-  var ComponentView = require('coreViews/componentView');
-  var Adapt = require('coreJS/adapt');
 
-  var HotGraphic = ComponentView.extend({
+    var ComponentView = require('coreViews/componentView');
+    var Adapt = require('coreJS/adapt');
 
-    initialize: function() {
-      this.listenTo(Adapt, 'remove', this.remove);
-      this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
-      this.model.set('_accessibility', Adapt.course.get('_accessibility'));
-      this.preRender();
-      if (Adapt.device.screenSize=='large') {
-        this.render();
-      } else {
-        this.reRender();
-      }
-    },
+    var HotGraphic = ComponentView.extend({
 
-    events: function () {
-      return {
-        'click .hotgraphic-graphic-pin':'openHotGraphic',
-        'click .hotgraphic-popup-done':'closeHotGraphic',
-        'click .hotgraphic-popup-nav .back':'previousHotGraphic',
-        'click .hotgraphic-popup-nav .next':'nextHotGraphic'
-      }
-    },
+        initialize: function() {
+            this.listenTo(Adapt, 'remove', this.remove);
+            this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+            this.model.set('_accessibility', Adapt.course.get('_accessibility'));
+            this.preRender();
+            if (Adapt.device.screenSize == 'large') {
+                this.render();
+            } else {
+                this.reRender();
+            }
+        },
 
-    preRender: function () {
-      this.listenTo(Adapt, 'device:changed', this.reRender, this);
-    },
+        events: function() {
+            return {
+                'click .hotgraphic-graphic-pin': 'openHotGraphic',
+                'click .hotgraphic-popup-done': 'closeHotGraphic',
+                'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
+                'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
+            }
+        },
 
-    postRender: function() {
-      this.$('.hotgraphic-widget').imageready(_.bind(function() {
-        this.setReadyStatus();
-      }, this));
-    },
+        preRender: function() {
+            this.listenTo(Adapt, 'device:changed', this.reRender, this);
 
-    reRender: function() {
-      if (Adapt.device.screenSize != 'large') {
-        this.replaceWithNarrative();
-      }
-    },
+            // Checks to see if the hotgraphic should be reset on revisit
+            this.checkIfResetOnRevisit();
+        },
 
-    replaceWithNarrative: function() {
-      var Narrative = require('components/adapt-contrib-narrative/js/adapt-contrib-narrative');
-      var model = this.prepareNarrativeModel();
-      var newNarrative = new Narrative({model:model, $parent: this.options.$parent});
-      newNarrative.reRender();
-      newNarrative.setupNarrative();
-      this.options.$parent.append(newNarrative.$el);
-      Adapt.trigger('device:resize');
-      this.remove();
-    },
+        postRender: function() {
+            this.$('.hotgraphic-widget').imageready(_.bind(function() {
+                this.setReadyStatus();
+            }, this));
+        },
 
-    prepareNarrativeModel: function() {
-      var model = this.model;
-      model.set('_component', 'narrative');
-      model.set('_wasHotgraphic', true);
-      model.set('originalBody', model.get('body'));
-      model.set('originalInstruction', model.get('instruction'));
-      if (model.get('mobileBody')) {
-        model.set('body', model.get('mobileBody'));
-      }
-      if (model.get('mobileInstruction')) {
-        model.set('instruction', model.get('mobileInstruction'));
-      }
-      return model;
-    },
+        // Used to check if the hotgraphic should reset on revisit
+        checkIfResetOnRevisit: function() {
+            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
-    applyNavigationClasses: function (index) {
-      var $nav = this.$('.hotgraphic-popup-nav'),
-          itemCount = this.$('.hotgraphic-item').length;
+            // If reset is enabled set defaults
+            if (isResetOnRevisit) {
+                this.model.set({
+                    _isEnabled: true,
+                    _isComplete: false
+                });
 
-      $nav.removeClass('first').removeClass('last');
-      if(index <= 0) {
-        this.$('.hotgraphic-popup-nav').addClass('first');
-      } else if (index >= itemCount-1) {
-        this.$('.hotgraphic-popup-nav').addClass('last');
-      }
-    },
+                _.each(this.model.get('_items'), function(item) {
+                    item._isVisited = false;
+                });
+            }
+        },
 
-    openHotGraphic: function (event) {
-      event.preventDefault();
-      Adapt.trigger('popup:opened');
-      this.$('.hotgraphic-popup a').attr('tabindex', 0);
-      var currentHotSpot = $(event.currentTarget).data('id');
-      this.$('.hotgraphic-item').hide().removeClass('active');
-      this.$('.'+currentHotSpot).show().addClass('active');
-      var currentIndex = this.$('.hotgraphic-item.active').index();
-      this.setVisited(currentIndex);
-      this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
-      this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
-      this.$('.hotgraphic-popup').show();
-      this.$('.hotgraphic-popup-done').focus();
-      this.applyNavigationClasses(currentIndex);
+        reRender: function() {
+            if (Adapt.device.screenSize != 'large') {
+                this.replaceWithNarrative();
+            }
+        },
 
-    },
+        replaceWithNarrative: function() {
+            var Narrative = require('components/adapt-contrib-narrative/js/adapt-contrib-narrative');
+            var model = this.prepareNarrativeModel();
+            var newNarrative = new Narrative({model: model, $parent: this.options.$parent});
+            newNarrative.reRender();
+            newNarrative.setupNarrative();
+            this.options.$parent.append(newNarrative.$el);
+            Adapt.trigger('device:resize');
+            this.remove();
+        },
 
-    closeHotGraphic: function (event) {
-      event.preventDefault();
-      var currentIndex = this.$('.hotgraphic-item.active').index();
-      this.$('.hotgraphic-popup').hide();
-      Adapt.trigger('popup:closed');
-    },
+        prepareNarrativeModel: function() {
+            var model = this.model;
+            model.set('_component', 'narrative');
+            model.set('_wasHotgraphic', true);
+            model.set('originalBody', model.get('body'));
+            if (model.get('mobileBody')) {
+                model.set('body', model.get('mobileBody'));
+            }
+            return model;
+        },
 
-    previousHotGraphic: function (event) {
-      event.preventDefault();
-      var currentIndex = this.$('.hotgraphic-item.active').index();
-      if (currentIndex > 0) {
-        this.$('.hotgraphic-item.active').hide().removeClass('active');
-        this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-        this.setVisited(currentIndex-1);
-        this.$('.hotgraphic-popup-count .current').html(currentIndex);
-      }
-      this.applyNavigationClasses(currentIndex-1);
-    },
+        applyNavigationClasses: function(index) {
+            var $nav = this.$('.hotgraphic-popup-nav'),
+                itemCount = this.$('.hotgraphic-item').length;
 
-    nextHotGraphic: function (event) {
-      event.preventDefault();
-      var currentIndex = this.$('.hotgraphic-item.active').index();
-      if (currentIndex < (this.$('.hotgraphic-item').length-1)) {
-        this.$('.hotgraphic-item.active').hide().removeClass('active');
-        this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-        this.setVisited(currentIndex+1);
-        this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
-      }
-      this.applyNavigationClasses(currentIndex+1);
-    },
+            $nav.removeClass('first').removeClass('last');
+            if (index <= 0) {
+                this.$('.hotgraphic-popup-nav').addClass('first');
+            } else if (index >= itemCount - 1) {
+                this.$('.hotgraphic-popup-nav').addClass('last');
+            }
+        },
 
-    setVisited: function(index) {
-      var item = this.model.get('_items')[index];
-      item._isVisited = true;
-      this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited');
-      this.checkCompletionStatus();
-    },
+        openHotGraphic: function(event) {
+            event.preventDefault();
+            Adapt.trigger('popup:opened');
+            this.$('.hotgraphic-popup a').attr('tabindex', 0);
+            var currentHotSpot = $(event.currentTarget).data('id');
+            this.$('.hotgraphic-item').hide().removeClass('active');
+            this.$('.' + currentHotSpot).show().addClass('active');
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            this.setVisited(currentIndex);
+            this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
+            this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
+            this.$('.hotgraphic-popup').show();
+            this.$('.hotgraphic-popup-done').focus();
+            this.applyNavigationClasses(currentIndex);
+        },
 
-    getVisitedItems: function() {
-      return _.filter(this.model.get('_items'), function(item) {
-        return item._isVisited;
-      });
-    },
+        closeHotGraphic: function(event) {
+            event.preventDefault();
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            this.$('.hotgraphic-popup').hide();
+            Adapt.trigger('popup:closed');
+        },
 
-    checkCompletionStatus: function() {
-      if (!this.model.get('_isComplete')) {
-        if (this.getVisitedItems().length == this.model.get('_items').length) {
-          this.setCompletionStatus();
+        previousHotGraphic: function(event) {
+            event.preventDefault();
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            if (currentIndex > 0) {
+                this.$('.hotgraphic-item.active').hide().removeClass('active');
+                this.$('.hotgraphic-item').eq(currentIndex - 1).show().addClass('active');
+                this.setVisited(currentIndex - 1);
+                this.$('.hotgraphic-popup-count .current').html(currentIndex);
+            }
+            this.applyNavigationClasses(currentIndex - 1);
+        },
+
+        nextHotGraphic: function(event) {
+            event.preventDefault();
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            if (currentIndex < (this.$('.hotgraphic-item').length - 1)) {
+                this.$('.hotgraphic-item.active').hide().removeClass('active');
+                this.$('.hotgraphic-item').eq(currentIndex + 1).show().addClass('active');
+                this.setVisited(currentIndex + 1);
+                this.$('.hotgraphic-popup-count .current').html(currentIndex + 2);
+            }
+            this.applyNavigationClasses(currentIndex + 1);
+        },
+
+        setVisited: function(index) {
+            var item = this.model.get('_items')[index];
+            item._isVisited = true;
+            this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited');
+            this.checkCompletionStatus();
+        },
+
+        getVisitedItems: function() {
+            return _.filter(this.model.get('_items'), function(item) {
+                return item._isVisited;
+            });
+        },
+
+        checkCompletionStatus: function() {
+            if (!this.model.get('_isComplete')) {
+                if (this.getVisitedItems().length == this.model.get('_items').length) {
+                    this.setCompletionStatus();
+                }
+            }
         }
-      }
-    }
 
-  });
+    });
 
-  Adapt.register("hotgraphic", HotGraphic);
+    Adapt.register('hotgraphic', HotGraphic);
 
-  return HotGraphic;
+    return HotGraphic;
 
 });
