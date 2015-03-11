@@ -39,6 +39,7 @@ define(function(require) {
         },
 
         postRender: function() {
+            this.renderState();
             this.$('.hotgraphic-widget').imageready(_.bind(function() {
                 this.setReadyStatus();
             }, this));
