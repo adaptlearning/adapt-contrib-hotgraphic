@@ -68,7 +68,9 @@ define(function(require) {
         },
 
         replaceWithNarrative: function() {
-            var Narrative = require('components/adapt-contrib-narrative/js/adapt-contrib-narrative');
+            if (!Adapt.componentStore.narrative) throw "Narrative not included in build";
+            var Narrative = Adapt.componentStore.narrative;
+
             var model = this.prepareNarrativeModel();
             var newNarrative = new Narrative({model: model, $parent: this.options.$parent});
             newNarrative.reRender();
