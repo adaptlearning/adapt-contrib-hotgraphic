@@ -59,6 +59,15 @@
       "validators": [],
       "help": "If set to 'true', the progress indicator and previous and next links will not be shown on the popup toolbar"
     },
+    "_canCycleThroughPagination": {
+      "type":"boolean",
+      "required":true,
+      "default": false,
+      "title": "Cycle through item pagination",
+      "inputType": {"type": "Boolean", "options": [false, true]},
+      "validators": [],
+      "help": "If set to 'true', the items in the open up with be allowed to cycle through continiously"
+    },
     "_useGraphicsAsPins": {
       "type":"boolean",
       "required":true,
