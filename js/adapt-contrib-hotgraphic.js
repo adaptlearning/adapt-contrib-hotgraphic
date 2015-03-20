@@ -13,6 +13,9 @@ define(function(require) {
       this.listenTo(Adapt, 'remove', this.remove);
       this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
       this.preRender();
+      if (this.model.get('_canCycleThroughPagination') === undefined) {
+        this.model.set('_canCycleThroughPagination', false);
+      }
       if (Adapt.device.screenSize=='large') {
         this.render();
       } else {
@@ -109,24 +112,30 @@ define(function(require) {
     previousHotGraphic: function (event) {
       event.preventDefault();
       var currentIndex = this.$('.hotgraphic-item.active').index();
-      if (currentIndex > 0) {
-        this.$('.hotgraphic-item.active').hide().removeClass('active');
-        this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-        this.setVisited(currentIndex-1);
-        this.$('.hotgraphic-popup-count .current').html(currentIndex);
+      if (currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
+        return;
+      } else if (currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
+        currentIndex = this.model.get('_items').length;
       }
+      this.$('.hotgraphic-item.active').hide().removeClass('active');
+      this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
+      this.setVisited(currentIndex-1);
+      this.$('.hotgraphic-popup-count .current').html(currentIndex);
       this.applyNavigationClasses(currentIndex-1);
     },
 
     nextHotGraphic: function (event) {
       event.preventDefault();
       var currentIndex = this.$('.hotgraphic-item.active').index();
-      if (currentIndex < (this.$('.hotgraphic-item').length-1)) {
-        this.$('.hotgraphic-item.active').hide().removeClass('active');
-        this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-        this.setVisited(currentIndex+1);
-        this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
+      if (currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
+        return;
+      } else if (currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
+        currentIndex = -1;
       }
+      this.$('.hotgraphic-item.active').hide().removeClass('active');
+      this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
+      this.setVisited(currentIndex+1);
+      this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
       this.applyNavigationClasses(currentIndex+1);
     },
 

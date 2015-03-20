@@ -41,6 +41,10 @@ This defines the position of the component in the block. Values can be `full`, `
 
 Hides the previous and next actions and progress indicator from the toolbar.
 
+####_canCycleThroughPagination
+
+Enables the popups to be cycled through. e.g. going from item 3 back around to item 1.
+
 ####_useGraphicsAsPins
 
 When this is set to true, the item graphics can be used as 'pins'.  When this is set to 'false' (per default), a main poster image is displayed, with pins overlayed to trigger the hot spots.
