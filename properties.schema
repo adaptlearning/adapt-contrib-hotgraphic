@@ -4,6 +4,21 @@
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
   "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "full-width",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
     "_graphic": {
       "type":"object",
       "required":false,
@@ -35,6 +50,15 @@
       "type":"string",
       "required":false,
       "title":"Mobile only instruction text"
+    },
+    "_hidePagination": {
+      "type":"boolean",
+      "required":true,
+      "default": false,
+      "title": "Hide pagination",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'true', the progress indicator and previous and next links will not be shown on the popup toolbar"
     },
     "_items": {
       "type":"array",

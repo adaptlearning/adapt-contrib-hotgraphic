@@ -11,6 +11,7 @@
       "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
       "instruction":"",
       "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
+      "_hidePagination": false,
       "_graphic": {
         "src": "hot_graphic.jpg",
         "alt": "alt text"
