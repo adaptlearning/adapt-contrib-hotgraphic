@@ -28,7 +28,7 @@
 
         <div class="hotgraphic-popup-inner clearfix">
           {{#each _items}}
-          <div class="hotgraphic-item component-item item-{{@index}}">
+          <div class="hotgraphic-item component-item item-{{@index}} {{_classes}}">
             <div class="hotgraphic-item-graphic">
               <div class="hotgraphic-item-graphic-inner">
                 <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
@@ -50,12 +50,22 @@
 
       </div>
 
-      <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
-      {{#each _items}}
-      <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
-        <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
-      </a>
-      {{/each}}
+      {{#if _useGraphicsAsPins}}
+        <div class="hotgraphic-narrative">
+          {{#each _items}}
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+            <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+          </a>
+          {{/each}}
+        </div>
+      {{else}}
+        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
+        {{#each _items}}
+        <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+          <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+        </a>
+        {{/each}}
+      {{/if}}
     </div>
   </div>
 </div>

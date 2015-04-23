@@ -60,6 +60,15 @@
       "validators": [],
       "help": "If set to 'true', the progress indicator and previous and next links will not be shown on the popup toolbar"
     },
+    "_useGraphicsAsPins": {
+      "type":"boolean",
+      "required":true,
+      "default": false,
+      "title": "Use graphics as pins",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'true', the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
+    },
     "_items": {
       "type":"array",
       "required":true,
@@ -107,8 +116,26 @@
                 "type":"string",
                 "required":false,
                 "title":"Graphic title"
-              }
+              },
+              "classes": {
+                "type":"string",
+                "required": false,
+                "default": "",
+                "title": "Classes",
+                "inputType": "Text",
+                "validators": [],
+                "help": ""
+               }
             }
+          },
+          "classes": {
+            "type":"string",
+            "required": false,
+            "default": "",
+            "title": "Classes",
+            "inputType": "Text",
+            "validators": [],
+            "help": ""
           },
           "_left": {
             "type":"number",
