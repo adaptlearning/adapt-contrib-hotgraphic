@@ -22,34 +22,49 @@
     "_graphic": {
       "type":"object",
       "required":false,
-      "title":"Main hotgraphic",
+      "title": "Main hotgraphic",
       "properties":{
+        "src": {
+          "type":"string",
+          "required":true,
+          "default": "",
+          "inputType": "Asset:image",
+          "validators": ["required"],
+          "help": "This is the image that appears behind the pins"
+        },
         "alt": {
           "type":"string",
           "required":false,
-          "title":"Alternative text"
-        },
-        "src": {
-          "type":"string",
-          "required":false,
-          "title":"Select hotgraphic"
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Alternative text for this image"
         },
         "title": {
           "type":"string",
           "required":false,
-          "title":"Graphic title"
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Graphic title"
         }
       }
     },
     "mobileBody": {
       "type":"string",
       "required":false,
-      "title":"Mobile only body text"
+      "default": "",
+      "inputType": "TextArea",
+      "validators": [],
+      "help": "This body text is displayed on mobile devices when this component turns into a Narrative"
     },
     "mobileInstruction": {
       "type":"string",
       "required":false,
-      "title":"Mobile only instruction text"
+      "default": "",
+      "inputType": "TextArea",
+      "validators": [],
+      "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative"
     },
     "_hidePagination": {
       "type":"boolean",
@@ -81,8 +96,7 @@
     "_items": {
       "type":"array",
       "required":true,
-      "minItems": 1,
-      "title":"Hotspots",
+      "title": "Hot Graphic Pins",
       "items": {
         "type":"object",
         "required":true,
@@ -90,43 +104,57 @@
           "title": {
             "type":"string",
             "required":true,
-            "minLength": 1,
-            "title":"Hotspot title"
+            "default": "",
+            "inputType": "Text",
+            "validators": [],
+            "help": "Title displayed in the popup"
           },
           "body": {
             "type":"string",
             "required":true,
-            "minLength": 1,
-            "title":"Hotspot main body text"
+            "default": "",
+            "inputType": "TextArea",
+            "validators": ["required"],
+            "help": "Body text displayed in the popup"
           },
           "strapline": {
             "type":"string",
             "required":true,
-            "minLength": 1,
-            "title":"Strapline"
+            "default": "",
+            "inputType": "Text",
+            "validators": ["required"],
+            "help": "Strapline displayed on mobile version"
           },
           "_graphic": {
             "type":"object",
             "required":true,
-            "title":"Hotspot graphic",
+            "title": "Item Graphic",
             "properties":{
-              "alt": {
-                "type":"string",
-                "required":false,
-                "title":"Alternative text"
-              },
               "src": {
                 "type":"string",
                 "required":true,
-                "minLength": 1,
-                "title":"Select graphic"
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": ["required"],
+                "help": "Image displayed in the popup"
+              },
+              "alt": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Alternative text for this image"
               },
               "title": {
                 "type":"string",
-                "required":false,
-                "title":"Graphic title"
+                "required":true,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Title text for this image"
               },
-              "classes": {
+              "_classes": {
                 "type":"string",
                 "required": false,
                 "default": "",
@@ -134,10 +162,10 @@
                 "inputType": "Text",
                 "validators": [],
                 "help": ""
-               }
+              }
             }
           },
-          "classes": {
+          "_classes": {
             "type":"string",
             "required": false,
             "default": "",
@@ -150,13 +178,19 @@
             "type":"number",
             "required":true,
             "default":0,
-            "title":"Hotspot left positioning"
+            "title": "Pin Position - Left",
+            "inputType": "Number",
+            "validators": ["required", "number"],
+            "help": "Left position of pin"
           },
           "_top": {
             "type":"number",
             "required":true,
             "default":0,
-            "title":"Hotspot top positioning"
+            "title": "Pin Position - Top",
+            "inputType": "Number",
+            "validators": ["required", "number"],
+            "help": "Top position of pin"
           }
         }
       }

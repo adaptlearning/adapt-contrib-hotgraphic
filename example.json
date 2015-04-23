@@ -16,7 +16,8 @@
   "_hidePagination": false,
   "_graphic": {
     "src": "hot_graphic.jpg",
-    "alt": "alt text"
+    "alt": "alt text",
+    "title": "title"
   },
   "_items": [
     {
