@@ -28,7 +28,6 @@
         "title": "title text",
         "_classes": "cols-2 rows-1"
       },
-      "pinAlt": "alt text",
       "strapline": "strapline...",
       "_classes": "top-left",
       "_top": 5,
@@ -43,7 +42,6 @@
         "title": "title text",
         "_classes": "cols-2 rows-1"
       },
-      "pinAlt": "alt text",
       "strapline": "strapline...",
       "_classes": "center",
       "_top": 25,
@@ -58,7 +56,6 @@
         "title": "title text",
         "_classes": "cols-1 rows-1"
       },
-      "pinAlt": "alt text",
       "strapline": "strapline...",
       "_classes": "bottom-right",
       "_top": 85,
