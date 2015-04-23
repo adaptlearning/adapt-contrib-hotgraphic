@@ -15,6 +15,9 @@ define(function(require) {
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
             this.model.set('_globals', Adapt.course.get('_globals'));
             this.preRender();
+            if (this.model.get('_canCycleThroughPagination') === undefined) {
+                this.model.set('_canCycleThroughPagination', false);
+            }
             if (Adapt.device.screenSize == 'large') {
                 this.render();
             } else {
@@ -100,11 +103,11 @@ define(function(require) {
 
             $nav.removeClass('first').removeClass('last');
             this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
-            if(index <= 0) {
+            if(index <= 0 && !this.model.get('_canCycleThroughPagination')) {
                 this.$('.hotgraphic-popup-nav').addClass('first');
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            } else if (index >= itemCount-1) {
+            } else if (index >= itemCount-1 && !this.model.get('_canCycleThroughPagination')) {
                 this.$('.hotgraphic-popup-nav').addClass('last');
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
@@ -150,13 +153,19 @@ define(function(require) {
         previousHotGraphic: function (event) {
             event.preventDefault();
             var currentIndex = this.$('.hotgraphic-item.active').index();
-            if (currentIndex > 0) {
-                this.$('.hotgraphic-item.active').hide().removeClass('active');
-                this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-                this.setVisited(currentIndex-1);
-                this.$('.hotgraphic-popup-count .current').html(currentIndex);
-                this.$('.hotgraphic-popup-inner').a11y_on(false);
+
+            if (currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
+                return;
+            } else if (currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
+                currentIndex = this.model.get('_items').length;
             }
+
+            this.$('.hotgraphic-item.active').hide().removeClass('active');
+            this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
+            this.setVisited(currentIndex-1);
+            this.$('.hotgraphic-popup-count .current').html(currentIndex);
+            this.$('.hotgraphic-popup-inner').a11y_on(false);
+
             this.applyNavigationClasses(currentIndex-1);
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
@@ -165,13 +174,17 @@ define(function(require) {
         nextHotGraphic: function (event) {
             event.preventDefault();
             var currentIndex = this.$('.hotgraphic-item.active').index();
-            if (currentIndex < (this.$('.hotgraphic-item').length-1)) {
-                this.$('.hotgraphic-item.active').hide().removeClass('active');
-                this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-                this.setVisited(currentIndex+1);
-                this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
-                this.$('.hotgraphic-popup-inner').a11y_on(false);
+            if (currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
+                return;
+            } else if (currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
+                currentIndex = -1;
             }
+            this.$('.hotgraphic-item.active').hide().removeClass('active');
+            this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
+            this.setVisited(currentIndex+1);
+            this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
+            this.$('.hotgraphic-popup-inner').a11y_on(false);
+
             this.applyNavigationClasses(currentIndex+1);
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
             this.$('.hotgraphic-popup-inner .active').a11y_focus();

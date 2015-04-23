@@ -12,6 +12,7 @@
   "instruction":"",
   "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
   "_useGraphicsAsPins": false,
+  "_canCycleThroughPagination": false,
   "_hidePagination": false,
   "_graphic": {
     "src": "hot_graphic.jpg",
