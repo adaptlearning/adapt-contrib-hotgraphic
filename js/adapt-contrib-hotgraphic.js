@@ -116,11 +116,7 @@ define(function(require) {
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
 
-            var classes = this.model.get("_items")[index]._classes 
-                ? this.model.get("_items")[index]._classes
-                : '';  // _classes has not been defined
-        
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
+            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index);
 
         },
 
@@ -134,6 +130,7 @@ define(function(require) {
             this.setVisited(currentIndex);
             this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
+            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + currentIndex);
             this.$('.hotgraphic-popup').show();      
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
               

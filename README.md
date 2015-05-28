@@ -45,10 +45,6 @@ Hides the previous and next actions and progress indicator from the toolbar.
 
 Enables the popups to be cycled through. e.g. going from item 3 back around to item 1.
 
-####_useGraphicsAsPins
-
-When this is set to true, the item graphics can be used as 'pins'.  When this is set to 'false' (per default), a main poster image is displayed, with pins overlayed to trigger the hot spots.
-
 ####mobileBody
 
 This is optional body text that will be shown when viewed on mobile.
@@ -78,8 +74,6 @@ Title text can be entered here for the image.
 ####_items
 
 Multiple items can be entered. Each item represents one hot spot for this component and contains values for `title`, `body` and `_graphic`.
-
-Within _graphic, 'src', 'title', 'alt' and '_classes' can be set.
 
 ####title
 
