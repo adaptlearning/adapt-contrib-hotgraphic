@@ -53,6 +53,10 @@ This is optional body text that will be shown when viewed on mobile.
 
 This is optional instruction text that will be shown when viewed on mobile.
 
+### Component completion
+
+The ```_setCompletionOn``` setting controls when the component is set to complete, and accepts the following values: "```inview```" and "```allItems```".
+
 ####_graphic
 
 The main hot graphic image is defined within this element. This element should contain only one value for `src`, `alt` and `title`.
