@@ -1,22 +1,25 @@
 {
-      "_id": "c-40",
-      "_parentId":"b-05",
-      "_classes": "",
-      "_type":"component",
-      "_component": "hotgraphic",
-      "_layout": "full",    
-      "title": "Hot graphic",
-      "displayTitle": "Hot graphic",
-      "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
-      "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-      "instruction":"",
-      "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
-      "_setCompletionOn":"allItems",
-      "_graphic": {
-        "src": "hot_graphic.jpg",
-        "alt": "alt text"
-      },
-      "_items": [
+    "_id": "c-40",
+    "_parentId":"b-05",
+    "_classes": "",
+    "_type":"component",
+    "_component": "hotgraphic",
+    "_layout": "full",    
+    "title": "Hot graphic",
+    "displayTitle": "Hot graphic",
+    "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
+    "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
+    "instruction":"",
+    "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
+    "_setCompletionOn":"allItems",
+    "_canCycleThroughPagination": false,
+    "_hidePagination": false,
+    "_graphic": {
+      "src": "hot_graphic.jpg",
+      "alt": "alt text",
+      "title": "title"
+    },
+    "_items": [
         {
             "title": "Hotspot 1 title",
             "body": "This is display text 1.",
@@ -54,4 +57,4 @@
             "_left": 40
         }
     ]
-  }
+}

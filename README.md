@@ -37,6 +37,14 @@ You can use this setting to add custom classes to your template and LESS file.
 
 This defines the position of the component in the block. Values can be `full`, `left` or `right`. 
 
+####_hidePagination
+
+Hides the previous and next actions and progress indicator from the toolbar.
+
+####_canCycleThroughPagination
+
+Enables the popups to be cycled through. e.g. going from item 3 back around to item 1.
+
 ####mobileBody
 
 This is optional body text that will be shown when viewed on mobile.
