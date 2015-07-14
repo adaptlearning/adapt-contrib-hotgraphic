@@ -25,10 +25,10 @@ define(function(require) {
 
     events: function () {
       return {
-        'click .hotgraphic-graphic-pin':'openHotGraphic',
-        'click .hotgraphic-popup-done':'closeHotGraphic',
-        'click .hotgraphic-popup-nav .back':'previousHotGraphic',
-        'click .hotgraphic-popup-nav .next':'nextHotGraphic'
+        'click .hotgraphic-graphic-pin': 'openHotGraphic',
+        'click .hotgraphic-popup-done': 'closeHotGraphic',
+        'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
+        'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
       }
     },
 
