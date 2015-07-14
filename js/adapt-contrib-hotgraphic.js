@@ -93,10 +93,11 @@ define(function(require) {
             var Narrative = Adapt.componentStore.narrative;
 
             var model = this.prepareNarrativeModel();
-            var newNarrative = new Narrative({model: model, $parent: this.options.$parent});
+            var newNarrative = new Narrative({ model: model });
+
             newNarrative.reRender();
             newNarrative.setupNarrative();
-            this.options.$parent.append(newNarrative.$el);
+            $("." + this.model.get("_parentId")).append(newNarrative.$el);
             Adapt.trigger('device:resize');
             this.remove();
         },
