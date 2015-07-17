@@ -25,7 +25,8 @@
             "body": "This is display text 1.",
             "_graphic": {
                 "src": "image1.jpg",
-                "alt": "alt text"
+                "alt": "alt text",
+                "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
             "strapline": "strapline...",
@@ -37,7 +38,8 @@
             "body": "This is display text 2.",
             "_graphic": {
                 "src": "image2.jpg",
-                "alt": "alt text"
+                "alt": "alt text",
+                "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
             "strapline": "strapline...",
@@ -49,7 +51,8 @@
             "body": "This is display text 3.",
             "_graphic": {
                 "src": "image3.jpg",
-                "alt": "alt text"
+                "alt": "alt text",
+                "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
             "strapline": "strapline...",

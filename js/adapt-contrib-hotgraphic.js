@@ -136,8 +136,11 @@ define(function(require) {
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
-
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index);
+            var classes = this.model.get("_items")[index]._classes 
+                ? this.model.get("_items")[index]._classes
+                : '';  // _classes has not been defined
+      
+            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
 
         },
 
