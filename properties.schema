@@ -165,6 +165,15 @@
               }
             }
           },
+          "_classes": {
+            "type":"string",
+            "required": false,
+            "default": "",
+            "title": "Classes",
+            "inputType": "Text",
+            "validators": [],
+            "help": ""
+          },
           "_left": {
             "type":"number",
             "required":true,
