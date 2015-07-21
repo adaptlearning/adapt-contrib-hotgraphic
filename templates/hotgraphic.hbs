@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotGraphic.ariaRegion}}" {{#if _globals._components._hotGraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget">
+  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else}}pin{{/if}}">
 
     <div class="hotgraphic-graphic">
 
