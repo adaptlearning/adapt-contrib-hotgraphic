@@ -84,6 +84,15 @@
       "validators": [],
       "help": "If set to 'true', the items in the open popup will be allowed to cycle through continiously"
     },
+    "_useGraphicsAsPins": {
+      "type":"boolean",
+      "required":true,
+      "default": false,
+      "title": "Use graphics as pins",
+      "inputType": {"type": "Boolean", "options": [true, false]},
+      "validators": [],
+      "help": "If set to 'true', the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
+    },
     "_items": {
       "type":"array",
       "required":true,
@@ -144,8 +153,26 @@
                 "inputType": "Text",
                 "validators": [],
                 "help": "Title text for this image"
+              },
+              "_classes": {
+                "type":"string",
+                "required": false,
+                "default": "",
+                "title": "Classes",
+                "inputType": "Text",
+                "validators": [],
+                "help": ""
               }
             }
+          },
+          "_classes": {
+            "type":"string",
+            "required": false,
+            "default": "",
+            "title": "Classes",
+            "inputType": "Text",
+            "validators": [],
+            "help": ""
           },
           "_left": {
             "type":"number",

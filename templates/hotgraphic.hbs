@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotGraphic.ariaRegion}}" {{#if _globals._components._hotGraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget">
+  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else}}pin{{/if}}">
 
     <div class="hotgraphic-graphic">
 
@@ -48,12 +48,22 @@
           {{/each}}
         </div>
       </div>
-      <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
-      {{#each _items}}
-      <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
-        <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
-      </a>
-      {{/each}}
+      {{#if _useGraphicsAsPins}}
+        <div class="hotgraphic-narrative">
+          {{#each _items}}
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+            <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
+          </a>
+          {{/each}}
+        </div>
+      {{else}}
+        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
+        {{#each _items}}
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+            <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+          </a>
+        {{/each}}
+      {{/if}}
     </div>
   </div>
 </div>
