@@ -39,14 +39,6 @@
           "inputType": "Text",
           "validators": [],
           "help": "Alternative text for this image"
-        },
-        "title": {
-          "type":"string",
-          "required":false,
-          "default": "",
-          "inputType": "Text",
-          "validators": [],
-          "help": "Graphic title"
         }
       }
     },

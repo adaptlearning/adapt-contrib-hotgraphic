@@ -75,10 +75,6 @@ course/en/images/gqcq-1-large.gif
 
 A value for alternative text can be entered here.
 
-####title
-
-Title text can be entered here for the image.
-
 ####_items
 
 Multiple items can be entered. Each item represents one hot spot for this component and contains values for `title`, `body` and `_graphic`.

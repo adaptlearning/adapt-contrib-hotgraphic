@@ -57,7 +57,7 @@
           {{/each}}
         </div>
       {{else}}
-        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}" title="{{{_graphic.title}}}"/>
+        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
         {{#each _items}}
           <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
