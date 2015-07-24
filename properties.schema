@@ -3,6 +3,29 @@
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "Below is a component which allows you to select hot spots over an image. Select a hot spot to trigger a popup that includes an image with display text. Select the close button to close the popup.",
+      "inputType": "Text",
+      "validators": []
+    },
+    "ariaPoupupLabel": {
+      "type": "string",
+      "required": true,
+      "default": "Hotgraphic popup",
+      "inputType": "Text",
+      "validators": []
+    },
+    "instruction": {
+      "type": "string",
+      "required": true,
+      "default": "",
+      "inputType": "Text",
+      "validators": []
+    }
+  },
   "properties":{
     "_supportedLayout": {
       "type": "string",
