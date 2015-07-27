@@ -17,13 +17,6 @@
       "default": "Hotgraphic popup",
       "inputType": "Text",
       "validators": []
-    },
-    "instruction": {
-      "type": "string",
-      "required": true,
-      "default": "",
-      "inputType": "Text",
-      "validators": []
     }
   },
   "properties":{
