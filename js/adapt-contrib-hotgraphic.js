@@ -92,7 +92,7 @@ define(function(require) {
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
-            $("." + this.model.get("_parentId")).append(newNarrative.$el);
+            $("." + this.model.get("_parentId") + ' .component-container').append(newNarrative.$el);
             Adapt.trigger('device:resize');
             this.remove();
         },
