@@ -1,131 +1,94 @@
-#adapt-contrib-hotgraphic
+# adapt-contrib-hotgraphic  
 
-A contributed hot graphic component that enables a user to click on hot spots over an image and display a detailed popup that includes an image with text.
+**Hot Graphic** is a *presentation component* bundled with the [Adapt framework](https://github.com/adaptlearning/adapt_framework).  
+<img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/hotgraphic01.gif" alt="Hot Graphic in action">  
+
+When a learner clicks on a hot spot within the image, a pop-up is displayed that consists of text with an image. [Visit the **Hot Graphic** wiki](https://github.com/adaptlearning/adapt-contrib-hotgraphic/wiki) for more information about its functionality and for explanations of key properties. 
+
 
 ##Installation
 
+As one of Adapt's *[core components](https://github.com/adaptlearning/adapt_framework/wiki/Core-Plug-ins-in-the-Adapt-Learning-Framework#components),* **Hot Graphic** is included with the [installation of the Adapt framework](https://github.com/adaptlearning/adapt_framework/wiki/Manual-installation-of-the-Adapt-framework#installation) and the [installation of the Adapt authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-Adapt-Origin).
 
-First, be sure to install the [Adapt Command Line Interface](https://github.com/adaptlearning/adapt-cli), then from the command line run:-
+* If **Hot Graphic** has been uninstalled from the Adapt framework, it may be reinstalled.
+With the [Adapt CLI](https://github.com/adaptlearning/adapt-cli) installed, run the following from the command line:  
+`adapt install adapt-contrib-hotgraphic`
 
-        adapt install adapt-contrib-hotgraphic
+    Alternatively, this component can also be installed by adding the following line of code to the *adapt.json* file:  
+    `"adapt-contrib-hotgraphic": "*"`  
+    Then running the command:  
+    `adapt install`  
+    (This second method will reinstall all plug-ins listed in *adapt.json*.)  
 
-This component can also be installed by adding the component to the adapt.json file before running `adapt install`:
+* If **Hot Graphic** has been uninstalled from the Adapt authoring tool, it may be reinstalled using the [Plug-in Manager](https://github.com/adaptlearning/adapt_authoring/wiki/Plugin-Manager).  
+<div float align=right><a href="#top">Back to Top</a></div>
 
-        "adapt-contrib-hotgraphic": "*"
+## Settings Overview
 
-##Usage
+The attributes listed below are used in *components.json* to configure **Hot Graphic**, and are properly formatted as JSON in [*example.json*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/example.json). Visit the [**Hot Graphic** wiki](https://github.com/adaptlearning/adapt-contrib-hotgraphic/wiki) for more information about how they appear in the [authoring tool](https://github.com/adaptlearning/adapt_authoring/wiki). 
 
-Once installed, the component can be used to display an image with clickable 'hot spot' elements. The location of these hot spots are defined within the content. When a hot spot is clicked, a pop-up window appears which displays an image and text.
+### Attributes
 
-Controls are provided to move between the next and previous hot spots via the pop-up window.
+[**core model attributes**](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes): These are inherited by every Adapt component. [Read more](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes).
 
-##Settings overview
+**_component** (string): This value must be: `hotgraphic`. (One word.)
 
-For example JSON format, see [example.json](example.json). A description of the core settings can be found at: [Core model attributes](https://github.com/adaptlearning/adapt_framework/wiki/Core-model-attributes)
+**_classes** (string): CSS class name to be applied to **Hot Graphic**’s containing `div`. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
-Further settings for this component are:
+**_layout** (string): This defines the horizontal position of the component in the block. Acceptable values are `full`, `left` or `right`.  
 
-####_component
+**instruction** (string): This optional text appears above the component. It is frequently used to
+guide the learner’s interaction with the component.  
 
-This value must be: `hotgraphic`
+**mobileBody** (string): This is optional text that will be substituted for **body** when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices).  
 
-####_classes
+**mobileInstruction** (string): This is optional text that will be substituted for **instruction** when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices).  
 
-You can use this setting to add custom classes to your template and LESS file.
+**_setCompletionOn** (string): This value determines when the component registers as complete. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.  
+  
+**_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
-####_layout
+**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
 
-This defines the position of the component in the block. Values can be `full`, `left` or `right`. 
+**_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
 
-####_hidePagination
+>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
 
-Hides the previous and next actions and progress indicator from the toolbar.
+>**alt** (string): This text becomes the image’s `alt` attribute.
 
-####_canCycleThroughPagination
+>**title** (string): This text becomes the image’s `title` attribute.  
 
-Enables the popups to be cycled through. e.g. going from item 3 back around to item 1.
+**_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body** and **_graphic**.
 
-####_useGraphicsAsPins
+>**title** (string): This is the title text for a hot spot pop-up.
 
-When this is set to true, the item graphics can be used as 'pins'.  When this is set to 'false' (per default), a main poster image is displayed, with pins overlayed to trigger the hot spots.
+>**body** (string): This is the main text for a hot spot pop-up.
 
-####mobileBody
+>**_graphic** (string): The image that appears as a hot spot. Its location is controlled by **_top** and **_left**. It contains values for **src** and **alt**.  
 
-This is optional body text that will be shown when viewed on mobile.
+>>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
 
-####mobileInstruction
+>>**alt** (string): This text becomes the image’s `alt` attribute.   
 
-This is optional instruction text that will be shown when viewed on mobile.
+>**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
 
-### Component completion
+>**_top** (number): Each hot spot must contain **_top** and **_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
-The ```_setCompletionOn``` setting controls when the component is set to complete, and accepts the following values: "```inview```" and "```allItems```".
+>**_left** (number): Enter the number of pixels this hot spot should be from the left border of the main graphic.  
 
-####_graphic
+### Accessibility
+**Hot Graphic** has two elements assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion** and **ariaPoupupLabel**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema).   
+<div float align=right><a href="#top">Back to Top</a></div>
 
-The main hot graphic image is defined within this element. This element should contain only one value for `src`, `alt` and `title`.
-
-####src
-
-Enter a path to the image. Paths should be relative to the src folder, e.g.
-
-course/en/images/gqcq-1-large.gif
-
-####alt
-
-A value for alternative text can be entered here.
-
-####_items
-
-Multiple items can be entered. Each item represents one hot spot for this component and contains values for `title`, `body` and `_graphic`.
-
-Within _graphic, 'src', 'title', 'alt' and '_classes' can be set.
-
-####title
-
-This is the title text for a hot spot popup.
-
-####body
-
-This is the main text for a hot spot popup.
-
-####_graphic
-
-Each hotspot can contain an image. Details for the image are entered within this setting.
-
-####src
-
-Enter a path to the image. Paths should be relative to the src folder, e.g.
-
-course/en/images/gqcq-1-large.gif
-
-####alt
-
-A value for alternative text can be entered here.
-
-####title
-
-This setting is for the title attribute on the image.
-
-####strapline
-
-Enter text for a strapline. This will be displayed when viewport size changes to the smallest range and is shown as a title above the image.
-
-####_top
-
-Each hot spot must contain `_top` and `_left` coordinates to position them on the hot graphic. 
-
-Enter the number of pixels this hot spot should be from the top border of the main graphic.
-
-####_left
-
-Enter the number of pixels this hot spot should be from the left border of the main graphic.
-
-
-##Limitations
+## Limitations
  
-When viewport size changes to the smallest range this component will behave like a narrative component. All information will be available but as a narrative rather than hot spots on a graphic.
+When viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic.  
 
-##Browser spec
 
-This component has been tested to the standard Adapt browser specification.
+----------------------------
+**Version number:**  2.0   <a href="https://community.adaptlearning.org/ target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Framework versions:**  2.0     
+**Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
+**Accessibility support:** WAI AA   
+**RTL support:** yes  
+**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), IE 11, IE10, IE9, IE8, IE Mobile 11, Safari for iPhone (iOS 7+8), Safari for iPad (iOS 7+8), Safari 8, Opera    
