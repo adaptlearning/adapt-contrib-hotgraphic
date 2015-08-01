@@ -89,10 +89,11 @@ define(function(require) {
 
             var model = this.prepareNarrativeModel();
             var newNarrative = new Narrative({ model: model });
+            var $container = $(".component-container", $("." + this.model.get("_parentId")));
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
-            $("." + this.model.get("_parentId")).append(newNarrative.$el);
+            $container.append(newNarrative.$el);
             Adapt.trigger('device:resize');
             this.remove();
         },
