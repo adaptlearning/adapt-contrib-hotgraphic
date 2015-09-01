@@ -79,7 +79,7 @@
       "required":true,
       "default": false,
       "title": "Hide pagination",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": {"type": "Boolean", "options": [false, true]},
       "validators": [],
       "help": "If set to 'true', the progress indicator and previous and next links will not be shown on the popup toolbar"
     },
@@ -97,7 +97,7 @@
       "required":true,
       "default": false,
       "title": "Use graphics as pins",
-      "inputType": {"type": "Boolean", "options": [true, false]},
+      "inputType": {"type": "Boolean", "options": [false, true]},
       "validators": [],
       "help": "If set to 'true', the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
     },
