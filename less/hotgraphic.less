@@ -1,256 +1,217 @@
 .hotgraphic-component {
 
-  .hotgraphic-graphic {
-    position: relative;
-  }
+	.hotgraphic-graphic {
+		position: relative;
+	}
 
-  .hotgraphic-graphic-pin {
-    display: block;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    background-color:@item-text-color;
-    border-radius:50%;
+	.hotgraphic-graphic-pin {
+		display: block;
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		background-color: @item-text-color;
+		border-radius:50%;
 
-    &.visited {
-      .hotgraphic-graphic-pin-icon {
-        color: @item-visited-color;
-      }
-    }
-  }
+		&.visited {
+			.hotgraphic-graphic-pin-icon {
+				color: @item-visited-color;
+			}
+		}
+		.no-touch &:hover {
+			.hotgraphic-graphic-pin-icon {
+				color: @item-hover-color;
+			}
+		}
+	}
 
-  .hotgraphic-graphic-pin-icon {
-    color: @item-color;
-    font-size: (@icon-size*2);
-    width:auto;
-    height:auto;
-  }
+	.hotgraphic-graphic-pin-icon {
+		color: @item-color;
+		font-size: (@icon-size*2);
+		width:auto;
+		height:auto;
+	}
 
-  .hotgraphic-popup {
-    display: none;
-    width: auto;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    height: auto;
-    margin: 40px;
-    background-color: @background-color;
-    border: @item-border;
-    z-index: 5;
-  }
+	.hotgraphic-popup {
+		display: none;
+		width: auto;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 0px;
+		height: auto;
+		margin: 40px;
+		background-color: @background-color;
+		border: @item-border;
+		z-index: 5;
+	}
 
-  .hotgraphic-popup-toolbar {
-    padding: @item-padding;
-    position: relative;
-    background-color: @item-color;
-    height: 20px;
-  }
+	.hotgraphic-popup-toolbar {
+		position: relative;
+		background-color: @item-color;
+		height: (@item-padding * 2) + @icon-size;
+	}
 
-  .hotgraphic-popup-nav {
-    background-color: @item-color;
-  &.first {
-    .hotgraphic-popup-controls.back {
-      cursor: default;
-      .icon-controls-small-left:before {
-        display:none;
-      }
-    }
-  }
-  &.last {
-    .hotgraphic-popup-controls.next {
-      cursor: default;
-      .icon-controls-small-right:before {
-        display:none;
-      }
-    }
-  }
-  }
+	.hotgraphic-popup-nav {
+		background-color: @item-color;
+	}
 
-  .hotgraphic-popup-done {
-    color: @item-text-color;
-    position: absolute;
-    top: @item-padding-top;
-    right: @item-padding-right;
-    .dir-rtl & {
-        right: inherit;
-        left: @item-padding-right;
-    }
-  }
+	.hotgraphic-popup-done {
+		position: absolute;
+		top: 0;
+		right: 0;
+		.dir-rtl & {
+			right: inherit;
+			left: 0;
+		}
+		.no-touch &:hover {
+			.hotgraphic-popup-close {
+				color: @button-text-color-hover;
+				background-color: @button-color-hover;
+			}
+		}
+	}
 
-  .hotgraphic-popup-arrow-l {
-    color: @item-text-color;
-  }
+	.hotgraphic-popup-arrow-l, 
+	.hotgraphic-popup-arrow-r,
+	.hotgraphic-popup-close {
+		padding: @item-padding;
+		color: @button-text-color;
+		background-color: @button-color;
+	}
 
-  .hotgraphic-popup-arrow-r {
-    color: @item-text-color;
-  }
+	.hotgraphic-popup-count {
+		padding: @item-padding;
+		vertical-align: baseline;
+		color: @item-text-color;
+		float: left;
+		.dir-rtl & {
+			float: right;
+		}
+	}
 
-  .hotgraphic-popup-close {
-    color: @item-text-color;
-  }
+	.hotgraphic-popup-controls {
+		float: left;
+		.dir-rtl & {
+			float: right;
+		}
+		.no-touch &:hover {
+			.hotgraphic-popup-arrow-l,
+			.hotgraphic-popup-arrow-r {
+				color: @button-text-color-hover;
+				background-color: @button-color-hover;
+			}
+		}
+		&.disabled {
+			visibility: hidden;
+		}
+	}
 
-  .hotgraphic-popup-count {
-    color: @item-text-color;
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-    height: 30px;
-    line-height: 30px;
-    margin-right: @item-padding-right;
-    .dir-rtl & {
-        margin-right: inherit;
-        margin-left: @item-padding-right;
-    }
-    vertical-align: baseline;
-  }
+	.hotgraphic-popup-inner {
+		padding: @item-padding;
+	}
 
-  .hotgraphic-popup-controls {
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-    margin-right: @item-padding-right;
-    .dir-rtl & {
-        margin-right: inherit;
-        margin-left: @item-padding-right;
-    }
-    padding: @item-spacing;
-  }
+	.hotgraphic-item-graphic {
+		width: 50%;
+		float: right;
+		.dir-rtl & {
+			float: left;
+		}
+		text-align: center;
+	}
 
-  .hotgraphic-popup-inner {
-    padding: @item-padding;
-  }
+	.hotgraphic-item-graphic-inner{
+		padding-left: @item-padding-left;
+		.dir-rtl & {
+			padding-left: inherit;
+			padding-right: @item-padding-left;
+		}
+	}
 
-  .hotgraphic-item-graphic {
-    width: 50%;
-    float: right;
-    .dir-rtl & {
-        float: left;
-    }
-    text-align: center;
-  }
+	.hotgraphic-item-content {
+		width: 50%;
+		float: left;
+		.dir-rtl & {
+			float: right;
+		}
+	}
 
-  .hotgraphic-item-graphic-inner{
-    padding-left: @item-padding-left;
-    .dir-rtl & {
-        padding-left: inherit;
-        padding-right: @item-padding-left;
-    }
-  }
-
-  .hotgraphic-item-body {
-    width: 50%;
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-  }
-
-  a {
-    text-decoration: none;
-  }
+	a {
+		text-decoration: none;
+	}
 
 }
 
 // Hotgraphic Narrative
 
 .hotgraphic-narrative {
-  position: relative;
-  max-height: 500px;
-  height: 500px;
+	position: relative;
+	max-height: 500px;
+	height: 500px;
 
-  .hotgraphic-graphic-pin {
-    border-radius: 0px;
-    position:absolute;
-    display:block;
-    box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    border:4px solid @background-color;
-    background-size: cover;
-    transition: background-size .4s;
-    overflow:hidden;
-    .hotgraphic-graphic-pin-image {
-        display:block;
-        position:absolute;
-        width:100%;
-        height:100%;
-        -webkit-transition: transform .4s;
-        transition: transform .4s;
-        background-size: cover;
-        &:before {
-            content: '';
-            position:absolute;
-            top:0px;
-            left:0px;
-            width:100%;
-            height:100%;
-            background:fadeout(@foreground-color, 50%);
-            transition: background .5s;
-        }
-    }
-    &:hover {
-        .hotgraphic-graphic-pin-image {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-            &:before {
-                background:fadeout(@foreground-color, 100%);
-            }
-        }
-    }
-  }
+	.hotgraphic-graphic-pin {
+		border-radius: 0px;
+		position:absolute;
+		display:block;
+		box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		border:4px solid @background-color;
+		background-size: cover;
+		transition: background-size .4s;
+		overflow:hidden;
+		.hotgraphic-graphic-pin-image {
+			display:block;
+			position:absolute;
+			width:100%;
+			height:100%;
+			-webkit-transition: transform .4s;
+			transition: transform .4s;
+			background-size: cover;
+			&:before {
+				content: '';
+				position:absolute;
+				top:0px;
+				left:0px;
+				width:100%;
+				height:100%;
+				background:fadeout(@foreground-color, 50%);
+				transition: background .5s;
+			}
+		}
+		&:hover {
+			.hotgraphic-graphic-pin-image {
+				-webkit-transform: scale(1.1);
+				transform: scale(1.1);
+				&:before {
+					background:fadeout(@foreground-color, 100%);
+				}
+			}
+		}
+	}
 }
 
 // Narrative Pin Size & Position
 
 .cols-1 {
-  width: 25%;
+		width: 25%;
 }
 
 .cols-2 {
-  width: 50%;
+		width: 50%;
 }
 
 .cols-3 {
-  width: 75%;
+		width: 75%;
 }
 
 .cols-4 {
-  width: 100%;
+		width: 100%;
 }
 
 .rows-1 {
-  height: 50%;
+		height: 50%;
 }
 
 .rows-2 {
-  height: 100%;
-}
-
-.no-touch {
-  .hotgraphic-component {
-    .hotgraphic-graphic-pin-icon {
-      &:hover {
-        color: @item-hover-color;
-      }
-    }
-    .hotgraphic-popup-close {
-      &:hover {
-        color: @item-hover-color;
-      }
-    }
-    .hotgraphic-popup-arrow-r {
-      &:hover {
-        color: @item-hover-color;
-      }
-    }
-    .hotgraphic-popup-arrow-l {
-      &:hover {
-        color: @item-hover-color;
-      }
-    }
-  }
-
+		height: 100%;
 }
