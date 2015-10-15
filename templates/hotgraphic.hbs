@@ -1,0 +1,69 @@
+{{! Maintainers - Kevin Corry}}
+<div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
+  {{> component this}}
+  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else}}pin{{/if}}">
+
+    <div class="hotgraphic-graphic">
+
+      <div class="hotgraphic-popup" role="dialog" aria-label="{{_globals._components._hotgraphic.ariaPopupLabel}}">
+
+        <div class="hotgraphic-popup-toolbar component-item-color clearfix">
+          {{#unless _hidePagination}}
+          <div class="hotgraphic-popup-nav component-item-color">
+            <a href="#" class="hotgraphic-popup-controls back" aria-label="{{_globals._accessibility._ariaLabels.previous}}" role="button">
+              <div class="hotgraphic-popup-arrow-l component-item-text-color icon icon-controls-small-left"></div>
+            </a>
+            <div class="hotgraphic-popup-count component-item-text-color">
+              <span class="current">1</span>/<span class="total">3</span>
+            </div>
+            <a href="#" class="hotgraphic-popup-controls next" aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
+              <div class="hotgraphic-popup-arrow-r component-item-text-color icon icon-controls-small-right"></div>
+            </a>
+          </div>
+          {{/unless}}
+          <a href="#" class="hotgraphic-popup-done" aria-label="{{_globals._accessibility._ariaLabels.closePopup}}" role="button">
+            <div class="hotgraphic-popup-close component-item-text-color icon icon-cross"></div>
+          </a>
+        </div>
+
+        <div class="hotgraphic-popup-inner clearfix">
+          {{#each _items}}
+          <div class="hotgraphic-item component-item item-{{@index}} {{_classes}}">
+            <div class="hotgraphic-item-graphic">
+              <div class="hotgraphic-item-graphic-inner">
+                <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
+              </div>
+            </div>
+            <div class="hotgraphic-item-body">
+              <div class="hotgraphic-item-body-inner">
+                <div class="h5 accessible-text-block" role="heading" aria-level="5" tabindex="0">
+                  {{{title}}}
+                </div>
+                <div class="hotgraphic-content-body-inner">
+                  {{{a11y_text body}}}
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{#if _useGraphicsAsPins}}
+        <div class="hotgraphic-narrative">
+          {{#each _items}}
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+            <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
+          </a>
+          {{/each}}
+        </div>
+      {{else}}
+        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
+        {{#each _items}}
+          <a href="#" class="hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+            <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+          </a>
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 {
-  "name": "adapt-contrib-hiddenHotspots",
+  "name": "adapt-contrib-hotgraphic",
   "version": "2.0.1",
   "framework": "^2.0.0",
-  "homepage": "https://github.com/adaptlearning/adapt-contrib-hiddenHotspots",
+  "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
   "issues": "https://adaptlearning.atlassian.net/secure/CreateIssueDetails!init.jspa?pid=10100&issuetype=1&priority=6&components=10501",
-  "description": "A contributed question component that enables a user to click on hidden hot spots over an image and mark their correct position.",
-  "main": "/js/adapt-contrib-hiddenHotspots.js",
-  "displayName" : "Hidden Hotspots",
-  "component" : "hiddenHotspots",
+  "description": "A contributed hot graphic component that enables a user to click on hot spots over an image and display a detailed popup that includes an image with text.",
+  "main": "/js/adapt-contrib-hotgraphic.js",
+  "displayName" : "Hot Graphic",
+  "component" : "hotgraphic",
   "assetFields" : [
     "_graphic.src",
     "_items[]._graphic.src"
