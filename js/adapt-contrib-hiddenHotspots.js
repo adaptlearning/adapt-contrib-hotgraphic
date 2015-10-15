@@ -2,8 +2,45 @@ define(function(require) {
 
     var QuestionView = require('coreViews/questionView');
     var Adapt = require('coreJS/adapt');
+    var HiddenHotspotsItem = require('./adapt-contrib-hiddenHotspotsItem.js');
+    var HiddenHotspotsItemModel = require('./adapt-contrib-hiddenHotspotsItemModel.js');
+    var HiddenHotspotsZone = require('./adapt-contrib-hiddenHotspotsZone.js');
 
     var HiddenHotspots = QuestionView.extend({
+
+        events: {
+            'click .hidden-hotspots-graphic': 'onGraphicClicked',
+            'click .show-zones': 'onShowZonesClicked'
+        },
+        // Interaction code
+        onGraphicClicked: function(event) {
+            event.preventDefault();
+            var unusedItemModel = this.hasAvailableItems();
+            if (unusedItemModel) {
+                unusedItemModel.set({
+                    _hasBeenUsed: true,
+                    _currentLeft: (event.offsetX),
+                    _currentTop: (event.offsetY)
+                });
+            }
+        },
+
+        onShowZonesClicked: function(event) {
+            this.renderZones();
+        },
+
+        renderZones: function() {
+            this.zones.each(function(itemModel, index) {
+                this.$('.hidden-hotspots-widget').append(new HiddenHotspotsZone({
+                    model: itemModel,
+                    index: index
+                }).$el)
+            }, this);
+        },
+
+        hasAvailableItems: function() {
+            return this.collection.findWhere({_hasBeenUsed: false});
+        },
 
         // Used by the question to disable the question during submit and complete stages
         disableQuestion: function() {},
@@ -15,10 +52,29 @@ define(function(require) {
         resetQuestionOnRevisit: function(type) {},
 
         // Left blank for question setup - should be used instead of preRender
-        setupQuestion: function() {},
+        setupQuestion: function() {
+            this.zones = new Backbone.Collection();
+            this.zones.add(this.model.get('_items'));
+            this.collection = new Backbone.Collection();
+            this.collection.model = HiddenHotspotsItemModel;
+            this.collection.add(this.model.get('_items'));
+        },
 
         // Blank method used just like postRender is for presentational components
-        onQuestionRendered: function() {},
+        onQuestionRendered: function() {
+            this.renderItems();
+            this.setReadyStatus();
+        },
+
+        renderItems: function() {
+            this.collection.each(function(itemModel, index) {
+                this.$('.hidden-hotspots-widget').append(new HiddenHotspotsItem({
+                    componentModel: this.model,
+                    model: itemModel,
+                    index: index
+                }).$el)
+            }, this);
+        },
 
         //////
         // Submit process
@@ -80,20 +136,89 @@ define(function(require) {
 
         // Use to check if the user is allowed to submit the question
         // Maybe the user has to select an item?
-        canSubmit: function() {},
+        canSubmit: function() {
+            return true;
+        },
 
         // Blank method for question to fill out when the question cannot be submitted
         onCannotSubmit: function() {},
 
         // This is important for returning or showing the users answer
         // This should preserve the state of the users answers
-        storeUserAnswer: function() {},
+        storeUserAnswer: function() {
+            this.model.set("_userAnswer", this.collection.toJSON());
+        },
 
         // Should return a boolean based upon whether to question is correct or not
-        isCorrect: function() {},
+        isCorrect: function() {
+            this.zones.each(function(zone) {
+                console.log(zone.attributes);
+                var zoneTopMax = zone.attributes._top + zone.attributes._height;
+                var zoneTopMin = zone.attributes._top;
+                var zoneLeftMax = zone.attributes._left + zone.attributes._width;
+                var zoneLeftMin = zone.attributes._left;
+                this.collection.each(function(item) {
+                    
+                    if (zone.get('_hasBeenUsed')) {
+                        return;
+                    }
+                    
+                    if (item.get('_hasBeenUsed')) {
+                        var itemTopMax = item.attributes._currentTop + 25;
+                        var itemTopMin = item.attributes._currentTop - 25;
+                        var itemLeftMax = item.attributes._currentLeft + 25;
+                        var itemLeftMin = item.attributes._currentLeft - 25;
+                        console.log(zoneLeftMax, zoneLeftMin, zoneTopMax, zoneTopMin);
+                        console.log(itemLeftMax, itemLeftMin, itemTopMax, itemTopMin);
+                        var isInLeftArea = false;
+                        var isInTopArea = false;
+
+
+                        if ((itemLeftMax <= zoneLeftMax) && (itemLeftMax >= zoneLeftMin)) {
+                            isInLeftArea = true;
+                        }
+
+                        if ((itemLeftMin <= zoneLeftMax) && (itemLeftMin >= zoneLeftMin)) {
+                            isInLeftArea = true;
+                        }
+
+                        if ((itemTopMax <= zoneTopMax) && (itemTopMax >= zoneTopMin)) {
+                            isInTopArea = true;
+                        }
+
+                        if ((itemTopMin <= zoneTopMax) && (itemTopMin >= zoneTopMin)) {
+                            isInTopArea = true;
+                        }
+
+                        console.log(isInLeftArea, isInTopArea);
+
+                        if (isInLeftArea && isInTopArea) {
+                            console.log('is in!');
+                            zone.set({
+                                '_hasBeenUsed': true,
+                                '_isCorrect': true
+                            });
+                        }
+                    }
+
+                }, this)
+            }, this);
+
+            var correctLength = this.zones.where({_isCorrect: true}).length;
+            var itemLength = this.model.get('_items').length;
+
+            if (correctLength === itemLength) {
+                return true;
+            } else {
+                return false;
+            }
+
+        },
 
         // Used to set the score based upon the _questionWeight
-        setScore: function() {},
+        setScore: function() {
+            console.log(this.model.attributes);
+        },
 
         // This is important and should give the user feedback on how they answered the question
         // Normally done through ticks and crosses by adding classes
@@ -127,3 +252,15 @@ define(function(require) {
     return HiddenHotspots;
 
 });
+
+/*, {
+            "_left": 540,
+            "_top": 340,
+            "_shape": "circle",
+            "_spread": 80
+        }, {
+            "_left": 825,
+            "_top": 525,
+            "_shape": "circle",
+            "_spread": 50
+        }*/
