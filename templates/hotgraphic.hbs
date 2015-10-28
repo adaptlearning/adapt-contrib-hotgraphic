@@ -31,7 +31,7 @@
           <div class="hotgraphic-item component-item item-{{@index}} {{_classes}}">
             <div class="hotgraphic-item-graphic">
               <div class="hotgraphic-item-graphic-inner">
-                <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
+                <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
               </div>
             </div>
             <div class="hotgraphic-item-content">
@@ -57,7 +57,7 @@
           {{/each}}
         </div>
       {{else}}
-        <img src="{{_graphic.src}}" alt="{{_graphic.alt}}"/>
+        <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
         {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
