@@ -95,7 +95,9 @@ define(function(require) {
             newNarrative.setupNarrative();
             $container.append(newNarrative.$el);
             Adapt.trigger('device:resize');
-            this.remove();
+            _.defer(_.bind(function () {
+                this.remove();    
+            }, this));
         },
 
         prepareNarrativeModel: function() {
