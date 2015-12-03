@@ -212,8 +212,12 @@ define(function(require) {
         setVisited: function(index) {
             var item = this.model.get('_items')[index];
             item._isVisited = true;
-            this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited').attr('aria-label', "Item visited.");
+            this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited');
             $.a11y_alert("visited");
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            var itemTitle = this.model.get('_items')[index].title;
+            var visitedLabel = Adapt.course.get('_globals')._accessibility._ariaLabels.visited;
+            this.$('.hotgraphic-graphic-pin').eq(index).attr('aria-label', 'item' + ' ' + (currentIndex+1) + ' ' + itemTitle + ' ' + visitedLabel);
             this.checkCompletionStatus();
         },
 
