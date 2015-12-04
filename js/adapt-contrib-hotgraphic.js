@@ -96,7 +96,7 @@ define(function(require) {
             $container.append(newNarrative.$el);
             Adapt.trigger('device:resize');
             _.defer(_.bind(function () {
-                this.remove();    
+                this.remove();
             }, this));
         },
 
@@ -153,7 +153,7 @@ define(function(require) {
             this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
             this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + currentIndex);
-            this.$('.hotgraphic-popup').show();      
+            this.$('.hotgraphic-popup').show();
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
               
             Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
@@ -212,8 +212,15 @@ define(function(require) {
         setVisited: function(index) {
             var item = this.model.get('_items')[index];
             item._isVisited = true;
-            this.$('.hotgraphic-graphic-pin').eq(index).addClass('visited').attr('aria-label', "Item visited.");
+
+            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
+            $pin.addClass('visited');
+            // append the word 'visited.' to the pin's aria-label
+            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
+
             $.a11y_alert("visited");
+
             this.checkCompletionStatus();
         },
 
@@ -227,7 +234,7 @@ define(function(require) {
             if (!this.model.get('_isComplete')) {
                 if (this.getVisitedItems().length == this.model.get('_items').length) {
                     this.trigger('allItems');
-                } 
+                }
             }
         },
 

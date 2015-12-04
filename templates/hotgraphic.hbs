@@ -51,7 +51,7 @@
       {{#if _useGraphicsAsPins}}
         <div class="hotgraphic-narrative">
           {{#each _items}}
-          <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+          <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
           </button>
           {{/each}}
@@ -59,7 +59,7 @@
       {{else}}
         <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
         {{#each _items}}
-          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.">
+          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
           </button>
         {{/each}}
