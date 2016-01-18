@@ -231,10 +231,8 @@ define(function(require) {
         },
 
         checkCompletionStatus: function() {
-            if (!this.model.get('_isComplete')) {
-                if (this.getVisitedItems().length == this.model.get('_items').length) {
-                    this.trigger('allItems');
-                }
+            if (this.getVisitedItems().length == this.model.get('_items').length) {
+                this.trigger('allItems');
             }
         },
 
