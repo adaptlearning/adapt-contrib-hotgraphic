@@ -15,7 +15,6 @@ define([
             "_items",
             "_graphic",
             "_isComplete",
-            "_isPopupShown",
             "_canCycleThroughPagination"
         ],
 
@@ -88,7 +87,9 @@ define([
             "click .hotgraphic-graphic-pin": "openHotGraphic"
         },
 
-        postRender: function() {
+        postRender: function(isFirstRender) {
+            if (!isFirstRender) return;
+            
             this.$('.hotgraphic-widget').imageready(_.bind(function() {
                 this.setReadyStatus();
             }, this));
@@ -129,7 +130,6 @@ define([
                 state:this.state,
                 parentView: this
             });
-            this.$(".hotgraphic-popup-container").append(popupView.$el);
         },
 
         onCompletion: function() {

@@ -8,8 +8,7 @@ define([
         renderAttributes: [
             "_hidePagination",
             "_currentPosition",
-            "_currentIndex",
-            "_isPopupShown"
+            "_currentIndex"
         ],
 
         className: function() {
@@ -19,23 +18,18 @@ define([
             ]);
         },
 
-        postInitialize: function() {
-            Adapt.trigger('popup:opened',  this.$el);
-        },
-
         events: {
             'click .hotgraphic-popup-done': 'closeHotGraphic',
             'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
             'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
         },
 
-        preRender: function() {
+        postInitialize: function() {
             var currentIndex = this.state.get("_currentIndex");
-            this.state.set("_isPopupShown", true);
             this.moveToIndex(currentIndex);
         },
 
-        moveToIndex: function(index) {
+        moveToIndex: function(index, initial) {
             this.setVisited(index);
 
             this.state.set({
@@ -46,7 +40,8 @@ define([
 
             this.setNavigationForItem(index);
 
-            this.listenToOnce(this, "postRender",function () {
+            // Make sure the focus is set correctly after the popup moves to a new index and is rerendered
+            this.listenToOnce(this, "postRender", function () {
                 this.$('.active').a11y_focus();
             });
         },
@@ -80,6 +75,15 @@ define([
             this.state.set('_popupClasses', classes);
             this.$el.attr("class", this.className()); //reapply className to comtainer
 
+        },
+
+        postRender: function(isFirstRender) {
+            if (!isFirstRender) return;
+
+            this.$el.imageready(_.bind(function() {
+                this.parentView.$(".hotgraphic-popup-container").append(this.$el);
+                Adapt.trigger('popup:opened', this.$el);
+            }, this));
         },
 
         previousHotGraphic: function (event) {
@@ -123,7 +127,6 @@ define([
 
             this.model.evaluateCompletion();
 
-            this.state.set("_isPopupShown", false);
             Adapt.trigger('popup:closed');
 
             this.remove();
