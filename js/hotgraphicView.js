@@ -10,6 +10,7 @@ define([
             "displayTitle",
             "body",
             "title",
+            "instruction",
             "_useGraphicsAsPins",
             "_currentIndex",
             "_items",
