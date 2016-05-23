@@ -5,11 +5,16 @@ define(function(require) {
 
     var HotGraphic = ComponentView.extend({
 
+        isPopupOpen: false,
+        
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             
             this.model.set('_globals', Adapt.course.get('_globals'));
+            
+            _.bindAll(this, 'onKeyUp');
             
             this.preRender();
             
@@ -158,7 +163,7 @@ define(function(require) {
             this.setVisited(currentIndex);
             
             this.openPopup();
-            
+           
             this.applyNavigationClasses(currentIndex);
         },
         
@@ -174,12 +179,16 @@ define(function(require) {
             Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
 
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
+            
+            this.setupEscapeKey();
         },
 
         closePopup: function(event) {
             if(event) event.preventDefault();
             
             this.$('.hotgraphic-popup').hide();
+            
+            this.isPopupOpen = false;
             
             Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
         },
@@ -267,6 +276,28 @@ define(function(require) {
             } else {
                 this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
+        },
+        
+        setupEscapeKey: function() {
+            var hasAccessibility = Adapt.config.has('_accessibility') && Adapt.config.get('_accessibility')._isActive;
+
+            if (!hasAccessibility && this.isPopupOpen) {
+                $(window).on("keyup", this.onKeyUp);
+            } else {
+                $(window).off("keyup", this.onKeyUp);
+            }
+        },
+
+        onAccessibilityToggle: function() {
+            this.setupEscapeKey();
+        },
+
+        onKeyUp: function(event) {
+            if (event.which != 27) return;
+            
+            event.preventDefault();
+
+            this.closePopup();
         }
 
     });
