@@ -8,8 +8,11 @@ define(function(require) {
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+            
             this.model.set('_globals', Adapt.course.get('_globals'));
+            
             this.preRender();
+            
             if (this.model.get('_canCycleThroughPagination') === undefined) {
                 this.model.set('_canCycleThroughPagination', false);
             }
@@ -22,8 +25,8 @@ define(function(require) {
 
         events: function() {
             return {
-                'click .hotgraphic-graphic-pin': 'openHotGraphic',
-                'click .hotgraphic-popup-done': 'closeHotGraphic',
+                'click .hotgraphic-graphic-pin': 'onPinClicked',
+                'click .hotgraphic-popup-done': 'closePopup',
                 'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
                 'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
             }
@@ -142,30 +145,42 @@ define(function(require) {
 
         },
 
-        openHotGraphic: function (event) {
-            event.preventDefault();
+        onPinClicked: function (event) {
+            if(event) event.preventDefault();
+            
             this.$('.hotgraphic-popup-inner').a11y_on(false);
-            var currentHotSpot = $(event.currentTarget).data('id');
             this.$('.hotgraphic-item').hide().removeClass('active');
-            this.$('.'+currentHotSpot).show().addClass('active');
+            
+            var $currentHotSpot = this.$('.' + $(event.currentTarget).data('id'));
+            $currentHotSpot.show().addClass('active');
+            
             var currentIndex = this.$('.hotgraphic-item.active').index();
             this.setVisited(currentIndex);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
+            
+            this.openPopup();
+            
+            this.applyNavigationClasses(currentIndex);
+        },
+        
+        openPopup: function() {
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + currentIndex);
-            this.$('.hotgraphic-popup').show();
+            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
+            
+            this.isPopupOpen = true;
               
             Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
 
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
-            this.applyNavigationClasses(currentIndex);
         },
 
-        closeHotGraphic: function(event) {
-            event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
+        closePopup: function(event) {
+            if(event) event.preventDefault();
+            
             this.$('.hotgraphic-popup').hide();
+            
             Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
         },
 
@@ -231,8 +246,10 @@ define(function(require) {
         },
 
         checkCompletionStatus: function() {
-            if (this.getVisitedItems().length == this.model.get('_items').length) {
-                this.trigger('allItems');
+            if (!this.model.get('_isComplete')) {
+                if (this.getVisitedItems().length == this.model.get('_items').length) {
+                    this.trigger('allItems');
+                }
             }
         },
 
