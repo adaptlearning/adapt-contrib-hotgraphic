@@ -136,7 +136,7 @@
           "strapline": {
             "type":"string",
             "required":true,
-            "default": "Tap on '+' for more info",
+            "default": "",
             "inputType": "Text",
             "validators": ["required"],
             "help": "Strapline displayed on mobile version",
