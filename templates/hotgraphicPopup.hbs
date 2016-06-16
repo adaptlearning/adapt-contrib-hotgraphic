@@ -1,0 +1,44 @@
+<span class="aria-label" role="dialog">{{_globals._components._hotgraphic.ariaPopupLabel}}</span>
+
+<div class="hotgraphic-popup-toolbar component-item-color clearfix">
+  {{#unless _hidePagination}}
+  <div class="hotgraphic-popup-nav component-item-color {{#if _isFirst}}first {{/if}}{{#if _isLast}}last {{/if}}">
+    <button class="base hotgraphic-popup-controls back {{#unless _showBack}}disabled{{/unless}}" {{#unless _showBack}}disabled="disabled" tabindex="0"{{/unless}} aria-label="{{_globals._accessibility._ariaLabels.previous}}" role="button">
+      <div class="hotgraphic-popup-arrow-l component-item-text-color icon icon-controls-small-left"></div>
+    </button>
+    <div class="hotgraphic-popup-count component-item-text-color">
+      <span class="current">{{_currentPosition}}</span>/<span class="total">{{_total}}</span>
+    </div>
+    <button class="base hotgraphic-popup-controls next {{#unless _showNext}}disabled{{/unless}}" {{#unless _showNext}}disabled="disabled" tabindex="0"{{/unless}} aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
+      <div class="hotgraphic-popup-arrow-r component-item-text-color icon icon-controls-small-right"></div>
+    </button>
+  </div>
+  {{/unless}}
+  <button class="base hotgraphic-popup-done" aria-label="{{_globals._accessibility._ariaLabels.closePopup}}">
+    <div class="hotgraphic-popup-close component-item-text-color icon icon-cross"></div>
+  </button>
+</div>
+
+<div class="hotgraphic-popup-inner clearfix">
+  {{#each _items}}
+  <div class="hotgraphic-item component-item item-{{@index}} {{_classes}} {{#if_value_equals ../_currentIndex @index}}active{{else}}display-none{{/if_value_equals}}">
+    <div class="hotgraphic-item-graphic">
+      <div class="hotgraphic-item-graphic-inner">
+        <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" {{#if_value_equals ../_currentIndex @index}}tabindex="0"{{else}}tabindex="-1"{{/if_value_equals}}/>
+      </div>
+    </div>
+    <div class="hotgraphic-item-content">
+      <div class="hotgraphic-item-content-inner">
+        <div class="hotgraphic-content-title accessible-text-block" role="heading" aria-level="5" tabindex="0">
+          {{{title}}}
+        </div>
+        <div class="hotgraphic-content-body">
+          {{{a11y_text body}}}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+<a id="a11y-focusguard" class="a11y-ignore a11y-ignore-focus" tabindex="0" role="button">&nbsp;</a>
