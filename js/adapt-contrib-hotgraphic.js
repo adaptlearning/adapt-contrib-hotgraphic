@@ -5,11 +5,19 @@ define(function(require) {
 
     var HotGraphic = ComponentView.extend({
 
+        isPopupOpen: false,
+        
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
+            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
+            
             this.model.set('_globals', Adapt.course.get('_globals'));
+            
+            _.bindAll(this, 'onKeyUp');
+            
             this.preRender();
+            
             if (this.model.get('_canCycleThroughPagination') === undefined) {
                 this.model.set('_canCycleThroughPagination', false);
             }
@@ -22,8 +30,8 @@ define(function(require) {
 
         events: function() {
             return {
-                'click .hotgraphic-graphic-pin': 'openHotGraphic',
-                'click .hotgraphic-popup-done': 'closeHotGraphic',
+                'click .hotgraphic-graphic-pin': 'onPinClicked',
+                'click .hotgraphic-popup-done': 'closePopup',
                 'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
                 'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
             }
@@ -142,30 +150,46 @@ define(function(require) {
 
         },
 
-        openHotGraphic: function (event) {
-            event.preventDefault();
+        onPinClicked: function (event) {
+            if(event) event.preventDefault();
+            
             this.$('.hotgraphic-popup-inner').a11y_on(false);
-            var currentHotSpot = $(event.currentTarget).data('id');
             this.$('.hotgraphic-item').hide().removeClass('active');
-            this.$('.'+currentHotSpot).show().addClass('active');
+            
+            var $currentHotSpot = this.$('.' + $(event.currentTarget).data('id'));
+            $currentHotSpot.show().addClass('active');
+            
             var currentIndex = this.$('.hotgraphic-item.active').index();
             this.setVisited(currentIndex);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex+1);
+            
+            this.openPopup();
+           
+            this.applyNavigationClasses(currentIndex);
+        },
+        
+        openPopup: function() {
+            var currentIndex = this.$('.hotgraphic-item.active').index();
+            this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + currentIndex);
-            this.$('.hotgraphic-popup').show();
+            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
+            
+            this.isPopupOpen = true;
               
             Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
 
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
-            this.applyNavigationClasses(currentIndex);
+            
+            this.setupEscapeKey();
         },
 
-        closeHotGraphic: function(event) {
-            event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
+        closePopup: function(event) {
+            if(event) event.preventDefault();
+            
             this.$('.hotgraphic-popup').hide();
+            
+            this.isPopupOpen = false;
+            
             Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
         },
 
@@ -250,6 +274,28 @@ define(function(require) {
             } else {
                 this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
+        },
+        
+        setupEscapeKey: function() {
+            var hasAccessibility = Adapt.config.has('_accessibility') && Adapt.config.get('_accessibility')._isActive;
+
+            if (!hasAccessibility && this.isPopupOpen) {
+                $(window).on("keyup", this.onKeyUp);
+            } else {
+                $(window).off("keyup", this.onKeyUp);
+            }
+        },
+
+        onAccessibilityToggle: function() {
+            this.setupEscapeKey();
+        },
+
+        onKeyUp: function(event) {
+            if (event.which != 27) return;
+            
+            event.preventDefault();
+
+            this.closePopup();
         }
 
     });
