@@ -12,7 +12,7 @@
       "validators": [],
       "translatable": true
     },
-    "ariaPoupupLabel": {
+    "ariaPopupLabel": {
       "type": "string",
       "required": true,
       "default": "Hotgraphic popup",
