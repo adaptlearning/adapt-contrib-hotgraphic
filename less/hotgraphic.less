@@ -20,6 +20,8 @@
 			}
 		}
 		.no-touch &:hover {
+			background-color: @item-text-color;
+
 			.hotgraphic-graphic-pin-icon {
 				color: @item-color-hover;
 			}
@@ -112,6 +114,11 @@
 
 	.hotgraphic-popup-inner {
 		padding: @item-padding;
+	}
+
+	.hotgraphic-content-title {
+		.item-title;
+		margin-bottom: @title-text-margin;
 	}
 
 	.hotgraphic-item-graphic {
