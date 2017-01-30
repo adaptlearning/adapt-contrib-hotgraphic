@@ -45,10 +45,10 @@
       "properties":{
         "src": {
           "type":"string",
-          "required":true,
+          "required":false,
           "default": "",
           "inputType": "Asset:image",
-          "validators": ["required"],
+          "validators": [],
           "help": "This is the image that appears behind the pins"
         },
         "alt": {
