@@ -6,7 +6,6 @@ define([
     var HotGraphicView = ComponentView.extend({
 
         initialize: function() {
-            this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             
@@ -81,7 +80,7 @@ define([
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
                     this.$('.component-inner').off('inview');
-                    this.setCompletionStatus();
+                    this.model.setCompletionStatus();
                 }
             }
         },
@@ -235,7 +234,7 @@ define([
 
             $.a11y_alert("visited");
 
-            this.checkCompletionStatus();
+            this.model.checkCompletionStatus();
         },
 
         setActiveClasses: function(index) {
@@ -248,25 +247,17 @@ define([
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
         },
 
-        checkCompletionStatus: function() {
-            if (this.model.getVisitedItems().length == this.model.getItemCount()) {
-                this.trigger('allItems');
-            }
-        },
-
-        onCompletion: function() {
-            this.setCompletionStatus();
-            if (this.completionEvent && this.completionEvent != 'inview') {
-                this.off(this.completionEvent, this);
-            }
-        },
-
         setupEventListeners: function() {
-            this.completionEvent = (!this.model.get('_setCompletionOn')) ? 'allItems' : this.model.get('_setCompletionOn');
-            if (this.completionEvent !== 'inview') {
-                this.on(this.completionEvent, _.bind(this.onCompletion, this));
-            } else {
-                this.$('.component-widget').on('inview', _.bind(this.inview, this));
+            this.completionEvent = this.model.get('_setCompletionOn');
+            
+            switch (this.completionEvent) {
+                case 'allItems':
+                    this.model.once(this.completionEvent, this.onCompletion, this);
+                    break;
+                case 'inview':
+                default:
+                    this.$('.component-widget').on('inview', _.bind(this.inview, this));
+                    break;
             }
         },
         
@@ -290,6 +281,12 @@ define([
             event.preventDefault();
 
             this.model.set('_isPopupOpen', false);
+        },
+
+        preRemove: function() {
+            if (this.completionEvent === 'allItems') {
+                this.model.off(this.completionEvent, this.onCompletion, this);
+            }
         }
 
     });
