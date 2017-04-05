@@ -118,8 +118,8 @@ define([
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
-            var classes = this.model.getCurrentItem(index)._classes 
-                ? this.model.getCurrentItem(index)._classes
+            var classes = this.model.getItemAtIndex(index)._classes 
+                ? this.model.getItemAtIndex(index)._classes
                 : '';  // _classes has not been defined
       
             this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
