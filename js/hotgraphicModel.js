@@ -6,7 +6,7 @@ define([
     var HotgraphicModel = ItemsModel.extend({
         
         defaults: function() {
-            return _.extend(_.result(ItemsModel.prototype, "defaults"), {
+            return _.extend({}, _.result(ItemsModel.prototype, "defaults"), {
                 _activeItem: -1,
                 _isPopupOpen: false
             });
@@ -31,11 +31,17 @@ define([
         },
 
         checkCompletionStatus: function() {
-            ItemsModel.prototype.checkCompletionStatus.apply(this, arguments);
-
             if (this.getCompletionStatus()) {
                 this.trigger('allItems');
             }
+        },
+
+        reset: function(type, force) {
+            this.set({
+                _activeItem: -1,
+                _isPopupOpen: false
+            });
+            ItemsModel.prototype.reset.call(this, type, force);
         }
 
     });

@@ -53,12 +53,8 @@ define([
         // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
             var isResetOnRevisit = this.model.get('_isResetOnRevisit');
-
             // If reset is enabled set defaults
-            if (isResetOnRevisit) {
-                this.model.reset(isResetOnRevisit);
-                this.model.resetItems();
-            }
+            if (isResetOnRevisit) this.model.reset(isResetOnRevisit);
         },
 
         reRender: function() {
@@ -247,17 +243,19 @@ define([
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
         },
 
+        onCompletion: function() {
+            this.model.setCompletionStatus();
+            if (this.completionEvent && this.completionEvent != 'inview') {
+                this.model.off(this.completionEvent, this);
+            }
+        },
+
         setupEventListeners: function() {
-            this.completionEvent = this.model.get('_setCompletionOn');
-            
-            switch (this.completionEvent) {
-                case 'allItems':
-                    this.model.once(this.completionEvent, this.onCompletion, this);
-                    break;
-                case 'inview':
-                default:
-                    this.$('.component-widget').on('inview', _.bind(this.inview, this));
-                    break;
+            this.completionEvent = (!this.model.get('_setCompletionOn')) ? 'allItems' : this.model.get('_setCompletionOn');
+            if (this.completionEvent !== 'inview') {
+                this.model.on(this.completionEvent, _.bind(this.onCompletion, this));
+            } else {
+                this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
         },
         
@@ -284,8 +282,10 @@ define([
         },
 
         preRemove: function() {
-            if (this.completionEvent === 'allItems') {
-                this.model.off(this.completionEvent, this.onCompletion, this);
+            if (this.completionEvent !== 'inview') {
+                this.model.off(this.completionEvent);
+            } else {
+                this.$('.component-widget').off('inview');
             }
         }
 
