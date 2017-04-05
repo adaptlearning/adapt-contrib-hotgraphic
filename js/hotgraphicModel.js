@@ -6,10 +6,10 @@ define([
     var HotgraphicModel = ItemsModel.extend({
         
         defaults: function() {
-            return _.extend({
+            return _.extend(_.result(ItemsModel.prototype, "defaults"), {
                 _activeItem: -1,
                 _isPopupOpen: false
-            }, ItemsModel.prototype.defaults);
+            });
         },
 
         initialize: function() {
