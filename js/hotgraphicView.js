@@ -6,6 +6,7 @@ define([
     var HotGraphicView = ComponentView.extend({
 
         initialize: function() {
+            this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             
@@ -34,7 +35,7 @@ define([
 
         preRender: function() {
             this.listenTo(Adapt, 'device:changed', this.reRender, this);
-            this.listenTo(this.model, 'change:_activeItem', this.onActiveItemChanged);
+            this.listenTo(this.model, 'change:_items:_isActive', this.onActiveItemChanged);
             this.listenTo(this.model, 'change:_isPopupOpen', this.onPopupOpenChanged);
 
             // Checks to see if the hotgraphic should be reset on revisit
@@ -132,7 +133,7 @@ define([
             var currentIndex = parseInt($(event.currentTarget).data('id').split('item-')[1]);
 
             this.setVisited(currentIndex);
-            this.model.set('_activeItem', currentIndex);
+            this.model.setItemAtIndexAsActive(currentIndex, true);
             this.applyNavigationClasses(currentIndex);
         },
         
@@ -160,16 +161,18 @@ define([
 
         closePopup: function() {
             this.model.set('_isPopupOpen', false);
-            this.model.set('_activeItem', -1);
+            this.model.resetActiveItems(false);
             this.$('.hotgraphic-popup').hide();
             Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
         },
 
-        onActiveItemChanged: function(model, activeItem, options) {
-            if (activeItem < 0) {
+        onActiveItemChanged: function(model, items, options) {
+            var activeItem = this.model.getActiveItemsIndexes();
+            
+            if (activeItem.length <= 0) {
                 this.closePopup();
-            } else if (activeItem < this.model.getItemCount()) {
-                this.openPopup(activeItem);
+            } else if (activeItem[0] < this.model.getItemCount()) {
+                this.openPopup(activeItem[0]);
             }
         },
 
@@ -183,8 +186,8 @@ define([
                 currentIndex = this.model.getItemCount();
             }
 
-            this.model.set('_activeItem', currentIndex-1);
-
+            this.model.setItemAtIndexAsInactive(currentIndex, false);
+            this.model.setItemAtIndexAsActive(currentIndex-1, true);
             this.setActiveClasses(currentIndex-1);
             this.setVisited(currentIndex-1);
             this.setPopupCount(currentIndex);
@@ -204,8 +207,8 @@ define([
                 currentIndex = -1;
             }
             
-            this.model.set('_activeItem', currentIndex+1);
-            
+            this.model.setItemAtIndexAsInactive(currentIndex, false);
+            this.model.setItemAtIndexAsActive(currentIndex+1, true);
             this.setActiveClasses(currentIndex+1);
             this.setVisited(currentIndex+1);
             this.setPopupCount(currentIndex+2);
@@ -220,7 +223,7 @@ define([
         },
 
         setVisited: function(index) {
-            this.model.setItemAsVisited(index);
+            this.model.setItemAtIndexAsVisited(index);
 
             var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             $pin.addClass('visited');
@@ -282,6 +285,8 @@ define([
         },
 
         preRemove: function() {
+            if (!this.completionEvent) return;
+            
             if (this.completionEvent !== 'inview') {
                 this.model.off(this.completionEvent);
             } else {

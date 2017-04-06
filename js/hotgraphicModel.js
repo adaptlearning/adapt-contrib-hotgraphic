@@ -4,24 +4,22 @@ define([
 ], function(Adapt, ItemsModel) {
 
     var HotgraphicModel = ItemsModel.extend({
-        
-        defaults: function() {
-            return _.extend({}, _.result(ItemsModel.prototype, "defaults"), {
-                _activeItem: -1,
-                _isPopupOpen: false
-            });
-        },
 
         initialize: function() {
-            this.set('_marginDir', 'left');
+            this.set({
+                '_marginDir': 'left',
+                '_isPopupOpen': false
+            });
             if (Adapt.config.get('_defaultDirection') == 'rtl') {
                 this.set('_marginDir', 'right');
             }
             this.set('_itemCount', this.get('_items').length);
+
+            ItemsModel.prototype.initialize.apply(this, arguments);
         },
 
         prepareHotgraphicModel: function() {
-            this.set('_activeItem', -1);
+            this.resetActiveItems(false);
             this.set('_isPopupOpen', false);
             this.set('_component', 'hotgraphic');
             this.set('body', this.get('originalBody'));
@@ -38,7 +36,6 @@ define([
 
         reset: function(type, force) {
             this.set({
-                _activeItem: -1,
                 _isPopupOpen: false
             });
             ItemsModel.prototype.reset.call(this, type, force);
