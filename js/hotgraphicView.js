@@ -167,7 +167,7 @@ define([
         },
 
         onActiveItemChanged: function(model, items, options) {
-            var activeItem = this.model.getFirstActiveItem();
+            var activeItem = this.model.getFirstActiveItemIndex();
             
             if (activeItem === undefined) {
                 this.closePopup();
