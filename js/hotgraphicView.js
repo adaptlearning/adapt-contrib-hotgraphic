@@ -167,12 +167,12 @@ define([
         },
 
         onActiveItemChanged: function(model, items, options) {
-            var activeItem = this.model.getActiveItemsIndexes();
+            var activeItem = this.model.getFirstActiveItem();
             
-            if (activeItem.length <= 0) {
+            if (activeItem === undefined) {
                 this.closePopup();
-            } else if (activeItem[0] < this.model.getItemCount()) {
-                this.openPopup(activeItem[0]);
+            } else if (activeItem < this.model.getItemCount()) {
+                this.openPopup(activeItem);
             }
         },
 
