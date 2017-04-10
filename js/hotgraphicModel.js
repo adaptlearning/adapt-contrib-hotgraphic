@@ -5,14 +5,14 @@ define([
 
     var HotgraphicModel = ItemsModel.extend({
 
-        initialize: function() {
-            this.set({
-                '_marginDir': 'left',
-                '_isPopupOpen': false
+        defaults: function() {
+            return _.extend({}, _.result(ItemsModel.prototype, "defaults"), {
+                _isPopupOpen: false,
+                _marginDir: (Adapt.config.get('_defaultDirection') == 'rtl') ? 'right': 'left'
             });
-            if (Adapt.config.get('_defaultDirection') == 'rtl') {
-                this.set('_marginDir', 'right');
-            }
+        },
+
+        initialize: function() {
             this.set('_itemCount', this.get('_items').length);
 
             ItemsModel.prototype.initialize.apply(this, arguments);
