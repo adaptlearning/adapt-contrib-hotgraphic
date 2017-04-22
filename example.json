@@ -28,6 +28,7 @@
             "_graphic": {
                 "src": "image1.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -42,6 +43,7 @@
             "_graphic": {
                 "src": "image2.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -56,6 +58,7 @@
             "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -89,7 +92,8 @@
     "_hidePagination": false,
     "_graphic": {
       "src": "hot_graphic.jpg",
-      "alt": "alt text"
+      "alt": "alt text",
+      "attribution":"Copyright © 2015"
     },
     "_items": [
         {
@@ -98,6 +102,7 @@
             "_graphic": {
                 "src": "image1.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -112,6 +117,7 @@
             "_graphic": {
                 "src": "image2.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -126,6 +132,7 @@
             "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -140,6 +147,7 @@
             "_graphic": {
                 "src": "image4.jpg",
                 "alt": "alt text",
+                "attribution":"Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",

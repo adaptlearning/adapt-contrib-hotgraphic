@@ -59,7 +59,16 @@
           "validators": [],
           "help": "Alternative text for this image",
           "translatable": true
-        }
+        },
+        "attribution": {
+          "type":"string",
+          "required":false,
+          "default": "",
+          "inputType": "Text",
+          "validators": [],
+          "help": "Text to be displayed as an attribution",
+          "translatable": true
+        }        
       }
     },
     "mobileBody": {
@@ -162,6 +171,15 @@
                 "inputType": "Text",
                 "validators": [],
                 "help": "Alternative text for this image",
+                "translatable": true
+              },
+              "attribution": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Text to be displayed as an attribution",
                 "translatable": true
               },
               "title": {
