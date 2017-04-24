@@ -19,7 +19,8 @@
     "_hidePagination": false,
     "_graphic": {
       "src": "hot_graphic.jpg",
-      "alt": "alt text"
+      "alt": "alt text",
+      "attribution":"Copyright © 2015"
     },
     "_items": [
         {
