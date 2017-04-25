@@ -9,9 +9,7 @@ define([
             this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(this.model, 'change:_isVisible', this.toggleVisibility);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
-            
-            this.model.set('_globals', Adapt.course.get('_globals'));
-            
+                        
             _.bindAll(this, 'onKeyUp');
             
             this.preRender();
@@ -224,7 +222,7 @@ define([
             var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             $pin.addClass('visited');
             // append the word 'visited.' to the pin's aria-label
-            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            var visitedLabel = Adapt.course.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
 
             $.a11y_alert("visited");
