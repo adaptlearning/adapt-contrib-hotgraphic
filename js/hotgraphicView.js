@@ -16,9 +16,6 @@ define([
             
             this.preRender();
             
-            if (this.model.get('_canCycleThroughPagination') === undefined) {
-                this.model.set('_canCycleThroughPagination', false);
-            }
             if (Adapt.device.screenSize == 'large') {
                 this.render();
             } else {
@@ -36,7 +33,6 @@ define([
         preRender: function() {
             this.listenTo(Adapt, 'device:changed', this.reRender, this);
             this.listenTo(this.model, 'change:_items:_isActive', this.onActiveItemChanged);
-            this.listenTo(this.model, 'change:_isPopupOpen', this.onPopupOpenChanged);
 
             // Checks to see if the hotgraphic should be reset on revisit
             this.checkIfResetOnRevisit();
