@@ -113,8 +113,8 @@ define([
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
-            var classes = this.model.getItemAtIndex(index)._classes 
-                ? this.model.getItemAtIndex(index)._classes
+            var classes = this.model.getItem(index)._classes 
+                ? this.model.getItem(index)._classes
                 : '';  // _classes has not been defined
       
             this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
@@ -127,7 +127,7 @@ define([
             var currentIndex = parseInt($(event.currentTarget).data('id').split('item-')[1]);
 
             this.setVisited(currentIndex);
-            this.model.setItemAtIndexAsActive(currentIndex, true);
+            this.model.setItemActive(currentIndex, true);
             this.applyNavigationClasses(currentIndex);
         },
         
@@ -180,8 +180,8 @@ define([
                 currentIndex = this.model.getItemCount();
             }
 
-            this.model.setItemAtIndexAsInactive(currentIndex, false);
-            this.model.setItemAtIndexAsActive(currentIndex-1, true);
+            this.model.setItemInactive(currentIndex, false);
+            this.model.setItemActive(currentIndex-1, true);
             this.setActiveClasses(currentIndex-1);
             this.setVisited(currentIndex-1);
             this.setPopupCount(currentIndex);
@@ -201,8 +201,8 @@ define([
                 currentIndex = -1;
             }
             
-            this.model.setItemAtIndexAsInactive(currentIndex, false);
-            this.model.setItemAtIndexAsActive(currentIndex+1, true);
+            this.model.setItemInactive(currentIndex, false);
+            this.model.setItemActive(currentIndex+1, true);
             this.setActiveClasses(currentIndex+1);
             this.setVisited(currentIndex+1);
             this.setPopupCount(currentIndex+2);
@@ -217,7 +217,7 @@ define([
         },
 
         setVisited: function(index) {
-            this.model.setItemAtIndexAsVisited(index);
+            this.model.setItemVisited(index);
 
             var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             $pin.addClass('visited');
