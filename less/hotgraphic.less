@@ -143,6 +143,29 @@
         font-size:0.75em;
         line-height: 1em;
     }
+
+		.hotgraphic-widget {
+			&.numbers {
+				.hotgraphic-graphic-pin {
+					padding: 15px;
+					border-radius: 100%;
+					background-color: @item-color;
+					&:hover {
+							background-color: @item-color-hover;
+						}
+					&.visited {
+						background-color: @item-color-visited;
+					}
+					&.visited {
+						background-color: @item-color-visited;
+					}
+				}
+				.hotgraphic-graphic-number-icon {
+					font-size: @icon-size;
+					color: @item-text-color;
+				}
+			}
+		}
 }
 
 // Hotgraphic Narrative
