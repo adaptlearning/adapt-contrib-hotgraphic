@@ -67,7 +67,7 @@
         {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             {{#if ../_useNumbersAsPins}}
-            <div class="hotgraphic-graphic-number-icon component-item-color item-{{inc @index}}">{{inc @index}}</div>
+            <div class="hotgraphic-graphic-number-icon component-item-color item-{{@index}}">{{inc @index}}</div>
             {{else}}
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
             {{/if}}
