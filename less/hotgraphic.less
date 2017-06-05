@@ -144,26 +144,24 @@
         line-height: 1em;
     }
 
-		.hotgraphic-widget {
-			&.numbers {
-				.hotgraphic-graphic-pin {
-					width: 40px;
-					height: 40px;
-					background-color: @item-color;
-					&.visited {
-						background-color: @item-color-visited;
-					}
-					&:hover {
-							background-color: @item-color-hover;
-					}
-				}
-				.hotgraphic-graphic-number-icon {
-					font-size: 20px;
-					text-align: center;
-					color: @item-text-color;
-				}
+	.hotgraphic-widget .numbers {
+		.hotgraphic-graphic-pin {
+			width: 40px;
+			height: 40px;
+			background-color: @item-color;
+			&.visited {
+				background-color: @item-color-visited;
+			}
+			.no-touch &:hover {
+					background-color: @item-color-hover;
 			}
 		}
+		.hotgraphic-graphic-number-icon {
+			font-size: 20px;
+			text-align: center;
+			color: @item-text-color;
+		}
+	}
 }
 
 // Hotgraphic Narrative
