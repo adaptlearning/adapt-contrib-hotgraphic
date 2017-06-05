@@ -15,6 +15,7 @@
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
     "_useGraphicsAsPins": false,
+    "_useNumbersAsPins": false,
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
@@ -89,6 +90,7 @@
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
     "_useGraphicsAsPins": true,
+    "_useNumbersAsPins": false,
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {

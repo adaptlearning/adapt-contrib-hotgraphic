@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else}}pin{{/if}}">
+  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else if  _useNumbersAsPins}}numbers{{else}}pin{{/if}}">
 
     <div class="hotgraphic-graphic">
 
@@ -66,7 +66,11 @@
         {{/if}}
         {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+            {{#if ../_useNumbersAsPins}}
+            <div class="hotgraphic-graphic-number-icon component-item-color item-{{@index}}">{{inc @index}}</div>
+            {{else}}
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+            {{/if}}
           </button>
         {{/each}}
       {{/if}}

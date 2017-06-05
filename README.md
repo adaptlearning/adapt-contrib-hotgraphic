@@ -50,6 +50,10 @@ guide the learner’s interaction with the component.
 
 **_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
 
+**_useGraphicsAsPins** (boolean): When set to `true`, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes. The default is `false`.
+
+**_useNumbersAsPins** (boolean): When set to `true`, replaces the pins with incrementing numbers. The default is `false`.
+
 **_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
 
 >**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
@@ -90,8 +94,8 @@ When viewport size changes to the smallest range, this component will behave lik
 
 
 ----------------------------
-**Version number:**  2.0.8   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
-**Framework versions:**  2.0     
+**Version number:**  2.0.9   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>
+**Framework versions:**  2.0.11
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA   
 **RTL support:** yes  
