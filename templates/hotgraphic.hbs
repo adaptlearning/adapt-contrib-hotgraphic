@@ -69,7 +69,7 @@
             {{#compare ../_pinStyle '=' 'numbers' }}
             <div class="hotgraphic-graphic-number-icon component-item-color item-{{@index}}">{{inc @index}}</div>
             {{else}}
-            <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
+            <div class="hotgraphic-graphic-pin-icon component-item-color icon {{#if _iconClass}}{{_iconClass}}{{else}}icon-pin{{/if}} item-{{@index}}"></div>
             {{/compare}}
           </button>
         {{/each}}
