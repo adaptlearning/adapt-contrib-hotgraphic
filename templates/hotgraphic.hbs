@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else if  _useNumbersAsPins}}numbers{{else}}pin{{/if}}">
+  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tile' }}tile{{/compare}}{{#compare _pinStyle '=' 'numbers' }}numbers{{/compare}}{{#compare _pinStyle '=' 'default' }}pins{{/compare}}{{#unless _pinStyle}}pins{{/unless}}">
 
     <div class="hotgraphic-graphic">
 
@@ -51,7 +51,7 @@
           {{/each}}
         </div>
       </div>
-      {{#if _useGraphicsAsPins}}
+      {{#compare _pinStyle '=' 'tile' }}
         <div class="hotgraphic-narrative">
           {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
@@ -66,14 +66,14 @@
         {{/if}}
         {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
-            {{#if ../_useNumbersAsPins}}
+            {{#compare ../_pinStyle '=' 'numbers' }}
             <div class="hotgraphic-graphic-number-icon component-item-color item-{{@index}}">{{inc @index}}</div>
             {{else}}
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
-            {{/if}}
+            {{/compare}}
           </button>
         {{/each}}
-      {{/if}}
+      {{/compare}}
     </div>
   </div>
 </div>

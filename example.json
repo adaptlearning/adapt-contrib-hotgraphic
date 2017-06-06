@@ -14,7 +14,7 @@
     "instruction":"",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
-    "_pinStyle": "default" // default | numbers | graphic
+    "_pinStyle": "default" // default | numbers | tile
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
