@@ -14,8 +14,7 @@
     "instruction":"",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
-    "_useGraphicsAsPins": false,
-    "_useNumbersAsPins": false,
+    "_pinStyle": "default" // default | numbers | graphic
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
@@ -33,6 +32,7 @@
                 "attribution":"Copyright © 2015",
                 "_classes": ""
             },
+            "_iconClass": "star",
             "pinAlt": "alt text",
             "strapline": "strapline...",
             "_classes": "top-left",

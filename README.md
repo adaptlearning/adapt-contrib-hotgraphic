@@ -48,6 +48,8 @@ guide the learner’s interaction with the component.
   
 **_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
+**_pinStyle** (string): This optional attribute changes the styling of the pin. `default` sets these pins to be icons. `numbers` replaces the pins with incrementing numbers. `tile` replaces the pins with larger images which can be positioned using classes. Any other attribute or this attribute not being presented results in `default` being used.
+
 **_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
 
 **_useGraphicsAsPins** (boolean): When set to `true`, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes. The default is `false`.
@@ -77,6 +79,8 @@ guide the learner’s interaction with the component.
 >>**alt** (string): This text becomes the image’s `alt` attribute.   
 
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.
+
+>**_iconClass** (string): Overrides the default pin icon with a custom icon with the name.
 
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
 
