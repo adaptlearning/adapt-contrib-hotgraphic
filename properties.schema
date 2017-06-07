@@ -107,6 +107,15 @@
       "validators": [],
       "help": "If set to 'true', the items in the open popup will be allowed to cycle through continiously"
     },
+    "_pinStyle": {
+      "type":"text",
+      "required":true,
+      "default": "default",
+      "title": "Pin Style",
+      "inputType": {"type": "String", "options": ["default", "numbers", "tiles"]},
+      "validators": [],
+      "help": "Default uses pins. Numbers uses ascending numbers. Tiles replaces the pin with larger images. Default and numbers can be overriden with custom icons using icon class."
+    },
     "_useGraphicsAsPins": {
       "type":"boolean",
       "required":true,
@@ -210,6 +219,15 @@
                 "help": ""
               }
             }
+          },
+          "_iconClass": {
+            "type":"string",
+            "required":false,
+            "default": "",
+            "inputType": "Icon class",
+            "validators": [],
+            "help": "Override the default icon to use a custom icon. List of support icons <a href='https://github.com/adaptlearning/adapt-contrib-vanilla/blob/19f050f9fb271fb10525ed8b71211ff2569e5747/less/src/icons.less#L36-L362'>here</a>.",
+            "translatable": true
           },
           "_classes": {
             "type":"string",
