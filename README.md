@@ -45,10 +45,10 @@ guide the learner’s interaction with the component.
 **mobileInstruction** (string): This is optional text that will be substituted for **instruction** when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices).  
 
 **_setCompletionOn** (string): This value determines when the component registers as complete. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.  
-  
+
 **_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
-**_pinStyle** (string): This optional attribute changes the styling of the pin. `default` sets these pins to be icons. `numbers` replaces the pins with incrementing numbers. `tile` replaces the pins with larger images which can be positioned using classes. Any other attribute or this attribute not being presented results in `default` being used.
+**_pinStyle** (string): This optional attribute changes the styling of the pin. `default` sets these pins to be icons. `numbers` replaces the pins with incrementing numbers. `tiles` replaces the pins with larger images which can be positioned using classes. Any other attribute or this attribute not being presented results in `default` being used.
 
 **_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
 

@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tile' }}tile{{else}}{{#if _useGraphicsAsPins}}tile{{else}}pins{{/if}}{{/compare}}">
+  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tiles' }}tile{{else}}{{#if _useGraphicsAsPins}}tile{{else}}pins{{/if}}{{/compare}}">
 
     <div class="hotgraphic-graphic">
 
@@ -51,7 +51,16 @@
           {{/each}}
         </div>
       </div>
-      {{#compare _pinStyle '=' 'tile' }}
+      {{#compare _pinStyle '=' 'tiles' }}
+        <div class="hotgraphic-narrative">
+          {{#each _items}}
+          <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+            <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
+          </button>
+          {{/each}}
+        </div>
+      {{else}}
+      {{#if _useGraphicsAsPins}}
         <div class="hotgraphic-narrative">
           {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
@@ -73,6 +82,7 @@
             {{/compare}}
           </button>
         {{/each}}
+      {{/if}}
       {{/compare}}
     </div>
   </div>
