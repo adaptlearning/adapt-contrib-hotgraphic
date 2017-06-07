@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tile' }}tile{{else}}{{#compare _pinStyle '=' 'numbers' }}numbers{{else}}pins{{/compare}}{{/compare}}">
+  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tile' }}tile{{else}}{{#if _useGraphicsAsPins}}tile{{else}}pins{{/if}}{{/compare}}">
 
     <div class="hotgraphic-graphic">
 
@@ -65,9 +65,9 @@
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
         {{/if}}
         {{#each _items}}
-          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}} {{#compare ../_pinStyle '=' 'numbers' }}{{#unless _iconClass}}number{{/unless}}{{/compare}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             {{#compare ../_pinStyle '=' 'numbers' }}
-            <div class="hotgraphic-graphic-number-icon component-item-color item-{{@index}}">{{inc @index}}</div>
+            <div class="{{#if _iconClass}}hotgraphic-graphic-pin-icon icon {{_iconClass}}{{else}}hotgraphic-graphic-number-icon{{/if}} component-item-color item-{{@index}}">{{#unless _iconClass}}{{inc @index}}{{/unless}}</div>
             {{else}}
             <div class="hotgraphic-graphic-pin-icon component-item-color icon {{#if _iconClass}}{{_iconClass}}{{else}}icon-pin{{/if}} item-{{@index}}"></div>
             {{/compare}}
