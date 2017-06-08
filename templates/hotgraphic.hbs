@@ -1,7 +1,7 @@
 {{! Maintainers - Kevin Corry}}
 <div class="hotgraphic-inner component-inner" role="region" aria-label="{{_globals._components._hotgraphic.ariaRegion}}" {{#if _globals._components._hotgraphic.ariaRegion}}tabindex="0"{{/if}}>
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#compare _pinStyle '=' 'tiles' }}tile{{else}}{{#if _useGraphicsAsPins}}tile{{else}}pins{{/if}}{{/compare}}">
+  <div class="hotgraphic-widget component-widget {{#equals _pinStyle 'tiles' }}tile{{else}}{{#if _useGraphicsAsPins}}tile{{else}}pins{{/if}}{{/equals}}">
 
     <div class="hotgraphic-graphic">
 
@@ -51,7 +51,7 @@
           {{/each}}
         </div>
       </div>
-      {{#compare _pinStyle '=' 'tiles' }}
+      {{#equals _pinStyle 'tiles'}}
         <div class="hotgraphic-narrative">
           {{#each _items}}
           <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
@@ -74,16 +74,16 @@
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
         {{/if}}
         {{#each _items}}
-          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}} {{#compare ../_pinStyle '=' 'numbers' }}{{#unless _iconClass}}number{{/unless}}{{/compare}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
-            {{#compare ../_pinStyle '=' 'numbers' }}
+          <button class="base hotgraphic-graphic-pin component-item-text-color item-{{@index}} {{#if _isVisited}}visited{{/if}} {{#equals ../_pinStyle 'numbers'}}{{#unless _iconClass}}number{{/unless}}{{/equals}}" data-id="item-{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" role="button" aria-label="Item {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+            {{#equals ../_pinStyle 'numbers'}}
             <div class="{{#if _iconClass}}hotgraphic-graphic-pin-icon icon {{_iconClass}}{{else}}hotgraphic-graphic-number-icon{{/if}} component-item-color item-{{@index}}">{{#unless _iconClass}}{{inc @index}}{{/unless}}</div>
             {{else}}
             <div class="hotgraphic-graphic-pin-icon component-item-color icon {{#if _iconClass}}{{_iconClass}}{{else}}icon-pin{{/if}} item-{{@index}}"></div>
-            {{/compare}}
+            {{/equals}}
           </button>
         {{/each}}
       {{/if}}
-      {{/compare}}
+      {{/equals}}
     </div>
   </div>
 </div>

@@ -115,7 +115,7 @@
       "title": "Pin Style",
       "help": "Default uses pins. Numbers uses ascending numbers. Tiles replaces the pin with larger images. Default and numbers can be overriden with custom icons using icon class.",
       "inputType": {"type": "Select", "options":["default", "numbers", "tiles"]},
-      "validators": [],
+      "validators": []
     },
     "_items": {
       "type":"array",

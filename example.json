@@ -14,7 +14,7 @@
     "instruction":"",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
-    "_pinStyle": "default" // default | numbers | tile
+    "_pinStyle": "default", // default | numbers | tiles
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
@@ -32,7 +32,7 @@
                 "attribution":"Copyright © 2015",
                 "_classes": ""
             },
-            "_iconClass": "star",
+            "_iconClass": "icon-star",
             "pinAlt": "alt text",
             "strapline": "strapline...",
             "_classes": "top-left",
@@ -60,7 +60,7 @@
             "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -89,8 +89,7 @@
     "instruction":"",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
     "_setCompletionOn":"allItems",
-    "_useGraphicsAsPins": true,
-    "_useNumbersAsPins": false,
+    "_pinStyle": "tiles", // default | numbers | tiles
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
@@ -161,4 +160,3 @@
         }
     ]
 }
-

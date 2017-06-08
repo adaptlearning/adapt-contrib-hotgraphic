@@ -50,11 +50,7 @@ guide the learner’s interaction with the component.
 
 **_pinStyle** (string): This optional attribute changes the styling of the pin. `default` sets these pins to be icons. `numbers` replaces the pins with incrementing numbers. `tiles` replaces the pins with larger images which can be positioned using classes. Any other attribute or this attribute not being presented results in `default` being used.
 
-**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
-
-**_useGraphicsAsPins** (boolean): When set to `true`, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes. The default is `false`.
-
-**_useNumbersAsPins** (boolean): When set to `true`, replaces the pins with incrementing numbers. The default is `false`.
+**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.
 
 **_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
 
