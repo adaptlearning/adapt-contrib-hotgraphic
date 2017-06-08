@@ -1,4 +1,4 @@
-// Regular hotgraphic
+// Example for _pinStyle default and numbers.
 
 {
     "_id": "c-40",
@@ -6,7 +6,7 @@
     "_classes": "",
     "_type":"component",
     "_component": "hotgraphic",
-    "_layout": "full",    
+    "_layout": "full",
     "title": "Hot graphic",
     "displayTitle": "Hot graphic",
     "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
@@ -72,8 +72,8 @@
     ]
 }
 
-// Example using graphics as pins
-// The following example lays out the item graphics (_items._graphic) in a 2x2 grid. 
+// Example for _pinStyle tiles.
+// The following example lays out the item graphics (_items._graphic) in a 2x2 grid.
 
 {
     "_id": "c-40",
@@ -81,7 +81,7 @@
     "_classes": "",
     "_type":"component",
     "_component": "hotgraphic",
-    "_layout": "full",    
+    "_layout": "full",
     "title": "Hot graphic",
     "displayTitle": "Hot graphic",
     "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
