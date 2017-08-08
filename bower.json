@@ -10,7 +10,8 @@
   "component" : "hotgraphic",
   "assetFields" : [
     "_graphic.src",
-    "_items[]._graphic.src"
+    "_items[]._graphic.src",
+    "_items[]._pin.src"
   ],
   "keywords": [
     "adapt-plugin",
