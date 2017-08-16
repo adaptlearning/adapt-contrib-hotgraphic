@@ -195,10 +195,34 @@
                 "type": "string",
                 "required": false,
                 "default": "",
-                "title": "Classes",
+                "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
                 "help": ""
+              }
+            }
+          },
+          "_pin": {
+            "type": "object",
+            "required": false,
+            "title": "Item Pin",
+            "properties": {
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "help": "The pin image leave blank for default"
+              },
+              "alt": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Alternative text for this image",
+                "translatable": true
               }
             }
           },
@@ -206,7 +230,7 @@
             "type": "string",
             "required": false,
             "default": "",
-            "title": "Classes",
+            "title": "Component Classes",
             "inputType": "Text",
             "validators": [],
             "help": ""
