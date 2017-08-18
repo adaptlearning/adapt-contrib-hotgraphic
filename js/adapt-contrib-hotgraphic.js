@@ -168,7 +168,7 @@ define(function(require) {
         },
         
         openPopup: function(index) {
-            var currentIndex = index || this.$('.hotgraphic-item.active').index();
+            var currentIndex = index; 
             this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
             this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
