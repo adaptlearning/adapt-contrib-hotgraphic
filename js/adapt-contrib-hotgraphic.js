@@ -5,7 +5,7 @@ define(function(require) {
 
     var HotGraphic = ComponentView.extend({
 
-        isPopupOpen: false,
+        currentIndex: 0,
         
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
@@ -13,8 +13,6 @@ define(function(require) {
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             
             this.model.set('_globals', Adapt.course.get('_globals'));
-            
-            _.bindAll(this, 'onKeyUp');
             
             this.preRender();
             
@@ -30,10 +28,7 @@ define(function(require) {
 
         events: function() {
             return {
-                'click .hotgraphic-graphic-pin': 'onPinClicked',
-                'click .hotgraphic-popup-done': 'closePopup',
-                'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
-                'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
+                'click .hotgraphic-graphic-pin': 'onPinClicked'
             }
         },
 
@@ -124,113 +119,148 @@ define(function(require) {
             return model;
         },
 
-        applyNavigationClasses: function (index) {
-            var $nav = this.$('.hotgraphic-popup-nav'),
-                itemCount = this.$('.hotgraphic-item').length;
+        updateNavigation: function (index) {
+            var $nav = this.$notifyPopup.find('.hotgraphic-popup-nav'),
+                itemCount = this.model.get('_items').length;
 
             $nav.removeClass('first').removeClass('last');
-            this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
+
             if(index <= 0 && !this.model.get('_canCycleThroughPagination')) {
-                this.$('.hotgraphic-popup-nav').addClass('first');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
+                this.$notifyPopup.find('.hotgraphic-popup-nav').addClass('first');
+                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
+                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             } else if (index >= itemCount-1 && !this.model.get('_canCycleThroughPagination')) {
-                this.$('.hotgraphic-popup-nav').addClass('last');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
+                this.$notifyPopup.find('.hotgraphic-popup-nav').addClass('last');
+                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
+                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
             } else {
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
+                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
+                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
-            var classes = this.model.get("_items")[index]._classes 
-                ? this.model.get("_items")[index]._classes
+            
+        },
+
+        removeItemClasses:function() {
+            if (!this.$notifyPopup) return;
+
+            var classes = this.model.get("_items")[this.currentIndex]._classes 
+                ? this.model.get("_items")[this.currentIndex]._classes
                 : '';  // _classes has not been defined
       
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
+            this.$notifyPopup.removeClass('item-' + this.currentIndex + ' ' + classes);
+        },
 
+        addItemClasses:function() {
+            var classes = this.model.get("_items")[this.currentIndex]._classes 
+                ? this.model.get("_items")[this.currentIndex]._classes
+                : '';  // _classes has not been defined
+      
+            this.$notifyPopup.addClass('item-' + this.currentIndex + ' ' + classes);
         },
 
         onPinClicked: function (event) {
             if(event) event.preventDefault();
+
+            this.removeItemClasses();
             
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-            this.$('.hotgraphic-item').hide().removeClass('active');
+            var $currentHotSpot = $(event.currentTarget);
+
+            this.currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
             
-            var $currentHotSpot = this.$('.' + $(event.currentTarget).data('id'));
-            $currentHotSpot.show().addClass('active');
-            
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-            this.setVisited(currentIndex);
+            this.setVisited(this.currentIndex);
             
             this.openPopup();
-           
-            this.applyNavigationClasses(currentIndex);
         },
         
         openPopup: function() {
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-            this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
-            this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            
-            this.isPopupOpen = true;
-              
-            Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
-
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
-            
-            this.setupEscapeKey();
+            this.listenToOnce(Adapt, 'popup:opened', this.onPopupOpened);
+            this.listenToOnce(Adapt, 'popup:closed', this.onPopupClosed);
+            Adapt.trigger('notify:popup', {template:Handlebars.templates['hotgraphicPopup'], data:this.model.toJSON()});
         },
 
-        closePopup: function(event) {
-            if(event) event.preventDefault();
-            
-            this.$('.hotgraphic-popup').hide();
-            
-            this.isPopupOpen = false;
-            
-            Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
+        onPopupOpened:function($notifyPopup) {
+            this.$notifyPopup = $notifyPopup;
+
+            $notifyPopup.find('.hotgraphic-item').hide().removeClass('active');
+            $notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
+            $notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
+            $notifyPopup.find('.hotgraphic-popup-count .total').html($notifyPopup.find('.hotgraphic-item').length);
+            $notifyPopup.find('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + this.currentIndex);
+
+            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+
+            this.addItemClasses();
+            this.addNavListeners();
+
+            this.updateNavigation(this.currentIndex);
+        },
+
+        onPopupClosed:function() {
+            this.removeNavListeners();
+        },
+
+        addNavListeners:function() {
+            this.$notifyPopup.find('.hotgraphic-popup-nav .back').on('click', _.bind(this.previousHotGraphic, this));
+            this.$notifyPopup.find('.hotgraphic-popup-nav .next').on('click', _.bind(this.nextHotGraphic, this));
+        },
+
+        removeNavListeners:function() {
+            this.$notifyPopup.find('.hotgraphic-popup-nav .back').off();
+            this.$notifyPopup.find('.hotgraphic-popup-nav .next').off();
         },
 
         previousHotGraphic: function (event) {
             event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
+            var newIndex;
 
-            if (currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
+            if (this.currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
                 return;
-            } else if (currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
-                currentIndex = this.model.get('_items').length;
+            } else if (this.currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
+                newIndex = this.model.get('_items').length;
+            } else {
+                newIndex = this.currentIndex - 1;
             }
 
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-            this.setVisited(currentIndex-1);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex);
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
+            this.removeItemClasses();
 
-            this.applyNavigationClasses(currentIndex-1);
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+            this.currentIndex = newIndex;
+
+            this.$notifyPopup.find('.hotgraphic-item.active').hide().removeClass('active');
+            this.$notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
+            this.setVisited(this.currentIndex);
+            this.$notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
+
+            this.addItemClasses();
+            this.updateNavigation(this.currentIndex);
+
+            this.$notifyPopup.find('.hotgraphic-popup-inner .active').a11y_focus();
         },
 
         nextHotGraphic: function (event) {
             event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-            if (currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
-                return;
-            } else if (currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
-                currentIndex = -1;
-            }
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-            this.setVisited(currentIndex+1);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
+            var newIndex;
 
-            this.applyNavigationClasses(currentIndex+1);
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+            if (this.currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
+                return;
+            } else if (this.currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
+                newIndex = 0;
+            } else {
+                newIndex = this.currentIndex + 1;
+            }
+
+            this.removeItemClasses();
+
+            this.currentIndex = newIndex;
+
+            this.$notifyPopup.find('.hotgraphic-item.active').hide().removeClass('active');
+            this.$notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
+            this.setVisited(this.currentIndex);
+            this.$notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
+
+            this.addItemClasses();
+            this.updateNavigation(this.currentIndex);
+
+            this.$notifyPopup.find('.hotgraphic-popup-inner .active').a11y_focus();
         },
 
         setVisited: function(index) {
@@ -274,30 +304,7 @@ define(function(require) {
             } else {
                 this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
-        },
-        
-        setupEscapeKey: function() {
-            var hasAccessibility = Adapt.config.has('_accessibility') && Adapt.config.get('_accessibility')._isActive;
-
-            if (!hasAccessibility && this.isPopupOpen) {
-                $(window).on("keyup", this.onKeyUp);
-            } else {
-                $(window).off("keyup", this.onKeyUp);
-            }
-        },
-
-        onAccessibilityToggle: function() {
-            this.setupEscapeKey();
-        },
-
-        onKeyUp: function(event) {
-            if (event.which != 27) return;
-            
-            event.preventDefault();
-
-            this.closePopup();
         }
-
     });
 
     Adapt.register('hotgraphic', HotGraphic);

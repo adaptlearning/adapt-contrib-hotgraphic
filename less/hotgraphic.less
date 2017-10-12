@@ -1,4 +1,4 @@
-.hotgraphic-component {
+.hotgraphic-component, .notify-popup {
 
 	.hotgraphic-graphic {
 		position: relative;
@@ -55,6 +55,9 @@
 
 	.hotgraphic-popup-nav {
 		background-color: @item-color;
+		position: absolute;
+		left: 0;
+		top: 0;
 	}
 
 	.hotgraphic-popup-done {
@@ -112,6 +115,14 @@
 
 	.hotgraphic-popup-inner {
 		padding: @item-padding;
+	}
+
+	.hotgraphic-item {
+		display: none;
+	}
+
+	.hotgraphic-item:first-child {
+		display: block;
 	}
 
 	.hotgraphic-item-graphic {
