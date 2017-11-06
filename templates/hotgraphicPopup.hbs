@@ -1,4 +1,4 @@
-<div {{#each _attributes}}{{@key}}="{{this}}" {{/each}} class="notify-popup notify-type-{{_type}}" role="region" aria-label="{{_globals._accessibility._ariaLabels.feedbackPopUp}}">
+<div {{#each _attributes}}{{@key}}="{{this}}" {{/each}} class="notify-popup" role="region" aria-label="{{_globals._accessibility._ariaLabels.feedbackPopUp}}">
     <div class="notify-popup-inner">
         <div class="notify-popup-content">
             <div class="notify-popup-content-inner">
@@ -36,24 +36,22 @@
             </div>
         </div>
         {{! toolbar moved for AA purposes - last tabbable element}}
-        {{#if_value_equals _type "popup"}}
-            {{#unless _hidePagination}}
-            <div class="hotgraphic-popup-nav component-item-color">
-              <button class="base hotgraphic-popup-controls back" aria-label="{{_globals._accessibility._ariaLabels.previous}}" role="button">
-                <div class="hotgraphic-popup-arrow-l component-item-text-color icon icon-controls-small-left"></div>
-              </button>
-              <div class="hotgraphic-popup-count component-item-text-color">
-                <span class="current">1</span>/<span class="total">3</span>
-              </div>
-              <button class="base hotgraphic-popup-controls next" aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
-                <div class="hotgraphic-popup-arrow-r component-item-text-color icon icon-controls-small-right"></div>
-              </button>
-            </div>
-            {{/unless}}
-            <button class="base notify-popup-done" aria-label="{{_globals._accessibility._ariaLabels.closePopup}}">
-                <div class="notify-popup-icon-close icon icon-cross"></div>
-            </button>
-        {{/if_value_equals}}
+        {{#unless _hidePagination}}
+        <div class="hotgraphic-popup-nav component-item-color">
+          <button class="base hotgraphic-popup-controls back" aria-label="{{_globals._accessibility._ariaLabels.previous}}" role="button">
+            <div class="hotgraphic-popup-arrow-l component-item-text-color icon icon-controls-small-left"></div>
+          </button>
+          <div class="hotgraphic-popup-count component-item-text-color">
+            <span class="current">1</span>/<span class="total">3</span>
+          </div>
+          <button class="base hotgraphic-popup-controls next" aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
+            <div class="hotgraphic-popup-arrow-r component-item-text-color icon icon-controls-small-right"></div>
+          </button>
+        </div>
+        {{/unless}}
+        <button class="base notify-popup-done" aria-label="{{_globals._accessibility._ariaLabels.closePopup}}">
+            <div class="notify-popup-icon-close icon icon-cross"></div>
+        </button> 
     </div>
 </div>
 

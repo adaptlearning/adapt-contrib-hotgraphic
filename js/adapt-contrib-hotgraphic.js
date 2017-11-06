@@ -2,10 +2,9 @@ define(function(require) {
 
     var ComponentView = require('coreViews/componentView');
     var Adapt = require('coreJS/adapt');
+    var PopupView = require('./popupView');
 
     var HotGraphic = ComponentView.extend({
-
-        currentIndex: 0,
         
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
@@ -46,6 +45,14 @@ define(function(require) {
             }, this));
 
             this.setupEventListeners();
+        },
+
+        remove:function() {
+            if (this.popupView) {
+                this.removePopupListeners();
+            }
+
+            ComponentView.prototype.remove.apply(this, arguments);
         },
 
         // Used to check if the hotgraphic should reset on revisit
@@ -119,148 +126,42 @@ define(function(require) {
             return model;
         },
 
-        updateNavigation: function (index) {
-            var $nav = this.$notifyPopup.find('.hotgraphic-popup-nav'),
-                itemCount = this.model.get('_items').length;
-
-            $nav.removeClass('first').removeClass('last');
-
-            if(index <= 0 && !this.model.get('_canCycleThroughPagination')) {
-                this.$notifyPopup.find('.hotgraphic-popup-nav').addClass('first');
-                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
-                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            } else if (index >= itemCount-1 && !this.model.get('_canCycleThroughPagination')) {
-                this.$notifyPopup.find('.hotgraphic-popup-nav').addClass('last');
-                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
-            } else {
-                this.$notifyPopup.find('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$notifyPopup.find('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            }
-            
-        },
-
-        removeItemClasses:function() {
-            if (!this.$notifyPopup) return;
-
-            var classes = this.model.get("_items")[this.currentIndex]._classes 
-                ? this.model.get("_items")[this.currentIndex]._classes
-                : '';  // _classes has not been defined
-      
-            this.$notifyPopup.removeClass('item-' + this.currentIndex + ' ' + classes);
-        },
-
-        addItemClasses:function() {
-            var classes = this.model.get("_items")[this.currentIndex]._classes 
-                ? this.model.get("_items")[this.currentIndex]._classes
-                : '';  // _classes has not been defined
-      
-            this.$notifyPopup.addClass('item-' + this.currentIndex + ' ' + classes);
-        },
-
         onPinClicked: function (event) {
             if(event) event.preventDefault();
-
-            this.removeItemClasses();
             
             var $currentHotSpot = $(event.currentTarget);
 
-            this.currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
+            var currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
             
-            this.setVisited(this.currentIndex);
+            this.setVisited(currentIndex);
             
-            this.openPopup();
+            this.openPopup(currentIndex);
         },
         
-        openPopup: function() {
-            this.listenToOnce(Adapt, 'popup:opened', this.onPopupOpened);
-            this.listenToOnce(Adapt, 'popup:closed', this.onPopupClosed);
-            Adapt.trigger('notify:popup', {template:Handlebars.templates['hotgraphicPopup'], data:this.model.toJSON()});
+        openPopup: function(index) {
+            this.popupView = new PopupView({model:this.model, index:index});
+
+            this.listenToOnce(this.popupView, 'hotGraphicPopup:opened', this.onPopupOpened);
+            this.listenToOnce(this.popupView, 'hotGraphicPopup:closed', this.onPopupClosed);
+
+            this.popupView.open();
         },
 
-        onPopupOpened:function($notifyPopup) {
-            this.$notifyPopup = $notifyPopup;
-
-            $notifyPopup.find('.hotgraphic-item').hide().removeClass('active');
-            $notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
-            $notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
-            $notifyPopup.find('.hotgraphic-popup-count .total').html($notifyPopup.find('.hotgraphic-item').length);
-            $notifyPopup.find('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + this.currentIndex);
-
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
-
-            this.addItemClasses();
-            this.addNavListeners();
-
-            this.updateNavigation(this.currentIndex);
+        onPopupOpened:function() {
+            this.addPopupListeners();
         },
 
         onPopupClosed:function() {
-            this.removeNavListeners();
+            this.removePopupListeners();
+            this.popupView = null;
         },
 
-        addNavListeners:function() {
-            this.$notifyPopup.find('.hotgraphic-popup-nav .back').on('click', _.bind(this.previousHotGraphic, this));
-            this.$notifyPopup.find('.hotgraphic-popup-nav .next').on('click', _.bind(this.nextHotGraphic, this));
+        addPopupListeners:function() {
+            this.listenTo(this.popupView, 'hotGraphicPopup:visited', this.setVisited);
         },
 
-        removeNavListeners:function() {
-            this.$notifyPopup.find('.hotgraphic-popup-nav .back').off();
-            this.$notifyPopup.find('.hotgraphic-popup-nav .next').off();
-        },
-
-        previousHotGraphic: function (event) {
-            event.preventDefault();
-            var newIndex;
-
-            if (this.currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
-                return;
-            } else if (this.currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
-                newIndex = this.model.get('_items').length;
-            } else {
-                newIndex = this.currentIndex - 1;
-            }
-
-            this.removeItemClasses();
-
-            this.currentIndex = newIndex;
-
-            this.$notifyPopup.find('.hotgraphic-item.active').hide().removeClass('active');
-            this.$notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
-            this.setVisited(this.currentIndex);
-            this.$notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
-
-            this.addItemClasses();
-            this.updateNavigation(this.currentIndex);
-
-            this.$notifyPopup.find('.hotgraphic-popup-inner .active').a11y_focus();
-        },
-
-        nextHotGraphic: function (event) {
-            event.preventDefault();
-            var newIndex;
-
-            if (this.currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
-                return;
-            } else if (this.currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
-                newIndex = 0;
-            } else {
-                newIndex = this.currentIndex + 1;
-            }
-
-            this.removeItemClasses();
-
-            this.currentIndex = newIndex;
-
-            this.$notifyPopup.find('.hotgraphic-item.active').hide().removeClass('active');
-            this.$notifyPopup.find('.hotgraphic-item').eq(this.currentIndex).show().addClass('active');
-            this.setVisited(this.currentIndex);
-            this.$notifyPopup.find('.hotgraphic-popup-count .current').html(this.currentIndex + 1);
-
-            this.addItemClasses();
-            this.updateNavigation(this.currentIndex);
-
-            this.$notifyPopup.find('.hotgraphic-popup-inner .active').a11y_focus();
+        removePopupListeners:function() {
+            this.stopListening(this.popupView, 'hotGraphicPopup:visited', this.setVisited);
         },
 
         setVisited: function(index) {
