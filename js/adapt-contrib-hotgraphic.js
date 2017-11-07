@@ -1,10 +1,10 @@
-define(function(require) {
+define([
+    'core/js/adapt',
+    'core/js/views/componentView',
+    './popupView'
+], function(Adapt, ComponentView, PopupView) {
 
-    var ComponentView = require('coreViews/componentView');
-    var Adapt = require('coreJS/adapt');
-    var PopupView = require('./popupView');
-
-    var HotGraphic = ComponentView.extend({
+    const HotGraphic = ComponentView.extend({
         
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
@@ -57,7 +57,7 @@ define(function(require) {
 
         // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+            const isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
             // If reset is enabled set defaults
             if (isResetOnRevisit) {
@@ -95,11 +95,11 @@ define(function(require) {
 
         replaceWithNarrative: function() {
             if (!Adapt.componentStore.narrative) throw "Narrative not included in build";
-            var Narrative = Adapt.componentStore.narrative;
+            const Narrative = Adapt.componentStore.narrative;
 
-            var model = this.prepareNarrativeModel();
-            var newNarrative = new Narrative({ model: model });
-            var $container = $(".component-container", $("." + this.model.get("_parentId")));
+            const model = this.prepareNarrativeModel();
+            const newNarrative = new Narrative({ model: model });
+            const $container = $(".component-container", $("." + this.model.get("_parentId")));
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
@@ -111,7 +111,7 @@ define(function(require) {
         },
 
         prepareNarrativeModel: function() {
-            var model = this.model;
+            const model = this.model;
             model.set('_component', 'narrative');
             model.set('_wasHotgraphic', true);
             model.set('originalBody', model.get('body'));
@@ -129,9 +129,9 @@ define(function(require) {
         onPinClicked: function (event) {
             if(event) event.preventDefault();
             
-            var $currentHotSpot = $(event.currentTarget);
+            const $currentHotSpot = $(event.currentTarget);
 
-            var currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
+            const currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
             
             this.setVisited(currentIndex);
             
@@ -141,8 +141,10 @@ define(function(require) {
         openPopup: function(index) {
             this.popupView = new PopupView({model:this.model, index:index});
 
-            this.listenToOnce(this.popupView, 'hotGraphicPopup:opened', this.onPopupOpened);
-            this.listenToOnce(this.popupView, 'hotGraphicPopup:closed', this.onPopupClosed);
+            this.listenToOnce(this.popupView, {
+                'hotGraphicPopup:opened': this.onPopupOpened,
+                'hotGraphicPopup:closed': this.onPopupClosed
+            });
 
             this.popupView.open();
         },
@@ -165,13 +167,13 @@ define(function(require) {
         },
 
         setVisited: function(index) {
-            var item = this.model.get('_items')[index];
+            const item = this.model.get('_items')[index];
             item._isVisited = true;
 
-            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
+            const $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             $pin.addClass('visited');
             // append the word 'visited.' to the pin's aria-label
-            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            const visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
 
             $.a11y_alert("visited");

@@ -1,8 +1,8 @@
-define(function(require) {
+define([
+    'core/js/adapt'
+], function(Adapt) {
 
-    var Adapt = require('coreJS/adapt');
-
-    var PopupView = Backbone.View.extend({
+    const PopupView = Backbone.View.extend({
 
         currentIndex: 0,
         isOpen:false,
@@ -22,8 +22,8 @@ define(function(require) {
         },
 
         render:function() {
-            var template = Handlebars.templates['hotgraphicPopup'];
-            var data = this.model.toJSON();
+            const template = Handlebars.templates['hotgraphicPopup'];
+            const data = this.model.toJSON();
 
             this.setElement(template(data));
 
@@ -39,7 +39,7 @@ define(function(require) {
         },
 
         addItemClasses:function() {
-            var classes = this.model.get("_items")[this.currentIndex]._classes 
+            const classes = this.model.get("_items")[this.currentIndex]._classes 
                 ? this.model.get("_items")[this.currentIndex]._classes
                 : '';  // _classes has not been defined
       
@@ -47,7 +47,7 @@ define(function(require) {
         },
 
         removeItemClasses:function() {
-            var classes = this.model.get("_items")[this.currentIndex]._classes 
+            const classes = this.model.get("_items")[this.currentIndex]._classes 
                 ? this.model.get("_items")[this.currentIndex]._classes
                 : '';  // _classes has not been defined
       
@@ -55,7 +55,7 @@ define(function(require) {
         },
 
         updateNavigation: function (index) {
-            var $nav = this.$('.hotgraphic-popup-nav'),
+            const $nav = this.$('.hotgraphic-popup-nav'),
                 itemCount = this.model.get('_items').length;
 
             $nav.removeClass('first').removeClass('last');
@@ -97,9 +97,9 @@ define(function(require) {
         },
 
         previousHotGraphic:function(event) {
-            var targetIndex;
+            let targetIndex;
 
-            event.preventDefault();
+            if (event) event.preventDefault();
 
             if (this.currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) return;
 
@@ -113,9 +113,9 @@ define(function(require) {
         },
 
         nextHotGraphic:function(event) {
-            var targetIndex;
+            let targetIndex;
 
-            event.preventDefault();
+            if (event) event.preventDefault();
 
             if (this.currentIndex === this.model.get('_items').length - 1 && !this.model.get('_canCycleThroughPagination')) return;
 
