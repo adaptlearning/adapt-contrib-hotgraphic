@@ -85,7 +85,7 @@ define(function(require) {
                 }
 
                 if (this._isVisibleTop && this._isVisibleBottom) {
-                    this.$('.component-inner').off('inview');
+                    this.$('.component-widget').off('inview');
                     this.setCompletionStatus();
                 }
             }
