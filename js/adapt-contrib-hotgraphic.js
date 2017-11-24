@@ -1,11 +1,10 @@
-define(function(require) {
+define([
+    'core/js/adapt',
+    'core/js/views/componentView',
+    './popupView'
+], function(Adapt, ComponentView, PopupView) {
 
-    var ComponentView = require('coreViews/componentView');
-    var Adapt = require('coreJS/adapt');
-
-    var HotGraphic = ComponentView.extend({
-
-        isPopupOpen: false,
+    const HotGraphic = ComponentView.extend({
         
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
@@ -13,8 +12,6 @@ define(function(require) {
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             
             this.model.set('_globals', Adapt.course.get('_globals'));
-            
-            _.bindAll(this, 'onKeyUp');
             
             this.preRender();
             
@@ -30,10 +27,7 @@ define(function(require) {
 
         events: function() {
             return {
-                'click .hotgraphic-graphic-pin': 'onPinClicked',
-                'click .hotgraphic-popup-done': 'closePopup',
-                'click .hotgraphic-popup-nav .back': 'previousHotGraphic',
-                'click .hotgraphic-popup-nav .next': 'nextHotGraphic'
+                'click .hotgraphic-graphic-pin': 'onPinClicked'
             }
         },
 
@@ -53,9 +47,17 @@ define(function(require) {
             this.setupEventListeners();
         },
 
+        remove:function() {
+            if (this.popupView) {
+                this.removePopupListeners();
+            }
+
+            ComponentView.prototype.remove.apply(this, arguments);
+        },
+
         // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+            const isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
             // If reset is enabled set defaults
             if (isResetOnRevisit) {
@@ -93,11 +95,11 @@ define(function(require) {
 
         replaceWithNarrative: function() {
             if (!Adapt.componentStore.narrative) throw "Narrative not included in build";
-            var Narrative = Adapt.componentStore.narrative;
+            const Narrative = Adapt.componentStore.narrative;
 
-            var model = this.prepareNarrativeModel();
-            var newNarrative = new Narrative({ model: model });
-            var $container = $(".component-container", $("." + this.model.get("_parentId")));
+            const model = this.prepareNarrativeModel();
+            const newNarrative = new Narrative({ model: model });
+            const $container = $(".component-container", $("." + this.model.get("_parentId")));
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
@@ -109,7 +111,7 @@ define(function(require) {
         },
 
         prepareNarrativeModel: function() {
-            var model = this.model;
+            const model = this.model;
             model.set('_component', 'narrative');
             model.set('_wasHotgraphic', true);
             model.set('originalBody', model.get('body'));
@@ -124,123 +126,54 @@ define(function(require) {
             return model;
         },
 
-        applyNavigationClasses: function (index) {
-            var $nav = this.$('.hotgraphic-popup-nav'),
-                itemCount = this.$('.hotgraphic-item').length;
-
-            $nav.removeClass('first').removeClass('last');
-            this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
-            if(index <= 0 && !this.model.get('_canCycleThroughPagination')) {
-                this.$('.hotgraphic-popup-nav').addClass('first');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            } else if (index >= itemCount-1 && !this.model.get('_canCycleThroughPagination')) {
-                this.$('.hotgraphic-popup-nav').addClass('last');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
-            } else {
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            }
-            var classes = this.model.get("_items")[index]._classes 
-                ? this.model.get("_items")[index]._classes
-                : '';  // _classes has not been defined
-      
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup ' + 'item-' + index + ' ' + classes);
-
-        },
-
         onPinClicked: function (event) {
             if(event) event.preventDefault();
             
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-            this.$('.hotgraphic-item').hide().removeClass('active');
+            const $currentHotSpot = $(event.currentTarget);
+
+            const currentIndex = this.$('.hotgraphic-graphic-pin').index($currentHotSpot);
             
-            var $currentHotSpot = this.$('.' + $(event.currentTarget).data('id'));
-            $currentHotSpot.show().addClass('active');
-            
-            var currentIndex = this.$('.hotgraphic-item.active').index();
             this.setVisited(currentIndex);
             
-            this.openPopup();
-           
-            this.applyNavigationClasses(currentIndex);
+            this.openPopup(currentIndex);
         },
         
-        openPopup: function() {
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-            this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
-            this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
-            this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            
-            this.isPopupOpen = true;
-              
-            Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
+        openPopup: function(index) {
+            this.popupView = new PopupView({model:this.model, index:index});
 
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
-            
-            this.setupEscapeKey();
+            this.listenToOnce(this.popupView, {
+                'hotGraphicPopup:opened': this.onPopupOpened,
+                'hotGraphicPopup:closed': this.onPopupClosed
+            });
+
+            this.popupView.open();
         },
 
-        closePopup: function(event) {
-            if(event) event.preventDefault();
-            
-            this.$('.hotgraphic-popup').hide();
-            
-            this.isPopupOpen = false;
-            
-            Adapt.trigger('popup:closed',  this.$('.hotgraphic-popup-inner'));
+        onPopupOpened:function() {
+            this.addPopupListeners();
         },
 
-        previousHotGraphic: function (event) {
-            event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-
-            if (currentIndex === 0 && !this.model.get('_canCycleThroughPagination')) {
-                return;
-            } else if (currentIndex === 0 && this.model.get('_canCycleThroughPagination')) {
-                currentIndex = this.model.get('_items').length;
-            }
-
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-            this.setVisited(currentIndex-1);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex);
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-
-            this.applyNavigationClasses(currentIndex-1);
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+        onPopupClosed:function() {
+            this.removePopupListeners();
+            this.popupView = null;
         },
 
-        nextHotGraphic: function (event) {
-            event.preventDefault();
-            var currentIndex = this.$('.hotgraphic-item.active').index();
-            if (currentIndex === (this.model.get('_items').length-1) && !this.model.get('_canCycleThroughPagination')) {
-                return;
-            } else if (currentIndex === (this.model.get('_items').length-1) && this.model.get('_canCycleThroughPagination')) {
-                currentIndex = -1;
-            }
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-            this.setVisited(currentIndex+1);
-            this.$('.hotgraphic-popup-count .current').html(currentIndex+2);
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
+        addPopupListeners:function() {
+            this.listenTo(this.popupView, 'hotGraphicPopup:visited', this.setVisited);
+        },
 
-            this.applyNavigationClasses(currentIndex+1);
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+        removePopupListeners:function() {
+            this.stopListening(this.popupView, 'hotGraphicPopup:visited', this.setVisited);
         },
 
         setVisited: function(index) {
-            var item = this.model.get('_items')[index];
+            const item = this.model.get('_items')[index];
             item._isVisited = true;
 
-            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
+            const $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             $pin.addClass('visited');
             // append the word 'visited.' to the pin's aria-label
-            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            const visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
 
             $.a11y_alert("visited");
@@ -274,30 +207,7 @@ define(function(require) {
             } else {
                 this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
-        },
-        
-        setupEscapeKey: function() {
-            var hasAccessibility = Adapt.config.has('_accessibility') && Adapt.config.get('_accessibility')._isActive;
-
-            if (!hasAccessibility && this.isPopupOpen) {
-                $(window).on("keyup", this.onKeyUp);
-            } else {
-                $(window).off("keyup", this.onKeyUp);
-            }
-        },
-
-        onAccessibilityToggle: function() {
-            this.setupEscapeKey();
-        },
-
-        onKeyUp: function(event) {
-            if (event.which != 27) return;
-            
-            event.preventDefault();
-
-            this.closePopup();
         }
-
     });
 
     Adapt.register('hotgraphic', HotGraphic);
