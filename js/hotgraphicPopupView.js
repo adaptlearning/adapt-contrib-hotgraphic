@@ -55,13 +55,13 @@ define([
         },
         
         remove: function() {
+            this.trigger('popup:closed');
             this.removeEscapeKey();
             Backbone.View.prototype.remove.apply(this, arguments);
         },
         
         closePopup: function(event) {
             Adapt.trigger('notify:close');
-            this.trigger('popup:closed');
         },
 
         onBackClick: function(event) {
