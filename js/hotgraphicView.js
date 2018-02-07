@@ -127,8 +127,8 @@ define([
         },
         
         onItemsVisitedChange: function(model, _isVisited) {
-            const selector = 'item-'+model.get('_index');
             if (_isVisited) {
+                const selector = 'item-'+model.get('_index');
                 this.$('.hotgraphic-graphic-pin.'+selector).addClass('visited');
             }
         },
