@@ -3,7 +3,7 @@ define([
 ], function(Adapt) {
     'use strict';
 
-    const HotgraphicPopupView = Backbone.View.extend({
+    var HotgraphicPopupView = Backbone.View.extend({
 
         className: 'hotgraphic-popup',
 
@@ -32,7 +32,7 @@ define([
             this.setupEscapeKey();
             this.trigger('popup:open');
 
-            const currentIndex = this.model.getActiveItem().get('_index');
+            var currentIndex = this.model.getActiveItem().get('_index');
 
             this.$('.hotgraphic-popup-inner').a11y_on(false);
             this.$('.hotgraphic-item').hide().removeClass('active');
@@ -49,8 +49,8 @@ define([
         },
         
         render: function() {
-            const data = this.model.toJSON();
-            const template = Handlebars.templates['hotgraphicPopup'];
+            var data = this.model.toJSON();
+            var template = Handlebars.templates['hotgraphicPopup'];
             this.$el.html(template(data));
         },
         
@@ -95,9 +95,9 @@ define([
         },
 
         previousHotGraphic: function () {
-            let currentIndex = this.model.getActiveItem().get('_index');
-            const canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
-            const itemLength = this.model.get('_items').length;
+            var currentIndex = this.model.getActiveItem().get('_index');
+            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
+            var itemLength = this.model.get('_items').length;
 
             if (currentIndex === 0 && !canCycleThroughPagination) {
                 return;
@@ -117,9 +117,9 @@ define([
         },
         
         nextHotGraphic: function () {
-            let currentIndex = this.model.getActiveItem().get('_index');
-            const canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
-            const itemLength = this.model.get('_items').length;
+            var currentIndex = this.model.getActiveItem().get('_index');
+            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
+            var itemLength = this.model.get('_items').length;
 
             if (currentIndex === (itemLength-1) && !canCycleThroughPagination) {
                 return;
@@ -140,7 +140,7 @@ define([
 
         setItemState: function(index) {
             this.model.getActiveItem().set('_isActive', false);
-            const nextItem = this.model.getItem(index);
+            var nextItem = this.model.getItem(index);
             nextItem.set('_isActive', true);
             nextItem.set('_isVisited', true);
         },
@@ -153,9 +153,9 @@ define([
         },
 
         applyNavigationClasses: function (index) {
-            const $nav = this.$('.hotgraphic-popup-nav');
-            const itemCount = this.model.get('_items').length;
-            const canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
+            var $nav = this.$('.hotgraphic-popup-nav');
+            var itemCount = this.model.get('_items').length;
+            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
 
             $nav.removeClass('first').removeClass('last');
             this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
@@ -173,8 +173,8 @@ define([
                 this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
             }
 
-            const item = this.model.getItem(index);
-            const classString = 'hotgraphic-popup ' + 'item-' + index + ' ' + item.get('_classes');
+            var item = this.model.getItem(index);
+            var classString = 'hotgraphic-popup ' + 'item-' + index + ' ' + item.get('_classes');
             this.$('.hotgraphic-popup').attr('class', classString);
         },
 

@@ -100,14 +100,16 @@ define([
         },
 
         prepareNarrativeModel: function() {
-            const model = this.model;
-            model.set('_component', 'narrative');
-            model.set('_wasHotgraphic', true);
-            model.set('originalBody', model.get('body'));
-            model.set('originalInstruction', model.get('instruction'));
-            
+            var model = this.model;
+            model.set({
+                '_component': 'narrative',
+                '_wasHotgraphic': true,
+                'originalBody': model.get('body'),
+                'originalInstruction': model.get('instruction')
+            });
+
             // check if active item exists, default to 0
-            const active = model.getActiveItem();
+            var active = model.getActiveItem();
             if (!active) {
                 model.getItem(0).toggleActive(true);
             }
@@ -122,13 +124,13 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            const selector = 'item-'+model.get('_index');
+            var selector = 'item-'+model.get('_index');
             this.$('.hotgraphic-graphic-pin.'+selector).toggleClass('active', _isActive);
         },
         
         onItemsVisitedChange: function(model, _isVisited) {
             if (_isVisited) {
-                const selector = 'item-'+model.get('_index');
+                var selector = 'item-'+model.get('_index');
                 this.$('.hotgraphic-graphic-pin.'+selector).addClass('visited');
             }
         },
@@ -137,8 +139,8 @@ define([
             event && event.preventDefault();
 
             this.selectedPin = event.currentTarget;
-            const $currentHotSpot = $(event.currentTarget);
-            const currentIndex = $currentHotSpot.index() - 1;
+            var $currentHotSpot = $(event.currentTarget);
+            var currentIndex = $currentHotSpot.index() - 1;
             $currentHotSpot.show().addClass('active');
             
             this.setVisited(currentIndex);
@@ -196,13 +198,13 @@ define([
         },
 
         setVisited: function(index) {
-            const item = this.model.getItem(index);
+            var item = this.model.getItem(index);
             item.toggleActive(true);
             item.toggleVisited(true);
 
-            const $pin = this.$('.hotgraphic-graphic-pin').eq(index);
+            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             // append the word 'visited.' to the pin's aria-label
-            const visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
 
             $.a11y_alert("visited");
