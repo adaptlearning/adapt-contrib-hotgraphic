@@ -2,25 +2,25 @@
 
 {
     "_id": "c-40",
-    "_parentId":"b-05",
+    "_parentId": "b-05",
     "_classes": "",
-    "_type":"component",
+    "_type": "component",
     "_component": "hotgraphic",
-    "_layout": "full",    
+    "_layout": "full",
     "title": "Hot graphic",
     "displayTitle": "Hot graphic",
     "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
     "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-    "instruction":"",
+    "instruction": "",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
-    "_setCompletionOn":"allItems",
+    "_setCompletionOn": "allItems",
     "_useGraphicsAsPins": false,
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
       "src": "hot_graphic.jpg",
       "alt": "alt text",
-      "attribution":"Copyright © 2015"
+      "attribution": "Copyright © 2015"
     },
     "_items": [
         {
@@ -29,7 +29,7 @@
             "_graphic": {
                 "src": "image1.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -44,7 +44,7 @@
             "_graphic": {
                 "src": "image2.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -59,7 +59,7 @@
             "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": ""
             },
             "pinAlt": "alt text",
@@ -72,29 +72,29 @@
 }
 
 // Example using graphics as pins
-// The following example lays out the item graphics (_items._graphic) in a 2x2 grid. 
+// The following example lays out the item graphics (_items._graphic) in a 2x2 grid.
 
 {
     "_id": "c-40",
-    "_parentId":"b-05",
+    "_parentId": "b-05",
     "_classes": "",
-    "_type":"component",
+    "_type": "component",
     "_component": "hotgraphic",
-    "_layout": "full",    
+    "_layout": "full",
     "title": "Hot graphic",
     "displayTitle": "Hot graphic",
     "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
     "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-    "instruction":"",
+    "instruction": "",
     "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
-    "_setCompletionOn":"allItems",
+    "_setCompletionOn": "allItems",
     "_useGraphicsAsPins": true,
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
     "_graphic": {
       "src": "hot_graphic.jpg",
       "alt": "alt text",
-      "attribution":"Copyright © 2015"
+      "attribution": "Copyright © 2015"
     },
     "_items": [
         {
@@ -103,7 +103,7 @@
             "_graphic": {
                 "src": "image1.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -118,7 +118,7 @@
             "_graphic": {
                 "src": "image2.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -133,7 +133,7 @@
             "_graphic": {
                 "src": "image3.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -148,7 +148,7 @@
             "_graphic": {
                 "src": "image4.jpg",
                 "alt": "alt text",
-                "attribution":"Copyright © 2015",
+                "attribution": "Copyright © 2015",
                 "_classes": "cols-2 rows-1"
             },
             "pinAlt": "alt text",
@@ -159,4 +159,3 @@
         }
     ]
 }
-
