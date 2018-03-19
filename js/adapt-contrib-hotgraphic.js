@@ -159,16 +159,16 @@ define(function(require) {
             var $currentHotSpot = this.$('.' + $(event.currentTarget).data('id'));
             $currentHotSpot.show().addClass('active');
             
-            var currentIndex = this.$('.hotgraphic-item.active').index();
+            var currentIndex = $(event.currentTarget).data('index');
             this.setVisited(currentIndex);
             
-            this.openPopup();
+            this.openPopup(currentIndex);
            
             this.applyNavigationClasses(currentIndex);
         },
         
-        openPopup: function() {
-            var currentIndex = this.$('.hotgraphic-item.active').index();
+        openPopup: function(index) {
+            var currentIndex = index; 
             this.$('.hotgraphic-popup-count .current').html(currentIndex + 1);
             this.$('.hotgraphic-popup-count .total').html(this.$('.hotgraphic-item').length);
             this.$('.hotgraphic-popup').attr('class', 'hotgraphic-popup item-' + currentIndex).show();
