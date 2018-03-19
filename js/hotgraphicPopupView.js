@@ -11,7 +11,7 @@ define([
             return {
                 'role': 'dialog',
                 'aria-label': Adapt.course.get('_globals')._components._hotgraphic.ariaPopupLabel
-            }
+            };
         },
 
         events: {
@@ -27,7 +27,6 @@ define([
         },
 
         onOpened: function(notifyView) {
-            // notifyView.subView === this
             this.$currentLabel = this.$('.hotgraphic-popup-count .current');
             this.setupEscapeKey();
             this.trigger('popup:open');
@@ -141,8 +140,10 @@ define([
         setItemState: function(index) {
             this.model.getActiveItem().set('_isActive', false);
             var nextItem = this.model.getItem(index);
-            nextItem.set('_isActive', true);
-            nextItem.set('_isVisited', true);
+            nextItem.set({
+                '_isActive': true,
+                '_isVisited': true
+            });
         },
 
         handleFocus: function(setFocus) {
