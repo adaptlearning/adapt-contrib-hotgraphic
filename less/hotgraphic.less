@@ -2,7 +2,7 @@
 
 	.hotgraphic-graphic {
 		position: relative;
-		display:inline-block;
+		display: inline-block;
 		width: 100%;
 	}
 
@@ -12,7 +12,7 @@
 		top: 0%;
 		left: 0%;
 		background-color: @item-text-color;
-		border-radius:50%;
+		border-radius: 50%;
 		text-decoration: none;
 		&.visited {
 			.hotgraphic-graphic-pin-icon {
@@ -29,8 +29,8 @@
 	.hotgraphic-graphic-pin-icon {
 		color: @item-color;
 		font-size: (@icon-size*2);
-		width:auto;
-		height:auto;
+		width: auto;
+		height: auto;
 	}
 }
 
@@ -148,8 +148,9 @@
 		}
 
 		.graphic-attribution {
-			font-size:0.75em;
+			font-size: 0.75em;
 			line-height: 1em;
+			padding-top: 0.5em;
 		}
 	}
 }
@@ -163,30 +164,30 @@
 
 	.hotgraphic-graphic-pin {
 		border-radius: 0px;
-		position:absolute;
-		display:block;
-		box-sizing:border-box;
-		-moz-box-sizing:border-box;
-		-webkit-box-sizing:border-box;
-		border:4px solid @background-color;
+		position: absolute;
+		display: block;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		border: 4px solid @background-color;
 		background-size: cover;
 		transition: background-size .4s;
-		overflow:hidden;
+		overflow: hidden;
 		.hotgraphic-graphic-pin-image {
 			display:block;
-			width:100%;
-			height:100%;
+			width: 100%;
+			height: 100%;
 			-webkit-transition: transform .4s;
 			transition: transform .4s;
 			background-size: cover;
 			&:before {
 				content: '';
-				position:absolute;
-				top:0px;
-				left:0px;
-				width:100%;
-				height:100%;
-				background:fadeout(@foreground-color, 50%);
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+				background: fadeout(@foreground-color, 50%);
 				transition: background .5s;
 			}
 		}
@@ -195,7 +196,7 @@
 				-webkit-transform: scale(1.1);
 				transform: scale(1.1);
 				&:before {
-					background:fadeout(@foreground-color, 100%);
+					background: fadeout(@foreground-color, 100%);
 				}
 			}
 		}
