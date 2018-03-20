@@ -139,13 +139,10 @@ define([
             if(event) {
                 event.preventDefault();
             }
-
             this.selectedPin = event.currentTarget;
-            var $currentHotSpot = $(event.currentTarget);
-            var currentIndex = $currentHotSpot.index() - 1;
+            var $currentHotSpot = $(this.selectedPin);
             $currentHotSpot.show().addClass('active');
-            
-            this.setVisited(currentIndex);
+            this.setVisited($currentHotSpot.data('index'));
             this.model.set('_isPopupOpen', true);
         },
         
