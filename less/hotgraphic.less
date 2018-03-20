@@ -38,6 +38,7 @@
 
 	.notify-popup {
 		background-color: transparent;
+		color: @font-color;
 
 		.notify-popup-content {
 			width: auto;
@@ -122,7 +123,9 @@
 		}
 
 		.hotgraphic-item-graphic {
+			padding-left: @item-padding-left;
 			width: 50%;
+			box-sizing: border-box;
 			float: right;
 			.dir-rtl & {
 				float: left;
@@ -131,7 +134,9 @@
 		}
 
 		.hotgraphic-item-graphic-inner{
-			padding-left: @item-padding-left;
+			img {
+				display: block;
+			}
 			.dir-rtl & {
 				padding-left: inherit;
 				padding-right: @item-padding-left;
@@ -139,7 +144,6 @@
 		}
 
 		.hotgraphic-item-content {
-			color: @font-color;
 			width: 50%;
 			float: left;
 			.dir-rtl & {
