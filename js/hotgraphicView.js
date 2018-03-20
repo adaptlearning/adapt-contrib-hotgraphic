@@ -136,7 +136,9 @@ define([
         },
 
         onPinClicked: function (event) {
-            event && event.preventDefault();
+            if(event) {
+                event.preventDefault();
+            }
 
             this.selectedPin = event.currentTarget;
             var $currentHotSpot = $(event.currentTarget);
@@ -183,17 +185,9 @@ define([
             Adapt.trigger('popup:closed');
         },
 
-        onPopupNext: function() {
-        },
-
-        onPopupPrevious: function() {
-        },
-
         removePopupEvents: function() {
             this.stopListening(this.popupView, {
-                'popup:closed': this.onPopupClosed,
-                'popup:previous': this.onPopupPrevious,
-                'popup:next': this.onPopupNext
+                'popup:closed': this.onPopupClosed
             });
         },
 
@@ -205,7 +199,9 @@ define([
             var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
             // append the word 'visited.' to the pin's aria-label
             var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
-            $pin.attr('aria-label', function(index, val) {return val + " " + visitedLabel});
+            $pin.attr('aria-label', function(index, val) {
+                return val + " " + visitedLabel;
+            });
 
             $.a11y_alert("visited");
         },

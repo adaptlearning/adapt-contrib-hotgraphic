@@ -64,14 +64,16 @@ define([
         },
 
         onBackClick: function(event) {
-            event && event.preventDefault();
-            this.trigger('popup:previous'); // allow parentView to hook into this action
+            if (event) {
+                event.preventDefault();
+            }
             this.previousHotGraphic();
         },
-
+        
         onNextClick: function(event) {
-            event && event.preventDefault();
-            this.trigger('popup:next'); // allow parentView to hook into this action
+            if (event) {
+                event.preventDefault();
+            }
             this.nextHotGraphic();
         },
 
