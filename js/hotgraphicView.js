@@ -63,21 +63,22 @@ define([
         },
 
         inview: function(event, visible, visiblePartX, visiblePartY) {
-            if (visible) {
-                if (visiblePartY === 'top') {
-                    this._isVisibleTop = true;
-                } else if (visiblePartY === 'bottom') {
-                    this._isVisibleBottom = true;
-                } else {
-                    this._isVisibleTop = true;
-                    this._isVisibleBottom = true;
-                }
-
-                if (this._isVisibleTop && this._isVisibleBottom) {
-                    this.$('.component-widget').off('inview');
-                    this.setCompletionStatus();
-                }
+            if (!visible) return;
+            
+            if (visiblePartY === 'top') {
+                this._isVisibleTop = true;
+            } else if (visiblePartY === 'bottom') {
+                this._isVisibleBottom = true;
+            } else {
+                this._isVisibleTop = true;
+                this._isVisibleBottom = true;
             }
+
+            var wasAllInview = (this._isVisibleTop && this._isVisibleBottom);
+            if (!wasAllInview) return;
+
+            this.$('.component-widget').off('inview');
+            this.setCompletionStatus();
         },
 
         replaceWithNarrative: function() {
@@ -164,12 +165,8 @@ define([
                 _classes: ' hotgraphic'
             });
 
-            Adapt.trigger('popup:opened',  $(this.selectedPin));
-
             this.listenTo(this.popupView, {
-                'popup:closed': this.onPopupClosed,
-                'popup:previous': this.onPopupPrevious,
-                'popup:next': this.onPopupNext
+                'popup:closed': this.onPopupClosed
             });
 
             this.$('.hotgraphic-popup-inner .active').a11y_focus();
@@ -179,7 +176,7 @@ define([
             this.model.getActiveItem().set('_isActive', false);
             this.removePopupEvents();
             this.model.set('_isPopupOpen', false);
-            Adapt.trigger('popup:closed');
+            $(this.selectedPin).a11y_focus();
         },
 
         removePopupEvents: function() {
