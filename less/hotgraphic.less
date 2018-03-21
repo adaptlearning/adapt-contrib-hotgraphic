@@ -14,8 +14,7 @@
 		background-color: @item-text-color;
 		border-radius: 50%;
 		text-decoration: none;
-		height: (@icon-size*2);
-		width: (@icon-size*2);
+		
 		&.visited {
 			.hotgraphic-graphic-pin-icon {
 				color: @item-color-visited;
@@ -27,12 +26,12 @@
 			}
 		}
 	}
-
+	
 	.hotgraphic-graphic-pin-icon {
 		color: @item-color;
 		font-size: (@icon-size*2);
-		width: auto;
-		height: auto;
+		height: (@icon-size*2);
+		width: (@icon-size*2);
 	}
 }
 
@@ -57,10 +56,15 @@
 			background-color: @background-color;
 			border: @item-border;
 			z-index: 5;
+			position: relative;
+			padding-top: (@item-padding-top + @item-padding-bottom) + @icon-size;
 		}
 
 		.hotgraphic-popup-toolbar {
-			position: relative;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
 			background-color: @item-color;
 			height: (@item-padding-top + @item-padding-bottom) + @icon-size;
 		}
@@ -181,10 +185,11 @@
 		background-size: cover;
 		transition: background-size .4s;
 		overflow: hidden;
+
 		.hotgraphic-graphic-pin-image {
 			display:block;
-			width: 100%;
-			height: 100%;
+			width: auto;
+			height: auto;
 			-webkit-transition: transform .4s;
 			transition: transform .4s;
 			background-size: cover;
@@ -199,6 +204,7 @@
 				transition: background .5s;
 			}
 		}
+
 		&:hover {
 			.hotgraphic-graphic-pin-image {
 				-webkit-transform: scale(1.1);
