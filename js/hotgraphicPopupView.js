@@ -7,13 +7,6 @@ define([
 
         className: 'hotgraphic-popup',
 
-        attributes: function() {
-            return {
-                'role': 'dialog',
-                'aria-label': Adapt.course.get('_globals')._components._hotgraphic.ariaPopupLabel
-            };
-        },
-
         events: {
             'click .hotgraphic-popup-done': 'closePopup',
             'click .hotgraphic-popup-nav .back': 'onBackClick',
