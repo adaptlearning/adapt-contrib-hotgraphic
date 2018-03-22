@@ -16,7 +16,7 @@
             <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
             </div>
             {{#if _graphic.attribution}}
-            <div class="graphic-attribution" tabindex="0">{{{_graphic.attribution}}}</div>
+            <div class="graphic-attribution">{{{a11y_text _graphic.attribution}}}</div>
             {{/if}}
         </div>
     </div>
