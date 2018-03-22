@@ -2,7 +2,6 @@
     {{#each _items}}
     <div class="hotgraphic-item component-item clearfix item-{{@index}} {{_classes}}">
         <div class="hotgraphic-item-content">
-            {{{ a11y_aria_label (../view/getItemAriaLabel) }}}
             <div class="hotgraphic-item-content-inner">
             <div class="hotgraphic-content-title" role="heading" aria-level="5" tabindex="0">
                 {{{title}}}
@@ -29,8 +28,7 @@
         <button class="base hotgraphic-popup-controls back" aria-label="{{_globals._accessibility._ariaLabels.previous}}" role="button">
             <div class="hotgraphic-popup-arrow-l component-item-text-color icon icon-controls-small-left"></div>
         </button>
-        <div class="hotgraphic-popup-count component-item-text-color">
-            <span class="current">1</span>/<span class="total">{{_items.length}}</span>
+        <div class="hotgraphic-popup-count component-item-text-color" tabindex="0">
         </div>
         <button class="base hotgraphic-popup-controls next" aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
             <div class="hotgraphic-popup-arrow-r component-item-text-color icon icon-controls-small-right"></div>

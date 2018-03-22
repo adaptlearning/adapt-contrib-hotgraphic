@@ -14,7 +14,7 @@ define([
         },
 
         initialize: function() {
-            _.bindAll(this, 'onKeyUp', 'getItemAriaLabel');
+            _.bindAll(this, 'onKeyUp');
             this.listenToOnce(Adapt, "notify:opened", this.onOpened);
             this.render();
         },
@@ -38,6 +38,7 @@ define([
 
             this.$('.hotgraphic-popup').addClass('hotgraphic-popup item-' + currentIndex).show();
             this.handleFocus(false);
+            this.updatePageCount();
         },
 
         render: function() {
@@ -109,6 +110,7 @@ define([
 
             this.applyNavigationClasses(currentIndex-1);
             this.handleFocus(true);
+            this.updatePageCount();
         },
 
         nextHotGraphic: function () {
@@ -131,6 +133,7 @@ define([
 
             this.applyNavigationClasses(currentIndex+1);
             this.handleFocus(true);
+            this.updatePageCount();
         },
 
         setItemState: function(index) {
@@ -142,15 +145,15 @@ define([
             });
         },
 
-        getItemAriaLabel: function(context) {
+        updatePageCount: function() {
             var globals = Adapt.course.get("_globals");
-            var template = globals._components._hotgraphic &&
-                globals._components._hotgraphic.popupPagination;
-            if (!template) return "";
-            return Handlebars.compile(template)({
-                itemNumber: context.data.index+1,
+            var custom = (globals._components._hotgraphics && globals._component._hotgraphic.popupPagination);
+            var template = custom || '{{itemNumber}} / {{totalItems}}';
+            var labelText = Handlebars.compile(template)({
+                itemNumber: this.model.getActiveItem().get('_index')+1,
                 totalItems: this.model.get("_items").length
             });
+            this.$('.hotgraphic-popup-count').html(labelText);
         },
 
         handleFocus: function(setFocus) {
