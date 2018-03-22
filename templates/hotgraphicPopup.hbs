@@ -1,14 +1,6 @@
 <div class="hotgraphic-popup-inner clearfix">
     {{#each _items}}
     <div class="hotgraphic-item component-item clearfix item-{{@index}} {{_classes}}">
-        <div class="hotgraphic-item-graphic">
-            <div class="hotgraphic-item-graphic-inner">
-            <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
-            </div>
-            {{#if _graphic.attribution}}
-            <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
-            {{/if}}
-        </div>
         <div class="hotgraphic-item-content">
             <div class="hotgraphic-item-content-inner">
             <div class="hotgraphic-content-title" role="heading" aria-level="5" tabindex="0">
@@ -18,6 +10,14 @@
                 {{{a11y_text body}}}
             </div>
             </div>
+        </div>
+        <div class="hotgraphic-item-graphic">
+            <div class="hotgraphic-item-graphic-inner">
+            <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0"/>
+            </div>
+            {{#if _graphic.attribution}}
+            <div class="graphic-attribution" tabindex="0">{{{_graphic.attribution}}}</div>
+            {{/if}}
         </div>
     </div>
     {{/each}}
