@@ -14,7 +14,7 @@ define([
         },
 
         initialize: function() {
-            _.bindAll(this, 'onKeyUp');
+            _.bindAll(this, 'onKeyUp', 'getItemAriaLabel');
             this.listenToOnce(Adapt, "notify:opened", this.onOpened);
             this.render();
         },
@@ -33,25 +33,26 @@ define([
             this.$('.hotgraphic-item').eq(currentIndex).show().addClass('active');
 
             this.$currentLabel.html(currentIndex + 1);
-            
+
             this.applyNavigationClasses(currentIndex);
 
             this.$('.hotgraphic-popup').addClass('hotgraphic-popup item-' + currentIndex).show();
             this.handleFocus(false);
         },
-        
+
         render: function() {
             var data = this.model.toJSON();
+            data.view = this;
             var template = Handlebars.templates['hotgraphicPopup'];
             this.$el.html(template(data));
         },
-        
+
         remove: function() {
             this.trigger('popup:closed');
             this.removeEscapeKey();
             Backbone.View.prototype.remove.apply(this, arguments);
         },
-        
+
         closePopup: function(event) {
             Adapt.trigger('notify:close');
         },
@@ -62,7 +63,7 @@ define([
             }
             this.previousHotGraphic();
         },
-        
+
         onNextClick: function(event) {
             if (event) {
                 event.preventDefault();
@@ -109,7 +110,7 @@ define([
             this.applyNavigationClasses(currentIndex-1);
             this.handleFocus(true);
         },
-        
+
         nextHotGraphic: function () {
             var currentIndex = this.model.getActiveItem().get('_index');
             var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
@@ -141,6 +142,17 @@ define([
             });
         },
 
+        getItemAriaLabel: function(context) {
+            var globals = Adapt.course.get("_globals");
+            var template = globals._components._hotgraphic &&
+                globals._components._hotgraphic.popupPagination;
+            if (!template) return "";
+            return Handlebars.compile(template)({
+                itemNumber: context.data.index+1,
+                totalItems: this.model.get("_items").length
+            });
+        },
+
         handleFocus: function(setFocus) {
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
             if (setFocus) {
@@ -155,7 +167,7 @@ define([
 
             $nav.removeClass('first').removeClass('last');
             this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
-            
+
             if (index <= 0 && !canCycleThroughPagination) {
                 this.$('.hotgraphic-popup-nav').addClass('first');
                 this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
@@ -177,5 +189,5 @@ define([
     });
 
     return HotgraphicPopupView;
-    
+
 });

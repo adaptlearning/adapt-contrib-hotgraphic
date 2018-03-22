@@ -1,8 +1,9 @@
+{{import_globals}}
 <div class="hotgraphic-popup-inner clearfix">
     {{#each _items}}
     <div class="hotgraphic-item component-item clearfix item-{{@index}} {{_classes}}">
         <div class="hotgraphic-item-content">
-            {{{ a11y_aria_label (compile ../_globals._components._hotgraphic.popupPagination this) }}}
+            {{{ a11y_aria_label (../view/getItemAriaLabel) }}}
             <div class="hotgraphic-item-content-inner">
             <div class="hotgraphic-content-title" role="heading" aria-level="5" tabindex="0">
                 {{{title}}}
