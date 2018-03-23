@@ -20,7 +20,6 @@ define([
         },
 
         onOpened: function(notifyView) {
-            this.$currentLabel = this.$('.hotgraphic-popup-count .current');
             this.setupEscapeKey();
             this.trigger('popup:open');
 
@@ -31,8 +30,6 @@ define([
 
             this.$('.hotgraphic-item.active').hide().removeClass('active');
             this.$('.hotgraphic-item').eq(currentIndex).show().addClass('active');
-
-            this.$currentLabel.html(currentIndex + 1);
 
             this.applyNavigationClasses(currentIndex);
 
@@ -105,7 +102,6 @@ define([
 
             this.$('.hotgraphic-item.active').hide().removeClass('active');
             this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-            this.$currentLabel.html(currentIndex);
             this.$('.hotgraphic-popup-inner').a11y_on(false);
 
             this.applyNavigationClasses(currentIndex-1);
@@ -128,7 +124,6 @@ define([
 
             this.$('.hotgraphic-item.active').hide().removeClass('active');
             this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
-            this.$currentLabel.html(currentIndex+2);
             this.$('.hotgraphic-popup-inner').a11y_on(false);
 
             this.applyNavigationClasses(currentIndex+1);
@@ -147,8 +142,7 @@ define([
 
         updatePageCount: function() {
             var globals = Adapt.course.get("_globals");
-            var custom = (globals._components._hotgraphics && globals._component._hotgraphic.popupPagination);
-            var template = custom || '{{itemNumber}} / {{totalItems}}';
+            var template = globals._components._hotgraphic && globals._component._hotgraphic.popupPagination;
             var labelText = Handlebars.compile(template)({
                 itemNumber: this.model.getActiveItem().get('_index')+1,
                 totalItems: this.model.get("_items").length
