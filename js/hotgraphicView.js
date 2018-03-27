@@ -128,7 +128,7 @@ define([
             var selector = 'item-'+model.get('_index');
             this.$('.hotgraphic-graphic-pin.'+selector).toggleClass('active', _isActive);
         },
-        
+
         onItemsVisitedChange: function(model, _isVisited) {
             if (_isVisited) {
                 var selector = 'item-'+model.get('_index');
@@ -146,7 +146,7 @@ define([
             this.setVisited($currentHotSpot.data('index'));
             this.model.set('_isPopupOpen', true);
         },
-        
+
         openPopup: function(model, _isPopupOpen) {
             if (!_isPopupOpen) {
                 Adapt.trigger('notify:close');

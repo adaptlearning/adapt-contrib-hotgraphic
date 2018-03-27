@@ -14,21 +14,15 @@ define([
         },
 
         initialize: function() {
-            _.bindAll(this, 'onKeyUp');
             this.listenToOnce(Adapt, "notify:opened", this.onOpened);
             this.render();
         },
 
-        onOpened: function(notifyView) {
-            this.setupEscapeKey();
-            this.trigger('popup:open');
-
+        onOpened: function() {
             var currentIndex = this.model.getActiveItem().get('_index');
 
             this.$('.hotgraphic-popup-inner').a11y_on(false);
-            this.$('.hotgraphic-item').hide().removeClass('active');
-
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
+            this.$('.hotgraphic-item').hide();
             this.$('.hotgraphic-item').eq(currentIndex).show().addClass('active');
 
             this.applyNavigationClasses(currentIndex);
@@ -47,7 +41,6 @@ define([
 
         remove: function() {
             this.trigger('popup:closed');
-            this.removeEscapeKey();
             Backbone.View.prototype.remove.apply(this, arguments);
         },
 
@@ -56,35 +49,13 @@ define([
         },
 
         onBackClick: function(event) {
-            if (event) {
-                event.preventDefault();
-            }
+            if (event) event.preventDefault();
             this.previousHotGraphic();
         },
 
         onNextClick: function(event) {
-            if (event) {
-                event.preventDefault();
-            }
+            if (event) event.preventDefault();
             this.nextHotGraphic();
-        },
-
-        setupEscapeKey: function() {
-            var hasAccessibility = Adapt.config.has('_accessibility') && Adapt.config.get('_accessibility')._isActive;
-
-            if (!hasAccessibility) {
-                $(window).on("keyup", this.onKeyUp);
-            }
-        },
-
-        removeEscapeKey: function() {
-            $(window).off("keyup", this.onKeyUp);
-        },
-
-        onKeyUp: function(event) {
-            if (event.which != 27) return;
-            event.preventDefault();
-            this.closePopup();
         },
 
         previousHotGraphic: function () {
@@ -98,17 +69,9 @@ define([
                 currentIndex = itemLength;
             }
 
-            this.setItemState(currentIndex-1);
-
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex-1).show().addClass('active');
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-
-            this.applyNavigationClasses(currentIndex-1);
-            this.handleFocus(true);
-            this.updatePageCount();
+            this.applyItemClasses(currentIndex-1);
         },
-
+        
         nextHotGraphic: function () {
             var currentIndex = this.model.getActiveItem().get('_index');
             var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
@@ -120,13 +83,17 @@ define([
                 currentIndex = -1;
             }
 
-            this.setItemState(currentIndex+1);
+            this.applyItemClasses(currentIndex+1);
+        },
+
+        applyItemClasses: function(index) {
+            this.setItemState(index);
 
             this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(currentIndex+1).show().addClass('active');
+            this.$('.hotgraphic-item').eq(index).show().addClass('active');
             this.$('.hotgraphic-popup-inner').a11y_on(false);
 
-            this.applyNavigationClasses(currentIndex+1);
+            this.applyNavigationClasses(index);
             this.handleFocus(true);
             this.updatePageCount();
         },
