@@ -25,7 +25,7 @@ define([
 
             this.listenTo(Adapt, 'device:changed', this.reRender);
             this.listenTo(this.model, {
-                'change:_isPopupOpen': this.openPopup
+                'change:_isPopupOpen': this.pinClickEvent
             });
             this.listenTo(this.model.get('_items'), {
                 'change:_isActive': this.onItemsActiveChange,
@@ -34,7 +34,7 @@ define([
 
             this.checkIfResetOnRevisit();
             this.popupView = null;
-            this.selectedPin = null; // used to restore focus when popup is closed 
+            this.selectedPin = null; // used to restore focus when popup is closed
         },
 
         postRender: function() {
@@ -64,7 +64,7 @@ define([
 
         inview: function(event, visible, visiblePartX, visiblePartY) {
             if (!visible) return;
-            
+
             if (visiblePartY === 'top') {
                 this._isVisibleTop = true;
             } else if (visiblePartY === 'bottom') {
@@ -89,7 +89,7 @@ define([
             var newNarrative = new NarrativeView({ model: model });
             var $container = $(".component-container", $("." + this.model.get("_parentId")));
 
-            this.model.set('_isPopupOpen', false); // close popup 
+            this.model.set('_isPopupOpen', false); // close popup
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
@@ -114,7 +114,7 @@ define([
             if (!active) {
                 model.getItem(0).toggleActive(true);
             }
-            
+
             if (model.get('mobileBody')) {
                 model.set('body', model.get('mobileBody'));
             }
@@ -142,9 +142,16 @@ define([
             }
             this.selectedPin = event.currentTarget;
             var $currentHotSpot = $(this.selectedPin);
-            $currentHotSpot.show().addClass('active');
+
             this.setVisited($currentHotSpot.data('index'));
             this.model.set('_isPopupOpen', true);
+        },
+
+        pinClickEvent: function(model, _isPopupOpen) {
+            var $currentHotSpot = $(this.selectedPin);
+            $currentHotSpot.show().addClass('active');
+
+            this.openPopup(model, _isPopupOpen);
         },
 
         openPopup: function(model, _isPopupOpen) {
