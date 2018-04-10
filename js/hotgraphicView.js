@@ -197,7 +197,7 @@ define([
             item.toggleActive(true);
             item.toggleVisited(true);
 
-            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
+            var $pin = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
             // append the word 'visited.' to the pin's aria-label
             var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.attr('aria-label', function(index, val) {
