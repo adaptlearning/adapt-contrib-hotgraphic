@@ -26,7 +26,7 @@ define([
 
             this.$('.hotgraphic-popup-inner').a11y_on(false);
 
-            this.$('.hotgraphic-item').filter('[data-index="' + currentIndex + '"]').addClass('active');
+            this.applyItemClasses(currentIndex);
 
             this.applyNavigationClasses(currentIndex);
 
@@ -79,24 +79,26 @@ define([
         },
 
         onItemsActiveChange: function(item) {
-            if (item.get('_isActive')) this.applyItemClasses(item.get('_index'));
+            if (item.get('_isActive')) {
+                var index = item.get('_index');
+                this.applyItemClasses(index);
+                this.applyNavigationClasses(index);
+                this.handleFocus(true);
+                this.updatePageCount();
+            }
         },
 
         onItemsVisitedChange: function(item, _isVisited) {
             if (_isVisited) {
-                var selector = 'item-'+item.get('_index');
-                this.$('.hotgraphic-item').filter('[data-index="' + selector + '"]').addClass('visited');
+                var index = item.get('_index');
+                var selector = 'item-'+ index;
+                this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('visited');
             }
         },
 
         applyItemClasses: function(index) {
             this.$('.hotgraphic-item.active').removeClass('active');
             this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('active');
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-
-            this.applyNavigationClasses(index);
-            this.handleFocus(true);
-            this.updatePageCount();
         },
 
         setItemState: function(index) {
@@ -117,6 +119,7 @@ define([
         },
 
         handleFocus: function(setFocus) {
+            this.$('.hotgraphic-popup-inner').a11y_on(false);
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
             if (setFocus) {
                 this.$('.hotgraphic-popup-inner .active').a11y_focus();
