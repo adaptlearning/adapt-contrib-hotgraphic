@@ -178,7 +178,7 @@ define(function(require) {
               
             Adapt.trigger('popup:opened',  this.$('.hotgraphic-popup-inner'));
 
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+            this.$('.hotgraphic-popup').a11y_focus();
             
             this.setupEscapeKey();
         },
