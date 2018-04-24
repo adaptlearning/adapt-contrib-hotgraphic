@@ -19,6 +19,14 @@
       "inputType": "Text",
       "validators": [],
       "translatable": true
+    },
+    "ariaPinLabel": {
+        "type": "string",
+        "required": true,
+        "default": "Hotgraphic pin number ",
+        "inputType": "Text",
+        "validators": [],
+        "translatable": true
     }
   },
   "properties": {
