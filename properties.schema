@@ -23,7 +23,7 @@
       "ariaPinLabel": {
       "type": "string",
       "required": true,
-      "default": "Hotgraphic pin number ",
+      "default": "Selectable pin ",
       "inputType": "Text",
       "validators": [],
       "translatable": true
