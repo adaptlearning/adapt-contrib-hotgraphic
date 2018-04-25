@@ -22,17 +22,9 @@ define([
         },
 
         onOpened: function() {
-            var currentIndex = this.model.getActiveItem().get('_index');
-
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-
-            this.applyItemClasses(currentIndex);
-
-            this.applyNavigationClasses(currentIndex);
-
-            this.$('.hotgraphic-popup').addClass('hotgraphic-popup item-' + currentIndex).show();
-            this.handleFocus(false);
-            this.updatePageCount();
+            var item = this.model.getActiveItem();
+            this.onItemsActiveChange(item, true, {initialOpening: true});
+            this.onItemsVisitedChange(item, true);
         },
 
         render: function() {
@@ -78,22 +70,22 @@ define([
             return -1;
         },
 
-        onItemsActiveChange: function(item) {
-            if (item.get('_isActive')) {
-                var index = item.get('_index');
-                this.applyItemClasses(index);
-                this.applyNavigationClasses(index);
-                this.handleFocus(true);
-                this.updatePageCount();
-            }
+        onItemsActiveChange: function(item, _isActive, options) {
+            if (!_isActive) return;
+
+            var index = item.get('_index');
+            this.applyItemClasses(index);
+            this.applyNavigationClasses(index);
+            this.updatePageCount();
+            this.handleFocus(!options.initialOpening);
         },
 
         onItemsVisitedChange: function(item, _isVisited) {
-            if (_isVisited) {
-                var index = item.get('_index');
-                var selector = 'item-'+ index;
-                this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('visited');
-            }
+            if (!_isVisited) return;
+
+            this.$('.hotgraphic-item')
+                .filter('[data-index="' + item.get('_index') + '"]')
+                .addClass('visited');
         },
 
         applyItemClasses: function(index) {
