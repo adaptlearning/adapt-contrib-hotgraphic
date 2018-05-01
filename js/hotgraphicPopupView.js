@@ -34,11 +34,6 @@ define([
             this.$el.html(template(data));
         },
 
-        remove: function() {
-            this.trigger('popup:closed');
-            Backbone.View.prototype.remove.apply(this, arguments);
-        },
-
         closePopup: function(event) {
             Adapt.trigger('notify:close');
         },
@@ -104,7 +99,7 @@ define([
         updatePageCount: function() {
             var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination;
             var labelText = Handlebars.compile(template)({
-                itemNumber: this.model.getActiveItem().get('_index')+1,
+                itemNumber: this.model.getActiveItem().get('_index') + 1,
                 totalItems: this.model.get("_items").length
             });
             this.$('.hotgraphic-popup-count').html(labelText);

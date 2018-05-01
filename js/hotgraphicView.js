@@ -24,9 +24,8 @@ define([
             }
 
             this.listenTo(Adapt, 'device:changed', this.reRender);
-            this.listenTo(this.model, {
-                'change:_isPopupOpen': this.pinClickEvent
-            });
+
+
             this.listenTo(this.model.get('_items'), {
                 'change:_isActive': this.onItemsActiveChange,
                 'change:_isVisited': this.onItemsVisitedChange
@@ -35,6 +34,7 @@ define([
             this.checkIfResetOnRevisit();
             this.popupView = null;
             this.selectedPin = null; // used to restore focus when popup is closed
+            this._isPopupOpen = false;
         },
 
         postRender: function() {
@@ -125,40 +125,40 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            var selector = 'item-'+model.get('_index');
-            this.$('.hotgraphic-graphic-pin.'+selector).toggleClass('active', _isActive);
+            var selector = 'item-'+ model.get('_index');
+            this.$('.hotgraphic-graphic-pin.'+ selector).toggleClass('active', _isActive);
         },
 
         onItemsVisitedChange: function(model, _isVisited) {
-            if (_isVisited) {
-                var selector = 'item-'+model.get('_index');
-                this.$('.hotgraphic-graphic-pin.'+selector).addClass('visited');
-            }
+            if (!_isVisited) return;
+
+            var index = model.get('_index');
+            var $pin = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
+
+            // append the word 'visited.' to the pin's aria-label
+            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            $pin.attr('aria-label', function(index, val) {
+                return val + " " + visitedLabel;
+            });
+
+            $pin.addClass('visited');
+            $.a11y_alert("visited");
         },
 
         onPinClicked: function (event) {
-            if(event) {
-                event.preventDefault();
-            }
-            this.selectedPin = event.currentTarget;
-            var $currentHotSpot = $(this.selectedPin);
+            if(event) event.preventDefault();
 
-            this.setVisited($currentHotSpot.data('index'));
-            this.model.set('_isPopupOpen', true);
+            var item = this.model.getItem($(event.currentTarget).data('index'));
+            item.toggleActive(true);
+            item.toggleVisited(true);
+
+            this.openPopup();
         },
 
-        pinClickEvent: function(model, _isPopupOpen) {
-            var $currentHotSpot = $(this.selectedPin);
-            $currentHotSpot.show().addClass('active');
+        openPopup: function() {
+            if (this._isPopupOpen) return;
 
-            this.openPopup(model, _isPopupOpen);
-        },
-
-        openPopup: function(model, _isPopupOpen) {
-            if (!_isPopupOpen) {
-                Adapt.trigger('notify:close');
-                return;
-            }
+            this._isPopupOpen = true;
 
             this.popupView = new HotgraphicPopupView({
                 model: this.model
@@ -172,39 +172,15 @@ define([
                 _classes: ' hotgraphic'
             });
 
-            this.listenTo(this.popupView, {
+            this.listenToOnce(Adapt, {
                 'popup:closed': this.onPopupClosed
             });
-
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
         },
 
         onPopupClosed: function() {
             this.model.getActiveItem().set('_isActive', false);
-            this.removePopupEvents();
-            this.model.set('_isPopupOpen', false);
+            this._isPopupOpen = false;
             $(this.selectedPin).a11y_focus();
-        },
-
-        removePopupEvents: function() {
-            this.stopListening(this.popupView, {
-                'popup:closed': this.onPopupClosed
-            });
-        },
-
-        setVisited: function(index) {
-            var item = this.model.getItem(index);
-            item.toggleActive(true);
-            item.toggleVisited(true);
-
-            var $pin = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
-            // append the word 'visited.' to the pin's aria-label
-            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
-            $pin.attr('aria-label', function(index, val) {
-                return val + " " + visitedLabel;
-            });
-
-            $.a11y_alert("visited");
         },
 
         setupEventListeners: function() {
