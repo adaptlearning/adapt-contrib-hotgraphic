@@ -125,15 +125,15 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            var selector = 'item-'+ model.get('_index');
-            this.$('.hotgraphic-graphic-pin.'+ selector).toggleClass('active', _isActive);
+            var index = model.get('_index');
+            this.getItemElement(model).toggleClass('active', _isActive);
         },
 
         onItemsVisitedChange: function(model, _isVisited) {
             if (!_isVisited) return;
 
             var index = model.get('_index');
-            var $pin = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
+            var $pin = this.getItemElement(model);
 
             // append the word 'visited.' to the pin's aria-label
             var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
@@ -177,10 +177,15 @@ define([
             });
         },
 
+        getItemElement: function(model) {
+            var index = model.get('_index');
+            return this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
+        },
+
         onPopupClosed: function() {
-            this.model.getActiveItem().set('_isActive', false);
+            this.model.getActiveItem().toggleActive();
             this._isPopupOpen = false;
-            $(this.selectedPin).a11y_focus();
+            this.getItemElement(this.model).a11y_focus();
         },
 
         setupEventListeners: function() {
