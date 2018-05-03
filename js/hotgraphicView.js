@@ -33,7 +33,6 @@ define([
 
             this.checkIfResetOnRevisit();
             this.popupView = null;
-            this.selectedPin = null; // used to restore focus when popup is closed
             this._isPopupOpen = false;
         },
 
@@ -125,14 +124,11 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            var index = model.get('_index');
             this.getItemElement(model).toggleClass('active', _isActive);
         },
 
         onItemsVisitedChange: function(model, _isVisited) {
             if (!_isVisited) return;
-
-            var index = model.get('_index');
             var $pin = this.getItemElement(model);
 
             // append the word 'visited.' to the pin's aria-label

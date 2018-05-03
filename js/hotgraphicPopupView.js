@@ -22,9 +22,9 @@ define([
         },
 
         onOpened: function() {
-            var item = this.model.getActiveItem();
-            this.onItemsActiveChange(item, true, {initialOpening: true});
-            this.onItemsVisitedChange(item, true);
+            this.applyNavigationClasses(this.model.getActiveItem().get('_index'));
+            this.updatePageCount();
+            this.handleFocus();
         },
 
         render: function() {
@@ -65,14 +65,14 @@ define([
             return -1;
         },
 
-        onItemsActiveChange: function(item, _isActive, options) {
+        onItemsActiveChange: function(item, _isActive) {
             if (!_isActive) return;
 
             var index = item.get('_index');
             this.applyItemClasses(index);
             this.applyNavigationClasses(index);
             this.updatePageCount();
-            this.handleFocus(!options.initialOpening);
+            this.handleFocus(true);
         },
 
         onItemsVisitedChange: function(item, _isVisited) {
