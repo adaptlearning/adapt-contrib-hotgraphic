@@ -88,8 +88,6 @@ define([
             var newNarrative = new NarrativeView({ model: model });
             var $container = $(".component-container", $("." + this.model.get("_parentId")));
 
-            this.model.set('_isPopupOpen', false); // close popup
-
             newNarrative.reRender();
             newNarrative.setupNarrative();
             $container.append(newNarrative.$el);
