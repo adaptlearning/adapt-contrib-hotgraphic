@@ -107,7 +107,6 @@ define([
             });
 
             $pin.addClass('visited');
-            $.a11y_alert("visited");
         },
 
         // Used to check if the hotgraphic should reset on revisit
