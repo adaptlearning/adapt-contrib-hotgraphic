@@ -24,9 +24,8 @@ define([
             }
 
             this.listenTo(Adapt, 'device:changed', this.reRender);
-            this.listenTo(this.model, {
-                'change:_isPopupOpen': this.openPopup
-            });
+
+
             this.listenTo(this.model.get('_items'), {
                 'change:_isActive': this.onItemsActiveChange,
                 'change:_isVisited': this.onItemsVisitedChange
@@ -34,7 +33,7 @@ define([
 
             this.checkIfResetOnRevisit();
             this.popupView = null;
-            this.selectedPin = null; // used to restore focus when popup is closed 
+            this._isPopupOpen = false;
         },
 
         postRender: function() {
@@ -64,7 +63,7 @@ define([
 
         inview: function(event, visible, visiblePartX, visiblePartY) {
             if (!visible) return;
-            
+
             if (visiblePartY === 'top') {
                 this._isVisibleTop = true;
             } else if (visiblePartY === 'bottom') {
@@ -89,8 +88,6 @@ define([
             var newNarrative = new NarrativeView({ model: model });
             var $container = $(".component-container", $("." + this.model.get("_parentId")));
 
-            this.model.set('_isPopupOpen', false); // close popup 
-
             newNarrative.reRender();
             newNarrative.setupNarrative();
             $container.append(newNarrative.$el);
@@ -114,7 +111,7 @@ define([
             if (!active) {
                 model.getItem(0).toggleActive(true);
             }
-            
+
             if (model.get('mobileBody')) {
                 model.set('body', model.get('mobileBody'));
             }
@@ -125,33 +122,37 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            var selector = 'item-'+model.get('_index');
-            this.$('.hotgraphic-graphic-pin.'+selector).toggleClass('active', _isActive);
+            this.getItemElement(model).toggleClass('active', _isActive);
         },
 
         onItemsVisitedChange: function(model, _isVisited) {
-            if (_isVisited) {
-                var selector = 'item-'+model.get('_index');
-                this.$('.hotgraphic-graphic-pin.'+selector).addClass('visited');
-            }
+            if (!_isVisited) return;
+            var $pin = this.getItemElement(model);
+
+            // append the word 'visited.' to the pin's aria-label
+            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+            $pin.attr('aria-label', function(index, val) {
+                return val + " " + visitedLabel;
+            });
+
+            $pin.addClass('visited');
+            $.a11y_alert("visited");
         },
 
         onPinClicked: function (event) {
-            if(event) {
-                event.preventDefault();
-            }
-            this.selectedPin = event.currentTarget;
-            var $currentHotSpot = $(this.selectedPin);
-            $currentHotSpot.show().addClass('active');
-            this.setVisited($currentHotSpot.data('index'));
-            this.model.set('_isPopupOpen', true);
+            if(event) event.preventDefault();
+
+            var item = this.model.getItem($(event.currentTarget).data('index'));
+            item.toggleActive(true);
+            item.toggleVisited(true);
+
+            this.openPopup();
         },
 
-        openPopup: function(model, _isPopupOpen) {
-            if (!_isPopupOpen) {
-                Adapt.trigger('notify:close');
-                return;
-            }
+        openPopup: function() {
+            if (this._isPopupOpen) return;
+
+            this._isPopupOpen = true;
 
             this.popupView = new HotgraphicPopupView({
                 model: this.model
@@ -165,39 +166,20 @@ define([
                 _classes: ' hotgraphic'
             });
 
-            this.listenTo(this.popupView, {
+            this.listenToOnce(Adapt, {
                 'popup:closed': this.onPopupClosed
             });
+        },
 
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+        getItemElement: function(model) {
+            var index = model.get('_index');
+            return this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
         },
 
         onPopupClosed: function() {
-            this.model.getActiveItem().set('_isActive', false);
-            this.removePopupEvents();
-            this.model.set('_isPopupOpen', false);
-            $(this.selectedPin).a11y_focus();
-        },
-
-        removePopupEvents: function() {
-            this.stopListening(this.popupView, {
-                'popup:closed': this.onPopupClosed
-            });
-        },
-
-        setVisited: function(index) {
-            var item = this.model.getItem(index);
-            item.toggleActive(true);
-            item.toggleVisited(true);
-
-            var $pin = this.$('.hotgraphic-graphic-pin').eq(index);
-            // append the word 'visited.' to the pin's aria-label
-            var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
-            $pin.attr('aria-label', function(index, val) {
-                return val + " " + visitedLabel;
-            });
-
-            $.a11y_alert("visited");
+            this.model.getActiveItem().toggleActive();
+            this._isPopupOpen = false;
+            this.getItemElement(this.model).a11y_focus();
         },
 
         setupEventListeners: function() {

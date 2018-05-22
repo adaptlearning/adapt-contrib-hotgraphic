@@ -9,27 +9,22 @@ define([
 
         events: {
             'click .hotgraphic-popup-done': 'closePopup',
-            'click .hotgraphic-popup-nav .back': 'onBackClick',
-            'click .hotgraphic-popup-nav .next': 'onNextClick'
+            'click .hotgraphic-popup-controls': 'onControlClick'
         },
 
         initialize: function() {
             this.listenToOnce(Adapt, "notify:opened", this.onOpened);
+            this.listenTo(this.model.get('_items'), {
+                'change:_isActive': this.onItemsActiveChange,
+                'change:_isVisited': this.onItemsVisitedChange
+            });
             this.render();
         },
 
         onOpened: function() {
-            var currentIndex = this.model.getActiveItem().get('_index');
-
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-            this.$('.hotgraphic-item').hide();
-            this.$('.hotgraphic-item').eq(currentIndex).show().addClass('active');
-
-            this.applyNavigationClasses(currentIndex);
-
-            this.$('.hotgraphic-popup').addClass('hotgraphic-popup item-' + currentIndex).show();
-            this.handleFocus(false);
+            this.applyNavigationClasses(this.model.getActiveItem().get('_index'));
             this.updatePageCount();
+            this.handleFocus();
         },
 
         render: function() {
@@ -39,84 +34,79 @@ define([
             this.$el.html(template(data));
         },
 
-        remove: function() {
-            this.trigger('popup:closed');
-            Backbone.View.prototype.remove.apply(this, arguments);
-        },
-
         closePopup: function(event) {
             Adapt.trigger('notify:close');
         },
 
-        onBackClick: function(event) {
-            if (event) event.preventDefault();
-            this.previousHotGraphic();
-        },
+        onControlClick: function(event) {
+            event.preventDefault();
 
-        onNextClick: function(event) {
-            if (event) event.preventDefault();
-            this.nextHotGraphic();
-        },
+            var direction = $(event.currentTarget).hasClass('back') ? 'back' : 'next';
+            var index = this.getNextIndex(direction);
 
-        previousHotGraphic: function () {
-            var currentIndex = this.model.getActiveItem().get('_index');
-            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
-            var itemLength = this.model.get('_items').length;
-
-            if (currentIndex === 0 && !canCycleThroughPagination) {
-                return;
-            } else if (currentIndex === 0 && canCycleThroughPagination) {
-                currentIndex = itemLength;
+            if (index !== -1) {
+                this.setItemState(index);
             }
-
-            this.applyItemClasses(currentIndex-1);
         },
-        
-        nextHotGraphic: function () {
-            var currentIndex = this.model.getActiveItem().get('_index');
-            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
-            var itemLength = this.model.get('_items').length;
 
-            if (currentIndex === (itemLength-1) && !canCycleThroughPagination) {
-                return;
-            } else if (currentIndex === (itemLength-1) && canCycleThroughPagination) {
-                currentIndex = -1;
+        getNextIndex: function(direction) {
+            var index = this.model.getActiveItem().get('_index');
+            var lastIndex = this.model.get('_items').length - 1;
+
+            switch (direction) {
+                case 'back':
+                    if (index > 0) return --index;
+                    if (this.model.get('_canCycleThroughPagination')) return lastIndex;
+                    break;
+                case 'next':
+                    if (index < lastIndex) return ++index;
+                    if (this.model.get('_canCycleThroughPagination')) return 0;
             }
+            return -1;
+        },
 
-            this.applyItemClasses(currentIndex+1);
+        onItemsActiveChange: function(item, _isActive) {
+            if (!_isActive) return;
+
+            var index = item.get('_index');
+            this.applyItemClasses(index);
+            this.applyNavigationClasses(index);
+            this.updatePageCount();
+            this.handleFocus(true);
+        },
+
+        onItemsVisitedChange: function(item, _isVisited) {
+            if (!_isVisited) return;
+
+            this.$('.hotgraphic-item')
+                .filter('[data-index="' + item.get('_index') + '"]')
+                .addClass('visited');
         },
 
         applyItemClasses: function(index) {
-            this.setItemState(index);
-
-            this.$('.hotgraphic-item.active').hide().removeClass('active');
-            this.$('.hotgraphic-item').eq(index).show().addClass('active');
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-
-            this.applyNavigationClasses(index);
-            this.handleFocus(true);
-            this.updatePageCount();
+            this.$('.hotgraphic-item.active').removeClass('active');
+            this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('active');
         },
 
         setItemState: function(index) {
-            this.model.getActiveItem().set('_isActive', false);
+            this.model.getActiveItem().toggleActive();
+
             var nextItem = this.model.getItem(index);
-            nextItem.set({
-                '_isActive': true,
-                '_isVisited': true
-            });
+            nextItem.toggleActive();
+            nextItem.toggleVisited(true);
         },
 
         updatePageCount: function() {
             var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination;
             var labelText = Handlebars.compile(template)({
-                itemNumber: this.model.getActiveItem().get('_index')+1,
+                itemNumber: this.model.getActiveItem().get('_index') + 1,
                 totalItems: this.model.get("_items").length
             });
             this.$('.hotgraphic-popup-count').html(labelText);
         },
 
         handleFocus: function(setFocus) {
+            this.$('.hotgraphic-popup-inner').a11y_on(false);
             this.$('.hotgraphic-popup-inner .active').a11y_on(true);
             if (setFocus) {
                 this.$('.hotgraphic-popup-inner .active').a11y_focus();
@@ -124,30 +114,20 @@ define([
         },
 
         applyNavigationClasses: function (index) {
-            var $nav = this.$('.hotgraphic-popup-nav');
             var itemCount = this.model.get('_items').length;
             var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
 
-            $nav.removeClass('first').removeClass('last');
-            this.$('.hotgraphic-popup-done').a11y_cntrl_enabled(true);
+            var shouldEnableBack = index > 0 || canCycleThroughPagination;
+            var shouldEnableNext = index < itemCount - 1 || canCycleThroughPagination;
+            var $controls = this.$('.hotgraphic-popup-controls');
 
-            if (index <= 0 && !canCycleThroughPagination) {
-                this.$('.hotgraphic-popup-nav').addClass('first');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(false);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            } else if (index >= itemCount-1 && !canCycleThroughPagination) {
-                this.$('.hotgraphic-popup-nav').addClass('last');
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(false);
-            } else {
-                this.$('.hotgraphic-popup-controls.back').a11y_cntrl_enabled(true);
-                this.$('.hotgraphic-popup-controls.next').a11y_cntrl_enabled(true);
-            }
+            this.$('hotgraphic-popup-nav')
+                .toggleClass('first', !shouldEnableBack)
+                .toggleClass('last', !shouldEnableNext);
 
-            var item = this.model.getItem(index);
-            var classString = 'hotgraphic-popup ' + 'item-' + index + ' ' + item.get('_classes');
-            this.$('.hotgraphic-popup').attr('class', classString);
-        },
+            $controls.filter('.back').a11y_cntrl_enabled(shouldEnableBack);
+            $controls.filter('.next').a11y_cntrl_enabled(shouldEnableNext);
+        }
 
     });
 

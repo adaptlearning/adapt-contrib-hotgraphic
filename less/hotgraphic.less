@@ -1,11 +1,14 @@
 .hotgraphic-component {
 
+
+
+
 	.hotgraphic-graphic {
 		position: relative;
 		display: inline-block;
 		width: 100%;
 	}
-	
+
 	.hotgraphic-graphic-pin {
 		display: block;
 		position: absolute;
@@ -14,7 +17,7 @@
 		background-color: @item-text-color;
 		border-radius: 50%;
 		text-decoration: none;
-		
+
 		&.visited {
 			.hotgraphic-graphic-pin-icon {
 				color: @item-color-visited;
@@ -26,13 +29,18 @@
 			}
 		}
 	}
-	
+
 	.hotgraphic-graphic-pin-icon {
 		color: @item-color;
 		font-size: (@icon-size*2);
 		height: (@icon-size*2);
 		width: (@icon-size*2);
 	}
+
+}
+
+.hotgraphic-item:not(.active) {
+	display: none;
 }
 
 .notify.hotgraphic {
