@@ -199,10 +199,14 @@ define([
         },
 
         remove: function() {
+            this.removeInviewListener();
+            ComponentView.prototype.remove.apply(this, arguments);
+        },
+
+        removeInviewListener: function() {
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.$('.component-widget').off('inview');
             }
-            ComponentView.prototype.remove.apply(this, arguments);
         }
 
     });
