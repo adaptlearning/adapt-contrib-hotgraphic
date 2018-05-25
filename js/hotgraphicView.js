@@ -13,6 +13,7 @@ define([
 
         initialize: function() {
             ComponentView.prototype.initialize.call(this);
+            _.bindAll(this, 'inview');
             this.setUpViewData();
             this.setUpModelData();
             this.setUpEventListeners();
@@ -56,9 +57,7 @@ define([
             newNarrative.setupNarrative();
             $container.append(newNarrative.$el);
             Adapt.trigger('device:resize');
-            _.defer(_.bind(function () {
-                this.remove();
-            }, this));
+            _.defer(this.remove.bind(this));
         },
 
         prepareNarrativeModel: function() {
@@ -129,16 +128,14 @@ define([
 
         postRender: function() {
             this.renderState();
-            this.$('.hotgraphic-widget').imageready(_.bind(function() {
-                this.setReadyStatus();
-            }, this));
+            this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
 
             this.setUpInviewListener();
         },
 
         setUpInviewListener: function() {
             if (this.model.get('_setCompletionOn') === 'inview') {
-                this.$('.component-widget').on('inview', _.bind(this.inview, this));
+                this.$('.component-widget').on('inview', this.inview);
             }
         },
 
@@ -157,7 +154,7 @@ define([
             var wasAllInview = (this._isVisibleTop && this._isVisibleBottom);
             if (!wasAllInview) return;
 
-            this.$('.component-widget').off('inview');
+            this.removeInviewListener();
             this.setCompletionStatus();
         },
 
