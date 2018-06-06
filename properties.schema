@@ -68,7 +68,7 @@
           "validators": [],
           "help": "Text to be displayed as an attribution",
           "translatable": true
-        }        
+        }
       }
     },
     "mobileBody": {
