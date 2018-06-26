@@ -17,7 +17,7 @@
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
         {{/if}}
         {{#each _items}}
-          <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-haspopup="dialog" aria-label="{{../_globals._components._hotgraphic.ariaPinLabel}} {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}"></button>
+          <button class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-haspopup="dialog" aria-label="{{../_globals._components._hotgraphic.ariaPinLabel}} {{numbers @index}}. {{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             <div class="hotgraphic-graphic-pin-icon component-item-color icon icon-pin item-{{@index}}"></div>
           </button>
         {{/each}}
