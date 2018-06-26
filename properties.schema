@@ -20,6 +20,14 @@
       "validators": [],
       "translatable": true
     },
+    "ariaPinLabel": {
+      "type": "string",
+      "required": true,
+      "default": "Selectable pin ",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    },
     "popupPagination": {
       "type": "string",
       "required": true,
