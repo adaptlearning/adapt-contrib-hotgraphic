@@ -108,7 +108,6 @@ define([
             $pin.addClass('visited');
         },
 
-        // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
             var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
