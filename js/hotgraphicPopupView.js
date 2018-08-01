@@ -61,11 +61,10 @@ define([
             if (!_isActive) return;
 
             var index = item.get('_index');
-            this.applyNavigationClasses(index);
             this.updatePageCount();
             this.handleTabs();
             this.applyItemClasses(index);
-            this.handleFocus();
+            this.handleFocus(index);
         },
 
         applyItemClasses: function(index) {
@@ -73,8 +72,9 @@ define([
             this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('active');
         },
 
-        handleFocus: function() {
-            this.$('.hotgraphic-popup-inner .active').a11y_focus();
+        handleFocus: function(index) {
+            this.$('.hotgraphic-popup-inner .active').a11y_focus(true);
+            this.applyNavigationClasses(index);
         },
 
         onItemsVisitedChange: function(item, _isVisited) {
