@@ -7,23 +7,7 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "Below is a component which allows you to select hot spots over an image. Select a hot spot to trigger a popup that includes an image with display text. Select the close button to close the popup.",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    },
-    "ariaPopupLabel": {
-      "type": "string",
-      "required": true,
-      "default": "Hotgraphic popup",
-      "inputType": "Text",
-      "validators": [],
-      "translatable": true
-    },
-    "ariaPinLabel": {
-      "type": "string",
-      "required": true,
-      "default": "Selectable pin ",
+      "default": "Hotgraphic. Select buttons to reveal content popups.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
@@ -149,6 +133,15 @@
             "validators": [],
             "help": "Title displayed in the popup",
             "translatable": true
+          },
+          "_ariaLevel": {
+            "type": "number",
+            "required": true,
+            "default": 0,
+            "title": "Title level",
+            "inputType": "Number",
+            "validators": ["required", "number"],
+            "help": "Aria level for title"
           },
           "body": {
             "type": "string",
