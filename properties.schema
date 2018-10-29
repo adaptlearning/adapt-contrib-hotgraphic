@@ -204,7 +204,7 @@
                 "type": "string",
                 "required": false,
                 "default": "",
-                "title": "CSS Classes",
+                "title": "Classes",
                 "inputType": "Text",
                 "validators": [],
                 "help": "Allows you to specify custom CSS classes to be applied to the popup item"
