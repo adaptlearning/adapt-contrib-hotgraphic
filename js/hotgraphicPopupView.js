@@ -73,7 +73,7 @@ define([
         },
 
         handleFocus: function(index) {
-            this.$('.hotgraphic-popup-inner .active').a11y_focus(true);
+            this.$('.hotgraphic-popup-inner .active').a11y_focus();
             this.applyNavigationClasses(index);
         },
 
