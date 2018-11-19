@@ -105,7 +105,7 @@
       "title": "Cycle through item pagination",
       "inputType": "Checkbox",
       "validators": [],
-      "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next on the last item will take them to the first one)."
+      "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
     "_useGraphicsAsPins": {
       "type": "boolean",
