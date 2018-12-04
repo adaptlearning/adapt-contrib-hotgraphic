@@ -7,7 +7,7 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "Hotgraphic. Select buttons to reveal content popups.",
+      "default": "Image with selectable areas. Select each button to show more information.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
@@ -36,7 +36,6 @@
       "default": "",
       "inputType": "Text",
       "validators": [],
-      "help": "This is the instruction text",
       "translatable": true
     },
     "_graphic": {
@@ -58,7 +57,7 @@
           "default": "",
           "inputType": "Text",
           "validators": [],
-          "help": "Alternative text for this image",
+          "help": "Alternative text for the image",
           "translatable": true
         },
         "attribution": {
@@ -106,7 +105,7 @@
       "title": "Cycle through item pagination",
       "inputType": "Checkbox",
       "validators": [],
-      "help": "If enabled, the items in the open popup will be allowed to cycle through continuously"
+      "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
     "_useGraphicsAsPins": {
       "type": "boolean",
@@ -158,7 +157,7 @@
             "default": "",
             "inputType": "Text",
             "validators": ["required"],
-            "help": "Strapline displayed on mobile version",
+            "help": "Strapline - displayed on mobile version only",
             "translatable": true
           },
           "_graphic": {
@@ -172,7 +171,7 @@
                 "default": "",
                 "inputType": "Asset:image",
                 "validators": ["required"],
-                "help": "Image displayed in the popup"
+                "help": "Image to be displayed in a popup when this item is selected."
               },
               "alt": {
                 "type": "string",
@@ -180,7 +179,7 @@
                 "default": "",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Alternative text for this image",
+                "help": "Alternative text for the popup image",
                 "translatable": true
               },
               "attribution": {
@@ -189,7 +188,7 @@
                 "default": "",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Text to be displayed as an attribution",
+                "help": "Text to be displayed as an attribution for the popup image",
                 "translatable": true
               },
               "title": {
@@ -198,7 +197,7 @@
                 "default": "",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Title text for this image",
+                "help": "Title text for the popup image",
                 "translatable": true
               },
               "_classes": {
@@ -208,7 +207,7 @@
                 "title": "Classes",
                 "inputType": "Text",
                 "validators": [],
-                "help": ""
+                "help": "Allows you to specify custom CSS classes to be applied to the popup item"
               }
             }
           },
