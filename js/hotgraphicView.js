@@ -13,7 +13,6 @@ define([
 
         initialize: function() {
             ComponentView.prototype.initialize.call(this);
-            _.bindAll(this, 'inview');
             this.setUpViewData();
             this.setUpModelData();
             this.setUpEventListeners();
@@ -129,32 +128,7 @@ define([
             this.renderState();
             this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
 
-            this.setUpInviewListener();
-        },
-
-        setUpInviewListener: function() {
-            if (this.model.get('_setCompletionOn') === 'inview') {
-                this.$('.component-widget').on('inview', this.inview);
-            }
-        },
-
-        inview: function(event, visible, visiblePartX, visiblePartY) {
-            if (!visible) return;
-
-            if (visiblePartY === 'top') {
-                this._isVisibleTop = true;
-            } else if (visiblePartY === 'bottom') {
-                this._isVisibleBottom = true;
-            } else {
-                this._isVisibleTop = true;
-                this._isVisibleBottom = true;
-            }
-
-            var wasAllInview = (this._isVisibleTop && this._isVisibleBottom);
-            if (!wasAllInview) return;
-
-            this.removeInviewListener();
-            this.setCompletionStatus();
+            this.setupInviewCompletion('.component-widget');
         },
 
         onPinClicked: function (event) {
@@ -192,17 +166,6 @@ define([
         onPopupClosed: function() {
             this.model.getActiveItem().toggleActive();
             this._isPopupOpen = false;
-        },
-
-        remove: function() {
-            this.removeInviewListener();
-            ComponentView.prototype.remove.apply(this, arguments);
-        },
-
-        removeInviewListener: function() {
-            if (this.model.get('_setCompletionOn') === 'inview') {
-                this.$('.component-widget').off('inview');
-            }
         }
 
     });
