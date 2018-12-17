@@ -125,7 +125,6 @@ define([
         },
 
         postRender: function() {
-            this.renderState();
             this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
