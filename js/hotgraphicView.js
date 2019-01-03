@@ -8,7 +8,7 @@ define([
   var HotGraphicView = ComponentView.extend({
 
     events: {
-      'click .hotgraphic-graphic-pin': 'onPinClicked'
+      'click .js-hotgraphic-pin-click': 'onPinClicked'
     },
 
     initialize: function() {
@@ -50,7 +50,7 @@ define([
 
       var model = this.prepareNarrativeModel();
       var newNarrative = new NarrativeView({ model: model });
-      var $container = $(".component-container", $("." + this.model.get("_parentId")));
+      var $container = $(".component__container", $("." + this.model.get("_parentId")));
 
       newNarrative.reRender();
       newNarrative.setupNarrative();
@@ -86,12 +86,12 @@ define([
     },
 
     onItemsActiveChange: function(model, _isActive) {
-      this.getItemElement(model).toggleClass('active', _isActive);
+      this.getItemElement(model).toggleClass('is-active', _isActive);
     },
 
     getItemElement: function(model) {
       var index = model.get('_index');
-      return this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]');
+      return this.$('.hotgraphic__graphic-pin').filter('[data-index="' + index + '"]');
     },
 
     onItemsVisitedChange: function(model, _isVisited) {
@@ -104,7 +104,7 @@ define([
         return val + " " + visitedLabel;
       });
 
-      $pin.addClass('visited');
+      $pin.addClass('is-visited');
     },
 
     checkIfResetOnRevisit: function() {
@@ -126,9 +126,9 @@ define([
 
     postRender: function() {
       this.renderState();
-      this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
+      this.$('.hotgraphic__widget').imageready(this.setReadyStatus.bind(this));
       if (this.model.get('_setCompletionOn') === 'inview') {
-        this.setupInviewCompletion('.component-widget');
+        this.setupInviewCompletion('.component__widget');
       }
     },
 
