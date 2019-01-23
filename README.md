@@ -95,4 +95,4 @@ When viewport size changes to the smallest range, this component will behave lik
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA   
 **RTL support:** yes  
-**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE 11, IE Mobile 11, Safari 10+11 for macOS+iOS, Opera   
+**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE 11, IE Mobile 11, Safari 11+12 for macOS+iOS, Opera   
