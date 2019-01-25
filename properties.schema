@@ -47,9 +47,15 @@
           "type": "string",
           "required": false,
           "default": "",
-          "inputType": "Asset:image",
+          "inputType": "AssetItem",
           "validators": [],
-          "help": "This is the image that appears behind the pins"
+          "help": "This is the image that appears behind the pins",
+          "editorAttrs": {
+          	"data-items": "_items",
+          	"data-topAttribute": "_top",
+          	"data-leftAttribute": "_left",
+          	"data-precision": 2
+          }
         },
         "alt": {
           "type": "string",
