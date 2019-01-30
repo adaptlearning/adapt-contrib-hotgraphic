@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-hotgraphic",
-  "version": "3.0.1",
-  "framework": ">=3.2",
+  "version": "4.0.0",
+  "framework": ">=3.3",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
   "description": "A component that enables a user to click on pins over an image to display more detail in a popup",
