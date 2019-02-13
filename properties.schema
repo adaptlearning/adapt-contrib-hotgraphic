@@ -47,15 +47,15 @@
           "type": "string",
           "required": false,
           "default": "",
-          "inputType": "AssetItem",
+          "inputType": {
+            "type": "AssetItem",
+            "items": "_items",
+            "topAttribute": "_top",
+            "leftAttribute": "_left",
+            "precision": 2
+          },
           "validators": [],
-          "help": "This is the image that appears behind the pins",
-          "editorAttrs": {
-          	"data-items": "_items",
-          	"data-topAttribute": "_top",
-          	"data-leftAttribute": "_left",
-          	"data-precision": 2
-          }
+          "help": "This is the image that appears behind the pins"
         },
         "alt": {
           "type": "string",
