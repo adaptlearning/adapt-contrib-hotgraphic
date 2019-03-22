@@ -1,0 +1,33 @@
+.hotgraphic {
+  // --------------------------------------------------
+  // Pop up toolbar
+  // --------------------------------------------------
+  &__popup-controls.disabled {
+    visibility: hidden;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Hotgraphic pop up icons
+  // --------------------------------------------------
+  &__popup-controls.back .icon {
+    .icon-controls-small-left;
+  }
+
+  &__popup-controls.next .icon {
+    .icon-controls-small-right;
+  }
+
+  &__popup-close .icon {
+    .icon-cross;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Hide the items that are not currently active and being viewed
+  // --------------------------------------------------
+  &__item:not(.is-active) {
+    .u-display-none;
+  }
+  // --------------------------------------------------
+}
