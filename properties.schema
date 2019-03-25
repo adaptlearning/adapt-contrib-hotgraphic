@@ -217,10 +217,34 @@
                 "type": "string",
                 "required": false,
                 "default": "",
-                "title": "Classes",
+                "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
                 "help": "Allows you to specify custom CSS classes to be applied to the popup item"
+              }
+            }
+          },
+          "_pin": {
+            "type": "object",
+            "required": false,
+            "title": "Item Pin",
+            "properties": {
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "help": "The pin image leave blank for default"
+              },
+              "alt": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Alternative text for this image",
+                "translatable": true
               }
             }
           },
@@ -228,7 +252,7 @@
             "type": "string",
             "required": false,
             "default": "",
-            "title": "Classes",
+            "title": "Pin Classes",
             "inputType": "Text",
             "validators": [],
             "help": ""
