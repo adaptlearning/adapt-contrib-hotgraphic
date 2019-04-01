@@ -3,17 +3,17 @@
   <div class="hotgraphic-item component-item clearfix {{#if _isVisited}}visited{{/if}} {{#if _isActive}}active{{/if}} {{_classes}}" data-index={{@index}}>
     <div class="hotgraphic-item-content">
       <div class="hotgraphic-item-content-inner">
-      <div class="hotgraphic-content-title" {{a11y_attrs_heading 'componentItem'}}>
-        {{{title}}}
-      </div>
-      <div class="hotgraphic-content-body">
-        {{{compile body}}}
-      </div>
+        <div class="hotgraphic-content-title" {{a11y_attrs_heading 'componentItem'}}>
+          {{{title}}}
+        </div>
+        <div class="hotgraphic-content-body">
+          {{{compile body}}}
+        </div>
       </div>
     </div>
     <div class="hotgraphic-item-graphic">
       <div class="hotgraphic-item-graphic-inner">
-      <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}"/>
+        <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}"/>
       </div>
       {{#if _graphic.attribution}}
       <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
