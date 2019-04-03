@@ -235,7 +235,7 @@
                 "default": "",
                 "inputType": "Asset:image",
                 "validators": [] ,
-                "help": "The pin image leave blank for default"
+                "help": "This is the pin image, leave blank for default"
               },
               "alt": {
                 "type": "string",
