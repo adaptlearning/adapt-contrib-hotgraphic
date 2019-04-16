@@ -46,7 +46,7 @@ guide the learner’s interaction with the component.
 
 **_setCompletionOn** (string): This value determines when the component registers as complete. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.  
 
-**_useGraphicsAsPins** (boolean): When set to 'true', graphics image specified under attribute **_graphic** of **_items** attribute will appear as pins. The default is `false`.
+**_useGraphicsAsPins** (boolean): If set to `true`, the image specified by **_graphic.src** will be ignored and the popup images specified in **_items[n]._graphic.src** will instead be laid out in a grid system as defined by the classes in hotgraphic.less. See [example.json](example.json#L74-L161) for a working example. The default is `false`.
 
 **_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
@@ -72,11 +72,15 @@ guide the learner’s interaction with the component.
 
 >>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
 
->>**alt** (string): This text becomes the image’s `alt` attribute.   
+>>**alt** (string): This text becomes the image’s `alt` attribute.
 
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.
 
+>>**_classes** (string): Allows you to specify custom CSS classes to be applied to the popup item.
+
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
+
+>**_classes** (string): Used to specify custom CSS classes to be applied to the popup item. If _useGraphicsAsPins is true, used to specify the layout using the 'rows' and 'cols' classes defined in hotgraphic.less.
 
 >**_top** (number): Each hot spot must contain **_top** and **_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
