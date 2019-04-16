@@ -62,9 +62,11 @@ guide the learner’s interaction with the component.
 
 >**title** (string): This text becomes the image’s `title` attribute.  
 
-**_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body** and **_graphic**.
+**_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body**, **_graphic** and **_pin**.
 
 >**title** (string): This is the title text for a hot spot pop-up.
+
+>**_ariaLevel** (number): Aria level for the title.
 
 >**body** (string): This is the main text for a hot spot pop-up.
 
@@ -77,6 +79,14 @@ guide the learner’s interaction with the component.
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.
 
 >>**_classes** (string): Allows you to specify custom CSS classes to be applied to the popup item.
+
+>>**title** (string): Title text for the graphic image.
+
+>**_pin** (string): Optional image that can appear instead of the default pin icon. It contains values for **src** and **alt**. 
+
+>>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
+
+>>**alt** (string): This text becomes the pin image’s `alt` attribute. 
 
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
 
@@ -96,7 +106,7 @@ When viewport size changes to the smallest range, this component will behave lik
 
 
 ----------------------------
-**Version number:**  4.1.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Version number:**  4.2.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
 **Framework versions:**  3.3+   
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA   
