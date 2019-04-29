@@ -28,12 +28,11 @@ define([
         },
 
         applyNavigationClasses: function (index) {
-            var itemCount = this.model.get('_items').length;
-            var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
-
-            var shouldEnableBack = index > 0 || canCycleThroughPagination;
-            var shouldEnableNext = index < itemCount - 1 || canCycleThroughPagination;
-            var $controls = this.$('.hotgraphic-popup-controls');
+            var itemCount = this.model.get('_items').length,
+                canCycleThroughPagination = this.model.get('_canCycleThroughPagination'),
+                shouldEnableBack = index > 0 || canCycleThroughPagination,
+                shouldEnableNext = index < itemCount - 1 || canCycleThroughPagination,
+                $controls = this.$('.hotgraphic-popup-controls');
 
             this.$('hotgraphic-popup-nav')
                 .toggleClass('first', !shouldEnableBack)
@@ -99,8 +98,8 @@ define([
         onControlClick: function(event) {
             event.preventDefault();
 
-            var direction = $(event.currentTarget).hasClass('back') ? 'back' : 'next';
-            var index = this.getNextIndex(direction);
+            var direction = $(event.currentTarget).hasClass('back') ? 'back' : 'next',
+                index = this.getNextIndex(direction);
 
             if (index !== -1) {
                 this.setItemState(index);
@@ -108,8 +107,8 @@ define([
         },
 
         getNextIndex: function(direction) {
-            var index = this.model.getActiveItem().get('_index');
-            var lastIndex = this.model.get('_items').length - 1;
+            var index = this.model.getActiveItem().get('_index'),
+                lastIndex = this.model.get('_items').length - 1;
 
             switch (direction) {
                 case 'back':

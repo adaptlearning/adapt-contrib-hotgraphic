@@ -46,11 +46,10 @@ define([
         },
 
         replaceWithNarrative: function() {
-            var NarrativeView = Adapt.getViewClass('narrative');
-
-            var model = this.prepareNarrativeModel();
-            var newNarrative = new NarrativeView({ model: model });
-            var $container = $(".component-container", $("." + this.model.get("_parentId")));
+            var NarrativeView = Adapt.getViewClass('narrative'),
+                model = this.prepareNarrativeModel(),
+                newNarrative = new NarrativeView({ model: model }),
+                $container = $(".component-container", $("." + this.model.get("_parentId")));
 
             newNarrative.reRender();
             newNarrative.setupNarrative();
