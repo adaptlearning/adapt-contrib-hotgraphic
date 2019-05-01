@@ -1,16 +1,8 @@
 <div class="hotgraphic-inner component-inner">
   {{> component this}}
-  <div class="hotgraphic-widget component-widget {{#if _useGraphicsAsPins}}tile{{else}}pin{{/if}}">
+  <div class="hotgraphic-widget component-widget {{#unless _useGraphicsAsPins}}pin{{else}}tile{{/unless}}">
     <div class="hotgraphic-graphic"{{#unless _useGraphicsAsPins}} role="list"{{/unless}}>
-      {{#if _useGraphicsAsPins}}
-        <div class="hotgraphic-narrative" role="list">
-          {{#each _items}}
-          <button role="listitem" class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
-            <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
-          </button>
-          {{/each}}
-        </div>
-      {{else}}
+      {{#unless _useGraphicsAsPins}}
         <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" />
         {{#if _graphic.attribution}}
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
@@ -26,7 +18,15 @@
             {{/if}}
           </button>
         {{/each}}
-      {{/if}}
+      {{else}}
+        <div class="hotgraphic-narrative" role="list">
+          {{#each _items}}
+            <button role="listitem" class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+              <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
+            </button>
+          {{/each}}
+        </div>
+      {{/unless}}
     </div>
   </div>
 </div>
