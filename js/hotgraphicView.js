@@ -129,6 +129,26 @@ define([
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
             }
+            this.setuptTooltips();
+        },
+
+        setuptTooltips: function() {
+            var tooltipConfig = this.model.get('_tooltips');
+            if (!tooltipConfig._isEnabled) return;
+
+            var items = this.model.get('_items');
+            items.forEach(function(item) {
+                var tooltipElement =  this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0];
+                var position = this.setTooltipPosition(item);
+                $(tooltipElement).css(position);
+            }, this);
+        },
+
+        setTooltipPosition: function(item) {
+            return {
+                'top': item._top + '%',
+                'left': item._left + '%'
+            }
         },
 
         onPinClicked: function (event) {
