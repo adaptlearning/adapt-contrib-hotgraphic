@@ -138,33 +138,41 @@ define([
 
             var items = this.model.get('_items');
             items.forEach(function(item) {
-                var tooltipElement =  this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0];
-                this.setTooltipPosition(tooltipConfig, tooltipElement, item);
-                this.setTooltipEventListener(tooltipConfig, tooltipElement, item._index);
+                var config = {
+                    tooltipConfig: tooltipConfig,
+                    tooltipElement: this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0],
+                    pinElement: this.$('.hotgraphic-graphic-pin').filter('[data-index="' + item._index + '"]')[0],
+                    item: item
+                }
+                this.setTooltipPosition(config);
+                this.setTooltipEventListener(config);
             }, this);
         },
 
-        setTooltipPosition: function(tooltipConfig, tooltipElement, item) {
-
+        setTooltipPosition: function(config) {
+            /*
+             * Find position & dimensions of .hotgraphic-graphic-pin
+             * Determine position properties as defined in JSON
+             * Check if there is space for the tooltip in the preferred position, else switch to opposite side
+             * Set position with appropriate margin to seperate from the pin.
+             */
             var position = {
-                'top': item._top + '%',
-                'left': item._left + '%'
+                'top': config.item._top + '%',
+                'left': config.item._left + '%'
             }
-            $(tooltipElement).css(position);
+            $(config.tooltipElement).css(position);
         },
 
-        setTooltipEventListener: function(tooltipConfig, tooltipElement, index) {
-            if (!tooltipConfig._showOnlyOnHover) {
-                $(tooltipElement).css('visibility', 'visible');
+        setTooltipEventListener: function(config) {
+            if (!config.tooltipConfig._showOnlyOnHover) {
+                $(config.tooltipElement).css('visibility', 'visible');
                 return;
             }
 
-            var pinElement = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]')[0];
-
-            $(pinElement).hover(function() {
-                $(tooltipElement).css('visibility', 'visible');
+            $(config.pinElement).hover(function() {
+                $(config.tooltipElement).css('visibility', 'visible');
             }, function() {
-                $(tooltipElement).css('visibility', 'hidden');
+                $(config.tooltipElement).css('visibility', 'hidden');
             });
         },
 
