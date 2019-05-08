@@ -50,7 +50,7 @@ guide the learner’s interaction with the component.
 
 **_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.
 
-**_useGraphicsAsPins** (boolean): When set to `true`, the main graphic will be hidden and item pins will be displayed as images which can be positioned using classes. The default is `false`.
+**_useGraphicsAsPins** (boolean): If set to `true`, the image specified by **_graphic.src** will be ignored and the popup images specified in **_items[n]._graphic.src** will instead be laid out in a grid system as defined by the classes in hotgraphic.less. See [example.json](example.json#L74-L161) for a working example. The default is `false`.
 
 **_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
 
