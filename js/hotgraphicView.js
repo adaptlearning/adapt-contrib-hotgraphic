@@ -125,11 +125,25 @@ define([
         },
 
         postRender: function() {
-            this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
+            // this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
+            // this.$('.hotgraphic-widget').imageready(this.setupTooltips.bind(this));
+
+            //this.$('.hotgraphic-widget').imageready(imageReadyCallback.bind(this))
+
+            this.$('.hotgraphic-widget').imageready(function() {
+                this.setReadyStatus();
+                this.setupTooltips();
+            }.bind(this))
+
+
+            function imageReadyCallback() {
+                this.setReadyStatus();
+                this.setupTooltips();
+            }
+
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
             }
-            this.setupTooltips();
         },
 
         setupTooltips: function() {
@@ -156,10 +170,37 @@ define([
              * Check if there is space for the tooltip in the preferred position, else switch to opposite side
              * Set position with appropriate margin to seperate from the pin.
              */
+
+
+            var pinElement = $(config.pinElement);
+            var tooltipElement = $(config.tooltipElement);
+            var parentElement = $('.hotgraphic-graphic');
+            var margin = 5;
+
+            var pinDimensions = {
+                height: pinElement.height(),
+                width: pinElement.width(),
+                top: pinElement.position().top,
+                left: pinElement.position().left,
+                Xcentre: pinElement.position().left + (pinElement.width() / 2),
+                Ycentre: pinElement.position().top + (pinElement.height() / 2)
+            };
+
+            var tooltipDimensions = {
+                height: tooltipElement.height(),
+                width: tooltipElement.width()
+            };
+
+            var parentDimensions = {
+                height: parentElement.height(),
+                width: parentElement.width()
+            };
+
             var position = {
-                'top': config.item._top + '%',
-                'left': config.item._left + '%'
+                top: pinDimensions.Ycentre - (tooltipDimensions.height / 2),
+                left: pinDimensions.Xcentre - (tooltipDimensions.width / 2)
             }
+
             $(config.tooltipElement).css(position);
         },
 
