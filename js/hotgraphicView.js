@@ -129,26 +129,39 @@ define([
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
             }
-            this.setuptTooltips();
+            this.setupTooltips();
         },
 
-        setuptTooltips: function() {
+        setupTooltips: function() {
             var tooltipConfig = this.model.get('_tooltips');
-            if (!tooltipConfig._isEnabled) return;
+            if (!tooltipConfig || !tooltipConfig._isEnabled) return;
 
             var items = this.model.get('_items');
             items.forEach(function(item) {
                 var tooltipElement =  this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0];
-                var position = this.setTooltipPosition(item);
-                $(tooltipElement).css(position);
+                this.setTooltipPosition(tooltipElement, item);
+                this.setTooltipEventListener(tooltipElement, item._index);
             }, this);
         },
 
-        setTooltipPosition: function(item) {
-            return {
+        setTooltipPosition: function(tooltipElement, item) {
+            var tooltipConfig = this.model.get('_tooltips');
+
+            var position = {
                 'top': item._top + '%',
                 'left': item._left + '%'
             }
+            $(tooltipElement).css(position);
+        },
+
+        setTooltipEventListener: function(tooltipElement, index) {
+            var pinElement = this.$('.hotgraphic-graphic-pin').filter('[data-index="' + index + '"]')[0];
+
+            $(pinElement).hover(function() {
+                $(tooltipElement).css('visibility', 'visible');
+            }, function() {
+                $(tooltipElement).css('visibility', 'hidden');
+            });
         },
 
         onPinClicked: function (event) {
