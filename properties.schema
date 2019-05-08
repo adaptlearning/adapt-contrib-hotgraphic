@@ -220,7 +220,7 @@
                 "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Allows you to specify custom CSS classes to be applied to the popup item"
+                "help": "Allows you to specify positioning classes for when this component is in 'graphics as pins' mode"
               }
             }
           },
@@ -252,10 +252,10 @@
             "type": "string",
             "required": false,
             "default": "",
-            "title": "Pin Classes",
+            "title": "Item Popup Classes",
             "inputType": "Text",
             "validators": [],
-            "help": ""
+            "help": "Allows you to specify custom CSS classes to be applied to the popup item"
           },
           "_left": {
             "type": "number",
