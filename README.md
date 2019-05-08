@@ -48,7 +48,9 @@ guide the learner’s interaction with the component.
   
 **_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
-**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
+**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.
+
+**_useGraphicsAsPins** (boolean): When set to `true`, the main graphic will be hidden and item pins will be displayed as images which can be positioned using classes. The default is `false`.
 
 **_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
 
@@ -78,6 +80,8 @@ guide the learner’s interaction with the component.
 
 >>**title** (string): Title text for the graphic image.
 
+>>**_classes** (string): CSS class name to be applied to the `hotgraphic-graphic-pin` element when component is in **_useGraphicsAsPins** mode. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+
 >**_pin** (string): Optional image that can appear instead of the default pin icon. It contains values for **src** and **alt**. 
 
 >>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
@@ -85,6 +89,8 @@ guide the learner’s interaction with the component.
 >>**alt** (string): This text becomes the pin image’s `alt` attribute. 
 
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
+
+>**_classes** (string): CSS class name to be applied to the hot spot popup item. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
 >**_top** (number): Each hot spot must contain **_top** and **_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
