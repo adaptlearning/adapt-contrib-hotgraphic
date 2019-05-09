@@ -168,14 +168,14 @@ define([
             };
 
             config.centrePosition = this.getTooltipCentrePosition(config);
-            config.alignedPosition = this.getTooltipAlignedPosition(config);
+            var alignedPosition = this.getTooltipAlignedPosition(config);
 
             if (!this.checkTooltipWithinBounds(config)) {
                 var newAlignment = directionOpposites[config.tooltipConfig._alignment];
-                config.alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
+                alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
             }
 
-            $(config.tooltipElement).css(config.alignedPosition);
+            $(config.tooltipElement).css(alignedPosition);
         },
 
         getTooltipCentrePosition: function(config) {
