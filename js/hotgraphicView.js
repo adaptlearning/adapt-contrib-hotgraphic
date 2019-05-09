@@ -125,21 +125,10 @@ define([
         },
 
         postRender: function() {
-            // this.$('.hotgraphic-widget').imageready(this.setReadyStatus.bind(this));
-            // this.$('.hotgraphic-widget').imageready(this.setupTooltips.bind(this));
-
-            //this.$('.hotgraphic-widget').imageready(imageReadyCallback.bind(this))
-
             this.$('.hotgraphic-widget').imageready(function() {
                 this.setReadyStatus();
                 this.setupTooltips();
             }.bind(this))
-
-
-            function imageReadyCallback() {
-                this.setReadyStatus();
-                this.setupTooltips();
-            }
 
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
@@ -171,37 +160,58 @@ define([
              * Set position with appropriate margin to seperate from the pin.
              */
 
+            config.centrePosition = this.getTooltipCentrePosition(config);
+            config.alignedPosition = this.getTooltipAlignedPosition(config);
 
-            var pinElement = $(config.pinElement);
-            var tooltipElement = $(config.tooltipElement);
             var parentElement = $('.hotgraphic-graphic');
-            var margin = 5;
-
-            var pinDimensions = {
-                height: pinElement.height(),
-                width: pinElement.width(),
-                top: pinElement.position().top,
-                left: pinElement.position().left,
-                Xcentre: pinElement.position().left + (pinElement.width() / 2),
-                Ycentre: pinElement.position().top + (pinElement.height() / 2)
-            };
-
-            var tooltipDimensions = {
-                height: tooltipElement.height(),
-                width: tooltipElement.width()
-            };
 
             var parentDimensions = {
                 height: parentElement.height(),
                 width: parentElement.width()
             };
 
-            var position = {
-                top: pinDimensions.Ycentre - (tooltipDimensions.height / 2),
-                left: pinDimensions.Xcentre - (tooltipDimensions.width / 2)
+            $(config.tooltipElement).css(config.alignedPosition);
+        },
+
+        getTooltipCentrePosition: function(config) {
+            var pinElement = $(config.pinElement);
+            var tooltipElement = $(config.tooltipElement);
+            var xCentre = pinElement.position().left + (pinElement.width() / 2);
+            var yCentre = pinElement.position().top + (pinElement.height() / 2);
+
+            return {
+                top: yCentre - (tooltipElement.height() / 2),
+                left: xCentre - (tooltipElement.width() / 2)
+            }
+        },
+
+        getTooltipAlignedPosition: function(config) {
+            var alignment = config.tooltipConfig._alignment || 'top';
+            var margin = config.tooltipConfig._margin || 0;
+            var pinElement = $(config.pinElement);
+            var tooltipElement = $(config.tooltipElement);
+            var alignedPosition = {};
+
+            switch(alignment) {
+                case 'left':
+                    alignedPosition.top = config.centrePosition.top;
+                    alignedPosition.left = config.centrePosition.left - (tooltipElement.width() / 2) - (pinElement.width() / 2) - margin;
+                    break;
+                case 'top':
+                    alignedPosition.top = config.centrePosition.top - (tooltipElement.height() / 2) - (pinElement.height() / 2) - margin;
+                    alignedPosition.left = config.centrePosition.left;
+                    break;
+                case 'right':
+                    alignedPosition.top = config.centrePosition.top;
+                    alignedPosition.left = config.centrePosition.left + (tooltipElement.width() / 2) + (pinElement.width() / 2) + margin;
+                    break;
+                case 'bottom':
+                    alignedPosition.top = config.centrePosition.top + (tooltipElement.height() / 2) + (pinElement.height() / 2) + margin;
+                    alignedPosition.left = config.centrePosition.left;
+                    break;
             }
 
-            $(config.tooltipElement).css(position);
+            return alignedPosition;
         },
 
         setTooltipEventListener: function(config) {
