@@ -50,7 +50,7 @@ guide the learner’s interaction with the component.
 
 **_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
 
-**_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt**.
+**_graphic** (string): The main image that appears below the hot spots. It contains values for **src** and **alt**.
 
 >**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
 
