@@ -160,15 +160,23 @@ define([
              * Set position with appropriate margin to seperate from the pin.
              */
 
+            var directionOpposites = {
+                left: 'right',
+                top: 'bottom',
+                right: 'left',
+                bottom: 'top'
+            }
+
             config.centrePosition = this.getTooltipCentrePosition(config);
             config.alignedPosition = this.getTooltipAlignedPosition(config);
 
-            var parentElement = $('.hotgraphic-graphic');
+            var tooltipWithinBounds = this.checkTooltipWithinBounds(config);
+            console.log('tooltipWithinBounds = ' + tooltipWithinBounds);
 
-            var parentDimensions = {
-                height: parentElement.height(),
-                width: parentElement.width()
-            };
+            if (!tooltipWithinBounds) {
+                var newAlignment = directionOpposites[config.tooltipConfig._alignment];
+                config.alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
+            }
 
             $(config.tooltipElement).css(config.alignedPosition);
         },
@@ -185,8 +193,8 @@ define([
             }
         },
 
-        getTooltipAlignedPosition: function(config) {
-            var alignment = config.tooltipConfig._alignment || 'top';
+        getTooltipAlignedPosition: function(config, newAlignment) {
+            var alignment = newAlignment || config.tooltipConfig._alignment || 'top';
             var margin = config.tooltipConfig._margin || 0;
             var pinElement = $(config.pinElement);
             var tooltipElement = $(config.tooltipElement);
@@ -212,6 +220,32 @@ define([
             }
 
             return alignedPosition;
+        },
+
+        checkTooltipWithinBounds: function(config) {
+            var parentElement = $('.hotgraphic-graphic');
+            var tooltipElement = $(config.tooltipElement);
+            var result = [];
+            var tooltipBounds = {
+                left: config.alignedPosition.left,
+                top: config.alignedPosition.top,
+                right: config.alignedPosition.left + tooltipElement.width(),
+                bottom: config.alignedPosition.top + tooltipElement.height()
+            };
+
+            var parentElementBounds = {
+                left: 0,
+                top: 0,
+                right: parentElement.width(),
+                bottom: parentElement.height()
+            };
+
+            result.push(tooltipBounds.left > parentElementBounds.left);
+            result.push(tooltipBounds.top > parentElementBounds.top);
+            result.push(tooltipBounds.right < parentElementBounds.right);
+            result.push(tooltipBounds.bottom < parentElementBounds.bottom);
+
+            return result.every(Boolean);
         },
 
         setTooltipEventListener: function(config) {
