@@ -206,7 +206,6 @@
                 "src": "image1.jpg",
                 "alt": "alt text",
                 "attribution": "Copyright © 2015",
-                "title": "",
                 "_classes": "graphic-class"
             },
             "_pin": {
@@ -226,7 +225,6 @@
                 "src": "image2.jpg",
                 "alt": "alt text",
                 "attribution": "Copyright © 2015",
-                "title": "",
                 "_classes": "graphic-class"
             },
             "_pin": {

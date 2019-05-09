@@ -204,15 +204,6 @@
                 "help": "Text to be displayed as an attribution for the popup image",
                 "translatable": true
               },
-              "title": {
-                "type": "string",
-                "required": true,
-                "default": "",
-                "inputType": "Text",
-                "validators": [],
-                "help": "Title text for the popup image",
-                "translatable": true
-              },
               "_classes": {
                 "type": "string",
                 "required": false,
