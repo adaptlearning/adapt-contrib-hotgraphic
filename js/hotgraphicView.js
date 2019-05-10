@@ -229,7 +229,8 @@ define([
         },
 
         setTooltipEventListener: function(config) {
-            if (!config.tooltipConfig._showOnlyOnHover) {
+            var alwaysShow = !config.tooltipConfig._showOnlyOnHover || Adapt.device.touch;
+            if (alwaysShow) {
                 $(config.tooltipElement).css('visibility', 'visible');
                 return;
             }
