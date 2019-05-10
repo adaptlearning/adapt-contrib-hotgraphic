@@ -1,74 +1,80 @@
 // Regular hotgraphic
 
 {
-    "_id": "c-40",
+    "_id": "c-05",
     "_parentId": "b-05",
-    "_classes": "",
     "_type": "component",
     "_component": "hotgraphic",
+    "_classes": "",
     "_layout": "full",
-    "title": "Hot graphic",
-    "displayTitle": "Hot graphic",
-    "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
-    "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-    "instruction": "",
-    "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
+    "_comment": "setCompletionOn = inview | allItems",
     "_setCompletionOn": "allItems",
-    "_useGraphicsAsPins": false,
     "_canCycleThroughPagination": false,
     "_hidePagination": false,
+    "_useGraphicsAsPins": false,
+    "title": "Hot Graphic",
+    "displayTitle": "Hot Graphic",
+    "body": "You can add interactivity to an image by using the <strong>hot graphic</strong>. This component allows you to position icons over an image. When an icon is selected, content associated with its corresponding location is displayed in a window over the image. This component will fall back to a <strong>narrative</strong> when viewed on mobile.<br><br>This component is always spanned.",
+    "instruction": "Select the icons to find out more.",
+    "mobileInstruction": "",
     "_graphic": {
-      "src": "hot_graphic.jpg",
-      "alt": "alt text",
-      "attribution": "Copyright © 2015"
+        "src": "course/en/images/full_width.jpg",
+        "alt": "Placeholder graphic."
     },
     "_items": [
         {
-            "title": "Hotspot 1 title",
-            "body": "This is display text 1.",
+            "title": "Hot graphic item 1",
+            "body": "This is display text 1 which we have associated with the tablet image on the desktop.",
             "_graphic": {
-                "src": "image1.jpg",
-                "alt": "alt text",
-                "attribution": "Copyright © 2015",
+                "src": "course/en/images/single_width_small.jpg",
+                "alt": "Placeholder graphic.",
                 "_classes": ""
             },
-            "pinAlt": "alt text",
-            "strapline": "strapline...",
-            "_classes": "top-left",
-            "_top": 5,
-            "_left": 20
+            "strapline": "Hot graphic item 1",
+            "_classes": "",
+            "_top": 42,
+            "_left": 8.5,
+            "tooltip": "Tooltip for item 1"
         },
         {
-            "title": "Hotspot 2 title",
-            "body": "This is display text 2.",
+            "title": "Hot graphic item 2",
+            "body": "This is display text 2 which we have linked to the smartphone image.",
             "_graphic": {
-                "src": "image2.jpg",
-                "alt": "alt text",
-                "attribution": "Copyright © 2015",
+                "src": "course/en/images/single_width_small.jpg",
+                "alt": "Placeholder graphic.",
                 "_classes": ""
             },
-            "pinAlt": "alt text",
-            "strapline": "strapline...",
-            "_classes": "center",
-            "_top": 25,
-            "_left": 60
+            "strapline": "Hot graphic item 2",
+            "_classes": "",
+            "_top": 62,
+            "_left": 26.5,
+            "tooltip": "Tooltip for item 2"
         },
         {
-            "title": "Hotspot 3 title",
-            "body": "This is display text 3.",
+            "title": "Hot graphic item 3",
+            "body": "This is display text 3 which we’ve located over the laptop so you would expect the content to be about PCs.",
             "_graphic": {
-                "src": "image3.jpg",
-                "alt": "alt text",
-                "attribution": "Copyright © 2015",
+                "src": "course/en/images/single_width_small.jpg",
+                "alt": "Placeholder graphic.",
                 "_classes": ""
             },
-            "pinAlt": "alt text",
-            "strapline": "strapline...",
-            "_classes": "bottom-right",
-            "_top": 85,
-            "_left": 40
+            "strapline": "Hot graphic item 3",
+            "_classes": "",
+            "_top": 62,
+            "_left": 49,
+            "tooltip": "Tooltip for item 3"
         }
-    ]
+    ],
+    "_tooltips": {
+        "_isEnabled": true,
+        "_showOnlyOnHover": true,
+        "_alignment": "top",
+        "_margin": 5
+    },
+    "_pageLevelProgress": {
+        "_isEnabled": true,
+        "_isCompletionIndicatorEnabled": true
+    }
 }
 
 // Example using graphics as pins

@@ -153,13 +153,6 @@ define([
         },
 
         setTooltipPosition: function(config) {
-            /*
-             * Find position & dimensions of .hotgraphic-graphic-pin
-             * Determine position properties as defined in JSON
-             * Check if there is space for the tooltip in the preferred position, else switch to opposite side
-             * Set position with appropriate margin to seperate from the pin.
-             */
-
             var directionOpposites = {
                 left: 'right',
                 top: 'bottom',
@@ -168,14 +161,14 @@ define([
             };
 
             config.centrePosition = this.getTooltipCentrePosition(config);
-            var alignedPosition = this.getTooltipAlignedPosition(config);
+            config.alignedPosition = this.getTooltipAlignedPosition(config);
 
             if (!this.checkTooltipWithinBounds(config)) {
-                var newAlignment = directionOpposites[config.tooltipConfig._alignment];
-                alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
+                config.newAlignment = directionOpposites[config.tooltipConfig._alignment];
+                config.alignedPosition = this.getTooltipAlignedPosition(config);
             }
 
-            $(config.tooltipElement).css(alignedPosition);
+            $(config.tooltipElement).css(config.alignedPosition);
         },
 
         getTooltipCentrePosition: function(config) {
@@ -190,29 +183,33 @@ define([
             }
         },
 
-        getTooltipAlignedPosition: function(config, newAlignment) {
-            var alignment = newAlignment || config.tooltipConfig._alignment || 'top';
+        getTooltipAlignedPosition: function(config) {
+            var alignment = config.newAlignment || config.tooltipConfig._alignment || 'top';
             var margin = config.tooltipConfig._margin || 0;
             var pinElement = $(config.pinElement);
             var tooltipElement = $(config.tooltipElement);
-            var alignedPosition = {};
+            var xTooltip = tooltipElement.width() / 2;
+            var yTooltip = tooltipElement.height() / 2;
+            var xPin = pinElement.width() / 2;
+            var yPin = pinElement.height() / 2;
+
+            var alignedPosition = {
+                top: config.centrePosition.top,
+                left: config.centrePosition.left
+            };
 
             switch(alignment) {
                 case 'left':
-                    alignedPosition.top = config.centrePosition.top;
-                    alignedPosition.left = config.centrePosition.left - (tooltipElement.width() / 2) - (pinElement.width() / 2) - margin;
+                    alignedPosition.left = config.centrePosition.left - xTooltip - xPin - margin;
                     break;
                 case 'top':
-                    alignedPosition.top = config.centrePosition.top - (tooltipElement.height() / 2) - (pinElement.height() / 2) - margin;
-                    alignedPosition.left = config.centrePosition.left;
+                    alignedPosition.top = config.centrePosition.top - yTooltip - yPin - margin;
                     break;
                 case 'right':
-                    alignedPosition.top = config.centrePosition.top;
-                    alignedPosition.left = config.centrePosition.left + (tooltipElement.width() / 2) + (pinElement.width() / 2) + margin;
+                    alignedPosition.left = config.centrePosition.left + xTooltip + xPin + margin;
                     break;
                 case 'bottom':
-                    alignedPosition.top = config.centrePosition.top + (tooltipElement.height() / 2) + (pinElement.height() / 2) + margin;
-                    alignedPosition.left = config.centrePosition.left;
+                    alignedPosition.top = config.centrePosition.top + yTooltip + yPin + margin;
                     break;
             }
 
