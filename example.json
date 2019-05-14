@@ -21,6 +21,12 @@
         "src": "course/en/images/full_width.jpg",
         "alt": "Placeholder graphic."
     },
+    "_tooltips": {
+        "_isEnabled": true,
+        "_showOnlyOnHover": true,
+        "_alignment": "top",
+        "_margin": 5
+    },
     "_items": [
         {
             "title": "Hot graphic item 1",
@@ -65,12 +71,6 @@
             "tooltip": "Tooltip for item 3"
         }
     ],
-    "_tooltips": {
-        "_isEnabled": true,
-        "_showOnlyOnHover": true,
-        "_alignment": "top",
-        "_margin": 5
-    },
     "_pageLevelProgress": {
         "_isEnabled": true,
         "_isCompletionIndicatorEnabled": true

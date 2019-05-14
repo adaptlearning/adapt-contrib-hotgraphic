@@ -60,6 +60,16 @@ guide the learner’s interaction with the component.
 
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.  
 
+**_tooltips** (string): Enable tooltips that can be set to appear for each pin item. Content for these tooltips is defined in `_items`.
+
+>**_isEnabled** (boolean): Toggle tooltips on or off.
+
+>**_showOnlyOnHover** (boolean): Display the tooltip only when the cursor hovers over the relevant pin. If set to false, tooltips will always be displayed. For touch enabled devices, this defaults to false.
+
+>**_alignment** (string): `left, top, right, bottom` The preferred position for the tooltip, relative to the item pin. If there is not enough room within the parent `div` to display the tooltip there, it will automatically be displayed at the opposite alignment.
+
+>**_margin** (number): The margin required between the tooltip and it's associated pin.
+
 **_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body**, **_graphic** and **_pin**.
 
 >**title** (string): This is the title text for a hot spot pop-up.
@@ -91,7 +101,9 @@ guide the learner’s interaction with the component.
 
 >**_top** (number): Each hot spot must contain **_top** and **_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
->**_left** (number): Enter the number of pixels this hot spot should be from the left border of the main graphic.  
+>**_left** (number): Enter the number of pixels this hot spot should be from the left border of the main graphic.
+
+>**tooltip** (string): The text to be displayed in this item's tooltip, if enabled.
 
 ### Accessibility
 **Hot Graphic** has two elements assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion** and **ariaPoupupLabel**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema).   
