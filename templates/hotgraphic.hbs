@@ -8,6 +8,7 @@
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
         {{/if}}
         {{#each _items}}
+          {{#if tooltip}}<div class="hotgraphic-tooltip" data-index="{{@index}}">{{tooltip}}</div>{{/if}}
           <button role="listitem" class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
             {{#if _pin.src}}
               <div class="hotgraphic-graphic-pin-image item-{{@index}}">

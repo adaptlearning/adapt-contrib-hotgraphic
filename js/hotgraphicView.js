@@ -32,6 +32,7 @@ define([
 
         setUpEventListeners: function() {
             this.listenTo(Adapt, 'device:changed', this.reRender);
+            this.listenTo(Adapt, 'device:resize', this.setupTooltips);
 
             this.listenTo(this.model.get('_children'), {
                 'change:_isActive': this.onItemsActiveChange,
@@ -128,7 +129,7 @@ define([
             this.$('.hotgraphic-widget').imageready(function() {
                 this.setReadyStatus();
                 this.setupTooltips();
-            }.bind(this))
+            }.bind(this));
 
             if (this.model.get('_setCompletionOn') === 'inview') {
                 this.setupInviewCompletion('.component-widget');
@@ -139,14 +140,13 @@ define([
             var tooltipConfig = this.model.get('_tooltips');
             if (!tooltipConfig || !tooltipConfig._isEnabled) return;
 
-            var items = this.model.get('_items');
-            items.forEach(function(item) {
+            this.model.get('_items').forEach(function(item) {
                 var config = {
                     tooltipConfig: tooltipConfig,
-                    tooltipElement: this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0],
-                    pinElement: this.$('.hotgraphic-graphic-pin').filter('[data-index="' + item._index + '"]')[0],
+                    tooltipElement: $(this.$('.hotgraphic-tooltip').filter('[data-index="' + item._index + '"]')[0]),
+                    pinElement: $(this.$('.hotgraphic-graphic-pin').filter('[data-index="' + item._index + '"]')[0]),
                     item: item
-                }
+                };
                 this.setTooltipPosition(config);
                 this.setTooltipEventListener(config);
             }, this);
@@ -159,86 +159,76 @@ define([
                 right: 'left',
                 bottom: 'top'
             };
+            var alignedPosition = this.getTooltipAlignedPosition(config);
 
-            config.centrePosition = this.getTooltipCentrePosition(config);
-            config.alignedPosition = this.getTooltipAlignedPosition(config);
-
-            if (!this.checkTooltipWithinBounds(config)) {
-                config.newAlignment = directionOpposites[config.tooltipConfig._alignment];
-                config.alignedPosition = this.getTooltipAlignedPosition(config);
+            if (!this.checkTooltipWithinBounds(config, alignedPosition)) {
+                var newAlignment = directionOpposites[config.tooltipConfig._alignment];
+                alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
             }
 
-            $(config.tooltipElement).css(config.alignedPosition);
+            config.tooltipElement.css(alignedPosition);
         },
 
-        getTooltipCentrePosition: function(config) {
-            var pinElement = $(config.pinElement);
-            var tooltipElement = $(config.tooltipElement);
-            var xCentre = pinElement.position().left + (pinElement.width() / 2);
-            var yCentre = pinElement.position().top + (pinElement.height() / 2);
-
-            return {
-                top: yCentre - (tooltipElement.height() / 2),
-                left: xCentre - (tooltipElement.width() / 2)
-            }
-        },
-
-        getTooltipAlignedPosition: function(config) {
-            var alignment = config.newAlignment || config.tooltipConfig._alignment || 'top';
+        getTooltipAlignedPosition: function(config, newAlignment) {
+            var alignment = newAlignment || config.tooltipConfig._alignment || 'top';
+            var centrePosition = this.getTooltipCentrePosition(config);
             var margin = config.tooltipConfig._margin || 0;
-            var pinElement = $(config.pinElement);
-            var tooltipElement = $(config.tooltipElement);
-            var xTooltip = tooltipElement.width() / 2;
-            var yTooltip = tooltipElement.height() / 2;
-            var xPin = pinElement.width() / 2;
-            var yPin = pinElement.height() / 2;
-
-            var alignedPosition = {
-                top: config.centrePosition.top,
-                left: config.centrePosition.left
-            };
+            var xTooltip = config.tooltipElement.width() / 2;
+            var yTooltip = config.tooltipElement.height() / 2;
+            var xPin = config.pinElement.width() / 2;
+            var yPin = config.pinElement.height() / 2;
+            var alignedPosition = Object.assign({}, centrePosition);
 
             switch(alignment) {
                 case 'left':
-                    alignedPosition.left = config.centrePosition.left - xTooltip - xPin - margin;
+                    alignedPosition.left = centrePosition.left - xTooltip - xPin - margin;
                     break;
                 case 'top':
-                    alignedPosition.top = config.centrePosition.top - yTooltip - yPin - margin;
+                    alignedPosition.top = centrePosition.top - yTooltip - yPin - margin;
                     break;
                 case 'right':
-                    alignedPosition.left = config.centrePosition.left + xTooltip + xPin + margin;
+                    alignedPosition.left = centrePosition.left + xTooltip + xPin + margin;
                     break;
                 case 'bottom':
-                    alignedPosition.top = config.centrePosition.top + yTooltip + yPin + margin;
+                    alignedPosition.top = centrePosition.top + yTooltip + yPin + margin;
                     break;
             }
 
             return alignedPosition;
         },
 
-        checkTooltipWithinBounds: function(config) {
+        getTooltipCentrePosition: function(config) {
+            var yCentre = config.pinElement.position().top + (config.pinElement.height() / 2);
+            var xCentre = config.pinElement.position().left + (config.pinElement.width() / 2);
+
+            return {
+                top: yCentre - (config.tooltipElement.height() / 2),
+                left: xCentre - (config.tooltipElement.width() / 2)
+            };
+        },
+
+        checkTooltipWithinBounds: function(config, alignedPosition) {
             var parentElement = $('.hotgraphic-graphic');
-            var tooltipElement = $(config.tooltipElement);
 
             return [
-                config.alignedPosition.left > 0,
-                config.alignedPosition.top > 0,
-                config.alignedPosition.left + tooltipElement.width() < parentElement.width(),
-                config.alignedPosition.top + tooltipElement.height() < parentElement.height()
+                alignedPosition.left > 0,
+                alignedPosition.top > 0,
+                alignedPosition.left + config.tooltipElement.width() < parentElement.width(),
+                alignedPosition.top + config.tooltipElement.height() < parentElement.height()
             ].every(Boolean);
         },
 
         setTooltipEventListener: function(config) {
             var alwaysShow = !config.tooltipConfig._showOnlyOnHover || Adapt.device.touch;
             if (alwaysShow) {
-                $(config.tooltipElement).css('visibility', 'visible');
+                config.tooltipElement.css('visibility', 'visible');
                 return;
             }
 
-            $(config.pinElement).hover(function() {
-                $(config.tooltipElement).css('visibility', 'visible');
+            config.pinElement.hover(function() {
+                config.tooltipElement.css('visibility', 'visible');
             }, function() {
-                $(config.tooltipElement).css('visibility', 'hidden');
+                config.tooltipElement.css('visibility', 'hidden');
             });
         },
 
