@@ -48,12 +48,108 @@ define(function(require) {
             this.renderState();
             this.$('.hotgraphic-widget').imageready(_.bind(function() {
                 this.setReadyStatus();
+                this.setupTooltips();
             }, this));
 
             this.setupEventListeners();
         },
 
-        // Used to check if the hotgraphic should reset on revisit
+        setupTooltips: function() {
+            var tooltipConfig = this.model.get('_tooltips');
+            if (!tooltipConfig || !tooltipConfig._isEnabled) return;
+
+            this.model.get('_items').forEach(function(item, index) {
+                var config = {
+                    tooltipConfig: tooltipConfig,
+                    tooltipElement: $(this.$('.hotgraphic-tooltip')[index]),
+                    pinElement: $(this.$('.hotgraphic-graphic-pin')[index]),
+                    item: item
+                };
+                this.setTooltipPosition(config);
+                this.setTooltipEventListener(config);
+            }, this);
+        },
+
+        setTooltipPosition: function(config) {
+            var directionOpposites = {
+                left: 'right',
+                top: 'bottom',
+                right: 'left',
+                bottom: 'top'
+            };
+            var alignedPosition = this.getTooltipAlignedPosition(config);
+
+            if (!this.checkTooltipWithinBounds(config, alignedPosition)) {
+                var newAlignment = directionOpposites[config.tooltipConfig._alignment];
+                alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
+            }
+
+            config.tooltipElement.css(alignedPosition);
+        },
+
+        getTooltipAlignedPosition: function(config, newAlignment) {
+            var alignment = newAlignment || config.tooltipConfig._alignment || 'top';
+            var centrePosition = this.getTooltipCentrePosition(config);
+            var margin = config.tooltipConfig._margin || 0;
+            var xTooltip = config.tooltipElement.width() / 2;
+            var yTooltip = config.tooltipElement.height() / 2;
+            var xPin = config.pinElement.width() / 2;
+            var yPin = config.pinElement.height() / 2;
+            var alignedPosition = Object.assign({}, centrePosition);
+
+            switch(alignment) {
+                case 'left':
+                    alignedPosition.left = centrePosition.left - xTooltip - xPin - margin;
+                    break;
+                case 'top':
+                    alignedPosition.top = centrePosition.top - yTooltip - yPin - margin;
+                    break;
+                case 'right':
+                    alignedPosition.left = centrePosition.left + xTooltip + xPin + margin;
+                    break;
+                case 'bottom':
+                    alignedPosition.top = centrePosition.top + yTooltip + yPin + margin;
+                    break;
+            }
+
+            return alignedPosition;
+        },
+
+        getTooltipCentrePosition: function(config) {
+            var yCentre = config.pinElement.position().top + (config.pinElement.height() / 2);
+            var xCentre = config.pinElement.position().left + (config.pinElement.width() / 2);
+
+            return {
+                top: yCentre - (config.tooltipElement.height() / 2),
+                left: xCentre - (config.tooltipElement.width() / 2)
+            };
+        },
+
+        checkTooltipWithinBounds: function(config, alignedPosition) {
+            var parentElement = $('.hotgraphic-graphic');
+
+            return [
+                alignedPosition.left > 0,
+                alignedPosition.top > 0,
+                alignedPosition.left + config.tooltipElement.width() < parentElement.width(),
+                alignedPosition.top + config.tooltipElement.height() < parentElement.height()
+            ].every(Boolean);
+        },
+
+        setTooltipEventListener: function(config) {
+            var alwaysShow = Adapt.device.touch || !config.tooltipConfig._showOnlyOnHover;
+            if (alwaysShow) {
+                config.tooltipElement.css('visibility', 'visible');
+                return;
+            }
+
+            config.pinElement.hover(function() {
+                config.tooltipElement.css('visibility', 'visible');
+            }, function() {
+                config.tooltipElement.css('visibility', 'hidden');
+            });
+        },
+              // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
             var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
@@ -274,6 +370,7 @@ define(function(require) {
             } else {
                 this.$('.component-widget').on('inview', _.bind(this.inview, this));
             }
+            this.listenTo(Adapt, 'device:resize', this.setupTooltips);
         },
         
         setupEscapeKey: function() {

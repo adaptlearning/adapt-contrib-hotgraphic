@@ -22,6 +22,12 @@
       "alt": "alt text",
       "attribution":"Copyright © 2015"
     },
+    "_tooltips": {
+            "_isEnabled": true,
+            "_showOnlyOnHover": true,
+            "_alignment": "left",
+            "_margin": 30
+    },
     "_items": [
         {
             "title": "Hotspot 1 title",
@@ -36,7 +42,8 @@
             "strapline": "strapline...",
             "_classes": "top-left",
             "_top": 5,
-            "_left": 20
+            "_left": 20,
+            "tooltip": "Tooltip for item 1"
         },
         {
             "title": "Hotspot 2 title",
@@ -51,7 +58,8 @@
             "strapline": "strapline...",
             "_classes": "center",
             "_top": 25,
-            "_left": 60
+            "_left": 60,
+            "tooltip": "Tooltip for item 2"
         },
         {
             "title": "Hotspot 3 title",
@@ -66,7 +74,8 @@
             "strapline": "strapline...",
             "_classes": "bottom-right",
             "_top": 85,
-            "_left": 40
+            "_left": 40,
+            "tooltip": "Tooltip for item 3"
         }
     ]
 }
