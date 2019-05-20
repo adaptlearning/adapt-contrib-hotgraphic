@@ -179,7 +179,10 @@ define([
             var yTooltip = config.tooltipElement.height() / 2;
             var xPin = config.pinElement.width() / 2;
             var yPin = config.pinElement.height() / 2;
-            var alignedPosition = Object.assign({}, centrePosition);
+            var alignedPosition = {
+                top: centrePosition.top,
+                left: centrePosition.left
+            };
 
             switch(alignment) {
                 case 'left':
