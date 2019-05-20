@@ -22,6 +22,7 @@
       {{else}}
         <div class="hotgraphic-narrative" role="list">
           {{#each _items}}
+            {{#if tooltip}}<div class="hotgraphic-tooltip" data-index="{{@index}}">{{tooltip}}</div>{{/if}}
             <button role="listitem" class="base hotgraphic-graphic-pin component-item-text-color {{#if _isVisited}}visited{{/if}} hotgraphic-graphic-pin-{{@index}} {{#if _graphic._classes}}{{_graphic._classes}}{{/if}}" data-index="{{@index}}" style="top:{{{_top}}}%; left:{{{_left}}}%;" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
               <div class="hotgraphic-graphic-pin-image component-item-color item-{{@index}}" style="background-image: url({{_graphic.src}})"></div>
             </button>
