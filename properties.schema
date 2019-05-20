@@ -284,6 +284,7 @@
             "inputType": "Text",
             "validators": [],
             "help": "The text to be displayed in this item's tooltip, if enabled."
+          }
         }
       }
     }
