@@ -207,8 +207,8 @@ define([
             var xCentre = config.pinElement.position().left + (config.pinElement.width() / 2);
 
             return {
-                top: yCentre - (config.tooltipElement.height() / 2),
-                left: xCentre - (config.tooltipElement.width() / 2)
+                top: yCentre - (config.tooltipElement.outerHeight() / 2),
+                left: xCentre - (config.tooltipElement.outerWidth() / 2)
             };
         },
 
