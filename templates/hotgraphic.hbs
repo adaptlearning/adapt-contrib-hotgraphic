@@ -2,22 +2,11 @@
 
   {{> component this}}
 
-  <div class="component__widget hotgraphic__widget{{#if _useGraphicsAsPins}} is-tile{{else}} is-pin{{/if}}">
+  <div class="component__widget hotgraphic__widget{{#unless _useGraphicsAsPins}} is-pin{{else}} is-tile{{/unless}}">
 
     <div class="hotgraphic__graphic"{{#unless _useGraphicsAsPins}} role="list"{{/unless}}>
 
-      {{#if _useGraphicsAsPins}}
-      <div class="hotgraphic__narrative" role="list">
-
-        {{#each _items}}
-        <button class="hotgraphic__graphic-pin-image-container hotgraphic__graphic-pin-image-container-{{@index}} component-item-text-color{{#if _isVisited}} is-visited{{/if}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}} js-hotgraphic-pin-click" data-index="{{@index}}" role="listitem" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
-          <img class="hotgraphic__graphic-pin-image component-item-color item-{{@index}}" src="{{_graphic.src}}">
-        </button>
-        {{/each}}
-
-      </div>
-
-      {{else}}
+      {{#unless _useGraphicsAsPins}}
 
       <img class="hotgraphic__image" src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}>
 
@@ -30,7 +19,7 @@
       {{/if}}
 
       {{#each _items}}
-      <button class="btn-icon hotgraphic__graphic-pin component-item-text-color{{#if _isVisited}} is-visited{{/if}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}} js-hotgraphic-pin-click" data-index="{{@index}}" style="top: {{{_top}}}%; left: {{{_left}}}%;" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+      <button class="btn-icon hotgraphic__graphic-pin component-item-text-color{{#if _isVisited}} is-visited{{/if}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}} js-hotgraphic-pin-click" data-index="{{@index}}" style="top: {{{_top}}}%; left: {{{_left}}}%;" role="listitem" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
 
         {{#if _pin.src}}
         <div class="hotgraphic__graphic-pin-image-container hotgraphic__graphic-pin-image-container-{{@index}}">
@@ -43,7 +32,19 @@
       </button>
       {{/each}}
 
-      {{/if}}
+      {{else}}
+
+      <div class="hotgraphic__narrative" role="list">
+
+        {{#each _items}}
+        <button class="hotgraphic__graphic-pin-image-container hotgraphic__graphic-pin-image-container-{{@index}} component-item-text-color{{#if _isVisited}} is-visited{{/if}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}} js-hotgraphic-pin-click" data-index="{{@index}}" role="listitem" aria-label="{{title}}.{{#if _isVisited}} {{../_globals._accessibility._ariaLabels.visited}}.{{/if}}">
+          <img class="hotgraphic__graphic-pin-image component-item-color item-{{@index}}" src="{{_graphic.src}}">
+        </button>
+        {{/each}}
+
+      </div>
+
+      {{/unless}}
 
     </div>
 
