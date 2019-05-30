@@ -23,9 +23,10 @@
     },
     "_tooltips": {
         "_isEnabled": true,
-        "_showOnlyOnHover": true,
+        "_desktopShowOnHover": true,
+        "_alwaysShowOnTouch": false,
         "_alignment": "top",
-        "_margin": 5
+        "_margin": 30
     },
     "_items": [
         {

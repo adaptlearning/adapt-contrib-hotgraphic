@@ -84,12 +84,12 @@
         }
       }
     },
-    "tooltips": {
+    "_tooltips": {
       "type": "object",
       "required": false,
       "title": "Tooltips",
       "properties": {
-        "isEnabled": {
+        "_isEnabled": {
           "type": "boolean",
           "required": true,
           "default": false,
@@ -98,18 +98,27 @@
           "validators": [],
           "Help": "If enabled, tooltips defined for each item will be displayed."
         },
-        "showOnlyOnHover": {
+        "_desktopShowOnHover": {
           "type": "boolean",
           "required": true,
           "default": true,
-          "title": "Show tooltips only on hover",
+          "title": "Show tooltips only on hover on desktop",
           "inputType": "Checkbox",
           "validators": [],
-          "Help": "If enabled, tooltips will only display when the cursor hovers over the relevent pin. For touch enabled devices, this setting will default to false so the tooltips are always displayed."
+          "Help": "Desktop only setting. If enabled, tooltips will only display when the cursor hovers over the relevent pin."
+        },
+        "_alwaysShowOnTouch": {
+          "type": "boolean",
+          "required": true,
+          "default": true,
+          "title": "Always display tooltips on touch devices.",
+          "inputType": "Checkbox",
+          "validators": [],
+          "Help": "Touch device only setting. If enabled, tooltips will always render on touch devices. If not enabled, tooltips will not be sown on touch devices."
         },
         "alignment": {
           "type": "string",
-          "required": false,
+          "required": true,
           "default": "top",
           "title": "Tooltip alignment:",
           "enum": ["left", "top", "right", "bottom"],

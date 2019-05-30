@@ -224,8 +224,13 @@ define([
         },
 
         setTooltipEventListener: function(config) {
-            var alwaysShow = Adapt.device.touch || !config.tooltipConfig._showOnlyOnHover;
-            if (alwaysShow) {
+
+            if (Adapt.device.touch && !config.tooltipConfig._alwaysShowOnTouch) return;
+
+            var alwaysShowOnTouchDevice = Adapt.device.touch && config.tooltipConfig._alwaysShowOnTouch;
+            var alwaysShowOnDesktop = !Adapt.device.touch && !config.tooltipConfig._desktopShowOnHover;
+
+            if (alwaysShowOnTouchDevice || alwaysShowOnDesktop) {
                 config.tooltipElement.css('visibility', 'visible');
                 return;
             }
