@@ -140,8 +140,13 @@ define(function(require) {
         },
 
         setTooltipEventListener: function(config) {
-            var alwaysShow = Adapt.device.touch || !config.tooltipConfig._showOnlyOnHover;
-            if (alwaysShow) {
+
+            if (Adapt.device.touch && !config.tooltipConfig._alwaysShowOnTouch) return;
+
+            var alwaysShowOnTouchDevice = Adapt.device.touch && config.tooltipConfig._alwaysShowOnTouch;
+            var alwaysShowOnDesktop = !Adapt.device.touch && !config.tooltipConfig._desktopShowOnHover;
+
+            if (alwaysShowOnTouchDevice || alwaysShowOnDesktop) {
                 config.tooltipElement.css('visibility', 'visible');
                 return;
             }
@@ -152,7 +157,8 @@ define(function(require) {
                 config.tooltipElement.css('visibility', 'hidden');
             });
         },
-              // Used to check if the hotgraphic should reset on revisit
+
+            // Used to check if the hotgraphic should reset on revisit
         checkIfResetOnRevisit: function() {
             var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 

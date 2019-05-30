@@ -6,7 +6,7 @@
     "_classes": "",
     "_type":"component",
     "_component": "hotgraphic",
-    "_layout": "full",    
+    "_layout": "full",
     "title": "Hot graphic",
     "displayTitle": "Hot graphic",
     "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
@@ -23,10 +23,11 @@
       "attribution":"Copyright © 2015"
     },
     "_tooltips": {
-            "_isEnabled": true,
-            "_showOnlyOnHover": true,
-            "_alignment": "left",
-            "_margin": 30
+        "_isEnabled": true,
+        "_desktopShowOnHover": true,
+        "_alwaysShowOnTouch": true,
+        "_alignment": "left",
+        "_margin": 30
     },
     "_items": [
         {

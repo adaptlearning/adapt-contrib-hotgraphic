@@ -64,7 +64,9 @@ guide the learner’s interaction with the component.
 
 >**_isEnabled** (boolean): Toggle tooltips on or off.
 
->**_showOnlyOnHover** (boolean): Display the tooltip only when the cursor hovers over the relevant pin. If set to false, tooltips will always be displayed. For touch enabled devices, this defaults to false.
+>**_destopShowOnHover** (boolean): Desktop only setting. Display the tooltip only when the cursor hovers over the relevant pin. If set to `false`, tooltips will always be displayed on desktops. Default is `true`.
+
+>**_alwaysShowOnTouch** (boolean): Touch device only setting. If `true`, tooltips will always be shown. As hover support for touch devices is not feasible, setting this to `false` will disable tooltips on touch devices. Default is `true`.
 
 >**_alignment** (string): `left, top, right, bottom` The preferred position for the tooltip, relative to the item pin. If there is not enough room within the parent `div` to display the tooltip there, it will automatically be displayed at the opposite alignment.
 
