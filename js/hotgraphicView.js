@@ -162,13 +162,38 @@ define([
                 bottom: 'top'
             };
             var alignedPosition = this.getTooltipAlignedPosition(config);
+            var oppositeAlignment = directionOpposites[config.tooltipConfig._alignment];
 
             if (!this.checkTooltipWithinBounds(config, alignedPosition)) {
-                var newAlignment = directionOpposites[config.tooltipConfig._alignment];
-                alignedPosition = this.getTooltipAlignedPosition(config, newAlignment);
+                alignedPosition = this.getTooltipAlignedPosition(config, oppositeAlignment);
+            }
+
+            if (!this.checkTooltipWithinBounds(config, alignedPosition)) {
+                alignedPosition = this.moveWithinBounds(config, alignedPosition, oppositeAlignment);
             }
 
             config.tooltipElement.css(alignedPosition);
+        },
+
+        moveWithinBounds: function(config, alignedPosition, alignment) {
+            var parentElement = $('.hotgraphic-graphic');
+
+            switch(alignment) {
+                case 'left':
+                    alignedPosition.left = 0;
+                    break;
+                case 'top':
+                    alignedPosition.top = 0;
+                    break;
+                case 'right':
+                    alignedPosition.left = parentElement.width() - config.tooltipElement.outerWidth();
+                    break;
+                case 'bottom':
+                    alignedPosition.top = parentElement.height() - config.tooltipElement.outerHeight();
+                    break;
+            }
+
+            return alignedPosition;
         },
 
         getTooltipAlignedPosition: function(config, newAlignment) {
