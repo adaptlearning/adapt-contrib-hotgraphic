@@ -159,8 +159,8 @@ define(function(require) {
             return [
                 alignedPosition.left > 0,
                 alignedPosition.top > 0,
-                alignedPosition.left + config.tooltipElement.width() < parentElement.width(),
-                alignedPosition.top + config.tooltipElement.height() < parentElement.height()
+                alignedPosition.left + config.tooltipElement.outerWidth() < parentElement.width(),
+                alignedPosition.top + config.tooltipElement.outerHeight() < parentElement.height()
             ].every(Boolean);
         },
 
