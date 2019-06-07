@@ -1,9 +1,65 @@
 .hotgraphic {
   // --------------------------------------------------
+  // Pop up container
+  // --------------------------------------------------
+  &__popup {
+    position: relative;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
   // Pop up toolbar
   // --------------------------------------------------
+  &__popup-inner.has-toolbar {
+    padding-top: @icon-size + (@icon-padding * 2);
+  }
+
+  &__popup-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__popup-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  &__popup-count {
+    padding: @icon-padding;
+  }
+
   &__popup-controls.disabled {
     visibility: hidden;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Pop up item
+  // --------------------------------------------------
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item-content,
+  &__item-image-container {
+    width: 100%;
+
+    @media (min-width: @device-width-medium) {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: @device-width-medium) {
+    &__item-image-container {
+      padding-left: @item-padding / 2;
+    }
   }
   // --------------------------------------------------
 
@@ -28,6 +84,30 @@
   // --------------------------------------------------
   &__item:not(.is-active) {
     .u-display-none;
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Align hotgraphic pop up image to the left
+  // --------------------------------------------------
+  &__item.align-image-left {
+    @media (min-width: @device-width-medium) {
+      flex-direction: row-reverse;
+    }
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Hide hotgraphic pop up image in desktop
+  // --------------------------------------------------
+  &__item.hide-desktop-image {
+    .hotgraphic__item-content {
+      width: 100%;
+    }
+
+    .hotgraphic__item-image-container {
+      display: none;
+    }
   }
   // --------------------------------------------------
 }
