@@ -14,13 +14,14 @@
 		position: absolute;
 		top: 0%;
 		left: 0%;
-		background-color: transparent !important;
+		background-color: @item-text-color;
+		border-radius: 50%;
 		text-decoration: none;
-		line-height: 0;
 
-		.hotgraphic-graphic-pin-icon {
-			background-color: @item-text-color;
-			border-radius: 50%;
+		&.has-pin-image {
+			background-color: transparent !important;
+			border-radius: 0;
+			line-height: 0;
 		}
 
 		&.visited {
