@@ -103,7 +103,7 @@
           "validators": [],
           "Help": "Touch device only setting. If enabled, tooltips will always render on touch devices. If not enabled, tooltips will not be sown on touch devices."
         },
-        "alignment": {
+        "_alignment": {
           "type": "string",
           "required": false,
           "default": "top",
@@ -115,15 +115,6 @@
           },
           "validators": [],
           "help": "Choose the preferred position for the tooltip, relative to the item pin. If there is not enough room within the parent div to display the tooltip there, it will automatically be displayed at the opposite alignment."
-        },
-        "margin": {
-          "type": "number",
-          "required": false,
-          "default": 0,
-          "title": "Tooltip margin",
-          "inputType": "Number",
-          "validators": ["number"],
-          "help": "The margin required between the tooltip and it's associated pin."
         }
       }
     },

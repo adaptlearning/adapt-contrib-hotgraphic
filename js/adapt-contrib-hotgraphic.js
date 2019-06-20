@@ -114,10 +114,10 @@ define(function(require) {
 
         getTooltipAlignedPosition: function(config, newAlignment) {
             var alignment = newAlignment || config.tooltipConfig._alignment || 'top';
+            config.tooltipElement.removeClass().addClass('hotgraphic-tooltip hotgraphic-tooltip-' + alignment);
             var centrePosition = this.getTooltipCentrePosition(config);
-            var margin = config.tooltipConfig._margin || 0;
-            var xTooltip = config.tooltipElement.width() / 2;
-            var yTooltip = config.tooltipElement.height() / 2;
+            var xTooltip = config.tooltipElement.outerWidth(true) / 2;
+            var yTooltip = config.tooltipElement.outerHeight(true) / 2;
             var xPin = config.pinElement.width() / 2;
             var yPin = config.pinElement.height() / 2;
             var alignedPosition = {
@@ -127,16 +127,16 @@ define(function(require) {
 
             switch(alignment) {
                 case 'left':
-                    alignedPosition.left = centrePosition.left - xTooltip - xPin - margin;
+                    alignedPosition.left = centrePosition.left - xTooltip - xPin;
                     break;
                 case 'top':
-                    alignedPosition.top = centrePosition.top - yTooltip - yPin - margin;
+                    alignedPosition.top = centrePosition.top - yTooltip - yPin;
                     break;
                 case 'right':
-                    alignedPosition.left = centrePosition.left + xTooltip + xPin + margin;
+                    alignedPosition.left = centrePosition.left + xTooltip + xPin;
                     break;
                 case 'bottom':
-                    alignedPosition.top = centrePosition.top + yTooltip + yPin + margin;
+                    alignedPosition.top = centrePosition.top + yTooltip + yPin;
                     break;
             }
 
@@ -148,8 +148,8 @@ define(function(require) {
             var xCentre = config.pinElement.position().left + (config.pinElement.width() / 2);
 
             return {
-                top: yCentre - (config.tooltipElement.outerHeight() / 2),
-                left: xCentre - (config.tooltipElement.outerWidth() / 2)
+                top: yCentre - (config.tooltipElement.outerHeight(true) / 2),
+                left: xCentre - (config.tooltipElement.outerWidth(true) / 2)
             };
         },
 
