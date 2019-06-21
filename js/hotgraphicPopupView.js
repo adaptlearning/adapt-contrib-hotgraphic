@@ -5,7 +5,7 @@ define([
 
   var HotgraphicPopupView = Backbone.View.extend({
 
-    className: 'hotgraphic__popup',
+    className: 'hotgraphic-popup',
 
     events: {
       'click .js-hotgraphic-popup-close': 'closePopup',
@@ -33,9 +33,9 @@ define([
 
       var shouldEnableBack = index > 0 || canCycleThroughPagination;
       var shouldEnableNext = index < itemCount - 1 || canCycleThroughPagination;
-      var $controls = this.$('.hotgraphic__popup-controls');
+      var $controls = this.$('.hotgraphic-popup__controls');
 
-      this.$('hotgraphic__popup-nav')
+      this.$('hotgraphic-popup__nav')
           .toggleClass('first', !shouldEnableBack)
           .toggleClass('last', !shouldEnableNext);
 
@@ -49,12 +49,12 @@ define([
         itemNumber: this.model.getActiveItem().get('_index') + 1,
         totalItems: this.model.get("_items").length
       });
-      this.$('.hotgraphic__popup-count').html(labelText);
+      this.$('.hotgraphic-popup__count').html(labelText);
     },
 
     handleTabs: function() {
-      this.$('.hotgraphic__popup-inner').a11y_on(false);
-      this.$('.hotgraphic__popup-inner .is-active').a11y_on(true);
+      this.$('.hotgraphic-popup__inner').a11y_on(false);
+      this.$('.hotgraphic-popup__inner .is-active').a11y_on(true);
     },
 
     onItemsActiveChange: function(item, _isActive) {
@@ -68,19 +68,19 @@ define([
     },
 
     applyItemClasses: function(index) {
-      this.$('.hotgraphic__item.is-active').removeClass('is-active');
-      this.$('.hotgraphic__item').filter('[data-index="' + index + '"]').addClass('is-active');
+      this.$('.hotgraphic-popup__item.is-active').removeClass('is-active');
+      this.$('.hotgraphic-popup__item').filter('[data-index="' + index + '"]').addClass('is-active');
     },
 
     handleFocus: function(index) {
-      this.$('.hotgraphic__popup-inner .is-active').a11y_focus();
+      this.$('.hotgraphic-popup__inner .is-active').a11y_focus();
       this.applyNavigationClasses(index);
     },
 
     onItemsVisitedChange: function(item, _isVisited) {
       if (!_isVisited) return;
 
-      this.$('.hotgraphic__item')
+      this.$('.hotgraphic-popup__item')
           .filter('[data-index="' + item.get('_index') + '"]')
           .addClass('is-visited');
     },
