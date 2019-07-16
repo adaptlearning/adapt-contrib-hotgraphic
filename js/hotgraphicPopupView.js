@@ -53,13 +53,12 @@ define([
         },
 
         handleTabs: function() {
-            this.$('.hotgraphic-popup-inner').a11y_on(false);
-            this.$('.hotgraphic-popup-inner .active').a11y_on(true);
+            this.$('.hotgraphic-item:not(.active) *').a11y_on(false);
+            this.$('.hotgraphic-item.active *').a11y_on(true);
         },
 
         onItemsActiveChange: function(item, _isActive) {
             if (!_isActive) return;
-
             var index = item.get('_index');
             this.updatePageCount();
             this.handleTabs();
@@ -68,8 +67,10 @@ define([
         },
 
         applyItemClasses: function(index) {
-            this.$('.hotgraphic-item.active').removeClass('active');
-            this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('active');
+            this.$('.hotgraphic-item[data-index="' + index + '"]').addClass('active').removeAttr('aria-hidden');
+            this.$('.hotgraphic-item[data-index="' + index + '"] .hotgraphic-content-title').attr("id", "notify-heading");
+            this.$('.hotgraphic-item:not([data-index="' + index + '"])').removeClass('active').attr('aria-hidden', 'true');
+            this.$('.hotgraphic-item:not([data-index="' + index + '"]) .hotgraphic-content-title').removeAttr("id");
         },
 
         handleFocus: function(index) {
