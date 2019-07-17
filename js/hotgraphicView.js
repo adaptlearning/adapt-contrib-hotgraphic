@@ -101,7 +101,7 @@ define([
             // Append the word 'visited.' to the pin's aria-label
             var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
             $pin.find('.aria-label').each(function(index, el) {
-                el.innerHTML = el.innerHTML + " " + visitedLabel;
+                el.innerHTML += " " + visitedLabel;
             });
 
             $pin.addClass('visited');
