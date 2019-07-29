@@ -44,7 +44,7 @@ define([
         },
 
         updatePageCount: function() {
-            var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination;
+            var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination || '{{itemNumber}} / {{totalItems}}';
             var labelText = Handlebars.compile(template)({
                 itemNumber: this.model.getActiveItem().get('_index') + 1,
                 totalItems: this.model.get("_items").length
