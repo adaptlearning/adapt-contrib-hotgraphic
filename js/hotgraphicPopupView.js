@@ -44,7 +44,7 @@ define([
     },
 
     updatePageCount: function() {
-      var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination;
+      var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination || '{{itemNumber}} / {{totalItems}}';
       var labelText = Handlebars.compile(template)({
         itemNumber: this.model.getActiveItem().get('_index') + 1,
         totalItems: this.model.get("_items").length
@@ -53,13 +53,12 @@ define([
     },
 
     handleTabs: function() {
-      this.$('.hotgraphic-popup__inner').a11y_on(false);
-      this.$('.hotgraphic-popup__inner .is-active').a11y_on(true);
+      this.$('.hotgraphic-popup__item:not(.is-active) *').a11y_on(false);
+      this.$('.hotgraphic-popup__item.is-active *').a11y_on(true);
     },
 
     onItemsActiveChange: function(item, _isActive) {
       if (!_isActive) return;
-
       var index = item.get('_index');
       this.updatePageCount();
       this.handleTabs();
@@ -68,8 +67,10 @@ define([
     },
 
     applyItemClasses: function(index) {
-      this.$('.hotgraphic-popup__item.is-active').removeClass('is-active');
-      this.$('.hotgraphic-popup__item').filter('[data-index="' + index + '"]').addClass('is-active');
+      this.$('.hotgraphic-popup__item[data-index="' + index + '"]').addClass('is-active').removeAttr('aria-hidden');
+      this.$('.hotgraphic-popup__item[data-index="' + index + '"] .hotgraphic-popup__item-title').attr("id", "notify-heading");
+      this.$('.hotgraphic-popup__item:not([data-index="' + index + '"])').removeClass('is-active').attr('aria-hidden', 'true');
+      this.$('.hotgraphic-popup__item:not([data-index="' + index + '"]) .hotgraphic-popup__item-title').removeAttr("id");
     },
 
     handleFocus: function(index) {
