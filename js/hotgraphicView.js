@@ -8,7 +8,7 @@ define([
   var HotGraphicView = ComponentView.extend({
 
     events: {
-      'click .js-hotgraphic-pin-click': 'onPinClicked'
+      'click .js-hotgraphic-item-click': 'onPinClicked'
     },
 
     initialize: function() {
@@ -91,7 +91,7 @@ define([
 
     getItemElement: function(model) {
       var index = model.get('_index');
-      return this.$('.hotgraphic__graphic-pin').filter('[data-index="' + index + '"]');
+      return this.$('.js-hotgraphic-item-click').filter('[data-index="' + index + '"]');
     },
 
     onItemsVisitedChange: function(model, _isVisited) {
@@ -100,7 +100,7 @@ define([
 
       // Append the word 'visited.' to the pin's aria-label
       var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
-      $pin.children('.aria-label').attr('aria-label', function(index, val) {
+      $pin.attr('aria-label', function(index, val) {
         return val + " " + visitedLabel;
       });
 
