@@ -17,6 +17,7 @@
         "_useGraphicsAsPins": false,
         "_canCycleThroughPagination": false,
         "_hidePagination": false,
+        "_isRound": false,
         "_graphic": {
             "src": "hot_graphic.jpg",
             "alt": "alt text",
@@ -91,6 +92,7 @@
         "_useGraphicsAsPins": true,
         "_canCycleThroughPagination": false,
         "_hidePagination": false,
+        "_isRound": false,
         "_graphic": {
             "src": "hot_graphic.jpg",
             "alt": "alt text",
@@ -163,77 +165,67 @@
 // Example using graphic pins
 // In the following example there is a background image and each pin is an image rather than a pin icon
 
-{
-    "_id": "c-40",
-    "_parentId": "b-05",
-    "_classes": "",
-    "_type": "component",
-    "_component": "hotgraphic",
-    "_layout": "full",
-    "title": "Hot graphic",
-    "displayTitle": "Hot graphic",
-    "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
-    "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
-    "instruction": "",
-    "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
-    "_setCompletionOn": "allItems",
-    "_useGraphicsAsPins": false,
-    "_canCycleThroughPagination": false,
-    "_hidePagination": false,
-    "_graphic": {
-        "src": "hot_graphic.jpg",
-        "alt": "alt text",
-        "attribution": "Copyright © 2015"
-    },
-    "_isOptional": false,
-    "_isAvailable": true,
-    "_isHidden": false,
-    "_isVisible": true,
-    "_ariaLevel": 0,
-    "_disableAccessibilityState": false,
-    "_onScreen": {
-        "_isEnabled": false,
+    {
+        "_id": "c-40",
+        "_parentId": "b-05",
         "_classes": "",
-        "_percentInviewVertical": 50
-    },
-    "_items": [
-        {
-            "title": "Hotspot 1 title",
-            "_ariaLevel": 0,
-            "body": "This is display text 1.",
-            "strapline": "strapline...",
-            "_graphic": {
-                "src": "image1.jpg",
-                "alt": "alt text",
-                "attribution": "Copyright © 2015",
-                "_classes": "graphic-class"
-            },
-            "_pin": {
-                "src": "pin1.jpg",
-                "alt": "pin alt text"
-            },
-            "_classes": "pin-class",
-            "_left": 5,
-            "_top": 20
+        "_type": "component",
+        "_component": "hotgraphic",
+        "_layout": "full",
+        "title": "Hot graphic",
+        "displayTitle": "Hot graphic",
+        "body": "This is optional body text. Select the hotspots on the image to reveal the text. This component will scale down to a narrative when viewed on mobile.",
+        "mobileBody": "This is optional body text that will be shown when viewed on mobile.",
+        "instruction": "",
+        "mobileInstruction": "This is optional instruction text that will be shown when viewed on mobile.",
+        "_setCompletionOn": "allItems",
+        "_useGraphicsAsPins": false,
+        "_canCycleThroughPagination": false,
+        "_hidePagination": false,
+        "_isRound": false,
+        "_graphic": {
+            "src": "hot_graphic.jpg",
+            "alt": "alt text",
+            "attribution": "Copyright © 2015"
         },
-        {
-            "title": "Hotspot 2 title",
-            "_ariaLevel": 0,
-            "body": "This is display text 2.",
-            "strapline": "strapline...",
-            "_graphic": {
-                "src": "image2.jpg",
-                "alt": "alt text",
-                "attribution": "Copyright © 2015",
-                "_classes": "graphic-class"
+        "_items": [
+            {
+                "title": "Hotspot 1 title",
+                "_ariaLevel": 0,
+                "body": "This is display text 1.",
+                "strapline": "strapline...",
+                "_graphic": {
+                    "src": "image1.jpg",
+                    "alt": "alt text",
+                    "attribution": "Copyright © 2015",
+                    "_classes": "graphic-class"
+                },
+                "_pin": {
+                    "src": "pin1.jpg",
+                    "alt": "pin alt text"
+                },
+                "_classes": "pin-class",
+                "_left": 5,
+                "_top": 20
             },
-            "_pin": {
-                "src": "pin2.jpg",
-                "alt": "pin alt text"
-            },
-            "_classes": "pin-class",
-            "_left": 5,
-            "_top": 40
-        }
-    ]
-}
+            {
+                "title": "Hotspot 2 title",
+                "_ariaLevel": 0,
+                "body": "This is display text 2.",
+                "strapline": "strapline...",
+                "_graphic": {
+                    "src": "image2.jpg",
+                    "alt": "alt text",
+                    "attribution": "Copyright © 2015",
+                    "_classes": "graphic-class"
+                },
+                "_pin": {
+                    "src": "pin2.jpg",
+                    "alt": "pin alt text"
+                },
+                "_classes": "pin-class",
+                "_left": 5,
+                "_top": 40
+            }
+        ]
+    }

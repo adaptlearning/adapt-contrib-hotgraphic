@@ -129,6 +129,15 @@
       "validators": [],
       "help": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
     },
+    "_isRound": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Should item image be round?",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, a 50% border radius will be applied to the items pop up images."
+    },
     "_items": {
       "type": "array",
       "required": true,
