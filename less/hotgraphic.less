@@ -1,3 +1,9 @@
+@hotgraphic-tooltip-margin: 30px;
+.hotgraphic-tooltip-top { margin-bottom: @hotgraphic-tooltip-margin; }
+.hotgraphic-tooltip-right { margin-left: @hotgraphic-tooltip-margin; }
+.hotgraphic-tooltip-bottom { margin-top: @hotgraphic-tooltip-margin; }
+.hotgraphic-tooltip-left { margin-right: @hotgraphic-tooltip-margin; }
+
 .hotgraphic-component {
 
 
@@ -43,6 +49,15 @@
 		width: (@icon-size*2);
 	}
 
+}
+
+.hotgraphic-tooltip {
+	position: absolute;
+	visibility: hidden;
+	color: @item-text-color;
+	background-color: @item-color;
+	padding: @item-padding;
+	border-radius: 5px;
 }
 
 .hotgraphic-item:not(.active) {

@@ -84,6 +84,53 @@
         }
       }
     },
+    "_tooltips": {
+      "type": "object",
+      "required": false,
+      "title": "Tooltips",
+      "properties": {
+        "_isEnabled": {
+          "type": "boolean",
+          "required": true,
+          "default": false,
+          "title": "Enable tooltips",
+          "inputType": "Checkbox",
+          "validators": [],
+          "Help": "If enabled, tooltips defined for each item will be displayed."
+        },
+        "_desktopShowOnHover": {
+          "type": "boolean",
+          "required": true,
+          "default": true,
+          "title": "Show tooltips only on hover on desktop",
+          "inputType": "Checkbox",
+          "validators": [],
+          "Help": "Desktop only setting. If enabled, tooltips will only display when the cursor hovers over the relevent pin."
+        },
+        "_alwaysShowOnTouch": {
+          "type": "boolean",
+          "required": true,
+          "default": true,
+          "title": "Always display tooltips on touch devices.",
+          "inputType": "Checkbox",
+          "validators": [],
+          "Help": "Touch device only setting. If enabled, tooltips will always render on touch devices. If not enabled, tooltips will not be sown on touch devices."
+        },
+        "_alignment": {
+          "type": "string",
+          "required": true,
+          "default": "top",
+          "title": "Tooltip alignment:",
+          "enum": ["left", "top", "right", "bottom"],
+          "inputType": {
+            "type": "Select",
+            "options": ["left", "top", "right", "bottom"]
+          },
+          "validators": [],
+          "help": "Choose the preferred position for the tooltip, relative to the item pin. If there is not enough room within the parent div to display the tooltip there, it will automatically be displayed at the opposite alignment."
+        }
+      }
+    },
     "mobileBody": {
       "type": "string",
       "required": false,
@@ -265,6 +312,15 @@
             "inputType": "Number",
             "validators": ["required", "number"],
             "help": "Top position of pin"
+          },
+          "tooltip": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "title": "Tooltip content.",
+            "inputType": "Text",
+            "validators": [],
+            "help": "The text to be displayed in this item's tooltip, if enabled."
           }
         }
       }
