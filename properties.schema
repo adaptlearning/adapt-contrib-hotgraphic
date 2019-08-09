@@ -38,6 +38,19 @@
       "validators": [],
       "translatable": true
     },
+    "_setCompletionOn": {
+      "type": "string",
+      "required": false,
+      "default": "allItems",
+      "title": "Set completion on:",
+      "enum": ["inview", "allItems"],
+      "inputType": {
+        "type": "Select",
+        "options": ["inview", "allItems"]
+      },
+      "validators": [],
+      "help": "Whether completion is based on the learner having viewed all the items - or just having viewed the component"
+    },
     "_graphic": {
       "type": "object",
       "required": false,
@@ -191,23 +204,38 @@
                 "help": "Text to be displayed as an attribution for the popup image",
                 "translatable": true
               },
-              "title": {
-                "type": "string",
-                "required": true,
-                "default": "",
-                "inputType": "Text",
-                "validators": [],
-                "help": "Title text for the popup image",
-                "translatable": true
-              },
               "_classes": {
                 "type": "string",
                 "required": false,
                 "default": "",
-                "title": "Classes",
+                "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Allows you to specify custom CSS classes to be applied to the popup item"
+                "help": "Allows you to specify positioning classes for when this component is in 'graphics as pins' mode"
+              }
+            }
+          },
+          "_pin": {
+            "type": "object",
+            "required": false,
+            "title": "Item Pin",
+            "properties": {
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "help": "This is the pin image, leave blank for default"
+              },
+              "alt": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Alternative text for this image",
+                "translatable": true
               }
             }
           },
@@ -215,10 +243,10 @@
             "type": "string",
             "required": false,
             "default": "",
-            "title": "Classes",
+            "title": "Item Popup Classes",
             "inputType": "Text",
             "validators": [],
-            "help": ""
+            "help": "Allows you to specify custom CSS classes to be applied to the popup item"
           },
           "_left": {
             "type": "number",

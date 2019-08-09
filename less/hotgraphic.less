@@ -1,38 +1,44 @@
 .hotgraphic-component {
 
-  .hotgraphic-graphic {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
+	.hotgraphic-graphic {
+		position: relative;
+		display: inline-block;
+		width: 100%;
+	}
 
-  .hotgraphic-graphic-pin {
-    display: block;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    background-color: @item-text-color;
-    border-radius: 50%;
-    text-decoration: none;
+	.hotgraphic-graphic-pin {
+		display: block;
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		background-color: @item-text-color;
+		border-radius: 50%;
+		text-decoration: none;
 
-    &.visited {
-      .hotgraphic-graphic-pin-icon {
-        color: @item-color-visited;
-      }
-    }
-    .no-touch &:hover {
-      .hotgraphic-graphic-pin-icon {
-        color: @item-color-hover;
-      }
-    }
-  }
+		&.has-pin-image {
+			background-color: transparent !important;
+			border-radius: 0;
+			line-height: 0;
+		}
 
-  .hotgraphic-graphic-pin-icon {
-    color: @item-color;
-    font-size: (@icon-size*2);
-    height: (@icon-size*2);
-    width: (@icon-size*2);
-  }
+		&.visited {
+			.hotgraphic-graphic-pin-icon {
+				color: @item-color-visited;
+			}
+		}
+		.no-touch &:hover {
+			.hotgraphic-graphic-pin-icon {
+				color: @item-color-hover;
+			}
+		}
+	}
+
+	.hotgraphic-graphic-pin-icon {
+		color: @item-color;
+		font-size: (@icon-size*2);
+		height: (@icon-size*2);
+		width: (@icon-size*2);
+	}
 
 }
 

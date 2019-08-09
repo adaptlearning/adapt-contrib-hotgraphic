@@ -36,15 +36,15 @@ define([
       var $controls = this.$('.hotgraphic-popup-controls');
 
       this.$('hotgraphic-popup-nav')
-        .toggleClass('first', !shouldEnableBack)
-        .toggleClass('last', !shouldEnableNext);
+          .toggleClass('first', !shouldEnableBack)
+          .toggleClass('last', !shouldEnableNext);
 
       $controls.filter('.back').a11y_cntrl_enabled(shouldEnableBack);
       $controls.filter('.next').a11y_cntrl_enabled(shouldEnableNext);
     },
 
     updatePageCount: function() {
-      var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination;
+      var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination || '{{itemNumber}} / {{totalItems}}';
       var labelText = Handlebars.compile(template)({
         itemNumber: this.model.getActiveItem().get('_index') + 1,
         totalItems: this.model.get("_items").length
@@ -53,13 +53,12 @@ define([
     },
 
     handleTabs: function() {
-      this.$('.hotgraphic-popup-inner').a11y_on(false);
-      this.$('.hotgraphic-popup-inner .active').a11y_on(true);
+      this.$('.hotgraphic-item:not(.active) *').a11y_on(false);
+      this.$('.hotgraphic-item.active *').a11y_on(true);
     },
 
     onItemsActiveChange: function(item, _isActive) {
       if (!_isActive) return;
-
       var index = item.get('_index');
       this.updatePageCount();
       this.handleTabs();
@@ -68,8 +67,10 @@ define([
     },
 
     applyItemClasses: function(index) {
-      this.$('.hotgraphic-item.active').removeClass('active');
-      this.$('.hotgraphic-item').filter('[data-index="' + index + '"]').addClass('active');
+      this.$('.hotgraphic-item[data-index="' + index + '"]').addClass('active').removeAttr('aria-hidden');
+      this.$('.hotgraphic-item[data-index="' + index + '"] .hotgraphic-content-title').attr("id", "notify-heading");
+      this.$('.hotgraphic-item:not([data-index="' + index + '"])').removeClass('active').attr('aria-hidden', 'true');
+      this.$('.hotgraphic-item:not([data-index="' + index + '"]) .hotgraphic-content-title').removeAttr("id");
     },
 
     handleFocus: function(index) {
@@ -81,8 +82,8 @@ define([
       if (!_isVisited) return;
 
       this.$('.hotgraphic-item')
-        .filter('[data-index="' + item.get('_index') + '"]')
-        .addClass('visited');
+          .filter('[data-index="' + item.get('_index') + '"]')
+          .addClass('visited');
     },
 
     render: function() {
