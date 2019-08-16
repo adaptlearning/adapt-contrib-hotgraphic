@@ -2,15 +2,15 @@
 
   {{> component this}}
 
-  <div class="component__widget hotgraphic__widget{{#unless _useGraphicsAsPins}} is-pin{{else}} is-tile{{/unless}}">
+  <div class="component__widget hotgraphic__widget{{#unless _useGraphicsAsPins}} is-pin{{else}} is-tile{{/unless}}{{#if _graphic.attribution}} has-attribution{{/if}}">
 
     {{#unless _useGraphicsAsPins}}
 
     <img class="hotgraphic__image" src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}>
 
     {{#if _graphic.attribution}}
-    <div class="hotgraphic__attribution attribution">
-      <div class="hotgraphic__attribution-inner">
+    <div class="component__attribution hotgraphic__attribution">
+      <div class="component__attribution-inner hotgraphic__attribution-inner">
         {{{_graphic.attribution}}}
       </div>
     </div>

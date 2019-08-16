@@ -25,13 +25,13 @@
       </div>
     </div>
 
-    <div class="hotgraphic-popup__item-image-container">
+    <div class="hotgraphic-popup__item-image-container{{#if _graphic.attribution}} has-attribution{{/if}}">
 
       <img class="hotgraphic-popup__item-image" src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}>
 
       {{#if _graphic.attribution}}
-      <div class="hotgraphic-popup__item-attribution attribution">
-        <div class="hotgraphic-popup__item-attribution-inner">
+      <div class="component__attribution hotgraphic-popup__item-attribution">
+        <div class="component__attribution-inner hotgraphic-popup__item-attribution-inner">
           {{{_graphic.attribution}}}
         </div>
       </div>
