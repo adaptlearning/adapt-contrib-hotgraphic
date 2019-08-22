@@ -74,8 +74,8 @@
           "translatable": true
         },
         "attribution": {
-          "type":"string",
-          "required":false,
+          "type": "string",
+          "required": false,
           "default": "",
           "inputType": "Text",
           "validators": [],
@@ -205,8 +205,8 @@
                 "translatable": true
               },
               "attribution": {
-                "type":"string",
-                "required":false,
+                "type": "string",
+                "required": false,
                 "default": "",
                 "inputType": "Text",
                 "validators": [],
@@ -220,7 +220,7 @@
                 "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Allows you to specify positioning classes for when this component is in 'graphics as pins' mode"
+                "help": "Allows you to specify custom CSS classes to be applied to the hotgraphic pin or, alternatively, to the hotspot tile when _useGraphicsAsPins is set to true"
               }
             }
           },
