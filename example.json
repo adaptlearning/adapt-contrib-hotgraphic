@@ -32,10 +32,10 @@
                     "src": "course/en/images/example.jpg",
                     "alt": "Placeholder graphic",
                     "attribution": "Copyright © 2019",
-                    "_comment": "Supported classes = 'align-image-left' | 'hide-desktop-image'. Additional classes can be used but they must be predefined in one of the Less files",
                     "_classes": ""
                 },
                 "strapline": "Hotspot 1 strapline",
+                "_comment": "Supported classes = 'align-image-left' | 'hide-desktop-image'. Additional classes can be used but they must be predefined in one of the Less files",
                 "_classes": "",
                 "_top": 25,
                 "_left": 25

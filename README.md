@@ -87,7 +87,7 @@ guide the learner’s interaction with the component.
 
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
 
->**\_classes** (string): CSS class name to be applied to the popup item. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+>**\_classes** (string): CSS class name to be applied to the popup item. Supported classes are `"align-image-left"` and `"hide-desktop-image"` which aligns the item image to the left and hides the pop up image in desktop view respectively. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
 >**\_top** (number): Each hot spot must contain **\_top** and **\_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
