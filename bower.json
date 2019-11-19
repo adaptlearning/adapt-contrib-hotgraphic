@@ -13,7 +13,7 @@
     "adapt-component"
   ],
   "pluginDependencies": {
-    "adapt-contrib-narrative": ">=5"
+    "adapt-contrib-narrative": ">=6"
   },
   "license": "GPL-3.0"
 }
