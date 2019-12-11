@@ -1,258 +1,266 @@
 .hotgraphic-component {
+  .hotgraphic-graphic {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+  }
 
+  .hotgraphic-graphic-pin {
+    background-color: @item-text-color;
+    border-radius: 50%;
+    display: block;
+    left: 0%;
+    position: absolute;
+    text-decoration: none;
+    top: 0%;
 
+    &.has-pin-image {
+      background-color: transparent !important;
+      border-radius: 0;
+      line-height: 0;
+    }
 
+    &.visited {
+      .hotgraphic-graphic-pin-icon {
+        color: @item-color-visited;
+      }
+    }
 
-	.hotgraphic-graphic {
-		position: relative;
-		display: inline-block;
-		width: 100%;
-	}
+    .no-touch &:hover {
+      .hotgraphic-graphic-pin-icon {
+        color: @item-color-hover;
+      }
+    }
+  }
 
-	.hotgraphic-graphic-pin {
-		display: block;
-		position: absolute;
-		top: 0%;
-		left: 0%;
-		background-color: @item-text-color;
-		border-radius: 50%;
-		text-decoration: none;
-
-		&.has-pin-image {
-			background-color: transparent !important;
-			border-radius: 0;
-			line-height: 0;
-		}
-
-		&.visited {
-			.hotgraphic-graphic-pin-icon {
-				color: @item-color-visited;
-			}
-		}
-		.no-touch &:hover {
-			.hotgraphic-graphic-pin-icon {
-				color: @item-color-hover;
-			}
-		}
-	}
-
-	.hotgraphic-graphic-pin-icon {
-		color: @item-color;
-		font-size: (@icon-size*2);
-		height: (@icon-size*2);
-		width: (@icon-size*2);
-	}
-
+  .hotgraphic-graphic-pin-icon {
+    color: @item-color;
+    font-size: (@icon-size*2);
+    height: (@icon-size*2);
+    width: (@icon-size*2);
+  }
 }
 
 .hotgraphic-item:not(.active) {
-	display: none;
+  display: none;
 }
 
 .notify.hotgraphic {
+  .notify-popup {
+    pointer-events: none;
+    background-color: transparent;
+    color: @font-color;
 
-	.notify-popup {
-		pointer-events: none;
-		background-color: transparent;
-		color: @font-color;
+    .notify-popup-content {
+      width: auto;
+      pointer-events: auto;
+    }
+  }
 
-		.notify-popup-content {
-			width: auto;
-			pointer-events: auto;
-		}
-	}
+  .notify-popup-content-inner {
+    .hotgraphic-popup {
+      width: auto;
+      height: auto;
+      margin: 40px;
+      background-color: @background-color;
+      border: @item-border;
+      z-index: 5;
+      position: relative;
+      padding-top: (@item-padding-top + @item-padding-bottom) + @icon-size;
+    }
 
-	.notify-popup-content-inner {
-		.hotgraphic-popup {
-			width: auto;
-			height: auto;
-			margin: 40px;
-			background-color: @background-color;
-			border: @item-border;
-			z-index: 5;
-			position: relative;
-			padding-top: (@item-padding-top + @item-padding-bottom) + @icon-size;
-		}
+    .hotgraphic-popup-toolbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: @item-color;
+      height: (@item-padding-top + @item-padding-bottom) + @icon-size;
+    }
 
-		.hotgraphic-popup-toolbar {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			background-color: @item-color;
-			height: (@item-padding-top + @item-padding-bottom) + @icon-size;
-		}
+    .hotgraphic-popup-nav {
+      background-color: @item-color;
+    }
 
-		.hotgraphic-popup-nav {
-			background-color: @item-color;
-		}
+    .hotgraphic-popup-done {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-decoration: none;
 
-		.hotgraphic-popup-done {
-			position: absolute;
-			top: 0;
-			right: 0;
-			text-decoration: none;
-			.dir-rtl & {
-				right: inherit;
-				left: 0;
-			}
-			.no-touch &:hover {
-				.hotgraphic-popup-close {
-					color: @button-text-color-hover;
-				}
-			}
-		}
+      .dir-rtl & {
+        right: inherit;
+        left: 0;
+      }
 
-		.hotgraphic-popup-arrow-l,
-		.hotgraphic-popup-arrow-r,
-		.hotgraphic-popup-close {
-			padding: @item-padding;
-			color: @button-text-color;
-		}
+      .no-touch &:hover {
+        .hotgraphic-popup-close {
+          color: @button-text-color-hover;
+        }
+      }
+    }
 
-		.hotgraphic-popup-count {
-			padding: @item-padding;
-			vertical-align: baseline;
-			color: @item-text-color;
-			float: left;
-			.dir-rtl & {
-				float: right;
-			}
-			span {
-				display: inline-block;
-			}
-		}
+    .hotgraphic-popup-arrow-l,
+    .hotgraphic-popup-arrow-r,
+    .hotgraphic-popup-close {
+      padding: @item-padding;
+      color: @button-text-color;
+    }
 
-		.hotgraphic-popup-controls {
-			float: left;
-			text-decoration: none;
-			.dir-rtl & {
-				float: right;
-			}
-			.no-touch &:hover {
-				.hotgraphic-popup-arrow-l,
-				.hotgraphic-popup-arrow-r {
-					color: @button-text-color-hover;
-				}
-			}
-			&.disabled {
-				visibility: hidden;
-			}
-		}
+    .hotgraphic-popup-count {
+      padding: @item-padding;
+      vertical-align: baseline;
+      color: @item-text-color;
+      float: left;
 
-		.hotgraphic-popup-inner {
-			padding: @item-padding;
-		}
+      .dir-rtl & {
+        float: right;
+      }
 
-		.hotgraphic-item-graphic {
-			padding-left: @item-padding-left;
-			width: 50%;
-			box-sizing: border-box;
-			float: right;
-			.dir-rtl & {
-				float: left;
-			}
-			text-align: center;
-		}
+      span {
+        display: inline-block;
+      }
+    }
 
-		.hotgraphic-item-graphic-inner{
-			img {
-				display: block;
-			}
-			.dir-rtl & {
-				padding-left: inherit;
-				padding-right: @item-padding-left;
-			}
-		}
+    .hotgraphic-popup-controls {
+      float: left;
+      text-decoration: none;
 
-		.hotgraphic-item-content {
-			width: 50%;
-			float: left;
-			.dir-rtl & {
-				float: right;
-			}
-		}
+      .dir-rtl & {
+        float: right;
+      }
 
-		.graphic-attribution {
-			font-size: 0.75em;
-			line-height: 1em;
-			padding-top: 0.5em;
-		}
-	}
+      .no-touch &:hover {
+        .hotgraphic-popup-arrow-l,
+        .hotgraphic-popup-arrow-r {
+          color: @button-text-color-hover;
+        }
+      }
+
+      &.disabled {
+        visibility: hidden;
+      }
+    }
+
+    .hotgraphic-popup-inner {
+      padding: @item-padding;
+    }
+
+    .hotgraphic-item-graphic {
+      padding-left: @item-padding-left;
+      width: 50%;
+      box-sizing: border-box;
+      float: right;
+
+      .dir-rtl & {
+        float: left;
+      }
+
+      text-align: center;
+    }
+
+    .hotgraphic-item-graphic-inner {
+      img {
+        display: block;
+      }
+
+      .dir-rtl & {
+        padding-left: inherit;
+        padding-right: @item-padding-left;
+      }
+    }
+
+    .hotgraphic-item-content {
+      width: 50%;
+      float: left;
+
+      .dir-rtl & {
+        float: right;
+      }
+    }
+
+    .graphic-attribution {
+      font-size: 0.75em;
+      line-height: 1em;
+      padding-top: 0.5em;
+    }
+  }
 }
 
 // Hotgraphic Narrative
 
 .hotgraphic-narrative {
-	position: relative;
-	max-height: 500px;
-	height: 500px;
+  position: relative;
+  max-height: 500px;
+  height: 500px;
 
-	.hotgraphic-graphic-pin {
-		border-radius: 0px;
-		position: absolute;
-		display: block;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		border: 4px solid @background-color;
-		background-size: cover;
-		transition: background-size .4s;
-		overflow: hidden;
+  .hotgraphic-graphic-pin {
+    border-radius: 0px;
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 4px solid @background-color;
+    background-size: cover;
+    transition: background-size 0.4s;
+    overflow: hidden;
 
-		.hotgraphic-graphic-pin-image {
-			display:block;
-			width: auto;
-			height: 100%;
-			-webkit-transition: transform .4s;
-			transition: transform .4s;
-			background-size: cover;
-			&:before {
-				content: '';
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				width: 100%;
-				height: 100%;
-				background: fadeout(@foreground-color, 50%);
-				transition: background .5s;
-			}
-		}
+    .hotgraphic-graphic-pin-image {
+      display: block;
+      width: auto;
+      height: 100%;
+      -webkit-transition: transform 0.4s;
+      transition: transform 0.4s;
+      background-size: cover;
 
-		&:hover {
-			.hotgraphic-graphic-pin-image {
-				-webkit-transform: scale(1.1);
-				transform: scale(1.1);
-				&:before {
-					background: fadeout(@foreground-color, 100%);
-				}
-			}
-		}
-	}
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: fadeout(@foreground-color, 50%);
+        transition: background 0.5s;
+      }
+    }
+
+    &:hover {
+      .hotgraphic-graphic-pin-image {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+
+        &:before {
+          background: fadeout(@foreground-color, 100%);
+        }
+      }
+    }
+  }
 }
 
 // Narrative Pin Size & Position
 
 .cols-1 {
-	width: 25%;
+  width: 25%;
 }
 
 .cols-2 {
-	width: 50%;
+  width: 50%;
 }
 
 .cols-3 {
-	width: 75%;
+  width: 75%;
 }
 
 .cols-4 {
-	width: 100%;
+  width: 100%;
 }
 
 .rows-1 {
-	height: 50%;
+  height: 50%;
 }
 
 .rows-2 {
-	height: 100%;
+  height: 100%;
 }
