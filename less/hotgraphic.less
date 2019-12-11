@@ -47,35 +47,39 @@
 
 .notify.hotgraphic {
   .notify-popup {
-    pointer-events: none;
     background-color: transparent;
     color: @font-color;
+    left: 50%;
+    max-width: @device-width-large;
+    transform: translateX(-50%);
+
+    .notify-popup-inner {
+			padding: 0;
+		}
 
     .notify-popup-content {
       width: auto;
-      pointer-events: auto;
     }
   }
 
   .notify-popup-content-inner {
     .hotgraphic-popup {
-      width: auto;
-      height: auto;
-      margin: 40px;
       background-color: @background-color;
       border: @item-border;
-      z-index: 5;
-      position: relative;
+      height: auto;
       padding-top: (@item-padding-top + @item-padding-bottom) + @icon-size;
+      position: relative;
+      width: auto;
+      z-index: 5;
     }
 
     .hotgraphic-popup-toolbar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
       background-color: @item-color;
       height: (@item-padding-top + @item-padding-bottom) + @icon-size;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
     }
 
     .hotgraphic-popup-nav {
@@ -84,13 +88,13 @@
 
     .hotgraphic-popup-done {
       position: absolute;
-      top: 0;
       right: 0;
       text-decoration: none;
+      top: 0;
 
       .dir-rtl & {
-        right: inherit;
         left: 0;
+        right: inherit;
       }
 
       .no-touch &:hover {
@@ -103,15 +107,15 @@
     .hotgraphic-popup-arrow-l,
     .hotgraphic-popup-arrow-r,
     .hotgraphic-popup-close {
-      padding: @item-padding;
       color: @button-text-color;
+      padding: @item-padding;
     }
 
     .hotgraphic-popup-count {
-      padding: @item-padding;
-      vertical-align: baseline;
       color: @item-text-color;
       float: left;
+      padding: @item-padding;
+      vertical-align: baseline;
 
       .dir-rtl & {
         float: right;
@@ -147,16 +151,15 @@
     }
 
     .hotgraphic-item-graphic {
-      padding-left: @item-padding-left;
-      width: 50%;
       box-sizing: border-box;
       float: right;
+      padding-left: @item-padding-left;
+      text-align: center;
+      width: 50%;
 
       .dir-rtl & {
         float: left;
       }
-
-      text-align: center;
     }
 
     .hotgraphic-item-graphic-inner {
@@ -171,8 +174,8 @@
     }
 
     .hotgraphic-item-content {
-      width: 50%;
       float: left;
+      width: 50%;
 
       .dir-rtl & {
         float: right;
@@ -190,46 +193,46 @@
 // Hotgraphic Narrative
 
 .hotgraphic-narrative {
-  position: relative;
-  max-height: 500px;
   height: 500px;
+  max-height: 500px;
+  position: relative;
 
   .hotgraphic-graphic-pin {
+    background-size: cover;
+    border: 4px solid @background-color;
     border-radius: 0px;
-    position: absolute;
-    display: block;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 4px solid @background-color;
-    background-size: cover;
-    transition: background-size 0.4s;
+    display: block;
     overflow: hidden;
+    position: absolute;
+    transition: background-size 0.4s;
 
     .hotgraphic-graphic-pin-image {
-      display: block;
-      width: auto;
-      height: 100%;
-      -webkit-transition: transform 0.4s;
-      transition: transform 0.4s;
       background-size: cover;
+      display: block;
+      height: 100%;
+      transition: transform 0.4s;
+      -webkit-transition: transform 0.4s;
+      width: auto;
 
       &:before {
+        background: fadeout(@foreground-color, 50%);
         content: "";
+        height: 100%;
+        left: 0px;
         position: absolute;
         top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        background: fadeout(@foreground-color, 50%);
         transition: background 0.5s;
+        width: 100%;
       }
     }
 
     &:hover {
       .hotgraphic-graphic-pin-image {
-        -webkit-transform: scale(1.1);
         transform: scale(1.1);
+        -webkit-transform: scale(1.1);
 
         &:before {
           background: fadeout(@foreground-color, 100%);
