@@ -48,9 +48,11 @@ guide the learner’s interaction with the component.
   
 **_canCycleThroughPagination** (boolean): Enables the pop-ups to be cycled through endlessly using either the previous or next icon. When set to `true`, clicking "next" on the final stage will display the very first stage. When set to `false`, the final stage will display only a "previous" icon. The default is `false`.  
 
-**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.  
+**_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.
 
-**_graphic** (string): The main image that appears below the hot spots. It contains values for **src**, **alt** and **title**.
+**_useGraphicsAsPins** (boolean): If set to `true`, the image specified by **_graphic.src** will be ignored and the popup images specified in **_items[n]._graphic.src** will instead be laid out in a grid system as defined by the classes in hotgraphic.less. See [example.json](example.json#L74-L161) for a working example. The default is `false`.
+
+**_graphic** (string): The main image that appears below the hot spots. It contains values for **src** and **alt**.
 
 >**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
 
@@ -58,11 +60,11 @@ guide the learner’s interaction with the component.
 
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.  
 
->**title** (string): This text becomes the image’s `title` attribute.  
-
-**_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body** and **_graphic**.
+**_items** (string): Multiple items may be created. Each item represents one hot spot for this component and contains values for **title**, **body**, **_graphic** and **_pin**.
 
 >**title** (string): This is the title text for a hot spot pop-up.
+
+>**_ariaLevel** (number): Aria level for the title.
 
 >**body** (string): This is the main text for a hot spot pop-up.
 
@@ -74,7 +76,18 @@ guide the learner’s interaction with the component.
 
 >>**attribution** (string): Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.
 
+
+>>**_classes** (string): CSS class name to be applied to the `hotgraphic-graphic-pin` element when component is in **_useGraphicsAsPins** mode. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+
+>**_pin** (string): Optional image that can appear instead of the default pin icon. It contains values for **src** and **alt**. 
+
+>>**src** (string): File name (including path) of the image. Path should be relative to the *src* folder (e.g., *course/en/images/origami-menu-two.jpg*).
+
+>>**alt** (string): This text becomes the pin image’s `alt` attribute. 
+
 >**strapline** (string): This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
+
+>**_classes** (string): CSS class name to be applied to the hot spot popup item. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
 >**_top** (number): Each hot spot must contain **_top** and **_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
 
@@ -90,9 +103,9 @@ When viewport size changes to the smallest range, this component will behave lik
 
 
 ----------------------------
-**Version number:**  2.1.2   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
-**Framework versions:**  2+     
+**Version number:**  4.2.2   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a> 
+**Framework versions:**  3.3+   
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA   
 **RTL support:** yes  
-**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE11, IE10, IE9, IE8, IE Mobile 11, Safari 10+11 for macOS+iOS, Opera   
+**Cross-platform coverage:** Chrome, Chrome for Android, Firefox (ESR + latest version), Edge, IE 11, IE Mobile 11, Safari 11+12 for macOS+iOS, Opera   

@@ -7,17 +7,18 @@
     "ariaRegion": {
       "type": "string",
       "required": true,
-      "default": "Below is a component which allows you to select hot spots over an image. Select a hot spot to trigger a popup that includes an image with display text. Select the close button to close the popup.",
+      "default": "Image with selectable areas. Select each button to show more information.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
     },
-    "ariaPopupLabel": {
+    "popupPagination": {
       "type": "string",
       "required": true,
-      "default": "Hotgraphic popup",
+      "default": "{{itemNumber}} / {{totalItems}}",
       "inputType": "Text",
       "validators": [],
+      "help": "This is the aria label for each item. Use {{itemNumber}} and {{totalItems}} in your text to tell the user which item they are viewing and how many items there are in total.",
       "translatable": true
     }
   },
@@ -35,8 +36,20 @@
       "default": "",
       "inputType": "Text",
       "validators": [],
-      "help": "This is the instruction text",
       "translatable": true
+    },
+    "_setCompletionOn": {
+      "type": "string",
+      "required": false,
+      "default": "allItems",
+      "title": "Set completion on:",
+      "enum": ["inview", "allItems"],
+      "inputType": {
+        "type": "Select",
+        "options": ["inview", "allItems"]
+      },
+      "validators": [],
+      "help": "Whether completion is based on the learner having viewed all the items - or just having viewed the component"
     },
     "_graphic": {
       "type": "object",
@@ -57,7 +70,7 @@
           "default": "",
           "inputType": "Text",
           "validators": [],
-          "help": "Alternative text for this image",
+          "help": "Alternative text for the image",
           "translatable": true
         },
         "attribution": {
@@ -105,7 +118,7 @@
       "title": "Cycle through item pagination",
       "inputType": "Checkbox",
       "validators": [],
-      "help": "If enabled, the items in the open popup will be allowed to cycle through continiously"
+      "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
     "_useGraphicsAsPins": {
       "type": "boolean",
@@ -134,6 +147,15 @@
             "help": "Title displayed in the popup",
             "translatable": true
           },
+          "_ariaLevel": {
+            "type": "number",
+            "required": true,
+            "default": 0,
+            "title": "Title level",
+            "inputType": "Number",
+            "validators": ["required", "number"],
+            "help": "Aria level for title"
+          },
           "body": {
             "type": "string",
             "required": true,
@@ -149,7 +171,7 @@
             "default": "",
             "inputType": "Text",
             "validators": ["required"],
-            "help": "Strapline displayed on mobile version",
+            "help": "Strapline - displayed on mobile version only",
             "translatable": true
           },
           "_graphic": {
@@ -163,7 +185,49 @@
                 "default": "",
                 "inputType": "Asset:image",
                 "validators": ["required"],
-                "help": "Image displayed in the popup"
+                "help": "Image to be displayed in a popup when this item is selected."
+              },
+              "alt": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Alternative text for the popup image",
+                "translatable": true
+              },
+              "attribution": {
+                "type":"string",
+                "required":false,
+                "default": "",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Text to be displayed as an attribution for the popup image",
+                "translatable": true
+              },
+              "_classes": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Graphic Classes",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Allows you to specify positioning classes for when this component is in 'graphics as pins' mode"
+              }
+            }
+          },
+          "_pin": {
+            "type": "object",
+            "required": false,
+            "title": "Item Pin",
+            "properties": {
+              "src": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "help": "This is the pin image, leave blank for default"
               },
               "alt": {
                 "type": "string",
@@ -173,33 +237,6 @@
                 "validators": [],
                 "help": "Alternative text for this image",
                 "translatable": true
-              },
-              "attribution": {
-                "type":"string",
-                "required":false,
-                "default": "",
-                "inputType": "Text",
-                "validators": [],
-                "help": "Text to be displayed as an attribution",
-                "translatable": true
-              },
-              "title": {
-                "type": "string",
-                "required": true,
-                "default": "",
-                "inputType": "Text",
-                "validators": [],
-                "help": "Title text for this image",
-                "translatable": true
-              },
-              "_classes": {
-                "type": "string",
-                "required": false,
-                "default": "",
-                "title": "Classes",
-                "inputType": "Text",
-                "validators": [],
-                "help": ""
               }
             }
           },
@@ -207,10 +244,10 @@
             "type": "string",
             "required": false,
             "default": "",
-            "title": "Classes",
+            "title": "Item Popup Classes",
             "inputType": "Text",
             "validators": [],
-            "help": ""
+            "help": "Allows you to specify custom CSS classes to be applied to the popup item"
           },
           "_left": {
             "type": "number",
