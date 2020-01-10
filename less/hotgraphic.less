@@ -52,13 +52,18 @@
 .notify.hotgraphic {
 
 	.notify-popup {
-		pointer-events: none;
+		max-width: @device-width-large;
+		left: 50%;
+		transform: translateX(-50%);
 		background-color: transparent;
 		color: @font-color;
+		
+		.notify-popup-inner {
+			padding: 0;
+		}
 
 		.notify-popup-content {
 			width: auto;
-			pointer-events: auto;
 		}
 	}
 
@@ -66,7 +71,6 @@
 		.hotgraphic-popup {
 			width: auto;
 			height: auto;
-			margin: 40px;
 			background-color: @background-color;
 			border: @item-border;
 			z-index: 5;
