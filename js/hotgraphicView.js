@@ -154,7 +154,7 @@ define([
         _view: this.popupView,
         _isCancellable: true,
         _showCloseButton: false,
-        _classes: ' hotgraphic'
+        _classes: 'hotgraphic ' + this.model.get('_classes')
       });
 
       this.listenToOnce(Adapt, {
