@@ -89,9 +89,9 @@ guide the learner’s interaction with the component.
 
 >**\_classes** (string): CSS class name to be applied to the popup item. Supported classes are `"align-image-left"` and `"hide-desktop-image"` which aligns the item image to the left and hides the pop up image in desktop view respectively. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
->**\_top** (number): Each hot spot must contain **\_top** and **\_left** coordinates to position them on the hot graphic. Enter the number of pixels this hot spot should be from the top border of the main graphic.
+>**\_top** (number): Each hot spot must contain **\_top** and **\_left** coordinates to position them on the hot graphic. Enter a percentage value (0-100) that this hot spot should be from the top border of the main graphic.
 
->**\_left** (number): Enter the number of pixels this hot spot should be from the left border of the main graphic.  
+>**\_left** (number): Enter a percentage value (0-100) that this hot spot should be from the left border of the main graphic.
 
 ### Accessibility
 **Hot Graphic** has two elements assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion** and **ariaPopupLabel**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema).   
