@@ -98,6 +98,8 @@ define([
         },
 
         onControlClick: function(event) {
+            event.preventDefault();
+
             var direction = $(event.currentTarget).hasClass('back') ? 'back' : 'next';
             var index = this.getNextIndex(direction);
 
