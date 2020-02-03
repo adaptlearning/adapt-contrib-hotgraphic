@@ -86,7 +86,7 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            var $pin = this.getItemElement(e);
+            var $pin = this.getItemElement(model);
             $pin.toggleClass('active', _isActive);
 
             if (!_isActive) {
