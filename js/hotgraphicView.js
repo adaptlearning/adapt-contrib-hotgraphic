@@ -160,6 +160,7 @@ define([
                 _view: this.popupView,
                 _isCancellable: true,
                 _showCloseButton: false,
+                _closeOnBackdrop: true,
                 _classes: ' hotgraphic'
             });
 
