@@ -86,7 +86,13 @@ define([
         },
 
         onItemsActiveChange: function(model, _isActive) {
-            this.getItemElement(model).toggleClass('active', _isActive);
+            var $pin = this.getItemElement(model);
+            $pin.toggleClass('active', _isActive);
+
+            if (!_isActive) {
+                // Popup has been closed so restore focus to last active pin
+                $pin.a11y_focus();
+            }
         },
 
         getItemElement: function(model) {
