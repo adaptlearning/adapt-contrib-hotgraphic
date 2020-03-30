@@ -41,8 +41,8 @@ define([
           .toggleClass('first', !shouldEnableBack)
           .toggleClass('last', !shouldEnableNext);
 
-      $controls.filter('.back').a11y_cntrl_enabled(shouldEnableBack);
-      $controls.filter('.next').a11y_cntrl_enabled(shouldEnableNext);
+      Adapt.a11y.toggleAccessibleEnabled($controls.filter('.back'), shouldEnableBack);
+      Adapt.a11y.toggleAccessibleEnabled($controls.filter('.next'), shouldEnableNext);
     },
 
     updatePageCount: function() {
@@ -55,16 +55,16 @@ define([
     },
 
     handleTabs: function() {
-      this.$('.hotgraphic-popup__item:not(.is-active) *').a11y_on(false);
-      this.$('.hotgraphic-popup__item.is-active *').a11y_on(true);
+      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active) *'), true);
+      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active *'), false);
     },
 
     onItemsActiveChange: function(item, _isActive) {
       if (!_isActive) return;
       var index = item.get('_index');
       this.updatePageCount();
-      this.handleTabs();
       this.applyItemClasses(index);
+      this.handleTabs();
       this.handleFocus(index);
     },
 
@@ -76,7 +76,7 @@ define([
     },
 
     handleFocus: function(index) {
-      this.$('.hotgraphic-popup__inner .is-active').a11y_focus();
+      Adapt.a11y.focusFirst(this.$('.hotgraphic-popup__inner .is-active'));
       this.applyNavigationClasses(index);
     },
 
