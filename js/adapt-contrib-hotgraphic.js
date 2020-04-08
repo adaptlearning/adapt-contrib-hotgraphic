@@ -5,7 +5,7 @@ define([
 ], function(Adapt, HotgraphicView, ItemsComponentModel) {
 
   return Adapt.register('hotgraphic', {
-    model: ItemsComponentModel,
+    model: ItemsComponentModel.extend({}),
     view: HotgraphicView
   });
 
