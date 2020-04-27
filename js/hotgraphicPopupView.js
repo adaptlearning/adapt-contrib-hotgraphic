@@ -61,8 +61,8 @@ define([
             if (!_isActive) return;
             var index = item.get('_index');
             this.updatePageCount();
-            this.handleTabs();
             this.applyItemClasses(index);
+            this.handleTabs();
             this.handleFocus(index);
         },
 
