@@ -13,7 +13,7 @@
         </div>
         <div class="hotgraphic-item-graphic">
             <div class="hotgraphic-item-graphic-inner">
-            <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}"/>
+            <img src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}/>
             </div>
             {{#if _graphic.attribution}}
             <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
