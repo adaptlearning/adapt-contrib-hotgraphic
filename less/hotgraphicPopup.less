@@ -113,6 +113,22 @@
   // Hide hotgraphic pop up image in desktop
   // --------------------------------------------------
   &__item.hide-desktop-image {
+    @media (min-width: @device-width-medium) {
+      .hotgraphic-popup__item-content {
+        width: 100%;
+      }
+
+      .hotgraphic-popup__item-image-container {
+        display: none;
+      }
+    }
+  }
+  // --------------------------------------------------
+
+  // --------------------------------------------------
+  // Hide hotgraphic pop up image for all screen sizes
+  // --------------------------------------------------
+  &__item.hide-popup-image {
     .hotgraphic-popup__item-content {
       width: 100%;
     }
