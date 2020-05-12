@@ -3,7 +3,7 @@
   <div class="hotgraphic-widget component-widget {{#unless _useGraphicsAsPins}}pin{{else}}tile{{/unless}}">
     <div class="hotgraphic-graphic"{{#unless _useGraphicsAsPins}} role="list"{{/unless}}>
       {{#unless _useGraphicsAsPins}}
-        <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" />
+        <img src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}/>
         {{#if _graphic.attribution}}
           <div class="graphic-attribution">{{{_graphic.attribution}}}</div>
         {{/if}}
