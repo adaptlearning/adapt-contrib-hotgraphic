@@ -1,7 +1,7 @@
 {
   "name": "adapt-contrib-hotgraphic",
   "version": "5.0.0",
-  "framework": ">=5",
+  "framework": ">=5.3",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
   "issues": "https://github.com/adaptlearning/adapt_framework/issues/new",
   "component" : "hotgraphic",

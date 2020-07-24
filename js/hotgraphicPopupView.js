@@ -3,16 +3,20 @@ define([
   ], function(Adapt) {
     'use strict';
   
-    var HotgraphicPopupView = Backbone.View.extend({
+    class HotgraphicPopupView extends Backbone.View {
   
-      className: 'hotgraphic-popup',
+      className() {
+        return 'hotgraphic-popup';
+      }
   
-      events: {
-        'click .js-hotgraphic-popup-close': 'closePopup',
-        'click .js-hotgraphic-controls-click': 'onControlClick'
-      },
+      events() {
+        return {
+            'click .js-hotgraphic-popup-close': 'closePopup',
+            'click .js-hotgraphic-controls-click': 'onControlClick'
+        }
+      }
   
-      initialize: function() {
+      initialize() {
         // Debounce required as a second (bad) click event is dispatched on iOS causing a jump of two items.
         this.onControlClick = _.debounce(this.onControlClick.bind(this), 100);
         this.listenToOnce(Adapt, "notify:opened", this.onOpened);
@@ -21,15 +25,15 @@ define([
           'change:_isVisited': this.onItemsVisitedChange
         });
         this.render();
-      },
+      }
   
-      onOpened: function() {
+      onOpened() {
         this.applyNavigationClasses(this.model.getActiveItem().get('_index'));
         this.updatePageCount();
         this.handleTabs();
-      },
+      }
   
-      applyNavigationClasses: function (index) {
+      applyNavigationClasses(index) {
         var itemCount = this.model.get('_items').length;
         var canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
   
@@ -43,72 +47,72 @@ define([
   
         Adapt.a11y.toggleAccessibleEnabled($controls.filter('.back'), shouldEnableBack);
         Adapt.a11y.toggleAccessibleEnabled($controls.filter('.next'), shouldEnableNext);
-      },
+      }
   
-      updatePageCount: function() {
+      updatePageCount() {
         var template = Adapt.course.get("_globals")._components._hotgraphic.popupPagination || '{{itemNumber}} / {{totalItems}}';
         var labelText = Handlebars.compile(template)({
           itemNumber: this.model.getActiveItem().get('_index') + 1,
           totalItems: this.model.get("_items").length
         });
         this.$('.hotgraphic-popup__count').html(labelText);
-      },
+      }
   
-      handleTabs: function() {
+      handleTabs() {
         Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active) *'), true);
         Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active *'), false);
-      },
+      }
   
-      onItemsActiveChange: function(item, _isActive) {
+      onItemsActiveChange(item, _isActive) {
         if (!_isActive) return;
         var index = item.get('_index');
         this.updatePageCount();
         this.applyItemClasses(index);
         this.handleTabs();
         this.handleFocus(index);
-      },
+      }
   
-      applyItemClasses: function(index) {
+      applyItemClasses(index) {
         this.$('.hotgraphic-popup__item[data-index="' + index + '"]').addClass('is-active').removeAttr('aria-hidden');
         this.$('.hotgraphic-popup__item[data-index="' + index + '"] .hotgraphic-popup__item-title').attr("id", "notify-heading");
         this.$('.hotgraphic-popup__item:not([data-index="' + index + '"])').removeClass('is-active').attr('aria-hidden', 'true');
         this.$('.hotgraphic-popup__item:not([data-index="' + index + '"]) .hotgraphic-popup__item-title').removeAttr("id");
-      },
+      }
   
-      handleFocus: function(index) {
+      handleFocus(index) {
         Adapt.a11y.focusFirst(this.$('.hotgraphic-popup__inner .is-active'));
         this.applyNavigationClasses(index);
-      },
+      }
   
-      onItemsVisitedChange: function(item, _isVisited) {
+      onItemsVisitedChange(item, _isVisited) {
         if (!_isVisited) return;
   
         this.$('.hotgraphic-popup__item')
             .filter('[data-index="' + item.get('_index') + '"]')
             .addClass('is-visited');
-      },
+      }
   
-      render: function() {
+      render() {
         var data = this.model.toJSON();
         data.view = this;
         var template = Handlebars.templates['hotgraphicPopup'];
         this.$el.html(template(data));
-      },
+      }
   
-      closePopup: function(event) {
+      closePopup(event) {
         Adapt.trigger('notify:close');
-      },
+      }
   
-      onControlClick: function(event) {
+      onControlClick(event) {
         var direction = $(event.currentTarget).hasClass('back') ? 'back' : 'next';
         var index = this.getNextIndex(direction);
   
         if (index !== -1) {
           this.setItemState(index);
         }
-      },
+      }
   
-      getNextIndex: function(direction) {
+      getNextIndex(direction) {
         var index = this.model.getActiveItem().get('_index');
         var lastIndex = this.model.get('_items').length - 1;
   
@@ -122,9 +126,9 @@ define([
             if (this.model.get('_canCycleThroughPagination')) return 0;
         }
         return -1;
-      },
+      }
   
-      setItemState: function(index) {
+      setItemState(index) {
         this.model.getActiveItem().toggleActive();
   
         var nextItem = this.model.getItem(index);
@@ -132,7 +136,7 @@ define([
         nextItem.toggleVisited(true);
       }
   
-    });
+    };
   
     return HotgraphicPopupView;
   

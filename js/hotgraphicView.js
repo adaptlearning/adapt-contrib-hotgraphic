@@ -5,47 +5,49 @@ define([
   ], function(Adapt, ComponentView, HotgraphicPopupView) {
     'use strict';
   
-    var HotGraphicView = ComponentView.extend({
+    class HotGraphicView extends ComponentView {
   
-      events: {
-        'click .js-hotgraphic-item-click': 'onPinClicked'
-      },
+      events() {
+        return {
+            'click .js-hotgraphic-item-click': 'onPinClicked'
+        }
+      }
   
-      initialize: function() {
+      initialize() {
         ComponentView.prototype.initialize.call(this);
         this.setUpViewData();
         this.setUpModelData();
         this.setUpEventListeners();
         this.checkIfResetOnRevisit();
-      },
+      }
   
-      setUpViewData: function() {
+      setUpViewData() {
         this.popupView = null;
         this._isPopupOpen = false;
-      },
+      }
   
-      setUpModelData: function() {
+      setUpModelData() {
         if (this.model.get('_canCycleThroughPagination') === undefined) {
           this.model.set('_canCycleThroughPagination', false);
         }
-      },
+      }
   
-      setUpEventListeners: function() {
+      setUpEventListeners() {
         this.listenTo(Adapt, 'device:changed', this.reRender);
   
         this.listenTo(this.model.get('_children'), {
           'change:_isActive': this.onItemsActiveChange,
           'change:_isVisited': this.onItemsVisitedChange
         });
-      },
+      }
   
-      reRender: function() {
+      reRender() {
         if (Adapt.device.screenSize !== 'large') {
           this.replaceWithNarrative();
         }
-      },
+      }
   
-      replaceWithNarrative: function() {
+      replaceWithNarrative() {
         var NarrativeView = Adapt.getViewClass('narrative');
   
         var model = this.prepareNarrativeModel();
@@ -57,9 +59,9 @@ define([
         $container.append(newNarrative.$el);
         Adapt.trigger('device:resize');
         _.defer(this.remove.bind(this));
-      },
+      }
   
-      prepareNarrativeModel: function() {
+      prepareNarrativeModel() {
         var model = this.model;
         model.set({
           '_component': 'narrative',
@@ -83,18 +85,18 @@ define([
         }
   
         return model;
-      },
+      }
   
-      onItemsActiveChange: function(model, _isActive) {
+      onItemsActiveChange(model, _isActive) {
         this.getItemElement(model).toggleClass('is-active', _isActive);
-      },
+      }
   
-      getItemElement: function(model) {
+      getItemElement(model) {
         var index = model.get('_index');
         return this.$('.js-hotgraphic-item-click').filter('[data-index="' + index + '"]');
-      },
+      }
   
-      onItemsVisitedChange: function(model, _isVisited) {
+      onItemsVisitedChange(model, _isVisited) {
         if (!_isVisited) return;
         var $pin = this.getItemElement(model);
   
@@ -105,33 +107,33 @@ define([
         });
   
         $pin.addClass('is-visited');
-      },
+      }
   
-      checkIfResetOnRevisit: function() {
+      checkIfResetOnRevisit() {
         var isResetOnRevisit = this.model.get('_isResetOnRevisit');
   
         // If reset is enabled set defaults
         if (isResetOnRevisit) {
           this.model.reset(isResetOnRevisit);
         }
-      },
+      }
   
-      preRender: function() {
+      preRender() {
         if (Adapt.device.screenSize === 'large') {
           this.render();
         } else {
           this.reRender();
         }
-      },
+      }
   
-      postRender: function() {
+      postRender() {
         this.$('.hotgraphic__widget').imageready(this.setReadyStatus.bind(this));
         if (this.model.get('_setCompletionOn') === 'inview') {
           this.setupInviewCompletion('.component__widget');
         }
-      },
+      }
   
-      onPinClicked: function (event) {
+      onPinClicked(event) {
         if (event) event.preventDefault();
   
         var item = this.model.getItem($(event.currentTarget).data('index'));
@@ -139,9 +141,9 @@ define([
         item.toggleVisited(true);
   
         this.openPopup();
-      },
+      }
   
-      openPopup: function() {
+      openPopup() {
         if (this._isPopupOpen) return;
   
         this._isPopupOpen = true;
@@ -160,14 +162,14 @@ define([
         this.listenToOnce(Adapt, {
           'popup:closed': this.onPopupClosed
         });
-      },
+      }
   
-      onPopupClosed: function() {
+      onPopupClosed() {
         this.model.getActiveItem().toggleActive();
         this._isPopupOpen = false;
       }
   
-    });
+    };
   
     return HotGraphicView;
   
