@@ -3,145 +3,145 @@ define([
   'core/js/views/componentView',
   './hotgraphicPopupView'
 ], function(Adapt, ComponentView, HotgraphicPopupView) {
-  'use strict';
 
-  var HotGraphicView = ComponentView.extend({
+  class HotGraphicView extends ComponentView {
 
-    events: {
-      'click .js-hotgraphic-item-click': 'onPinClicked'
-    },
+    events () {
+      return {
+        'click .js-hotgraphic-item-click': 'onPinClicked'
+      }
+    }
 
-    initialize: function() {
-      ComponentView.prototype.initialize.call(this);
+    initialize(...args) {
+      super.initialize(...args);
+
       this.setUpViewData();
       this.setUpModelData();
       this.setUpEventListeners();
       this.checkIfResetOnRevisit();
-    },
+    }
 
-    setUpViewData: function() {
+    setUpViewData() {
       this.popupView = null;
       this._isPopupOpen = false;
-    },
+    }
 
-    setUpModelData: function() {
+    setUpModelData() {
       if (this.model.get('_canCycleThroughPagination') === undefined) {
         this.model.set('_canCycleThroughPagination', false);
       }
-    },
+    }
 
-    setUpEventListeners: function() {
+    setUpEventListeners() {
       this.listenTo(Adapt, 'device:changed', this.reRender);
 
       this.listenTo(this.model.get('_children'), {
         'change:_isActive': this.onItemsActiveChange,
         'change:_isVisited': this.onItemsVisitedChange
       });
-    },
+    }
 
-    reRender: function() {
-      if (Adapt.device.screenSize !== 'large') {
-        this.replaceWithNarrative();
-      }
-    },
+    reRender() {
+      if (Adapt.device.screenSize === 'large') return;
 
-    replaceWithNarrative: function() {
-      var NarrativeView = Adapt.getViewClass('narrative');
+      this.replaceWithNarrative();
+    }
 
-      var model = this.prepareNarrativeModel();
-      var newNarrative = new NarrativeView({ model: model });
-      var $container = $(".component__container", $("." + this.model.get("_parentId")));
+    replaceWithNarrative() {
+      const NarrativeView = Adapt.getViewClass('narrative');
+      if (!NarrativeView) return;
 
-      newNarrative.reRender();
-      newNarrative.setupNarrative();
-      $container.append(newNarrative.$el);
-      Adapt.trigger('device:resize');
-      _.defer(this.remove.bind(this));
-    },
+      const model = this.prepareNarrativeModel();
+      const newNarrative = new NarrativeView({ model });
 
-    prepareNarrativeModel: function() {
-      var model = this.model;
-      model.set({
-        '_component': 'narrative',
-        '_wasHotgraphic': true,
-        'originalBody': model.get('body'),
-        'originalInstruction': model.get('instruction')
+      this.$el.parents('.component__container').append(newNarrative.$el);
+      this.remove();
+      _.defer(() => {
+        Adapt.trigger('device:resize');
+      });
+    }
+
+    prepareNarrativeModel() {
+      this.model.set({
+        _component: 'narrative',
+        _wasHotgraphic: true,
+        originalBody: this.model.get('body'),
+        originalInstruction: this.model.get('instruction')
       });
 
       // Check if active item exists, default to 0
-      var activeItem = model.getActiveItem();
+      const activeItem = this.model.getActiveItem();
       if (!activeItem) {
-        model.getItem(0).toggleActive(true);
+        this.model.getItem(0).toggleActive(true);
       }
 
       // Swap mobile body and instructions for desktop variants.
-      if (model.get('mobileBody')) {
-        model.set('body', model.get('mobileBody'));
+      if (this.model.get('mobileBody')) {
+        this.model.set('body', this.model.get('mobileBody'));
       }
-      if (model.get('mobileInstruction')) {
-        model.set('instruction', model.get('mobileInstruction'));
+      if (this.model.get('mobileInstruction')) {
+        this.model.set('instruction', this.model.get('mobileInstruction'));
       }
 
-      return model;
-    },
+      return this.model;
+    }
 
-    onItemsActiveChange: function(model, _isActive) {
+    onItemsActiveChange(model, _isActive) {
       this.getItemElement(model).toggleClass('is-active', _isActive);
-    },
+    }
 
-    getItemElement: function(model) {
-      var index = model.get('_index');
-      return this.$('.js-hotgraphic-item-click').filter('[data-index="' + index + '"]');
-    },
+    getItemElement(model) {
+      const index = model.get('_index');
+      return this.$('.js-hotgraphic-item-click').filter(`[data-index="${index}"]`);
+    }
 
-    onItemsVisitedChange: function(model, _isVisited) {
+    onItemsVisitedChange(model, _isVisited) {
       if (!_isVisited) return;
-      var $pin = this.getItemElement(model);
 
+      const $pin = this.getItemElement(model);
       // Append the word 'visited.' to the pin's aria-label
-      var visitedLabel = this.model.get('_globals')._accessibility._ariaLabels.visited + ".";
+      const visitedLabel = ` ${this.model.get('_globals')._accessibility._ariaLabels.visited}.`;
       $pin.find('.aria-label').each(function(index, el) {
-        el.innerHTML += " " + visitedLabel;
+        el.innerHTML += visitedLabel;
       });
 
       $pin.addClass('is-visited');
-    },
+    }
 
-    checkIfResetOnRevisit: function() {
-      var isResetOnRevisit = this.model.get('_isResetOnRevisit');
+    checkIfResetOnRevisit() {
+      const isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
       // If reset is enabled set defaults
       if (isResetOnRevisit) {
         this.model.reset(isResetOnRevisit);
       }
-    },
+    }
 
-    preRender: function() {
+    preRender() {
       if (Adapt.device.screenSize === 'large') {
         this.render();
-      } else {
-        this.reRender();
+        return;
       }
-    },
 
-    postRender: function() {
+      this.reRender();
+    }
+
+    postRender() {
       this.$('.hotgraphic__widget').imageready(this.setReadyStatus.bind(this));
       if (this.model.get('_setCompletionOn') === 'inview') {
         this.setupInviewCompletion('.component__widget');
       }
-    },
+    }
 
-    onPinClicked: function (event) {
-      if (event) event.preventDefault();
-
-      var item = this.model.getItem($(event.currentTarget).data('index'));
+    onPinClicked (event) {
+      const item = this.model.getItem($(event.currentTarget).data('index'));
       item.toggleActive(true);
       item.toggleVisited(true);
 
       this.openPopup();
-    },
+    }
 
-    openPopup: function() {
+    openPopup() {
       if (this._isPopupOpen) return;
 
       this._isPopupOpen = true;
@@ -150,7 +150,7 @@ define([
         model: this.model
       });
 
-      Adapt.trigger("notify:popup", {
+      Adapt.notify.popup({
         _view: this.popupView,
         _isCancellable: true,
         _showCloseButton: false,
@@ -160,14 +160,16 @@ define([
       this.listenToOnce(Adapt, {
         'popup:closed': this.onPopupClosed
       });
-    },
+    }
 
-    onPopupClosed: function() {
+    onPopupClosed() {
       this.model.getActiveItem().toggleActive();
       this._isPopupOpen = false;
     }
 
-  });
+  }
+
+  HotGraphicView.template = 'hotgraphic';
 
   return HotGraphicView;
 

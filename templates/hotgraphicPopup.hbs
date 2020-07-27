@@ -49,13 +49,13 @@
   {{#unless _hidePagination}}
   <div class="hotgraphic-popup__nav">
 
-    <button class="btn-icon hotgraphic-popup__controls back js-hotgraphic-controls-click" aria-label="{{_globals._accessibility._ariaLabels.previous}}">
+    <button data-direction="back" class="btn-icon hotgraphic-popup__controls back js-hotgraphic-controls-click" aria-label="{{_globals._accessibility._ariaLabels.previous}}">
       <div class="icon"></div>
     </button>
 
     <div class="hotgraphic-popup__count"></div>
 
-    <button class="btn-icon hotgraphic-popup__controls next js-hotgraphic-controls-click" aria-label="{{_globals._accessibility._ariaLabels.next}}">
+    <button data-direction="next" class="btn-icon hotgraphic-popup__controls next js-hotgraphic-controls-click" aria-label="{{_globals._accessibility._ariaLabels.next}}">
       <div class="icon"></div>
     </button>
 
