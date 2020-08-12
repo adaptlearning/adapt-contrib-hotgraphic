@@ -53,8 +53,13 @@ define([
 
       const model = this.prepareNarrativeModel();
       const newNarrative = new NarrativeView({ model });
+      // NOTE: if this component is doing its inital render in 'narrative mode',
+      // this.$el.parents() won't exist at this point - which is why the following is
+      // written the way it is, instead of (what would appear to be) the more efficient
+      // this.$el.parents('.component__container')
+      const $container = $('.' + this.model.get('_parentId')).find('.component__container');
+      $container.append(newNarrative.$el);
 
-      this.$el.parents('.component__container').append(newNarrative.$el);
       this.remove();
       _.defer(() => {
         Adapt.trigger('device:resize');
