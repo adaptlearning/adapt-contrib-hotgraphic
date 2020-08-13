@@ -57,7 +57,7 @@ define([
       // this.$el.parents() won't exist at this point - which is why the following is
       // written the way it is, instead of (what would appear to be) the more efficient
       // this.$el.parents('.component__container')
-      const $container = $('.' + this.model.get('_parentId')).find('.component__container');
+      const $container = Adapt.findViewByModelId(model.get('_parentId')).$el.find('.component__container');
       $container.append(newNarrative.$el);
 
       this.remove();
