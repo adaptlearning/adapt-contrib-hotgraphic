@@ -74,8 +74,8 @@
           "translatable": true
         },
         "attribution": {
-          "type":"string",
-          "required":false,
+          "type": "string",
+          "required": false,
           "default": "",
           "inputType": "Text",
           "validators": [],
@@ -129,13 +129,22 @@
       "validators": [],
       "help": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
     },
+    "_isRound": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Should item image be round?",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, a 50% border radius will be applied to the items pop up images."
+    },
     "_items": {
       "type": "array",
       "required": true,
       "title": "Hot Graphic Pins",
       "items": {
         "type": "object",
-	      "inputType": "Hotgraphic:pins",
+        "inputType": "Hotgraphic:pins",
         "required": true,
         "properties": {
           "title": {
@@ -197,8 +206,8 @@
                 "translatable": true
               },
               "attribution": {
-                "type":"string",
-                "required":false,
+                "type": "string",
+                "required": false,
                 "default": "",
                 "inputType": "Text",
                 "validators": [],
@@ -212,7 +221,7 @@
                 "title": "Graphic Classes",
                 "inputType": "Text",
                 "validators": [],
-                "help": "Allows you to specify positioning classes for when this component is in 'graphics as pins' mode"
+                "help": "Allows you to specify custom CSS classes to be applied to the hotgraphic pin or, alternatively, to the hotspot tile when _useGraphicsAsPins is set to true"
               }
             }
           },
@@ -247,7 +256,7 @@
             "title": "Item Popup Classes",
             "inputType": "Text",
             "validators": [],
-            "help": "Allows you to specify custom CSS classes to be applied to the popup item"
+            "help": "Allows you to specify custom CSS classes to be applied to the popup item. Supported classes are 'align-image-left', 'hide-desktop-image', and 'hide-popup-image' which aligns the item image to the left, hides the pop up image in desktop view, and hides the pop up image for all screen sizes respectively."
           },
           "_left": {
             "type": "number",
