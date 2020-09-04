@@ -153,6 +153,7 @@
       "title": "Hot Graphic Pins",
       "items": {
         "type": "object",
+        "inputType": "Hotgraphic:pins",
         "required": true,
         "properties": {
           "title": {
