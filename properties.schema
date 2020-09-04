@@ -120,6 +120,15 @@
       "validators": [],
       "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
+    "_useNumberedPins": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "title": "Use numbered pins",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process."
+    },
     "_useGraphicsAsPins": {
       "type": "boolean",
       "required": true,

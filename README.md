@@ -49,6 +49,8 @@ guide the learner’s interaction with the component.
 
 **\_hidePagination** (boolean): When set to `true`, hides the "previous" and "next" icons and progress indicator (e.g., "1/5") on the pop-up's toolbar. The default is `false`.
 
+**\_useNumberedPins** (boolean): If set to `true`, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process. The default is `false`.
+
 **\_useGraphicsAsPins** (boolean): If set to `true`, the image specified by **\_graphic.src** will be ignored and the popup images specified in **\_items[n].\_graphic.src** will instead be laid out in a 2 item width grid system. See [example.json](example.json#L77-L121) for a working example. The default is `false`.
 
 **\_isRound** (boolean): If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
@@ -102,8 +104,8 @@ guide the learner’s interaction with the component.
 When viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic.
 
 ----------------------------
-**Version number:**  5.1.1   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
-**Framework versions:**  5+  
+**Version number:**  5.2.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
+**Framework versions:**  5.5+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA  
 **RTL support:** Yes  
