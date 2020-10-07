@@ -53,7 +53,7 @@
       {{#each _items}}
       <div class="hotgraphic__tile-item" role="listitem">
 
-        <button class="hotgraphic__tile item-{{@index}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}}{{#if _isVisited}} is-visited{{/if}} js-hotgraphic-item-click" data-index="{{@index}}">
+        <button class="hotgraphic__tile item-{{@index}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}}{{#if _isVisited}} is-visited{{/if}} js-hotgraphic-item-click" data-index="{{@index}}" style="top: {{{_top}}}%; left: {{{_left}}}%;>
 
           <span class="aria-label">{{title}}.</span>
 
