@@ -42,7 +42,7 @@ define([
     }
 
     reRender() {
-      if (Adapt.device.screenSize === 'large') return;
+      if (Adapt.device.screenSize === 'large' || !this.model.get('_isNarrativeOnMobile')) return;
 
       this.replaceWithNarrative();
     }

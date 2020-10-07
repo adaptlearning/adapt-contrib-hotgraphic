@@ -9,6 +9,11 @@
     position: absolute;
     top: 0;
     left: 0;
+    padding: @icon-padding / 2;
+
+    @media (min-width: @device-width-medium) {
+      padding: @icon-padding;
+    }
   }
 
   &__pin .icon {
