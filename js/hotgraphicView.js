@@ -43,7 +43,7 @@ define([
 
     reRender() {
       if (Adapt.device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
-      
+
       this.replaceWithNarrative();
     }
 
