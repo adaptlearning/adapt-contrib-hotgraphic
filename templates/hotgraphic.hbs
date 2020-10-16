@@ -32,7 +32,9 @@
           {{else}}
 
           {{#if ../_useNumberedPins}}
-          <div class="hotgraphic__pin-number">{{math @index "+" 1}}</div>
+          <div class="hotgraphic__pin-number" aria-hidden="true">
+            {{math @index "+" 1}}
+          </div>
           {{else}}
           <div class="icon"></div>
           {{/if}}
