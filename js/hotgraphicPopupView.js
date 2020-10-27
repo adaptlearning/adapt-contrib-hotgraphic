@@ -12,7 +12,7 @@ define([
       return {
         'click .js-hotgraphic-popup-close': 'closePopup',
         'click .js-hotgraphic-controls-click': 'onControlClick'
-      }
+      };
     }
 
     initialize(...args) {

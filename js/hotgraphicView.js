@@ -9,7 +9,7 @@ define([
     events () {
       return {
         'click .js-hotgraphic-item-click': 'onPinClicked'
-      }
+      };
     }
 
     initialize(...args) {
