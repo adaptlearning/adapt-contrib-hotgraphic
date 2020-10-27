@@ -120,6 +120,15 @@
       "validators": [],
       "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
+    "_isNarrativeOnMobile": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "title": "Render as Narrative on mobile?",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction."
+    },
     "_useNumberedPins": {
       "type": "boolean",
       "required": true,

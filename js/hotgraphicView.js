@@ -9,7 +9,7 @@ define([
     events () {
       return {
         'click .js-hotgraphic-item-click': 'onPinClicked'
-      }
+      };
     }
 
     initialize(...args) {
@@ -42,7 +42,7 @@ define([
     }
 
     reRender() {
-      if (Adapt.device.screenSize === 'large') return;
+      if (Adapt.device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
 
       this.replaceWithNarrative();
     }
