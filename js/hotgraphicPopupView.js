@@ -59,8 +59,8 @@ define([
     }
 
     handleTabs() {
-      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active) *'), true);
-      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active *'), false);
+      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active)'), true);
+      Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active'), false);
     }
 
     onItemsActiveChange(item, _isActive) {
