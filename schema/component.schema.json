@@ -150,12 +150,7 @@
                 "type": "number",
                 "title": "Title level",
                 "description": "Aria level for title",
-                "default": 0,
-                "_backboneForms": {
-                  "validators": [
-                    "number"
-                  ]
-                }
+                "default": 0
               },
               "body": {
                 "type": "string",
@@ -256,23 +251,13 @@
                 "type": "number",
                 "title": "Pin Position - Left",
                 "description": "Left position of pin",
-                "default": 0,
-                "_backboneForms": {
-                  "validators": [
-                    "number"
-                  ]
-                }
+                "default": 0
               },
               "_top": {
                 "type": "number",
                 "title": "Pin Position - Top",
                 "description": "Top position of pin",
-                "default": 0,
-                "_backboneForms": {
-                  "validators": [
-                    "number"
-                  ]
-                }
+                "default": 0
               }
             }
           }
