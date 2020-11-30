@@ -22,7 +22,7 @@
         "_isRound": false,
         "_graphic": {
             "src": "course/en/images/example.jpg",
-            "alt": "Placeholder graphic",
+            "alt": "",
             "attribution": "Copyright © 2019"
         },
         "_items": [
@@ -31,7 +31,7 @@
                 "body": "This is display text 1.",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
-                    "alt": "Placeholder graphic",
+                    "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
@@ -87,7 +87,7 @@
                 "body": "This is display text 1.",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
-                    "alt": "Placeholder graphic",
+                    "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
@@ -124,13 +124,13 @@
                 "body": "This is display text 1.",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
-                    "alt": "Placeholder graphic",
+                    "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
-                    "alt": "Placeholder graphic"
+                    "alt": ""
                 },
                 "strapline": "Hotspot 1 strapline",
                 "_classes": "",
