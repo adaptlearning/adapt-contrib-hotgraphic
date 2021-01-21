@@ -18,7 +18,7 @@
               "properties": {
                 "ariaRegion": {
                   "type": "string",
-                  "title": "Aria region",
+                  "title": "ARIA region",
                   "default": "Image with selectable areas. Select each button to show more information.",
                   "_adapt": {
                     "translatable": true
