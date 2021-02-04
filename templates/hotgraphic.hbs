@@ -6,7 +6,7 @@
 
     {{#unless _useGraphicsAsPins}}
 
-    <img class="hotgraphic__image" src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{_graphic.alt}}"{{else}}aria-hidden="true"{{/if}}>
+    <img class="hotgraphic__image" src="{{_graphic.src}}" {{#if _graphic.alt}}aria-label="{{{_graphic.alt}}}"{{else}}aria-hidden="true"{{/if}}>
 
     {{#if _graphic.attribution}}
     <div class="component__attribution hotgraphic__attribution">
