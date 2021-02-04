@@ -111,7 +111,7 @@ Aria level for the title.
 This is the main text for a hot spot pop-up.
 
 #### strapline (string):
-This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices). It is presented in a title bar above the image.
+This text is displayed when `Adapt.device.screenSize` is `small` (i.e., when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). It is presented in a title bar above the image.
 
 #### \_classes (string):
 CSS class name(s) to be applied to the popup item. Classes available by default are:
@@ -134,7 +134,7 @@ The alternative text for this image. Assign [alt text](https://github.com/adaptl
 Optional text to be displayed as an [attribution](https://wiki.creativecommons.org/Best_practices_for_attribution). By default it is displayed below the image. Adjust positioning by modifying CSS. Text can contain HTML tags, e.g., `Copyright © 2015 by <b>Lukasz 'Severiaan' Grela</b>`.
 
 ##### \_classes (string):
-CSS class name(s) to be applied to hotgraphic pin or, alternatively, to the hotspot tile when `_useGraphicsAsPins` is set to `true`. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+CSS class name(s) to be applied to hotgraphic pin or, alternatively, to the hotspot tile when [_useGraphicsAsPins](#_usegraphicsaspins-boolean) is set to `true`. The class must be predefined in one of the Less files. Separate multiple classes with a space.
 
 #### \_pin (object):
 Optional image that can appear instead of the default pin icon. See [example.json](example.json#L117-L160) for a working example. It contains the following settings:
@@ -144,7 +144,6 @@ File name (including path) of the image. Path should be relative to the `src` fo
 
 ##### alt (string):
 The alternative text for this image. Assign [alt text](https://github.com/adaptlearning/adapt_framework/wiki/Providing-good-alt-text) to images that convey course content only. 
-
 
 ## Accessibility
 **Hot Graphic** has two elements assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion** and **popupPagination**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema).   
