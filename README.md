@@ -5,9 +5,9 @@
 
 When a learner clicks on a hot spot within the image, a pop-up is displayed that consists of text with an image. [Visit the **Hot Graphic** wiki](https://github.com/adaptlearning/adapt-contrib-hotgraphic/wiki) for more information about its functionality and for explanations of key properties.
 
-In the standard configuration, the 'hot spots' are clickable 'pin' icons overlaying the main image - but it's possible to replace the default 'pin' icon with a custom image (see the [_pin](#_pin) setting for more information) or, using the [_useGraphicsAsPins](#_usegraphicsaspins) setting, create a 'tiled layout' of images where each 'tile' acts as a hot spot.
+In the standard configuration, the 'hot spots' are clickable 'pin' icons overlaying the main image - but it's possible to replace the default 'pin' icon with a custom image (see the [_pin](#_pin-object) setting for more information) or, using the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting, create a 'tiled layout' of images where each 'tile' acts as a hot spot.
 
-By default, when the viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic. This behaviour can be overridden by changing the [_isNarrativeOnMobile](#_isnarrativeonmobile) setting to `false`)
+By default, when the viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic. This behaviour can be overridden by changing the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting to `false`)
 
 ## Installation
 
@@ -81,7 +81,7 @@ If set to `true`, the image specified by `_graphic.src` will be ignored and the 
 If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
 
 ### \_graphic (object):
-The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins) setting is enabled). It contains the following settings:
+The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting is enabled). It contains the following settings:
 
 #### src (string):
 File name (including path) of the image. Path should be relative to the `src` folder (e.g. `"course/en/images/origami-menu-two.jpg"`).
@@ -122,7 +122,7 @@ CSS class name(s) to be applied to the popup item. Classes available by default 
 Any other classes need to be predefined in one of the Less files. Separate multiple classes with a space.
 
 #### \_graphic (object):
-The image that is associated with this item - which will be displayed in a popup when the pin is selected by the learner (although note that the [_useGraphicsAsPins](#_usegraphicsaspins) setting allows for it to be used as a 'tile' in the main image instead). It contains the following settings:
+The image that is associated with this item - which will be displayed in a popup when the pin is selected by the learner (although note that the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting allows for it to be used as a 'tile' in the main image instead). It contains the following settings:
 
 ##### src (string):
 File name (including path) of the image. Path should be relative to the `src` folder (e.g. `"course/en/images/origami-menu-two.jpg"`).
