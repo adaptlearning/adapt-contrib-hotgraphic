@@ -7,7 +7,7 @@ When a learner clicks on a hot spot within the image, a pop-up is displayed that
 
 In the standard configuration, the 'hot spots' are clickable 'pin' icons overlaying the main image - but it's possible to replace the default 'pin' icon with a custom image (see the [_pin](#_pin-object) setting for more information) or, using the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting, create a 'tiled layout' of images where each 'tile' acts as a hot spot.
 
-By default, when the viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic. This behaviour can be overridden by changing the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting to `false`)
+By default, when the viewport size changes to the smallest range, this component will behave like a [**Narrative** component](https://github.com/adaptlearning/adapt-contrib-narrative). All information will remain available but formatted as a narrative rather than as hot spots on a graphic. This behaviour can be overridden by changing the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting to `false`.
 
 ## Installation
 
@@ -105,7 +105,7 @@ Enter a percentage value (0-100) that this item should be from the left border o
 This is the title text for the hot spot's pop-up.
 
 #### \_ariaLevel (number):
-Aria level for the title.
+ARIA level to assign to the popup title. If not set, it will default to using the value assigned to `_notify` in the `_accessibility` section of config.json.
 
 #### body (string):
 This is the main text for a hot spot pop-up.
