@@ -31,7 +31,7 @@
         },
         "_setCompletionOn": {
           "type": "string",
-          "title": "Set completion on:",
+          "title": "Completion criteria",
           "description": "Whether completion is based on the learner having viewed all the items - or just having viewed the component",
           "default": "allItems",
           "enum": [
@@ -42,12 +42,12 @@
         },
         "_graphic": {
           "type": "object",
-          "title": "Main hotgraphic",
+          "title": "Main graphic",
           "default": {},
           "properties": {
             "src": {
               "type": "string",
-              "title": "Src",
+              "title": "Source",
               "description": "This is the image that appears behind the pins",
               "default": "",
               "_backboneForms": {
@@ -57,8 +57,8 @@
             },
             "alt": {
               "type": "string",
-              "title": "Alt",
-              "description": "Alternative text for the image",
+              "title": "Alternative text",
+              "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
               "default": "",
               "_adapt": {
                 "translatable": true
@@ -103,37 +103,37 @@
         },
         "_canCycleThroughPagination": {
           "type": "boolean",
-          "title": "Cycle through item pagination",
-          "description": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown.",
+          "title": "Loop items",
+          "description": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown)",
           "default": false
         },
         "_isNarrativeOnMobile": {
           "type": "boolean",
-          "title": "Render as Narrative on mobile?",
-          "description": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction.",
+          "title": "Replace with Narrative component on mobile",
+          "description": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction",
           "default": true
         },
         "_useNumberedPins": {
           "type": "boolean",
           "title": "Use numbered pins",
-          "description": "If enabled, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process.",
+          "description": "If enabled, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process",
           "default": false
         },
         "_useGraphicsAsPins": {
           "type": "boolean",
-          "title": "Use graphics as pins",
+          "title": "Use grid layout",
           "description": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes",
           "default": false
         },
         "_isRound": {
           "type": "boolean",
-          "title": "Should item image be round?",
+          "title": "Use circular popup item images",
           "description": "If enabled, a 50% border radius will be applied to the items pop up images.",
           "default": false
         },
         "_items": {
           "type": "array",
-          "title": "Hot Graphic Pins",
+          "title": "Items",
           "items": {
             "type": "object",
             "properties": {
@@ -148,8 +148,8 @@
               },
               "_ariaLevel": {
                 "type": "number",
-                "title": "Title level",
-                "description": "Aria level for title",
+                "title": "Title ARIA level",
+                "description": "ARIA level to assign to the popup title. Leave set to 0 to default to the Notify ARIA level (set via the Accessibility section of the course configuration)",
                 "default": 0
               },
               "body": {
@@ -173,7 +173,7 @@
               },
               "_graphic": {
                 "type": "object",
-                "title": "Item Graphic",
+                "title": "Graphic",
                 "default": {},
                 "required": [
                   "src"
@@ -181,7 +181,7 @@
                 "properties": {
                   "src": {
                     "type": "string",
-                    "title": "Src",
+                    "title": "Source",
                     "description": "Image to be displayed in a popup when this item is selected.",
                     "default": "",
                     "_backboneForms": {
@@ -191,8 +191,8 @@
                   },
                   "alt": {
                     "type": "string",
-                    "title": "Alt",
-                    "description": "Alternative text for the popup image",
+                    "title": "Alternative text",
+                    "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
                     "default": "",
                     "_adapt": {
                       "translatable": true
@@ -209,7 +209,7 @@
                   },
                   "_classes": {
                     "type": "string",
-                    "title": "Graphic Classes",
+                    "title": "Pin custom classes",
                     "description": "Allows you to specify custom CSS classes to be applied to the hotgraphic pin or, alternatively, to the hotspot tile when _useGraphicsAsPins is set to true",
                     "default": ""
                   }
@@ -217,12 +217,12 @@
               },
               "_pin": {
                 "type": "object",
-                "title": "Item Pin",
+                "title": "Pin",
                 "default": {},
                 "properties": {
                   "src": {
                     "type": "string",
-                    "title": "Src",
+                    "title": "Source",
                     "description": "This is the pin image, leave blank for default",
                     "default": "",
                     "_backboneForms": {
@@ -232,8 +232,8 @@
                   },
                   "alt": {
                     "type": "string",
-                    "title": "Alt",
-                    "description": "Alternative text for this image",
+                    "title": "Alternative text",
+                    "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
                     "default": "",
                     "_adapt": {
                       "translatable": true
@@ -243,20 +243,18 @@
               },
               "_classes": {
                 "type": "string",
-                "title": "Item Popup Classes",
-                "description": "Allows you to specify custom CSS classes to be applied to the popup item. Supported classes are 'align-image-left', 'hide-desktop-image', and 'hide-popup-image' which aligns the item image to the left, hides the pop up image in desktop view, and hides the pop up image for all screen sizes respectively.",
+                "title": "Popup item custom classes",
+                "description": "Allows you to specify custom CSS classes to be applied to the popup item. Supported classes are 'align-image-left', 'hide-desktop-image', and 'hide-popup-image' which aligns the item image to the left, hides the pop up image in desktop view, and hides the pop up image for all screen sizes respectively",
                 "default": ""
               },
               "_left": {
                 "type": "number",
-                "title": "Pin Position - Left",
-                "description": "Left position of pin",
+                "title": "Pin horizontal position (%)",
                 "default": 0
               },
               "_top": {
                 "type": "number",
-                "title": "Pin Position - Top",
-                "description": "Top position of pin",
+                "title": "Pin vertical position (%)",
                 "default": 0
               }
             }
