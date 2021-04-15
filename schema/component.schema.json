@@ -47,9 +47,9 @@
           "properties": {
             "src": {
               "type": "string",
+              "isObjectId": true,
               "title": "Source",
               "description": "This is the image that appears behind the pins",
-              "default": "",
               "_backboneForms": {
                 "type": "Asset",
                 "media": "image"
@@ -128,7 +128,7 @@
         "_isRound": {
           "type": "boolean",
           "title": "Use circular popup item images",
-          "description": "If enabled, a 50% border radius will be applied to the items pop up images.",
+          "description": "If enabled, a 50% border radius will be applied to the items pop up images",
           "default": false
         },
         "_items": {
@@ -181,9 +181,9 @@
                 "properties": {
                   "src": {
                     "type": "string",
+                    "isObjectId": true,
                     "title": "Source",
-                    "description": "Image to be displayed in a popup when this item is selected.",
-                    "default": "",
+                    "description": "Image to be displayed in a popup when this item is selected",
                     "_backboneForms": {
                       "type": "Asset",
                       "media": "image"
@@ -222,9 +222,9 @@
                 "properties": {
                   "src": {
                     "type": "string",
+                    "isObjectId": true,
                     "title": "Source",
                     "description": "This is the pin image, leave blank for default",
-                    "default": "",
                     "_backboneForms": {
                       "type": "Asset",
                       "media": "image"
