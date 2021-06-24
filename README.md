@@ -150,7 +150,7 @@ The alternative text for this image. Assign [alt text](https://github.com/adaptl
 <div float align=right><a href="#top">Back to Top</a></div>
 
 ----------------------------
-**Version number:**  5.3.2   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
+**Version number:**  5.3.3   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>  
 **Framework versions:**  5.5+  
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)  
 **Accessibility support:** WAI AA  
