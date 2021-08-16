@@ -1,0 +1,266 @@
+{
+  "$anchor": "hotgraphic-component",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$merge": {
+    "source": {
+      "$ref": "component"
+    },
+    "with": {
+      "properties": {
+        "_supportedLayout": {
+          "type": "string",
+          "title": "Supported layout",
+          "default": "full-width",
+          "enum": [
+            "full-width",
+            "half-width",
+            "both"
+          ],
+          "_adapt": {
+            "editorOnly": true
+          }
+        },
+        "instruction": {
+          "type": "string",
+          "title": "Instruction",
+          "default": "",
+          "_adapt": {
+            "translatable": true
+          }
+        },
+        "_setCompletionOn": {
+          "type": "string",
+          "title": "Completion criteria",
+          "description": "Whether completion is based on the learner having viewed all the items - or just having viewed the component",
+          "default": "allItems",
+          "enum": [
+            "inview",
+            "allItems"
+          ],
+          "_backboneForms": "Select"
+        },
+        "_graphic": {
+          "type": "object",
+          "title": "Main graphic",
+          "default": {},
+          "properties": {
+            "src": {
+              "type": "string",
+              "isObjectId": true,
+              "title": "Source",
+              "description": "This is the image that appears behind the pins",
+              "_backboneForms": {
+                "type": "Asset",
+                "media": "image"
+              }
+            },
+            "alt": {
+              "type": "string",
+              "title": "Alternative text",
+              "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            },
+            "attribution": {
+              "type": "string",
+              "title": "Attribution",
+              "description": "Text to be displayed as an attribution",
+              "default": "",
+              "_adapt": {
+                "translatable": true
+              }
+            }
+          }
+        },
+        "mobileBody": {
+          "type": "string",
+          "title": "Mobile body",
+          "description": "This body text is displayed on mobile devices when this component turns into a Narrative",
+          "default": "",
+          "_adapt": {
+            "translatable": true
+          },
+          "_backboneForms": "TextArea"
+        },
+        "mobileInstruction": {
+          "type": "string",
+          "title": "Mobile instruction",
+          "description": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
+          "default": "",
+          "_adapt": {
+            "translatable": true
+          },
+          "_backboneForms": "TextArea"
+        },
+        "_hidePagination": {
+          "type": "boolean",
+          "title": "Hide pagination",
+          "description": "If enabled, the progress indicator and previous and next links will not be shown on the popup toolbar",
+          "default": false
+        },
+        "_canCycleThroughPagination": {
+          "type": "boolean",
+          "title": "Loop items",
+          "description": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown)",
+          "default": false
+        },
+        "_isNarrativeOnMobile": {
+          "type": "boolean",
+          "title": "Replace with Narrative component on mobile",
+          "description": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction",
+          "default": true
+        },
+        "_useNumberedPins": {
+          "type": "boolean",
+          "title": "Use numbered pins",
+          "description": "If enabled, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process",
+          "default": false
+        },
+        "_useGraphicsAsPins": {
+          "type": "boolean",
+          "title": "Use grid layout",
+          "description": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes",
+          "default": false
+        },
+        "_isRound": {
+          "type": "boolean",
+          "title": "Use circular popup item images",
+          "description": "If enabled, a 50% border radius will be applied to the items pop up images",
+          "default": false
+        },
+        "_items": {
+          "type": "array",
+          "title": "Items",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "title": "Title",
+                "description": "Title displayed in the popup",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                }
+              },
+              "_ariaLevel": {
+                "type": "number",
+                "title": "Title ARIA level",
+                "description": "ARIA level to assign to the popup title. Leave set to 0 to default to the Notify ARIA level (set via the Accessibility section of the course configuration)",
+                "default": 0
+              },
+              "body": {
+                "type": "string",
+                "title": "Body",
+                "description": "Body text displayed in the popup",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                },
+                "_backboneForms": "TextArea"
+              },
+              "strapline": {
+                "type": "string",
+                "title": "Strapline",
+                "description": "Strapline - displayed on mobile version only",
+                "default": "",
+                "_adapt": {
+                  "translatable": true
+                }
+              },
+              "_graphic": {
+                "type": "object",
+                "title": "Graphic",
+                "default": {},
+                "required": [
+                  "src"
+                ],
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "isObjectId": true,
+                    "title": "Source",
+                    "description": "Image to be displayed in a popup when this item is selected",
+                    "_backboneForms": {
+                      "type": "Asset",
+                      "media": "image"
+                    }
+                  },
+                  "alt": {
+                    "type": "string",
+                    "title": "Alternative text",
+                    "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    }
+                  },
+                  "attribution": {
+                    "type": "string",
+                    "title": "Attribution",
+                    "description": "Text to be displayed as an attribution for the popup image",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    }
+                  },
+                  "_classes": {
+                    "type": "string",
+                    "title": "Pin custom classes",
+                    "description": "Allows you to specify custom CSS classes to be applied to the hotgraphic pin or, alternatively, to the hotspot tile when _useGraphicsAsPins is set to true",
+                    "default": ""
+                  }
+                }
+              },
+              "_pin": {
+                "type": "object",
+                "title": "Pin",
+                "default": {},
+                "properties": {
+                  "src": {
+                    "type": "string",
+                    "isObjectId": true,
+                    "title": "Source",
+                    "description": "This is the pin image, leave blank for default",
+                    "_backboneForms": {
+                      "type": "Asset",
+                      "media": "image"
+                    }
+                  },
+                  "alt": {
+                    "type": "string",
+                    "title": "Alternative text",
+                    "description": "A description of the image; required when it has meaning that must be conveyed to the learner. For 'decorative' images, leave this blank",
+                    "default": "",
+                    "_adapt": {
+                      "translatable": true
+                    }
+                  }
+                }
+              },
+              "_classes": {
+                "type": "string",
+                "title": "Popup item custom classes",
+                "description": "Allows you to specify custom CSS classes to be applied to the popup item. Supported classes are 'align-image-left', 'hide-desktop-image', and 'hide-popup-image' which aligns the item image to the left, hides the pop up image in desktop view, and hides the pop up image for all screen sizes respectively",
+                "default": ""
+              },
+              "_left": {
+                "type": "number",
+                "title": "Pin horizontal position (%)",
+                "default": 0
+              },
+              "_top": {
+                "type": "number",
+                "title": "Pin vertical position (%)",
+                "default": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
