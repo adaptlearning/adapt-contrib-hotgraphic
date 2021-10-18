@@ -18,7 +18,6 @@ define([
       this.setUpViewData();
       this.setUpModelData();
       this.setUpEventListeners();
-      this.checkIfResetOnRevisit();
     }
 
     setUpViewData() {
@@ -111,15 +110,6 @@ define([
       });
 
       $pin.addClass('is-visited');
-    }
-
-    checkIfResetOnRevisit() {
-      const isResetOnRevisit = this.model.get('_isResetOnRevisit');
-
-      // If reset is enabled set defaults
-      if (isResetOnRevisit) {
-        this.model.reset(isResetOnRevisit);
-      }
     }
 
     preRender() {
