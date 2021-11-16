@@ -1,12 +1,8 @@
-define([
-  'core/js/adapt',
-  './hotgraphicView',
-  'core/js/models/itemsComponentModel'
-], function(Adapt, HotgraphicView, ItemsComponentModel) {
+import Adapt from 'core/js/adapt';
+import HotgraphicView from './hotgraphicView';
+import ItemsComponentModel from 'core/js/models/itemsComponentModel';
 
-  return Adapt.register('hotgraphic', {
-    model: ItemsComponentModel.extend({}),
-    view: HotgraphicView
-  });
-
+export default Adapt.register('hotgraphic', {
+  model: ItemsComponentModel.extend({}),
+  view: HotgraphicView
 });
