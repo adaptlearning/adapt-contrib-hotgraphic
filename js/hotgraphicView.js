@@ -1,6 +1,6 @@
 import Adapt from 'core/js/adapt';
 import ComponentView from 'core/js/views/componentView';
-import HotgraphicPopupView from './hotgraphicPopupView'
+import HotgraphicPopupView from './hotgraphicPopupView';
 
 class HotGraphicView extends ComponentView {
 
