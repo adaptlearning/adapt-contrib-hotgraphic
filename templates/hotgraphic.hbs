@@ -23,7 +23,7 @@
 
         <button class="btn-icon hotgraphic__pin item-{{@index}}{{#if _graphic._classes}} {{_graphic._classes}}{{/if}}{{#if _pin.src}} has-pin-image{{/if}}{{#if _isVisited}} is-visited{{/if}} js-hotgraphic-item-click" data-index="{{@index}}" style="top: {{{_top}}}%; left: {{{_left}}}%;">
 
-          <span class="aria-label">{{#if ../_useNumberedPins}}{{math @index "+" 1}} {{/if}}{{{compile title}}}{{if _pin.alt}}. {{compile _pin.alt}}{{/if}}.</span>
+          <span class="aria-label">{{#if ../_useNumberedPins}}{{math @index "+" 1}} {{#if _pin.alt}}{{{compile _pin.alt}}}{{else}}{{{compile title}}}{{/if}}.</span>
 
           {{#if _pin.src}}
           <div class="hotgraphic__pin-image-container item-{{@index}}">
