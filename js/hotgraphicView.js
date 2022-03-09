@@ -1,5 +1,6 @@
 import Adapt from 'core/js/adapt';
 import ComponentView from 'core/js/views/componentView';
+import device from 'core/js/device';
 import HotgraphicPopupView from './hotgraphicPopupView';
 
 class HotGraphicView extends ComponentView {
@@ -38,7 +39,7 @@ class HotGraphicView extends ComponentView {
   }
 
   reRender() {
-    if (Adapt.device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
+    if (device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
 
     this.replaceWithNarrative();
   }
@@ -110,7 +111,7 @@ class HotGraphicView extends ComponentView {
   }
 
   preRender() {
-    if (Adapt.device.screenSize === 'large') {
+    if (device.screenSize === 'large') {
       this.render();
       return;
     }
