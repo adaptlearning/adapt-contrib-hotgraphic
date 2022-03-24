@@ -1,4 +1,8 @@
 import Adapt from 'core/js/adapt';
+import components from 'core/js/components';
+import data from 'core/js/data';
+import device from 'core/js/device';
+import notify from 'core/js/notify';
 import ComponentView from 'core/js/views/componentView';
 import HotgraphicPopupView from './hotgraphicPopupView';
 
@@ -31,20 +35,20 @@ class HotGraphicView extends ComponentView {
   setUpEventListeners() {
     this.listenTo(Adapt, 'device:changed', this.reRender);
 
-    this.listenTo(this.model.get('_children'), {
+    this.listenTo(this.model.getChildren(), {
       'change:_isActive': this.onItemsActiveChange,
       'change:_isVisited': this.onItemsVisitedChange
     });
   }
 
   reRender() {
-    if (Adapt.device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
+    if (device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
 
     this.replaceWithNarrative();
   }
 
   replaceWithNarrative() {
-    const NarrativeView = Adapt.getViewClass('narrative');
+    const NarrativeView = components.getViewClass('narrative');
     if (!NarrativeView) return;
 
     const model = this.prepareNarrativeModel();
@@ -53,7 +57,7 @@ class HotGraphicView extends ComponentView {
     // this.$el.parents() won't exist at this point - which is why the following is
     // written the way it is, instead of (what would appear to be) the more efficient
     // this.$el.parents('.component__container')
-    const $container = Adapt.findViewByModelId(model.get('_parentId')).$el.find('.component__container');
+    const $container = data.findViewByModelId(model.get('_parentId')).$el.find('.component__container');
     $container.append(newNarrative.$el);
 
     this.remove();
@@ -110,7 +114,7 @@ class HotGraphicView extends ComponentView {
   }
 
   preRender() {
-    if (Adapt.device.screenSize === 'large') {
+    if (device.screenSize === 'large') {
       this.render();
       return;
     }
@@ -141,7 +145,7 @@ class HotGraphicView extends ComponentView {
       model: this.model
     });
 
-    Adapt.notify.popup({
+    notify.popup({
       _view: this.popupView,
       _isCancellable: true,
       _showCloseButton: false,
