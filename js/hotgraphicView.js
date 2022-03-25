@@ -142,10 +142,11 @@ class HotGraphicView extends ComponentView {
     });
 
     Adapt.notify.popup({
+      _attributes: { 'data-adapt-id': this.model.get('_id') },
       _view: this.popupView,
       _isCancellable: true,
       _showCloseButton: false,
-      _classes: 'hotgraphic ' + this.model.get('_classes')
+      _classes: 'hotgraphic is-component is-hotgaphic ' + this.model.get('_classes')
     });
 
     this.listenToOnce(Adapt, {
