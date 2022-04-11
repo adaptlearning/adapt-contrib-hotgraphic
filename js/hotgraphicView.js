@@ -150,7 +150,7 @@ class HotGraphicView extends ComponentView {
       _view: this.popupView,
       _isCancellable: true,
       _showCloseButton: false,
-      _classes: 'hotgraphic is-component is-hotgaphic ' + this.model.get('_classes')
+      _classes: 'hotgraphic is-component is-hotgraphic ' + this.model.get('_classes')
     });
 
     this.listenToOnce(Adapt, {
