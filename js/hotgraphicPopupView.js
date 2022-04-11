@@ -1,4 +1,5 @@
 import Adapt from 'core/js/adapt';
+import a11y from 'core/js/a11y';
 
 class HotgraphicPopupView extends Backbone.View {
 
@@ -18,7 +19,7 @@ class HotgraphicPopupView extends Backbone.View {
     // Debounce required as a second (bad) click event is dispatched on iOS causing a jump of two items.
     this.onControlClick = _.debounce(this.onControlClick.bind(this), 100);
     this.listenToOnce(Adapt, 'notify:opened', this.onOpened);
-    this.listenTo(this.model.get('_children'), {
+    this.listenTo(this.model.getChildren(), {
       'change:_isActive': this.onItemsActiveChange,
       'change:_isVisited': this.onItemsVisitedChange
     });
@@ -43,8 +44,8 @@ class HotgraphicPopupView extends Backbone.View {
       .toggleClass('first', !shouldEnableBack)
       .toggleClass('last', !shouldEnableNext);
 
-    Adapt.a11y.toggleAccessibleEnabled($controls.filter('.back'), shouldEnableBack);
-    Adapt.a11y.toggleAccessibleEnabled($controls.filter('.next'), shouldEnableNext);
+    a11y.toggleAccessibleEnabled($controls.filter('.back'), shouldEnableBack);
+    a11y.toggleAccessibleEnabled($controls.filter('.next'), shouldEnableNext);
   }
 
   updatePageCount() {
@@ -57,8 +58,8 @@ class HotgraphicPopupView extends Backbone.View {
   }
 
   handleTabs() {
-    Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active)'), true);
-    Adapt.a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active'), false);
+    a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active)'), true);
+    a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active'), false);
   }
 
   onItemsActiveChange(item, _isActive) {
@@ -78,7 +79,7 @@ class HotgraphicPopupView extends Backbone.View {
   }
 
   handleFocus(index) {
-    Adapt.a11y.focusFirst(this.$('.hotgraphic-popup__inner .is-active'));
+    a11y.focusFirst(this.$('.hotgraphic-popup__inner .is-active'));
     this.applyNavigationClasses(index);
   }
 

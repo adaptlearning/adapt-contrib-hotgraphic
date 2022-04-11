@@ -54,10 +54,10 @@ This optional text appears above the component. It is frequently used to
 guide the learner’s interaction with the component.
 
 ### mobileBody (string):
-This is optional text that will be substituted for `body` when `Adapt.device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
+This is optional text that will be substituted for `body` when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
 
 ### mobileInstruction (string):
-This is optional text that will be substituted for `instruction` when `Adapt.device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
+This is optional text that will be substituted for `instruction` when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
 
 ### \_setCompletionOn (string):
 Determines when Adapt will register this component as having been completed by the learner. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.
@@ -111,7 +111,7 @@ ARIA level to assign to the popup title. If not set, it will default to using th
 This is the main text for a hot spot pop-up.
 
 #### strapline (string):
-This text is displayed when `Adapt.device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). It is presented in a title bar above the image.
+This text is displayed when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). It is presented in a title bar above the image.
 
 #### \_classes (string):
 CSS class name(s) to be applied to the popup item. Classes available by default are:
