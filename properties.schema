@@ -103,6 +103,15 @@
       "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
       "translatable": true
     },
+    "_isMobileTextBelowImage": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Move text area below image on mobile device",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "When Hot Graphic is displayed on a mobile device, it turns into a Narrative. If you check this box, the text content of each stage is positioned below the image. The Narrative will not use the default \"strapline\" layout."
+    },
     "_hidePagination": {
       "type": "boolean",
       "required": true,
