@@ -59,6 +59,9 @@ This is optional text that will be substituted for `body` when `device.screenSiz
 ### mobileInstruction (string):
 This is optional text that will be substituted for `instruction` when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
 
+### \_isMobileTextBelowImage (boolean):
+Like `mobileBody` and `mobileInstruction`, `_isMobileTextBelowImage` is only applicable when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). The default is `false`. When set to `true`, the replacement Narrative will not use the default "strapline" layout. Instead both the image and text of each stage remain visible, with the text positioned below the image. 
+
 ### \_setCompletionOn (string):
 Determines when Adapt will register this component as having been completed by the learner. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.
 
