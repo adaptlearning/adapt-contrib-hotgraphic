@@ -60,7 +60,7 @@ This is optional text that will be substituted for `body` when `device.screenSiz
 This is optional text that will be substituted for `instruction` when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`).
 
 ### \_isMobileTextBelowImage (boolean):
-Like `mobileBody` and `mobileInstruction`, `_isMobileTextBelowImage` is only applicable when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). The default is `false`. When set to `true`, the replacement Narrative will not use the default "strapline" layout. Instead both the image and text of each stage remain visible, with the text positioned below the image. 
+Like `mobileBody` and `mobileInstruction`, `_isMobileTextBelowImage` is only applicable when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). The default is `false`. When set to `true`, the replacement Narrative will not use the default "strapline" layout. Instead both the image and text of each stage remain visible, with the text positioned below the image.
 
 ### \_setCompletionOn (string):
 Determines when Adapt will register this component as having been completed by the learner. Acceptable values are `"allItems"` and `"inview"`. `"allItems"` requires each pop-up item to be visited. `"inview"` requires the **Hot Graphic** component to enter the view port completely.
@@ -153,7 +153,7 @@ The alternative text for this image. Assign [alt text](https://github.com/adaptl
 <div float align=right><a href="#top">Back to Top</a></div>
 
 ----------------------------
-**Version number:**  6.0.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>
+**Version number:**  6.1.0   <a href="https://community.adaptlearning.org/" target="_blank"><img src="https://github.com/adaptlearning/documentation/blob/master/04_wiki_assets/plug-ins/images/adapt-logo-mrgn-lft.jpg" alt="adapt learning logo" align="right"></a>
 **Framework versions:**  5.19.1+
 **Author / maintainer:** Adapt Core Team with [contributors](https://github.com/adaptlearning/adapt-contrib-hotgraphic/graphs/contributors)
 **Accessibility support:** WAI AA
