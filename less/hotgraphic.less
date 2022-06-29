@@ -16,8 +16,14 @@
     }
   }
 
-  &__pin .icon {
-    .icon-pin;
+  &__pin {
+    .icon {
+      .icon-pin;
+
+      .is-visited& {
+        .icon-tick;
+      }
+    }
   }
 
   &__pin.has-pin-image {
