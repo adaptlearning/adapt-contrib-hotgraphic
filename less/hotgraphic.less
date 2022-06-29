@@ -37,6 +37,17 @@
   }
 
   &__tile {
+    position: relative;
     width: 100%;
+
+    .icon {
+      position: absolute;
+      bottom: 1.0rem;
+      right: 1.0rem;
+
+      .is-visited& {
+        .icon-tick;
+      }
+    }
   }
 }
