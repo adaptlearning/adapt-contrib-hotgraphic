@@ -26,17 +26,17 @@
           <span class="aria-label">{{#if ../_useNumberedPins}}{{math @index "+" 1}} {{/if}}{{#if _pin.alt}}{{{compile _pin.alt}}}{{else}}{{{compile title}}}{{/if}}.</span>
 
           {{#if _pin.src}}
-          <div class="hotgraphic__pin-image-container item-{{@index}}">
+          <span class="hotgraphic__pin-image-container item-{{@index}}">
             <img class="hotgraphic__pin-image" src="{{_pin.src}}" aria-hidden="true">
-          </div>
+          </span>
           {{else}}
 
           {{#if ../_useNumberedPins}}
-          <div class="hotgraphic__pin-number" aria-hidden="true">
+          <span class="hotgraphic__pin-number" aria-hidden="true">
             {{math @index "+" 1}}
-          </div>
+          </span>
           {{else}}
-          <div class="icon" aria-hidden="true"></div>
+          <span class="icon" aria-hidden="true"></span>
           {{/if}}
 
           {{/if}}
