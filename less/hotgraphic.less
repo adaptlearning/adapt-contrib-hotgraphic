@@ -39,20 +39,20 @@
   &__tile {
     position: relative;
     width: 100%;
+  }
 
-    .icon {
-      position: absolute;
-      bottom: 1.0rem;
-      right: 1.0rem;
-      padding: @icon-padding / 2;
+  &__tile .icon {
+    position: absolute;
+    bottom: 1.0rem;
+    right: 1.0rem;
+    padding: @icon-padding / 2;
 
-      @media (min-width: @device-width-medium) {
-        padding: @icon-padding;
-      }
-
-      .is-visited& {
-        .icon-tick;
-      }
+    @media (min-width: @device-width-medium) {
+      padding: @icon-padding;
     }
+  }
+
+  &__tile.is-visited .icon {
+    .icon-tick;
   }
 }
