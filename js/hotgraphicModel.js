@@ -5,11 +5,16 @@ export default class HotgraphicModel extends ItemsComponentModel {
 
   setUpItems() {
     super.setUpItems();
-    this.getChildren().forEach(child => {
-      if (!child.get('_tooltip')) return;
-
-      tooltips.register(child.get('_tooltip'));
-    })
+    const id = this.get('_id');
+    this.getChildren().forEach((child, index) => {
+      const tooltip = child.get('_tooltip');
+      if (!tooltip?._isEnabled) return;
+      tooltip._id = `hotgraphic-pin-${id}-${index}`;
+      tooltips.register({
+        _classes: [ 'hotgraphic__pin-tooltip' ],
+        ...tooltip
+      });
+    });
   }
 
 }
