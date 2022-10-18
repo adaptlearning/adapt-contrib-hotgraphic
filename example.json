@@ -36,6 +36,10 @@
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
+                },
                 "strapline": "Hotspot 1 strapline",
                 "_comment": "Supported classes = 'align-image-left' | 'hide-desktop-image' | 'hide-popup-image'. Additional classes can be used but they must be predefined in one of the Less files",
                 "_classes": "",
@@ -51,6 +55,10 @@
                     "attribution": "",
                     "_classes": ""
                 },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
+                },
                 "strapline": "Hotspot 2 strapline",
                 "_classes": "",
                 "_top": 50,
@@ -64,6 +72,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
                 },
                 "strapline": "Hotspot 3 strapline",
                 "_classes": "",
@@ -92,6 +104,10 @@
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
+                },
                 "strapline": "Hotspot 1 strapline",
                 "_classes": "",
                 "_top": 25,
@@ -105,6 +121,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
                 },
                 "strapline": "Hotspot 2 strapline",
                 "_classes": "",
@@ -129,6 +149,10 @@
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
+                },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
                     "alt": ""
@@ -146,6 +170,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": ""
                 },
                 "_pin": {
                     "src": "course/en/images/example.jpg",

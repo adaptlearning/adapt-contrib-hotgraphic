@@ -253,6 +253,32 @@
               }
             }
           },
+          "_tooltip": {
+            "type": "object",
+            "required": true,
+            "title": "Tooltip",
+            "properties": {
+              "_isEnabled": {
+                "type": "boolean",
+                "required": false,
+                "default": false,
+                "title": "Is enabled?",
+                "inputType": "Checkbox",
+                "validators": [],
+                "help": "If enabled, a tooltip will be displayed on hover over this item."
+              },
+              "text": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Tooltip text",
+                "inputType": "Text",
+                "validators": [],
+                "help": "The tooltip text to display on hover over this item",
+                "translatable": true
+              }
+            }
+          },
           "_pin": {
             "type": "object",
             "required": false,
