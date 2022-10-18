@@ -83,6 +83,14 @@ If set to `true`, the image specified by `_graphic.src` will be ignored and the 
 ### \_isRound (boolean):
 If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
 
+### \_tooltip (object):
+
+#### \_isEnabled (boolean):
+When set to `true` the tooltip will be shown on hover over the item. The default is `false`.
+
+#### text (string):
+The text to display when the user hovers over the item.
+
 ### \_graphic (object):
 The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting is enabled). It contains the following settings:
 
