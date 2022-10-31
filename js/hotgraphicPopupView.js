@@ -27,9 +27,11 @@ class HotgraphicPopupView extends Backbone.View {
   }
 
   onOpened() {
-    this.applyNavigationClasses(this.model.getActiveItem().get('_index'));
+    const index = this.model.getActiveItem().get('_index');
+    this.applyNavigationClasses(index);
     this.updatePageCount();
     this.handleTabs();
+    this.evaluateNavigation(index);
   }
 
   applyNavigationClasses (index) {
@@ -130,9 +132,46 @@ class HotgraphicPopupView extends Backbone.View {
     this.model.getActiveItem().toggleActive();
 
     const nextItem = this.model.getItem(index);
+    this.evaluateNavigation(index);
     nextItem.toggleActive();
     nextItem.toggleVisited(true);
   }
+
+  evaluateNavigation(index) {
+    const active = index || 0;
+    const itemCount = this.model.getChildren().length;
+
+    const isAtStart = active === 0;
+    const isAtEnd = active === itemCount - 1;
+
+    const $left = this.$('.hotgraphic-popup__controls.back');
+    const $right = this.$('.hotgraphic-popup__controls.next');
+
+    const globals = Adapt.course.get('_globals');
+
+    const ariaLabelsGlobals = globals._accessibility._ariaLabels;
+    const hotGraphicGlobals = globals._components._hotgraphic;
+
+    const ariaLabelPrevious = hotGraphicGlobals.previous || ariaLabelsGlobals.previous;
+    const ariaLabelNext = hotGraphicGlobals.next || ariaLabelsGlobals.next;
+
+    const prevTitle = isAtStart ? '' : this.model.getItem(active - 1).get('title');
+    const nextTitle = isAtEnd ? '' : this.model.getItem(active + 1).get('title');
+
+    $left.attr('aria-label', Handlebars.helpers.compile_a11y_normalize(ariaLabelPrevious, {
+      title: prevTitle,
+      _globals: globals,
+      itemNumber: isAtStart ? null : active,
+      totalItems: itemCount
+    }));
+    $right.attr('aria-label', Handlebars.helpers.compile_a11y_normalize(ariaLabelNext, {
+      title: nextTitle,
+      _globals: globals,
+      itemNumber: isAtEnd ? null : active + 2,
+      totalItems: itemCount
+    }));
+
+  };
 
 };
 
