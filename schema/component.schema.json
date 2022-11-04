@@ -171,6 +171,17 @@
                   "translatable": true
                 }
               },
+              "_imageAlignment": {
+                "type": "string",
+                "title": "Image alignment",
+                "description": "Defines the horizontal alignment of the item image in the pop up. Left: Image aligned to the left of the text area. Right: Image aligned to the right of the text area. The default alignment is `right`",
+                "default": "right",
+                "enum": [
+                  "left",
+                  "right"
+                ],
+                "_backboneForms": "Select"
+              },
               "_graphic": {
                 "type": "object",
                 "title": "Graphic",
