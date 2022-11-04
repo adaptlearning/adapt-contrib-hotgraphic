@@ -28,47 +28,50 @@
         },
         "_items": [
             {
+                "_top": 25,
+                "_left": 25,
                 "title": "Hotspot 1 title",
                 "body": "This is display text 1.",
+                "strapline": "Hotspot 1 strapline",
+                "_imageAlignment": "right",
+                "_comment": "Supported classes = 'hide-desktop-image' | 'hide-popup-image'. Additional classes can be used but they must be predefined in one of the Less files",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
-                },
-                "strapline": "Hotspot 1 strapline",
-                "_comment": "Supported classes = 'align-image-left' | 'hide-desktop-image' | 'hide-popup-image'. Additional classes can be used but they must be predefined in one of the Less files",
-                "_classes": "",
-                "_top": 25,
-                "_left": 25
+                }
             },
             {
+                "_top": 50,
+                "_left": 50,
                 "title": "Hotspot 2 title",
-                "body": "This is display text 2.",
+                "body": "This is display text 2 with a left aligned image.",
+                "strapline": "Hotspot 2 strapline",
+                "_imageAlignment": "left",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
-                },
-                "strapline": "Hotspot 2 strapline",
-                "_classes": "",
-                "_top": 50,
-                "_left": 50
+                }
             },
             {
+                "_top": 75,
+                "_left": 75,
                 "title": "Hotspot 3 title",
                 "body": "This is display text 3.",
+                "strapline": "Hotspot 3 strapline",
+                "_imageAlignment": "right",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
-                },
-                "strapline": "Hotspot 3 strapline",
-                "_classes": "",
-                "_top": 75,
-                "_left": 75
+                }
             }
         ],
         "_pageLevelProgress": {
@@ -77,52 +80,59 @@
     }
 
     // Example using graphics as pins
-    // The following example lays out the item graphics (_items._graphic) 
+    // The following example lays out the item graphics (_items._graphic)
     // in a 2x2 grid.
     // --------------------------------------------------
     {
         "_useGraphicsAsPins": true,
         "_items": [
             {
+                "_top": 25,
+                "_left": 25,
                 "title": "Hotspot 1 title",
                 "body": "This is display text 1.",
+                "strapline": "Hotspot 1 strapline",
+                "_imageAlignment": "right",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
-                },
-                "strapline": "Hotspot 1 strapline",
-                "_classes": "",
-                "_top": 25,
-                "_left": 25
+                }
             },
             {
+                "_top": 50,
+                "_left": 50,
                 "title": "Hotspot 2 title",
                 "body": "This is display text 2.",
+                "strapline": "Hotspot 2 strapline",
+                "_imageAlignment": "right",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
-                },
-                "strapline": "Hotspot 2 strapline",
-                "_classes": "",
-                "_top": 50,
-                "_left": 50
+                }
             }
         ]
     }
 
     // Example using graphic pins
-    // In the following example there is a background image and each pin 
+    // In the following example there is a background image and each pin
     // is an image rather than a pin icon
     // --------------------------------------------------
     {
         "_items": [
             {
+                "_left": 25,
+                "_top": 25,
                 "title": "Hotspot 1 title",
                 "body": "This is display text 1.",
+                "strapline": "Hotspot 1 strapline",
+                "_imageAlignment": "right",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
@@ -132,15 +142,16 @@
                 "_pin": {
                     "src": "course/en/images/example.jpg",
                     "alt": ""
-                },
-                "strapline": "Hotspot 1 strapline",
-                "_classes": "",
-                "_left": 25,
-                "_top": 25
+                }
             },
             {
+                "_left": 50,
+                "_top": 50,
                 "title": "Hotspot 2 title",
                 "body": "This is display text 2.",
+                "strapline": "Hotspot 2 strapline",
+                "_imageAlignment": "right",
+                "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
                     "alt": "",
@@ -150,11 +161,7 @@
                 "_pin": {
                     "src": "course/en/images/example.jpg",
                     "alt": ""
-                },
-                "strapline": "Hotspot 2 strapline",
-                "_classes": "",
-                "_left": 50,
-                "_top": 50
+                }
             }
         ]
     }
