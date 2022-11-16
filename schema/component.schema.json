@@ -267,6 +267,25 @@
                 "type": "number",
                 "title": "Pin vertical position (%)",
                 "default": 0
+              },
+              "_tooltip": {
+                "type": "object",
+                "title": "Tooltip",
+                "properties": {
+                  "_isEnabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "Is enabled?",
+                    "help": "If enabled, a tooltip will be displayed on hover over this item."
+                  },
+                  "text": {
+                    "type": "string",
+                    "default": "",
+                    "title": "Tooltip text",
+                    "help": "The tooltip text to display on hover over this item",
+                    "translatable": true
+                  }
+                }
               }
             }
           }
