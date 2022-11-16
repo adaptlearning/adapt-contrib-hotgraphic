@@ -44,8 +44,8 @@ class HotgraphicPopupView extends Backbone.View {
       .toggleClass('first', !shouldEnableBack)
       .toggleClass('last', !shouldEnableNext);
 
-    a11y.toggleAccessibleEnabled($controls.filter('.back'), shouldEnableBack);
-    a11y.toggleAccessibleEnabled($controls.filter('.next'), shouldEnableNext);
+    a11y.toggleEnabled($controls.filter('.back'), shouldEnableBack);
+    a11y.toggleEnabled($controls.filter('.next'), shouldEnableNext);
   }
 
   updatePageCount() {
