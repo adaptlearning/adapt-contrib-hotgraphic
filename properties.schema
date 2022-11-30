@@ -12,6 +12,14 @@
       "validators": [],
       "translatable": true
     },
+    "item": {
+      "type": "string",
+      "title": "Item",
+      "default": "Item {{{itemNumber}}} of {{{totalItems}}}",
+      "_adapt": {
+        "translatable": true
+      }
+    },
     "previous": {
       "type": "string",
       "title": "Previous",
