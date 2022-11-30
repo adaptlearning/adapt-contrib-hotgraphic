@@ -165,9 +165,6 @@ class HotGraphicView extends ComponentView {
   }
 
   updateItemCount () {
-    const NarrativeView = components.getViewClass('narrative');
-    if (NarrativeView) return;
-
     const items = this.model.getChildren();
     const globals = Adapt.course.get('_globals');
     const hotGraphicGlobals = globals._components._hotgraphic;
