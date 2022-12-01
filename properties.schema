@@ -33,7 +33,7 @@
     "instruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Select the icons to find out more.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
@@ -97,7 +97,7 @@
     "mobileInstruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Select the plus icon followed by the next arrow to find out more.",
       "inputType": "TextArea",
       "validators": [],
       "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
