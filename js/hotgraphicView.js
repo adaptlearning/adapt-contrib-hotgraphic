@@ -106,9 +106,9 @@ class HotGraphicView extends ComponentView {
 
     const $pin = this.getItemElement(model);
     // Append the word 'visited.' to the pin's aria-label
-    const visitedLabel = ` ${this.model.get('_globals')._accessibility._ariaLabels.visited}.`;
+    const visitedLabel = ` ${this.model.get('_globals')._accessibility._ariaLabels.visited}. `;
     $pin.find('.aria-label').each((index, el) => {
-      el.innerHTML += visitedLabel;
+      el.innerHTML = visitedLabel + el.innerHTML;
     });
 
     $pin.addClass('is-visited');
