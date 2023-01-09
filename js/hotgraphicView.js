@@ -20,6 +20,7 @@ class HotGraphicView extends ComponentView {
     this.setUpViewData();
     this.setUpModelData();
     this.setUpEventListeners();
+    this.updateItemCount();
   }
 
   setUpViewData() {
@@ -105,9 +106,9 @@ class HotGraphicView extends ComponentView {
 
     const $pin = this.getItemElement(model);
     // Append the word 'visited.' to the pin's aria-label
-    const visitedLabel = ` ${this.model.get('_globals')._accessibility._ariaLabels.visited}.`;
+    const visitedLabel = ` ${this.model.get('_globals')._accessibility._ariaLabels.visited}. `;
     $pin.find('.aria-label').each((index, el) => {
-      el.innerHTML += visitedLabel;
+      el.innerHTML = visitedLabel + el.innerHTML;
     });
 
     $pin.addClass('is-visited');
@@ -161,6 +162,23 @@ class HotGraphicView extends ComponentView {
   onPopupClosed() {
     this.model.getActiveItem().toggleActive();
     this._isPopupOpen = false;
+  }
+
+  updateItemCount () {
+    const items = this.model.getChildren();
+    const globals = Adapt.course.get('_globals');
+    const hotGraphicGlobals = globals._components._hotgraphic;
+    const ariaLabelItem = hotGraphicGlobals.item;
+
+    items.forEach((element, index) => {
+      const $ariaLabel = this.$('button span.aria-label')[index];
+      const title = Handlebars.helpers.compile_a11y_normalize(ariaLabelItem, {
+        itemNumber: index + 1,
+        totalItems: items.length
+      });
+
+      $ariaLabel.textContent += ` ${title}`;
+    });
   }
 
 }
