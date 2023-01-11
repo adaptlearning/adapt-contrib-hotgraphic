@@ -16,25 +16,22 @@
       "type": "string",
       "title": "Item",
       "default": "Item {{{itemNumber}}} of {{{totalItems}}}",
-      "_adapt": {
-        "translatable": true
-      }
+      "inputType": "Text",
+      "translatable": true
     },
     "previous": {
       "type": "string",
       "title": "Previous",
       "default": "{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}",
-      "_adapt": {
-        "translatable": true
-      }
+      "inputType": "Text",
+      "translatable": true
     },
     "next": {
       "type": "string",
       "title": "Next",
       "default": "{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}",
-      "_adapt": {
-        "translatable": true
-      }
+      "inputType": "Text",
+      "translatable": true
     },
     "popupPagination": {
       "type": "string",
@@ -51,6 +48,10 @@
       "type": "string",
       "required": true,
       "enum": ["full-width", "half-width", "both"],
+      "inputType": {
+        "type": "Select",
+        "options": ["full-width", "half-width", "both"]
+      },
       "default": "full-width",
       "editorOnly": true
     },
