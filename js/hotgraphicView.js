@@ -183,6 +183,6 @@ class HotGraphicView extends ComponentView {
 
 }
 
-HotGraphicView.template = 'hotgraphic';
+HotGraphicView.template = 'hotgraphic.jsx';
 
 export default HotGraphicView;
