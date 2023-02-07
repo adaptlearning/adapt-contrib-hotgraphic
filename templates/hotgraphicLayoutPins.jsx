@@ -12,6 +12,23 @@ export default function HotgraphicLayoutPins(props) {
     _useNumberedPins
   } = props;
 
+  const itemAriaLabel = (index, pin, title) => {
+    const arr = [];
+    const separator = '. ';
+
+    if (_useNumberedPins) {
+      arr.push(index + 1);
+    }
+
+    if (pin.alt) {
+      arr.push(pin.alt);
+    } else {
+      arr.push(title);
+    }
+
+    return { __html: arr.join(separator) };
+  };
+
   return (
     <div className="hotgraphic__pins">
 
@@ -32,7 +49,7 @@ export default function HotgraphicLayoutPins(props) {
 
       <div className="hotgraphic__pin-item-container" role="list">
 
-        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin }, index) =>
+        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin, title }, index) =>
           <div className="hotgraphic__pin-item" role="listitem" key={_index}>
 
             <button
@@ -42,15 +59,13 @@ export default function HotgraphicLayoutPins(props) {
                 `item-${_index}`,
                 _graphic._classes,
                 _isVisited && 'is-visited',
-                (_pin && _pin.src) && 'has-pin-image'
+                _pin.src && 'has-pin-image'
               ])}
               data-index={_index}
               style={{ top: _top + '%', left: _left + '%' }}
             >
 
-              <span className="aria-label">
-                {/* {{#if ../_useNumberedPins}}{{math @index "+" 1}} {{/if}}{{#if _pin.alt}}{{{compile _pin.alt}}}{{else}}{{{compile title}}}{{/if}}. */}
-              </span>
+              <span className="aria-label" dangerouslySetInnerHTML={ itemAriaLabel(index, _pin, title) } />
 
               {_pin.src &&
               <span className="hotgraphic__pin-image-container item-{{@index}}">
@@ -65,7 +80,7 @@ export default function HotgraphicLayoutPins(props) {
               }
 
               {!_pin.src && !_useNumberedPins &&
-                <span className="icon" aria-hidden="true"></span>
+                <span className="icon" aria-hidden="true" />
               }
 
             </button>
