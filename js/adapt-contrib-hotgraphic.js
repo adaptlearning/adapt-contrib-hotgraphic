@@ -1,8 +1,8 @@
 import components from 'core/js/components';
 import HotgraphicView from './hotgraphicView';
-import ItemsComponentModel from 'core/js/models/itemsComponentModel';
+import HotgraphicModel from './hotgraphicModel';
 
 export default components.register('hotgraphic', {
-  model: ItemsComponentModel.extend({}),
+  model: HotgraphicModel,
   view: HotgraphicView
 });

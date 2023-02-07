@@ -13,7 +13,7 @@ export default function HotgraphicLayoutPins(props) {
   } = props;
 
   return (
-    <div className='component__inner hotgraphic__inner'>
+    <div className="hotgraphic__pins">
 
       <img
         className="hotgraphic__image"
@@ -32,7 +32,7 @@ export default function HotgraphicLayoutPins(props) {
 
       <div className="hotgraphic__pin-item-container" role="list">
 
-        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin }) =>
+        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin }, index) =>
           <div className="hotgraphic__pin-item" role="listitem" key={_index}>
 
             <button
@@ -60,7 +60,7 @@ export default function HotgraphicLayoutPins(props) {
 
               {!_pin.src && _useNumberedPins &&
                 <span className="hotgraphic__pin-number" aria-hidden="true">
-                  Increment index by 1
+                  {index + 1}
                 </span>
               }
 

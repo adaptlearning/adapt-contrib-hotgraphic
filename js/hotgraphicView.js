@@ -177,7 +177,7 @@ class HotGraphicView extends ComponentView {
         totalItems: items.length
       });
 
-      $ariaLabel.textContent += ` ${title}`;
+      // $ariaLabel.textContent += ` ${title}`;
     });
   }
 
