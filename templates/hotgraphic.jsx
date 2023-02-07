@@ -7,10 +7,8 @@ export default function Hotgraphic(props) {
   // const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
   const {
-    _items,
     _graphic,
-    _useGraphicsAsPins,
-    _useNumberedPins
+    _useGraphicsAsPins
   } = props;
 
   // const itemAriaLabel = (_index, _graphic, _isVisited) => {
@@ -44,105 +42,12 @@ export default function Hotgraphic(props) {
         _graphic.attribution && 'has-attribution'
       ])}>
 
-        {/* Grid layout */}
         {_useGraphicsAsPins &&
-
-          <div className="hotgraphic__tile-item-container" role="list">
-
-            {_items.map(({ _index, _graphic, _isVisited, title }) =>
-              <div className="hotgraphic__tile-item" role="listitem" key={_index}>
-
-                <button
-                  aria-haspopup="dialog"
-                  className={classes([
-                    'hotgraphic__tile',
-                    `item-${_index}`,
-                    _graphic._classes,
-                    _isVisited && 'is-visited'
-                  ])}
-                  data-index={_index}
-                >
-
-                  <span className="aria-label">{title}</span>
-
-                  <img className="hotgraphic__tile-image" src={_graphic.src} aria-hidden="true" />
-
-                  <div className="icon" aria-hidden="true" />
-
-                </button>
-
-              </div>
-            )}
-
-          </div>
+          <templates.hotgraphicLayoutTiles {...props} />
         }
 
-        {/* Standard layout */}
         {!_useGraphicsAsPins &&
-
-          <img
-            className="hotgraphic__image"
-            src={_graphic.src}
-            aria-label={_graphic.alt || null}
-            aria-hidden={!_graphic.alt}
-          />
-
-          {_graphic.attribution &&
-          <div className="component__attribution hotgraphic__attribution">
-            <div className="component__attribution-inner hotgraphic__attribution-inner">
-              {_graphic.attribution}
-            </div>
-          </div>
-          }
-
-          <div className="hotgraphic__pin-item-container" role="list">
-
-            {_items.map(({ _pin, _top, _left, _index, _graphic, _isVisited }) =>
-            <div className="hotgraphic__pin-item" role="listitem">
-
-              <button
-                aria-haspopup="dialog" 
-                className={classes([
-                  'btn-icon hotgraphic__pin',
-                  `item-${_index}`,
-                  _graphic._classes,
-                  _isVisited && 'is-visited',
-                  _pin.src && 'has-pin-image'
-                ])}
-                data-index={_index}
-                style={`top: ${_top}%; left: ${_left}%;`}
-              >
-
-                <span className="aria-label">
-                  {/* {{#if ../_useNumberedPins}}{{math @index "+" 1}} {{/if}}{{#if _pin.alt}}{{{compile _pin.alt}}}{{else}}{{{compile title}}}{{/if}}. */}
-                </span>
-
-                {_pin.src &&
-                <span className="hotgraphic__pin-image-container item-{{@index}}">
-                  <img className="hotgraphic__pin-image" src={_pin.src} aria-hidden="true" />
-                </span>
-                }
-
-                {!_pin.src && _useNumberedPins &&
-
-                  <span className="hotgraphic__pin-number" aria-hidden="true">
-                    // math @index "+" 1
-                  </span>
-
-                }
-
-                {!_pin.src && !_useNumberedPins &&
-                  <span className="icon" aria-hidden="true"></span>
-                }
-
-                }
-
-              </button>
-
-            </div>
-            )}
-
-          </div>
+          <templates.hotgraphicLayoutPins {...props} />
         }
 
       </div>
