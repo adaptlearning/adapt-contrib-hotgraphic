@@ -8,12 +8,6 @@ import HotgraphicPopupView from './hotgraphicPopupView';
 
 class HotGraphicView extends ComponentView {
 
-  events () {
-    return {
-      'click .js-hotgraphic-item-click': 'onPinClicked'
-    };
-  }
-
   initialize(...args) {
     super.initialize(...args);
 
@@ -21,6 +15,8 @@ class HotGraphicView extends ComponentView {
     this.setUpModelData();
     this.setUpEventListeners();
     this.updateItemCount();
+
+    this.onPinClicked = this.onPinClicked.bind(this);
   }
 
   setUpViewData() {

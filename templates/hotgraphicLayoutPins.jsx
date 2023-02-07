@@ -1,15 +1,13 @@
-import Adapt from 'core/js/adapt';
 import React from 'react';
 import { classes } from 'core/js/reactHelpers';
 
 export default function HotgraphicLayoutPins(props) {
-  // const hotgraphicGlobals = Adapt.course.get('_globals')._components._hotgraphic;
-  // const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
   const {
     _items,
     _graphic,
-    _useNumberedPins
+    _useNumberedPins,
+    onPinClicked
   } = props;
 
   const itemAriaLabel = (index, pin, title) => {
@@ -20,11 +18,8 @@ export default function HotgraphicLayoutPins(props) {
       arr.push(index + 1);
     }
 
-    if (pin.alt) {
-      arr.push(pin.alt);
-    } else {
-      arr.push(title);
-    }
+    const labelTitle = pin.alt || title;
+    arr.push(labelTitle);
 
     return { __html: arr.join(separator) };
   };
@@ -62,6 +57,7 @@ export default function HotgraphicLayoutPins(props) {
                 _pin.src && 'has-pin-image'
               ])}
               data-index={_index}
+              onClick={onPinClicked}
               style={{ top: _top + '%', left: _left + '%' }}
             >
 

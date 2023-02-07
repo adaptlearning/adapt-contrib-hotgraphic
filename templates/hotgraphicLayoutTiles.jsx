@@ -1,13 +1,11 @@
-import Adapt from 'core/js/adapt';
 import React from 'react';
 import { classes } from 'core/js/reactHelpers';
 
 export default function HotgraphicLayoutTiles(props) {
-  // const hotgraphicGlobals = Adapt.course.get('_globals')._components._hotgraphic;
-  // const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
   const {
-    _items
+    _items,
+    onPinClicked
   } = props;
 
   return (
@@ -25,6 +23,7 @@ export default function HotgraphicLayoutTiles(props) {
               _isVisited && 'is-visited'
             ])}
             data-index={_index}
+            onClick={onPinClicked}
           >
 
             <span className="aria-label">{title}</span>
