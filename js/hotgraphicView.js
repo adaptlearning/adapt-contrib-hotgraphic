@@ -11,12 +11,12 @@ class HotGraphicView extends ComponentView {
   initialize(...args) {
     super.initialize(...args);
 
+    this.onPinClicked = this.onPinClicked.bind(this);
+
     this.setUpViewData();
     this.setUpModelData();
     this.setUpEventListeners();
     this.updateItemCount();
-
-    this.onPinClicked = this.onPinClicked.bind(this);
   }
 
   setUpViewData() {

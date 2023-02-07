@@ -1,5 +1,7 @@
 import Adapt from 'core/js/adapt';
-import a11y from 'core/js/a11y';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { templates, compile } from 'core/js/reactHelpers';
 
 class HotgraphicPopupView extends Backbone.View {
 
@@ -7,114 +9,138 @@ class HotgraphicPopupView extends Backbone.View {
     return 'hotgraphic-popup';
   }
 
-  events() {
-    return {
-      'click .js-hotgraphic-popup-close': 'closePopup',
-      'click .js-hotgraphic-controls-click': 'onControlClick'
-    };
+  initialize() {
+    this.setupEventListeners();
   }
 
-  initialize(...args) {
-    super.initialize(...args);
-    // Debounce required as a second (bad) click event is dispatched on iOS causing a jump of two items.
-    this.onControlClick = _.debounce(this.onControlClick.bind(this), 100);
-    this.listenToOnce(Adapt, 'notify:opened', this.onOpened);
+  setupEventListeners() {
+    this.listenToOnce(Adapt, 'notify:opened', this.onNotifyOpened);
+
     this.listenTo(this.model.getChildren(), {
-      'change:_isActive': this.onItemsActiveChange,
-      'change:_isVisited': this.onItemsVisitedChange
+      'change:_isActive': this.onItemsActiveChange
     });
+
+    this.model.set('onCloseClick', this.onCloseClick.bind(this));
+
+    // Debounce required as a second (bad) click event is dispatched on iOS causing a jump of two items.
+    // this.onControlClick = _.debounce(this.onControlClick.bind(this), 100);
+    this.model.set('onControlClick', this.onControlClick.bind(this));
+  }
+
+  onNotifyOpened() {
+    this.setupNavigation();
     this.render();
   }
 
-  onOpened() {
-    const index = this.model.getActiveItem().get('_index');
-    this.applyNavigationClasses(index);
+  setupNavigation() {
+    this.manageBackNextStates();
     this.updatePageCount();
-    this.handleTabs();
-    this.evaluateNavigation(index);
+    this.setupBackNextLabels();
   }
 
-  applyNavigationClasses (index) {
-    const itemCount = this.model.get('_items').length;
+  /**
+   * Controls whether the back and next buttons should be enabled
+   *
+   * @param {Number} [index] Item's index value. Defaults to the currently active item.
+   */
+  manageBackNextStates(index = this.model.getActiveItem().get('_index')) {
+    const totalItems = this.model.getChildren().length;
     const canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
 
     const shouldEnableBack = index > 0 || canCycleThroughPagination;
-    const shouldEnableNext = index < itemCount - 1 || canCycleThroughPagination;
-    const $controls = this.$('.hotgraphic-popup__controls');
+    const shouldEnableNext = index < totalItems - 1 || canCycleThroughPagination;
 
-    this.$('hotgraphic-popup__nav')
-      .toggleClass('first', !shouldEnableBack)
-      .toggleClass('last', !shouldEnableNext);
+    this.model.set('shouldEnableBack', shouldEnableBack);
+    this.model.set('shouldEnableNext', shouldEnableNext);
+  }
 
-    a11y.toggleEnabled($controls.filter('.back'), shouldEnableBack);
-    a11y.toggleEnabled($controls.filter('.next'), shouldEnableNext);
+  /**
+   * Construct back and next aria labels
+   *
+   * @param {Number} [index] Item's index value.
+   */
+  setupBackNextLabels(index = this.model.getActiveItem().get('_index')) {
+    const totalItems = this.model.getChildren().length;
+    const canCycleThroughPagination = this.model.get('_canCycleThroughPagination');
+
+    const isAtStart = index === 0;
+    const isAtEnd = index === totalItems - 1;
+
+    const globals = Adapt.course.get('_globals');
+    const hotgraphicGlobals = globals._components._hotgraphic;
+
+    let prevTitle = isAtStart ? '' : this.model.getItem(index - 1).get('title');
+    let nextTitle = isAtEnd ? '' : this.model.getItem(index + 1).get('title');
+
+    let backItem = isAtStart ? null : index;
+    let nextItem = isAtEnd ? null : index + 2;
+
+    if (canCycleThroughPagination) {
+      if (isAtStart) {
+        prevTitle = this.model.getItem(totalItems - 1).get('title');
+        backItem = totalItems;
+      }
+      if (isAtEnd) {
+        nextTitle = this.model.getItem(0).get('title');
+        nextItem = 1;
+      }
+    }
+
+    const backLabel = compile(hotgraphicGlobals.previous, {
+      _globals: globals,
+      title: prevTitle,
+      itemNumber: backItem,
+      totalItems
+    });
+
+    const nextLabel = compile(hotgraphicGlobals.next, {
+      _globals: globals,
+      title: nextTitle,
+      itemNumber: nextItem,
+      totalItems
+    });
+
+    this.model.set('backLabel', backLabel);
+    this.model.set('nextLabel', nextLabel);
   }
 
   updatePageCount() {
-    const template = Adapt.course.get('_globals')._components._hotgraphic.popupPagination || '{{itemNumber}} / {{totalItems}}';
-    const labelText = Handlebars.compile(template)({
-      itemNumber: this.model.getActiveItem().get('_index') + 1,
-      totalItems: this.model.get('_items').length
-    });
-    this.$('.hotgraphic-popup__count').html(labelText);
-  }
+    const globals = Adapt.course.get('_globals');
+    const pagingTemplate = globals._components._hotgraphic.popupPagination;
+    const template = pagingTemplate || '{{itemNumber}} / {{totalItems}}';
+    const itemNumber = this.model.getActiveItem().get('_index') + 1;
+    const totalItems = this.model.getChildren().length;
+    const itemCount = compile(template, { itemNumber, totalItems });
 
-  handleTabs() {
-    a11y.toggleHidden(this.$('.hotgraphic-popup__item:not(.is-active)'), true);
-    a11y.toggleHidden(this.$('.hotgraphic-popup__item.is-active'), false);
+    this.model.set('itemCount', itemCount);
   }
 
   onItemsActiveChange(item, _isActive) {
     if (!_isActive) return;
+
     const index = item.get('_index');
+
+    this.manageBackNextStates(index);
     this.updatePageCount();
-    this.applyItemClasses(index);
-    this.handleTabs();
-    this.handleFocus(index);
+    this.render();
   }
 
-  applyItemClasses(index) {
-    this.$(`.hotgraphic-popup__item[data-index="${index}"]`).addClass('is-active').removeAttr('aria-hidden');
-    this.$(`.hotgraphic-popup__item[data-index="${index}"] .hotgraphic-popup__item-title`).attr('id', 'notify-heading');
-    this.$(`.hotgraphic-popup__item:not([data-index="${index}"])`).removeClass('is-active').attr('aria-hidden', 'true');
-    this.$(`.hotgraphic-popup__item:not([data-index="${index}"]) .hotgraphic-popup__item-title`).removeAttr('id');
-  }
-
-  handleFocus(index) {
-    a11y.focusFirst(this.$('.hotgraphic-popup__inner .is-active'));
-    this.applyNavigationClasses(index);
-  }
-
-  onItemsVisitedChange(item, _isVisited) {
-    if (!_isVisited) return;
-
-    this.$('.hotgraphic-popup__item')
-      .filter(`[data-index="${item.get('_index')}"]`)
-      .addClass('is-visited');
-  }
-
-  render() {
-    const data = this.model.toJSON();
-    data.view = this;
-    const template = Handlebars.templates[this.constructor.template];
-    this.$el.html(template(data));
-  }
-
-  closePopup() {
+  onCloseClick() {
     Adapt.trigger('notify:close');
   }
 
-  onControlClick(event) {
-    const direction = $(event.currentTarget).data('direction');
+  onControlClick(e) {
+    const direction = $(e.currentTarget).data('direction');
     const index = this.getNextIndex(direction);
-    if (index === -1) return;
 
-    this.setItemState(index);
+    if (index !== -1) {
+      this.setItemState(index);
+    }
   }
 
   getNextIndex(direction) {
     let index = this.model.getActiveItem().get('_index');
-    const lastIndex = this.model.get('_items').length - 1;
+    const lastIndex = this.model.getChildren().length - 1;
 
     switch (direction) {
       case 'back':
@@ -132,49 +158,15 @@ class HotgraphicPopupView extends Backbone.View {
     this.model.getActiveItem().toggleActive();
 
     const nextItem = this.model.getItem(index);
-    this.evaluateNavigation(index);
+    this.setupBackNextLabels(index);
     nextItem.toggleActive();
     nextItem.toggleVisited(true);
   }
 
-  evaluateNavigation(index) {
-    const active = index || 0;
-    const itemCount = this.model.getChildren().length;
-
-    const isAtStart = active === 0;
-    const isAtEnd = active === itemCount - 1;
-
-    const $left = this.$('.hotgraphic-popup__controls.back');
-    const $right = this.$('.hotgraphic-popup__controls.next');
-
-    const globals = Adapt.course.get('_globals');
-
-    const ariaLabelsGlobals = globals._accessibility._ariaLabels;
-    const hotGraphicGlobals = globals._components._hotgraphic;
-
-    const ariaLabelPrevious = hotGraphicGlobals.previous || ariaLabelsGlobals.previous;
-    const ariaLabelNext = hotGraphicGlobals.next || ariaLabelsGlobals.next;
-
-    const prevTitle = isAtStart ? '' : this.model.getItem(active - 1).get('title');
-    const nextTitle = isAtEnd ? '' : this.model.getItem(active + 1).get('title');
-
-    $left.attr('aria-label', Handlebars.helpers.compile_a11y_normalize(ariaLabelPrevious, {
-      title: prevTitle,
-      _globals: globals,
-      itemNumber: isAtStart ? null : active,
-      totalItems: itemCount
-    }));
-    $right.attr('aria-label', Handlebars.helpers.compile_a11y_normalize(ariaLabelNext, {
-      title: nextTitle,
-      _globals: globals,
-      itemNumber: isAtEnd ? null : active + 2,
-      totalItems: itemCount
-    }));
-
-  };
+  render() {
+    ReactDOM.render(<templates.hotgraphicPopup {...this.model.toJSON()} />, this.el);
+  }
 
 };
-
-HotgraphicPopupView.template = 'hotgraphicPopup';
 
 export default HotgraphicPopupView;
