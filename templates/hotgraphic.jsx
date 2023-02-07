@@ -2,8 +2,6 @@ import React from 'react';
 import { templates, classes } from 'core/js/reactHelpers';
 
 export default function Hotgraphic(props) {
-  // const hotgraphicGlobals = Adapt.course.get('_globals')._components._hotgraphic;
-  // const ariaLabels = Adapt.course.get('_globals')._accessibility._ariaLabels;
 
   const {
     _graphic,
