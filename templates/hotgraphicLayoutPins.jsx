@@ -64,7 +64,10 @@ export default function HotgraphicLayoutPins(props) {
               <span className="aria-label" dangerouslySetInnerHTML={ itemAriaLabel(index, _pin, title) } />
 
               {_pin.src &&
-              <span className="hotgraphic__pin-image-container item-{{@index}}">
+              <span className={classes([
+                'hotgraphic__pin-image-container',
+                `item-${_index}`
+              ])}>
                 <img className="hotgraphic__pin-image" src={_pin.src} aria-hidden="true" />
               </span>
               }
