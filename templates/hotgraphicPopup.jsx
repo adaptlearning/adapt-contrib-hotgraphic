@@ -79,7 +79,7 @@ export default function HotgraphicPopup(props) {
               className="hotgraphic-popup__item-image"
               src={_graphic.src}
               aria-label={_graphic.alt || null}
-              aria-hidden={!_graphic.alt ? true : null}
+              aria-hidden={!_graphic.alt || null}
             />
 
             {_graphic.attribution &&
