@@ -31,7 +31,7 @@ export default function HotgraphicLayoutPins(props) {
         className="hotgraphic__image"
         src={_graphic.src}
         aria-label={_graphic.alt || null}
-        aria-hidden={!_graphic.alt}
+        aria-hidden={!_graphic.alt || null}
       />
 
       {_graphic.attribution &&
