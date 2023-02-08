@@ -25,6 +25,7 @@ class HotGraphicView extends ComponentView {
 
   setUpModelData() {
     if (this.model.get('_canCycleThroughPagination') !== undefined) return;
+
     this.model.set('_canCycleThroughPagination', false);
   }
 
@@ -83,17 +84,14 @@ class HotGraphicView extends ComponentView {
   }
 
   preRender() {
-    if (device.screenSize === 'large') {
-      this.render();
-      return;
-    }
-
     this.reRender();
   }
 
   postRender() {
     this.$('.hotgraphic__widget').imageready(this.setReadyStatus.bind(this));
+
     if (this.model.get('_setCompletionOn') !== 'inview') return;
+
     this.setupInviewCompletion('.hotgraphic__widget');
   }
 

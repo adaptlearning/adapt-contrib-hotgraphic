@@ -125,7 +125,9 @@ class HotgraphicPopupView extends Backbone.View {
     this.render();
   }
 
-  onCloseClick() {
+  onCloseClick(e) {
+    e.preventDefault();
+
     Adapt.trigger('notify:close');
   }
 
