@@ -2,6 +2,12 @@ import ItemsComponentModel from 'core/js/models/itemsComponentModel';
 
 export default class HotgraphicModel extends ItemsComponentModel {
 
+  defaults() {
+    return ItemsComponentModel.resultExtend('defaults', {
+      _canCycleThroughPagination: false
+    });
+  }
+
   setUpItems() {
     super.setUpItems();
 

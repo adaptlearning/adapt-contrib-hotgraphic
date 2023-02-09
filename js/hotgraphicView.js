@@ -14,19 +14,12 @@ class HotGraphicView extends ComponentView {
     this.onPinClicked = this.onPinClicked.bind(this);
 
     this.setUpViewData();
-    this.setUpModelData();
     this.setUpEventListeners();
   }
 
   setUpViewData() {
     this.popupView = null;
     this._isPopupOpen = false;
-  }
-
-  setUpModelData() {
-    if (this.model.get('_canCycleThroughPagination') !== undefined) return;
-
-    this.model.set('_canCycleThroughPagination', false);
   }
 
   setUpEventListeners() {
