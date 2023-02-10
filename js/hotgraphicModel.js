@@ -17,4 +17,30 @@ export default class HotgraphicModel extends ItemsComponentModel {
     });
   }
 
+  prepareNarrativeModel() {
+    this.set({
+      _component: 'narrative',
+      _wasHotgraphic: true,
+      originalBody: this.get('body'),
+      originalInstruction: this.get('instruction')
+    });
+
+    // Check if active item exists, default to 0
+    const activeItem = this.getActiveItem();
+    if (!activeItem) {
+      this.getItem(0).toggleActive(true);
+    }
+
+    // Swap mobile body and instructions for desktop variants.
+    if (this.get('mobileBody')) {
+      this.set('body', this.get('mobileBody'));
+    }
+
+    if (this.get('mobileInstruction')) {
+      this.set('instruction', this.get('mobileInstruction'));
+    }
+
+    return this;
+  }
+
 }

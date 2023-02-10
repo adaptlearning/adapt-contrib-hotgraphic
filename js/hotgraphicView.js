@@ -36,7 +36,7 @@ class HotGraphicView extends ComponentView {
     const NarrativeView = components.getViewClass('narrative');
     if (!NarrativeView) return;
 
-    const model = this.prepareNarrativeModel();
+    const model = this.model.prepareNarrativeModel();
     const newNarrative = new NarrativeView({ model });
     // NOTE: if this component is doing its inital render in 'narrative mode',
     // this.$el.parents() won't exist at this point - which is why the following is
@@ -49,31 +49,6 @@ class HotGraphicView extends ComponentView {
     _.defer(() => {
       Adapt.trigger('device:resize');
     });
-  }
-
-  prepareNarrativeModel() {
-    this.model.set({
-      _component: 'narrative',
-      _wasHotgraphic: true,
-      originalBody: this.model.get('body'),
-      originalInstruction: this.model.get('instruction')
-    });
-
-    // Check if active item exists, default to 0
-    const activeItem = this.model.getActiveItem();
-    if (!activeItem) {
-      this.model.getItem(0).toggleActive(true);
-    }
-
-    // Swap mobile body and instructions for desktop variants.
-    if (this.model.get('mobileBody')) {
-      this.model.set('body', this.model.get('mobileBody'));
-    }
-    if (this.model.get('mobileInstruction')) {
-      this.model.set('instruction', this.model.get('mobileInstruction'));
-    }
-
-    return this.model;
   }
 
   preRender() {
@@ -89,8 +64,6 @@ class HotGraphicView extends ComponentView {
   }
 
   onPinClicked (e) {
-    e.preventDefault();
-
     const item = this.model.getItem($(e.currentTarget).data('index'));
 
     item.toggleActive(true);
