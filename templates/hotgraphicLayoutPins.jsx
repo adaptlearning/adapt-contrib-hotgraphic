@@ -48,7 +48,6 @@ export default function HotgraphicLayoutPins(props) {
           <div className="hotgraphic__pin-item" role="listitem" key={_index}>
 
             <button
-              aria-haspopup="dialog"
               className={classes([
                 'btn-icon hotgraphic__pin',
                 `item-${_index}`,

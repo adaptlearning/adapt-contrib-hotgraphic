@@ -15,7 +15,6 @@ export default function HotgraphicLayoutTiles(props) {
         <div className="hotgraphic__tile-item" role="listitem" key={_index}>
 
           <button
-            aria-haspopup="dialog"
             className={classes([
               'hotgraphic__tile',
               `item-${_index}`,
