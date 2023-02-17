@@ -75,7 +75,7 @@ export default function HotgraphicPopupToolbar(props) {
       </button>
 
       {a11yConfig._options._isPopupWrapFocusEnabled &&
-      <a className="a11y-focusguard a11y-ignore a11y-ignore-focus" tabIndex="0" role="presentation">&nbsp;</a>
+      <a className="a11y-focusguard a11y-ignore a11y-ignore-focus" tabIndex="0" role="presentation" />
       }
 
     </div>
