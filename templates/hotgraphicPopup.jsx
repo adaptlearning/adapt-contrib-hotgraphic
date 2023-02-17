@@ -23,8 +23,6 @@ export default function HotgraphicPopup(props) {
   return (
     <div className='hotgraphic-popup__inner'>
 
-      <templates.hotgraphicPopupToolbar {...props} />
-
       {_items.map(({ title, body, _graphic, _classes, _isVisited, _isActive, _imageAlignment }, index) =>
         <div className={classes([
           'hotgraphic-popup__item',
@@ -95,6 +93,8 @@ export default function HotgraphicPopup(props) {
 
         </div>
       )}
+
+      <templates.hotgraphicPopupToolbar {...props} />
 
     </div>
 
