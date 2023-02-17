@@ -47,6 +47,7 @@ export default function HotgraphicPopupToolbar(props) {
         <div
           className="hotgraphic-popup__count"
           dangerouslySetInnerHTML={{ __html: itemCount }}
+          aria-hidden="true"
         />
 
         <button
