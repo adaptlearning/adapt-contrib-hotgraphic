@@ -1,7 +1,10 @@
+import Adapt from 'core/js/adapt';
 import React from 'react';
-import { classes } from 'core/js/reactHelpers';
+import { classes, compile } from 'core/js/reactHelpers';
 
 export default function HotgraphicLayoutTiles(props) {
+  const globals = Adapt.course.get('_globals');
+  const visitedLabel = globals?._accessibility?._ariaLabels.visited;
 
   const {
     _items,
@@ -11,30 +14,38 @@ export default function HotgraphicLayoutTiles(props) {
   return (
     <div className="hotgraphic__tile-item-container" role="list">
 
-      {_items.map(({ _index, _graphic, _isVisited, title }) =>
-        <div className="hotgraphic__tile-item" role="listitem" key={_index}>
+      {_items.map(({ _index, _graphic, _isVisited, title }) => {
 
-          <button
-            className={classes([
-              'hotgraphic__tile',
-              `item-${_index}`,
-              _graphic._classes,
-              _isVisited && 'is-visited'
-            ])}
-            data-index={_index}
-            onClick={onPinClicked}
-          >
+        const visited = _isVisited ? visitedLabel + '. ' : '';
+        const itemTitle = title + '. ';
+        const itemCount = compile(globals._components._hotgraphic.item, { itemNumber: _index + 1, totalItems: _items.length });
+        const ariaLabel = visited + itemTitle + itemCount;
 
-            <span className="aria-label">{title}</span>
+        return (
+          <div className="hotgraphic__tile-item" role="listitem" key={_index}>
 
-            <img className="hotgraphic__tile-image" src={_graphic.src} aria-hidden="true" />
+            <button
+              className={classes([
+                'hotgraphic__tile',
+                `item-${_index}`,
+                _graphic._classes,
+                _isVisited && 'is-visited'
+              ])}
+              data-index={_index}
+              onClick={onPinClicked}
+            >
 
-            <div className="icon" aria-hidden="true" />
+              <span className="aria-label">{ariaLabel}</span>
 
-          </button>
+              <img className="hotgraphic__tile-image" src={_graphic.src} aria-hidden="true" />
 
-        </div>
-      )}
+              <div className="icon" aria-hidden="true" />
+
+            </button>
+
+          </div>
+        );
+      })}
 
     </div>
   );

@@ -110,9 +110,9 @@ class HotgraphicPopupView extends Backbone.View {
     const template = pagingTemplate || '{{itemNumber}} / {{totalItems}}';
     const itemNumber = this.model.getActiveItem().get('_index') + 1;
     const totalItems = this.model.getChildren().length;
-    const itemCount = compile(template, { itemNumber, totalItems });
+    const popupCount = compile(template, { itemNumber, totalItems });
 
-    this.model.set('itemCount', itemCount);
+    this.model.set('popupCount', popupCount);
   }
 
   onItemsActiveChange(item, _isActive) {
