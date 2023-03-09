@@ -85,7 +85,7 @@ class HotGraphicView extends ComponentView {
     if (this.model.get('mobileBody')) {
       this.model.set('body', this.model.get('mobileBody'));
     }
-    if (this.model.get('mobileInstruction')) {
+    if (this.model.get('mobileInstruction') && this.model.get('_isNarrativeOnMobile') && !this.model.get('_isMobileTextBelowImage')) {
       this.model.set('instruction', this.model.get('mobileInstruction'));
     }
 
