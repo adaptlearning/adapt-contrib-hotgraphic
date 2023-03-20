@@ -35,8 +35,7 @@ export default class HotgraphicModel extends ItemsComponentModel {
     if (this.get('mobileBody')) {
       this.set('body', this.get('mobileBody'));
     }
-
-    if (this.get('mobileInstruction')) {
+    if (this.get('mobileInstruction') && this.get('_isNarrativeOnMobile') && !this.get('_isMobileTextBelowImage')) {
       this.set('instruction', this.get('mobileInstruction'));
     }
 

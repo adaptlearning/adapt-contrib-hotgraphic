@@ -51,31 +51,6 @@ class HotGraphicView extends ComponentView {
     });
   }
 
-  prepareNarrativeModel() {
-    this.model.set({
-      _component: 'narrative',
-      _wasHotgraphic: true,
-      originalBody: this.model.get('body'),
-      originalInstruction: this.model.get('instruction')
-    });
-
-    // Check if active item exists, default to 0
-    const activeItem = this.model.getActiveItem();
-    if (!activeItem) {
-      this.model.getItem(0).toggleActive(true);
-    }
-
-    // Swap mobile body and instructions for desktop variants.
-    if (this.model.get('mobileBody')) {
-      this.model.set('body', this.model.get('mobileBody'));
-    }
-    if (this.model.get('mobileInstruction') && this.model.get('_isNarrativeOnMobile') && !this.model.get('_isMobileTextBelowImage')) {
-      this.model.set('instruction', this.model.get('mobileInstruction'));
-    }
-
-    return this.model;
-  }
-
   onItemsActiveChange(model, _isActive) {
     this.getItemElement(model).toggleClass('is-active', _isActive);
   }
