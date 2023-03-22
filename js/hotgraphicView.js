@@ -8,19 +8,13 @@ import HotgraphicPopupView from './hotgraphicPopupView';
 
 class HotGraphicView extends ComponentView {
 
-  events () {
-    return {
-      'click .js-hotgraphic-item-click': 'onPinClicked'
-    };
-  }
-
   initialize(...args) {
     super.initialize(...args);
 
+    this.onPinClicked = this.onPinClicked.bind(this);
+
     this.setUpViewData();
-    this.setUpModelData();
     this.setUpEventListeners();
-    this.updateItemCount();
   }
 
   setUpViewData() {
@@ -28,18 +22,8 @@ class HotGraphicView extends ComponentView {
     this._isPopupOpen = false;
   }
 
-  setUpModelData() {
-    if (this.model.get('_canCycleThroughPagination') !== undefined) return;
-    this.model.set('_canCycleThroughPagination', false);
-  }
-
   setUpEventListeners() {
     this.listenTo(Adapt, 'device:changed', this.reRender);
-
-    this.listenTo(this.model.getChildren(), {
-      'change:_isActive': this.onItemsActiveChange,
-      'change:_isVisited': this.onItemsVisitedChange
-    });
   }
 
   reRender() {
@@ -52,7 +36,7 @@ class HotGraphicView extends ComponentView {
     const NarrativeView = components.getViewClass('narrative');
     if (!NarrativeView) return;
 
-    const model = this.prepareNarrativeModel();
+    const model = this.model.prepareNarrativeModel();
     const newNarrative = new NarrativeView({ model });
     // NOTE: if this component is doing its inital render in 'narrative mode',
     // this.$el.parents() won't exist at this point - which is why the following is
@@ -65,31 +49,6 @@ class HotGraphicView extends ComponentView {
     _.defer(() => {
       Adapt.trigger('device:resize');
     });
-  }
-
-  prepareNarrativeModel() {
-    this.model.set({
-      _component: 'narrative',
-      _wasHotgraphic: true,
-      originalBody: this.model.get('body'),
-      originalInstruction: this.model.get('instruction')
-    });
-
-    // Check if active item exists, default to 0
-    const activeItem = this.model.getActiveItem();
-    if (!activeItem) {
-      this.model.getItem(0).toggleActive(true);
-    }
-
-    // Swap mobile body and instructions for desktop variants.
-    if (this.model.get('mobileBody')) {
-      this.model.set('body', this.model.get('mobileBody'));
-    }
-    if (this.model.get('mobileInstruction') && this.model.get('_isNarrativeOnMobile') && !this.model.get('_isMobileTextBelowImage')) {
-      this.model.set('instruction', this.model.get('mobileInstruction'));
-    }
-
-    return this.model;
   }
 
   onItemsActiveChange(model, _isActive) {
@@ -110,30 +69,25 @@ class HotGraphicView extends ComponentView {
     $pin.find('.aria-label').each((index, el) => {
       el.innerHTML = visitedLabel + el.innerHTML;
     });
-
-    $pin.addClass('is-visited');
   }
 
   preRender() {
-    if (device.screenSize === 'large') {
-      this.render();
-      return;
-    }
-
     this.reRender();
   }
 
   postRender() {
     this.$('.hotgraphic__widget').imageready(this.setReadyStatus.bind(this));
+
     if (this.model.get('_setCompletionOn') !== 'inview') return;
-    this.setupInviewCompletion('.component__widget');
+
+    this.setupInviewCompletion('.hotgraphic__widget');
   }
 
-  onPinClicked (event) {
-    const item = this.model.getItem($(event.currentTarget).data('index'));
+  onPinClicked (e) {
+    const item = this.model.getItem($(e.currentTarget).data('index'));
+
     item.toggleActive(true);
     item.toggleVisited(true);
-
     this.openPopup();
   }
 
@@ -164,25 +118,8 @@ class HotGraphicView extends ComponentView {
     this._isPopupOpen = false;
   }
 
-  updateItemCount () {
-    const items = this.model.getChildren();
-    const globals = Adapt.course.get('_globals');
-    const hotGraphicGlobals = globals._components._hotgraphic;
-    const ariaLabelItem = hotGraphicGlobals.item;
-
-    items.forEach((element, index) => {
-      const $ariaLabel = this.$('button span.aria-label')[index];
-      const title = Handlebars.helpers.compile_a11y_normalize(ariaLabelItem, {
-        itemNumber: index + 1,
-        totalItems: items.length
-      });
-
-      $ariaLabel.textContent += ` ${title}`;
-    });
-  }
-
 }
 
-HotGraphicView.template = 'hotgraphic';
+HotGraphicView.template = 'hotgraphic.jsx';
 
 export default HotGraphicView;
