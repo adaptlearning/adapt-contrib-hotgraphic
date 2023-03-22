@@ -24,7 +24,7 @@
         "instruction": {
           "type": "string",
           "title": "Instruction",
-          "default": "",
+          "default": "Select the icons to find out more.",
           "_adapt": {
             "translatable": true
           }
@@ -89,7 +89,7 @@
           "type": "string",
           "title": "Mobile instruction",
           "description": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
-          "default": "",
+          "default": "Select the plus icon followed by the next arrow to find out more.",
           "_adapt": {
             "translatable": true
           },

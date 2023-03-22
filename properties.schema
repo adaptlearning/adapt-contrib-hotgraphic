@@ -12,6 +12,27 @@
       "validators": [],
       "translatable": true
     },
+    "item": {
+      "type": "string",
+      "title": "Item",
+      "default": "Item {{{itemNumber}}} of {{{totalItems}}}",
+      "inputType": "Text",
+      "translatable": true
+    },
+    "previous": {
+      "type": "string",
+      "title": "Previous",
+      "default": "{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}",
+      "inputType": "Text",
+      "translatable": true
+    },
+    "next": {
+      "type": "string",
+      "title": "Next",
+      "default": "{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}",
+      "inputType": "Text",
+      "translatable": true
+    },
     "popupPagination": {
       "type": "string",
       "required": true,
@@ -27,13 +48,17 @@
       "type": "string",
       "required": true,
       "enum": ["full-width", "half-width", "both"],
+      "inputType": {
+        "type": "Select",
+        "options": ["full-width", "half-width", "both"]
+      },
       "default": "full-width",
       "editorOnly": true
     },
     "instruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Select the icons to find out more.",
       "inputType": "Text",
       "validators": [],
       "translatable": true
@@ -97,7 +122,7 @@
     "mobileInstruction": {
       "type": "string",
       "required": false,
-      "default": "",
+      "default": "Select the plus icon followed by the next arrow to find out more.",
       "inputType": "TextArea",
       "validators": [],
       "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
