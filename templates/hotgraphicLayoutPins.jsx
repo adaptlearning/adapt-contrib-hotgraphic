@@ -33,7 +33,7 @@ export default function HotgraphicLayoutPins(props) {
 
       <div className="hotgraphic__pin-item-container" role="list">
 
-        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin, title }, index) => {
+        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin, title, _tooltip }, index) => {
 
           const visited = _isVisited ? visitedLabel + '. ' : '';
           const numbered = _useNumberedPins ? (index + 1) + '. ' : '';
@@ -55,6 +55,7 @@ export default function HotgraphicLayoutPins(props) {
                 data-index={_index}
                 onClick={onPinClicked}
                 style={{ top: _top + '%', left: _left + '%' }}
+                data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
               >
 
                 <span className="aria-label" dangerouslySetInnerHTML={{ __html: compile(ariaLabel) }} />
