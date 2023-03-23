@@ -280,7 +280,7 @@
                   },
                   "text": {
                     "type": "string",
-                    "default": "",
+                    "default": "{{title}}",
                     "title": "Tooltip text",
                     "help": "The tooltip text to display on hover over this item",
                     "translatable": true
