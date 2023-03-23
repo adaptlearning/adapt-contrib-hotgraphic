@@ -303,7 +303,7 @@
               "text": {
                 "type": "string",
                 "required": false,
-                "default": "",
+                "default": "{{title}}",
                 "title": "Tooltip text",
                 "inputType": "Text",
                 "validators": [],
