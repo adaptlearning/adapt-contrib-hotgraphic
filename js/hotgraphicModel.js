@@ -22,6 +22,7 @@ export default class HotgraphicModel extends ItemsComponentModel {
       if (!tooltip?._isEnabled) return;
       tooltip._id = `hotgraphic-pin-${id}-${index}`;
       tooltips.register({
+        ...child.toJSON(),
         _classes: [ 'hotgraphic__pin-tooltip' ],
         ...tooltip
       });
