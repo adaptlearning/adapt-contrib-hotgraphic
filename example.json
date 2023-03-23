@@ -44,7 +44,7 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": ""
+                    "text": "{{title}}"
                 }
             },
             {
