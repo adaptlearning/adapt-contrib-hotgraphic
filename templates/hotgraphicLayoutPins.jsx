@@ -10,6 +10,7 @@ export default function HotgraphicLayoutPins(props) {
     _items,
     _graphic,
     _useNumberedPins,
+    _tooltip,
     onPinClicked
   } = props;
 
@@ -21,6 +22,7 @@ export default function HotgraphicLayoutPins(props) {
         src={_graphic.src}
         aria-label={_graphic.alt || null}
         aria-hidden={!_graphic.alt || null}
+        data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
       />
 
       {_graphic.attribution &&
@@ -55,7 +57,7 @@ export default function HotgraphicLayoutPins(props) {
                 data-index={_index}
                 onClick={onPinClicked}
                 style={{ top: _top + '%', left: _left + '%' }}
-                data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
+                data-tooltip-id={_tooltip?._id}
               >
 
                 <span className="aria-label" dangerouslySetInnerHTML={{ __html: compile(ariaLabel) }} />

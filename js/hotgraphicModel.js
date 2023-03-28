@@ -12,7 +12,6 @@ export default class HotgraphicModel extends ItemsComponentModel {
   setUpItems() {
     super.setUpItems();
     const id = this.get('_id');
-
     this.getChildren().forEach((child, index) => {
 
       // Set _pin for the item if undefined
@@ -24,7 +23,8 @@ export default class HotgraphicModel extends ItemsComponentModel {
       tooltips.register({
         ...child.toJSON(),
         _classes: [ 'hotgraphic__pin-tooltip' ],
-        ...tooltip
+        ...tooltip,
+        _position: 'outside middle bottom middle'
       });
 
     });
