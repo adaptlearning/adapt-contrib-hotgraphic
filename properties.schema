@@ -303,7 +303,7 @@
               "text": {
                 "type": "string",
                 "required": false,
-                "default": "{{title}}",
+                "default": "{{ariaLabel}}",
                 "title": "Tooltip text",
                 "inputType": "Text",
                 "validators": [],
