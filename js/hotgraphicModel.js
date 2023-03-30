@@ -23,7 +23,7 @@ export default class HotgraphicModel extends ItemsComponentModel {
       tooltips.register({
         ...child.toJSON(),
         _classes: [ 'hotgraphic__pin-tooltip' ],
-        _position: 'outside middle bottom middle',
+        _position: 'outside bottom middle middle',
         ...tooltip
       });
 
