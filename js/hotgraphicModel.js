@@ -26,7 +26,7 @@ export default class HotgraphicModel extends ItemsComponentModel {
         ...tooltip
       };
       tooltipConfig._position = tooltipConfig._position || 'outside bottom middle middle';
-      tooltips.register();
+      tooltips.register(tooltipConfig);
 
     });
   }
