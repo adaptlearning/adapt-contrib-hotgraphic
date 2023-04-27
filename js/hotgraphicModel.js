@@ -20,12 +20,13 @@ export default class HotgraphicModel extends ItemsComponentModel {
       const tooltip = child.get('_tooltip');
       if (!tooltip?._isEnabled) return;
       tooltip._id = `hotgraphic-pin-${id}-${index}`;
-      tooltips.register({
+      const tooltipConfig = {
         ...child.toJSON(),
         _classes: [ 'hotgraphic__pin-tooltip' ],
-        _position: 'outside bottom middle middle',
         ...tooltip
-      });
+      };
+      tooltipConfig._position = tooltipConfig._position || 'outside bottom middle middle';
+      tooltips.register();
 
     });
   }
