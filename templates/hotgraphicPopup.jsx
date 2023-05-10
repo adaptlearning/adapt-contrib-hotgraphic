@@ -46,6 +46,7 @@ export default function HotgraphicPopup(props) {
                   'hotgraphic-popup__item-title',
                   _isActive && 'notify-heading'
                 ])}
+                role="heading"
                 aria-level={a11y.ariaLevel({ level: 'notify' })}
               >
                 <div
