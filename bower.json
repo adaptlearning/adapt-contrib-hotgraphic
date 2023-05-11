@@ -1,6 +1,6 @@
 {
   "name": "adapt-contrib-hotgraphic",
-  "version": "6.6.4",
+  "version": "6.7.0",
   "framework": ">=5.19.1",
   "homepage": "https://github.com/adaptlearning/adapt-contrib-hotgraphic",
   "bugs": "https://github.com/adaptlearning/adapt-contrib-hotgraphic/issues",
@@ -25,7 +25,7 @@
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "conventional-changelog-eslint": "^3.0.9",
-    "semantic-release": "^19.0.3"
+    "semantic-release": "^21.0.1"
   },
   "scripts": {
     "postversion": "cp package.json bower.json"
