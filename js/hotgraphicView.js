@@ -27,7 +27,7 @@ class HotGraphicView extends ComponentView {
   }
 
   reRender() {
-    if (device.screenSize === 'large' || this.model.get('_isNarrativeOnMobile') === false) return;
+    if (device.isScreenSizeMin('medium') || this.model.get('_isNarrativeOnMobile') === false) return;
 
     this.replaceWithNarrative();
   }
