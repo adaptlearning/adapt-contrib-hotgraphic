@@ -10,6 +10,7 @@ export default function HotgraphicLayoutPins(props) {
     _items,
     _graphic,
     _useNumberedPins,
+    _tooltip,
     onPinClicked
   } = props;
 
@@ -21,6 +22,7 @@ export default function HotgraphicLayoutPins(props) {
         src={_graphic.src}
         aria-label={_graphic.alt || null}
         aria-hidden={!_graphic.alt || null}
+        data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
       />
 
       {_graphic.attribution &&
@@ -33,13 +35,13 @@ export default function HotgraphicLayoutPins(props) {
 
       <div className="hotgraphic__pin-item-container" role="list">
 
-        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin, title }, index) => {
+        {_items.map(({ _top, _left, _index, _graphic, _isVisited, _pin, title, _tooltip }, index) => {
 
-          const visited = _isVisited ? visitedLabel + '. ' : '';
+          const visited = _isVisited ? visitedLabel?.trim?.() + '. ' : '';
           const numbered = _useNumberedPins ? (index + 1) + '. ' : '';
-          const itemTitle = (_pin.alt || title) + '. ';
+          const itemTitle = (_pin.alt || title)?.trim?.() + '. ';
           const itemCount = compile(globals._components?._hotgraphic?.popupPagination || '', { itemNumber: _index + 1, totalItems: _items.length });
-          const ariaLabel = visited + numbered + itemTitle + itemCount;
+          const ariaLabel = `${visited}${numbered}${itemTitle}${itemCount}`;
 
           return (
             <div className="hotgraphic__pin-item" role="listitem" key={_index}>
@@ -55,6 +57,7 @@ export default function HotgraphicLayoutPins(props) {
                 data-index={_index}
                 onClick={onPinClicked}
                 style={{ top: _top + '%', left: _left + '%' }}
+                data-tooltip-id={_tooltip?._id}
               >
 
                 <span className="aria-label" dangerouslySetInnerHTML={{ __html: compile(ariaLabel) }} />

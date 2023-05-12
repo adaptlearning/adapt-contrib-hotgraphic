@@ -41,6 +41,10 @@
                     "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 }
             },
             {
@@ -56,6 +60,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 }
             },
             {
@@ -71,6 +79,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 }
             }
         ],
@@ -99,6 +111,10 @@
                     "alt": "",
                     "attribution": "Copyright © 2019",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 }
             },
             {
@@ -114,6 +130,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 }
             }
         ]
@@ -139,6 +159,10 @@
                     "attribution": "Copyright © 2019",
                     "_classes": ""
                 },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
+                },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
                     "alt": ""
@@ -157,6 +181,10 @@
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
+                },
+                "_tooltip": {
+                    "_isEnabled": false,
+                    "text": "{{ariaLabel}}"
                 },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
