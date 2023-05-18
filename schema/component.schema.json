@@ -93,7 +93,7 @@
           "_adapt": {
             "translatable": true
           },
-          "_backboneForms": "TextArea"
+          "_backboneForms": "Text"
         },
         "_hidePagination": {
           "type": "boolean",
