@@ -38,12 +38,15 @@ class HotGraphicView extends ComponentView {
 
     const model = this.model.prepareNarrativeModel();
     const newNarrative = new NarrativeView({ model });
-    // NOTE: if this component is doing its inital render in 'narrative mode',
-    // this.$el.parents() won't exist at this point - which is why the following is
-    // written the way it is, instead of (what would appear to be) the more efficient
-    // this.$el.parents('.component__container')
-    const $container = data.findViewByModelId(model.get('_parentId')).$el.find('.component__container');
+
+    const parentView = data.findViewByModelId(model.get('_parentId'));
+    const $container = parentView.$el.find('.component__container');
     $container.append(newNarrative.$el);
+
+    const parentChildViews = parentView.getChildViews();
+    const currentIndex = parentChildViews.findIndex(view => view === this);
+    parentChildViews[currentIndex] = newNarrative;
+    parentView.setChildViews(parentChildViews);
 
     this.remove();
     _.defer(() => {
