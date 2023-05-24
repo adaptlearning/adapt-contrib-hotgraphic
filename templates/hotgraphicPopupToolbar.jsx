@@ -33,7 +33,7 @@ export default function HotgraphicPopupToolbar(props) {
 
         <button
           className={classes([
-            'btn-icon hotgraphic-popup__controls back',
+            'btn-icon notify__btn-icon hotgraphic-popup__controls back',
             !shouldEnableBack && 'is-disabled'
           ])}
           aria-label={backLabel}
@@ -52,7 +52,7 @@ export default function HotgraphicPopupToolbar(props) {
 
         <button
           className={classes([
-            'btn-icon hotgraphic-popup__controls next',
+            'btn-icon notify__btn-icon hotgraphic-popup__controls next',
             !shouldEnableNext && 'is-disabled'
           ])}
           aria-label={nextLabel}
@@ -67,7 +67,7 @@ export default function HotgraphicPopupToolbar(props) {
       }
 
       <button
-        className="btn-icon hotgraphic-popup__close"
+        className="btn-icon notify__btn-icon hotgraphic-popup__close"
         aria-label={ariaLabels.closePopup}
         onClick={onCloseClick}
       >
