@@ -51,7 +51,7 @@ export default function HotgraphicPopup(props) {
               >
                 <div
                   className="hotgraphic-popup__item-title-inner"
-                  dangerouslySetInnerHTML={{ __html: title }}
+                  dangerouslySetInnerHTML={{ __html: compile(title) }}
                 />
               </div>
               }
