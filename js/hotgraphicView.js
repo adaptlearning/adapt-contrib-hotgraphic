@@ -45,8 +45,8 @@ class HotGraphicView extends ComponentView {
     const $container = parentView.$el.find('.component__container');
     $container.append(newNarrative.$el);
 
-    const parentChildViews = parentView.getChildViews() || [];
-    const currentIndex = parentChildViews.findIndex(view => view === this);
+    const parentChildViews = parentView.getChildViews();
+    const currentIndex = parentChildViews?.findIndex(view => view === this) ?? 0;
     parentChildViews[currentIndex] = newNarrative;
     parentView.setChildViews(parentChildViews);
 
