@@ -71,13 +71,13 @@ export default function HotgraphicLayoutPins(props) {
                 </span>
                 }
 
-                {!_pin.src && _useNumberedPins &&
+                {(!_pin.src && _useNumberedPins && !_isVisited) &&
                   <span className="hotgraphic__pin-number" aria-hidden="true">
                     {index + 1}
                   </span>
                 }
 
-                {!_pin.src && !_useNumberedPins &&
+                {((!_pin.src && !_useNumberedPins) || (!_pin.src && _isVisited)) &&
                   <span className="icon" aria-hidden="true" />
                 }
 
