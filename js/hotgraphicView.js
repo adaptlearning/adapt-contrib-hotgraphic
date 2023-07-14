@@ -29,7 +29,9 @@ class HotGraphicView extends ComponentView {
   reRender() {
     if (device.isScreenSizeMin('medium') || this.model.get('_isNarrativeOnMobile') === false) return;
 
-    this.replaceWithNarrative();
+    _.defer(() => {
+      this.replaceWithNarrative();
+    });
   }
 
   replaceWithNarrative() {
@@ -44,7 +46,7 @@ class HotGraphicView extends ComponentView {
     $container.append(newNarrative.$el);
 
     const parentChildViews = parentView.getChildViews();
-    const currentIndex = parentChildViews.findIndex(view => view === this);
+    const currentIndex = parentChildViews?.findIndex(view => view === this) ?? 0;
     parentChildViews[currentIndex] = newNarrative;
     parentView.setChildViews(parentChildViews);
 
