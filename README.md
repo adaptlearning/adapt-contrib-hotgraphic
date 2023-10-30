@@ -115,9 +115,6 @@ Enter a percentage value (0-100) that this item should be from the left border o
 #### title (string):
 This is the title text for the hot spot's pop-up.
 
-#### \_ariaLevel (number):
-ARIA level to assign to the popup title. If not set, it will default to using the value assigned to `_notify` in the `_accessibility` section of config.json.
-
 #### body (string):
 This is the main text for a hot spot pop-up.
 
