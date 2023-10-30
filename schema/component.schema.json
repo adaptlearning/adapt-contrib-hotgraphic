@@ -146,12 +146,6 @@
                   "translatable": true
                 }
               },
-              "_ariaLevel": {
-                "type": "number",
-                "title": "Title ARIA level",
-                "description": "ARIA level to assign to the popup title. Leave set to 0 to default to the Notify ARIA level (set via the Accessibility section of the course configuration)",
-                "default": 0
-              },
               "body": {
                 "type": "string",
                 "title": "Body",
