@@ -208,15 +208,6 @@
             "help": "Title displayed in the popup",
             "translatable": true
           },
-          "_ariaLevel": {
-            "type": "number",
-            "required": true,
-            "default": 0,
-            "title": "Title level",
-            "inputType": "Number",
-            "validators": ["required", "number"],
-            "help": "ARIA level to assign to the popup title. Leave set to 0 to default to the Notify ARIA level (set via the Accessibility section of the course configuration)."
-          },
           "body": {
             "type": "string",
             "required": true,
