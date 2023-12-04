@@ -37,6 +37,32 @@ export default function HotgraphicPopup(props) {
         aria-hidden={!_isActive ? true : null}
         >
 
+          {(_imageAlignment === 'left' || _imageAlignment === 'top') &&
+            <div className={classes([
+              'hotgraphic-popup__item-image-container',
+              _graphic.attribution && 'has-attribution'
+            ])}
+            >
+
+              <img
+                className="hotgraphic-popup__item-image"
+                src={_graphic.src}
+                aria-label={_graphic.alt || null}
+                aria-hidden={!_graphic.alt || null}
+              />
+
+              {_graphic.attribution &&
+              <div className="component__attribution hotgraphic-popup__attribution">
+                <div
+                  className="component__attribution-inner hotgraphic-popup__attribution-inner"
+                  dangerouslySetInnerHTML={{ __html: _graphic.attribution }}
+                />
+              </div>
+              }
+
+            </div>
+          }
+
           <div className="hotgraphic-popup__item-content">
             <div className="hotgraphic-popup__item-content-inner">
 
@@ -68,29 +94,31 @@ export default function HotgraphicPopup(props) {
             </div>
           </div>
 
-          <div className={classes([
-            'hotgraphic-popup__item-image-container',
-            _graphic.attribution && 'has-attribution'
-          ])}
-          >
+          {(_imageAlignment === 'right' || _imageAlignment === 'bottom') &&
+            <div className={classes([
+              'hotgraphic-popup__item-image-container',
+              _graphic.attribution && 'has-attribution'
+            ])}
+            >
 
-            <img
-              className="hotgraphic-popup__item-image"
-              src={_graphic.src}
-              aria-label={_graphic.alt || null}
-              aria-hidden={!_graphic.alt || null}
-            />
-
-            {_graphic.attribution &&
-            <div className="component__attribution hotgraphic-popup__attribution">
-              <div
-                className="component__attribution-inner hotgraphic-popup__attribution-inner"
-                dangerouslySetInnerHTML={{ __html: _graphic.attribution }}
+              <img
+                className="hotgraphic-popup__item-image"
+                src={_graphic.src}
+                aria-label={_graphic.alt || null}
+                aria-hidden={!_graphic.alt || null}
               />
-            </div>
-            }
 
-          </div>
+              {_graphic.attribution &&
+              <div className="component__attribution hotgraphic-popup__attribution">
+                <div
+                  className="component__attribution-inner hotgraphic-popup__attribution-inner"
+                  dangerouslySetInnerHTML={{ __html: _graphic.attribution }}
+                />
+              </div>
+              }
+
+            </div>
+          }
 
         </div>
       )}
