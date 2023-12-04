@@ -122,7 +122,7 @@ This is the main text for a hot spot pop-up.
 This text is displayed when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). It is presented in a title bar above the image.
 
 #### \_imageAlignment (string):
-Defines the horizontal alignment of the item image in the pop up. Left: Image aligned to the left of the text area. Right: Image aligned to the right of the text area. The default alignment is `right`.
+Defines the alignment of the item image in the pop up. Left: Image aligned to the left of the text area. Top: Image aligned above the text area. Right: Image aligned to the right of the text area. Bottom: Image aligned below the text area. The default alignment is `right`.
 
 #### \_classes (string):
 CSS class name(s) to be applied to the popup item. Classes available by default are:
