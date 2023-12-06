@@ -38,29 +38,11 @@ export default function HotgraphicPopup(props) {
         >
 
           {(_imageAlignment === 'left' || _imageAlignment === 'top') &&
-            <div className={classes([
-              'hotgraphic-popup__item-image-container',
-              _graphic.attribution && 'has-attribution'
-            ])}
-            >
-
-              <img
-                className="hotgraphic-popup__item-image"
-                src={_graphic.src}
-                aria-label={_graphic.alt || null}
-                aria-hidden={!_graphic.alt || null}
-              />
-
-              {_graphic.attribution &&
-              <div className="component__attribution hotgraphic-popup__attribution">
-                <div
-                  className="component__attribution-inner hotgraphic-popup__attribution-inner"
-                  dangerouslySetInnerHTML={{ __html: _graphic.attribution }}
-                />
-              </div>
-              }
-
-            </div>
+          <templates.image {..._graphic}
+            classNamePrefixSeparator='__item-'
+            classNamePrefixes={['component-item', 'hotgraphic-popup']}
+            attributionClassNamePrefixes={['component', 'hotgraphic-popup']}
+          />
           }
 
           <div className="hotgraphic-popup__item-content">
@@ -95,29 +77,11 @@ export default function HotgraphicPopup(props) {
           </div>
 
           {(_imageAlignment === 'right' || _imageAlignment === 'bottom') &&
-            <div className={classes([
-              'hotgraphic-popup__item-image-container',
-              _graphic.attribution && 'has-attribution'
-            ])}
-            >
-
-              <img
-                className="hotgraphic-popup__item-image"
-                src={_graphic.src}
-                aria-label={_graphic.alt || null}
-                aria-hidden={!_graphic.alt || null}
-              />
-
-              {_graphic.attribution &&
-              <div className="component__attribution hotgraphic-popup__attribution">
-                <div
-                  className="component__attribution-inner hotgraphic-popup__attribution-inner"
-                  dangerouslySetInnerHTML={{ __html: _graphic.attribution }}
-                />
-              </div>
-              }
-
-            </div>
+          <templates.image {..._graphic}
+            classNamePrefixSeparator='__item-'
+            classNamePrefixes={['component-item', 'hotgraphic-popup']}
+            attributionClassNamePrefixes={['component', 'hotgraphic-popup']}
+          />
           }
 
         </div>
