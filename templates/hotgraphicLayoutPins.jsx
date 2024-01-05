@@ -40,7 +40,7 @@ export default function HotgraphicLayoutPins(props) {
           const visited = _isVisited ? visitedLabel?.trim?.() + '. ' : '';
           const numbered = _useNumberedPins ? (index + 1) + '. ' : '';
           const itemTitle = (_pin.alt || title)?.trim?.() + '. ';
-          const itemCount = compile(globals._components?._hotgraphic?.popupPagination || '', { itemNumber: _index + 1, totalItems: _items.length });
+          const itemCount = compile(globals._components?._hotgraphic?.item || '', { itemNumber: _index + 1, totalItems: _items.length });
           const ariaLabel = `${visited}${numbered}${itemTitle}${itemCount}`;
 
           return (
