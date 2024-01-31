@@ -204,7 +204,7 @@
             "required": true,
             "default": "",
             "inputType": "Text",
-            "validators": [],
+            "validators": ["required"],
             "help": "Title displayed in the popup",
             "translatable": true
           },
