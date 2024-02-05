@@ -15,9 +15,9 @@
     "item": {
       "type": "string",
       "title": "Item count label",
-      "default": "Item {{{itemNumber}}} of {{{totalItems}}}",
+      "default": "Item {{itemNumber}} of {{totalItems}}",
       "inputType": "Text",
-      "help": "This is the aria label for each item. Use {{{itemNumber}}} and {{{totalItems}}} in your text to tell the user which item they are viewing and how many items there are in total.",
+      "help": "This is the aria label for each item. Use {{itemNumber}} and {{totalItems}} in your text to tell the user which item they are viewing and how many items there are in total.",
       "translatable": true
     },
     "previous": {
