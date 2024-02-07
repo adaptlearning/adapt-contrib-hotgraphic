@@ -156,7 +156,11 @@ File name (including path) of the image. Path should be relative to the `src` fo
 The alternative text for this image. Assign [alt text](https://github.com/adaptlearning/adapt_framework/wiki/Providing-good-alt-text) to images that convey course content only.
 
 ## Accessibility
-**Hot Graphic** has two elements assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion** and **popupPagination**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema).
+**Hot Graphic** has been assigned a descriptive label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **ariaRegion**.
+
+Other descriptive labels are used to provide context of the previous, current and next item. The following attributes are used to provide this functionality: **item**, **previous** and **next**.
+
+These labels are not visible elements. They are utilized by assistive technology (such as screen readers). Should any of these labels need to be customised or translated, they can be found within the **globals** object in [*properties.schema*](https://github.com/adaptlearning/adapt-contrib-hotgraphic/blob/master/properties.schema) (or Project settings > Globals in the Adapt Authoring Tool).
 <div float align=right><a href="#top">Back to Top</a></div>
 
 ----------------------------
