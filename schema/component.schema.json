@@ -136,6 +136,10 @@
           "title": "Items",
           "items": {
             "type": "object",
+            "default": {},
+            "required": [
+              "title"
+            ],
             "properties": {
               "title": {
                 "type": "string",
