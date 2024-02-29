@@ -1,6 +1,8 @@
 describe('Hot Graphic', function () {
   function loopThroughHotGraphic(hotGraphicComponent) {
     const itemsCount = Object.keys(hotGraphicComponent._items).length
+
+    // Check each pin works correctly
     cy.get('.hotgraphic__pin-item').should('have.length', itemsCount)
     for (let i = 0; i < itemsCount; i++) {
       cy.get(`.hotgraphic__pin-item .item-${i}.is-visited`).should('not.exist')
@@ -13,8 +15,8 @@ describe('Hot Graphic', function () {
       cy.get(`.hotgraphic__pin-item .item-${i}.is-visited`).should('exist')
     }
 
+    // Check pin popup navigation works as expected
     cy.get('.hotgraphic__pin-item .item-0').click()
-
     for (let i = 0; i < itemsCount-1; i++) {
       cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', hotGraphicComponent._items[i].title)
       cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', hotGraphicComponent._items[i].body)
@@ -39,6 +41,7 @@ describe('Hot Graphic', function () {
       cy.visit(`/#/preview/${hotGraphicComponent._id}`);
       const bodyWithoutHtml = hotGraphicComponent.body.replace(/<[^>]*>/g, '')
 
+      // Test basic hot graphic component
       cy.testContainsOrNotExists('.hotgraphic__title', hotGraphicComponent.displayTitle)
       cy.testContainsOrNotExists('.hotgraphic__body', bodyWithoutHtml)
       cy.testContainsOrNotExists('.hotgraphic__instruction', hotGraphicComponent.instruction)
@@ -46,8 +49,10 @@ describe('Hot Graphic', function () {
         cy.get('.hotgraphic__image').should('have.attr', 'src', hotGraphicComponent._graphic.src)
       }
 
+      // Test Hot Graphic items
       loopThroughHotGraphic(hotGraphicComponent)
 
+      // Allow the component to load and run external custom tests
       cy.wait(1000)
     })
   });
