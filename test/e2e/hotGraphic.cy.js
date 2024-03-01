@@ -1,33 +1,32 @@
 describe('Hot Graphic', function () {
   function loopThroughHotGraphic(hotGraphicComponent) {
-    const itemsCount = Object.keys(hotGraphicComponent._items).length
-
+    const items = hotGraphicComponent._items
+    cy.get('.hotgraphic__pin-item').should('have.length', items.length)
     // Check each pin works correctly
-    cy.get('.hotgraphic__pin-item').should('have.length', itemsCount)
-    for (let i = 0; i < itemsCount; i++) {
-      cy.get(`.hotgraphic__pin-item .item-${i}.is-visited`).should('not.exist')
+    items.forEach((item, index) =>  {
+      cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('not.exist')
       cy.get('.notify__popup.hotgraphic').should('not.exist')
-      cy.get(`.hotgraphic__pin-item .item-${i}`).click()
+      cy.get(`.hotgraphic__pin-item .item-${index}`).click()
       cy.get('.notify__popup.hotgraphic').should('be.visible')
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', hotGraphicComponent._items[i].title)
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', hotGraphicComponent._items[i].body)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
       cy.get('button.hotgraphic-popup__close').click()
-      cy.get(`.hotgraphic__pin-item .item-${i}.is-visited`).should('exist')
-    }
+      cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('exist')
+    })
 
     // Check pin popup navigation works as expected
     cy.get('.hotgraphic__pin-item .item-0').click()
-    for (let i = 0; i < itemsCount-1; i++) {
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', hotGraphicComponent._items[i].title)
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', hotGraphicComponent._items[i].body)
+    items.forEach((item) =>  {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
       cy.get('.hotgraphic-popup__controls.next').click()
-    }
+    })
     cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist')
-    for (let i = itemsCount-1; i >= 0; i--) {
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', hotGraphicComponent._items[i].title)
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', hotGraphicComponent._items[i].body)
+    items.forEach((item) =>  {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
       cy.get('.hotgraphic-popup__controls.back').click()
-    }
+    })
     cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist')
   }
 
@@ -49,7 +48,7 @@ describe('Hot Graphic', function () {
         cy.get('.hotgraphic__image').should('have.attr', 'src', hotGraphicComponent._graphic.src)
       }
 
-      // Test Hot Graphic items
+      // Test hot graphic items
       loopThroughHotGraphic(hotGraphicComponent)
 
       // Allow the component to load and run external custom tests
