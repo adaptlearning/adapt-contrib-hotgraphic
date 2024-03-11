@@ -19,9 +19,13 @@
   &__pin .icon {
     .icon-pin;
   }
-  
+
   &__pin.is-visited .icon {
     .icon-tick;
+  }
+
+  &__pin:not(.has-pin-image) {
+    .transform(translate(-50%, -50%));
   }
 
   &__pin.has-pin-image {
