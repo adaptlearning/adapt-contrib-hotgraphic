@@ -1,0 +1,58 @@
+describe('Hot Graphic', function () {
+  function loopThroughHotGraphic(hotGraphicComponent) {
+    const items = hotGraphicComponent._items
+    cy.get('.hotgraphic__pin-item').should('have.length', items.length)
+    // Check each pin works correctly
+    items.forEach((item, index) =>  {
+      cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('not.exist')
+      cy.get('.notify__popup.hotgraphic').should('not.exist')
+      cy.get(`.hotgraphic__pin-item .item-${index}`).click()
+      cy.get('.notify__popup.hotgraphic').should('be.visible')
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
+      cy.get('button.hotgraphic-popup__close').click()
+      cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('exist')
+    })
+
+    // Check pin popup navigation works as expected
+    cy.get('.hotgraphic__pin-item .item-0').click()
+    items.forEach((item) =>  {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
+      cy.get('.hotgraphic-popup__controls.next').click()
+    })
+    cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist')
+    items.forEach((item) =>  {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title)
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body)
+      cy.get('.hotgraphic-popup__controls.back').click()
+    })
+    cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist')
+  }
+
+  beforeEach(function () {
+    cy.getData()
+  });
+
+  it('should display the hot graphic component', function () {
+    const hotGraphicComponents = this.data.components.filter((component) => component._component === 'hotgraphic')
+    hotGraphicComponents.forEach((hotGraphicComponent) => {
+      cy.visit(`/#/preview/${hotGraphicComponent._id}`);
+      const bodyWithoutHtml = hotGraphicComponent.body.replace(/<[^>]*>/g, '')
+
+      // Test basic hot graphic component
+      cy.testContainsOrNotExists('.hotgraphic__title', hotGraphicComponent.displayTitle)
+      cy.testContainsOrNotExists('.hotgraphic__body', bodyWithoutHtml)
+      cy.testContainsOrNotExists('.hotgraphic__instruction', hotGraphicComponent.instruction)
+      if (hotGraphicComponent._graphic.src) {
+        cy.get('.hotgraphic__image').should('have.attr', 'src', hotGraphicComponent._graphic.src)
+      }
+
+      // Test hot graphic items
+      loopThroughHotGraphic(hotGraphicComponent)
+
+      // Allow the component to load and run external custom tests
+      cy.wait(1000)
+    })
+  });
+});
