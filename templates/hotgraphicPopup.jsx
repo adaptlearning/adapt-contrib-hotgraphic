@@ -30,7 +30,7 @@ export default function HotgraphicPopup(props) {
           _isRound && 'is-round',
           _isVisited && 'is-visited',
           _isActive && 'is-active',
-          _imageAlignment ? `align-image-${_imageAlignment}` : 'align-image-right'
+          `align-image-${_imageAlignment || 'right'}` 
         ])}
         key={index}
         data-index={index}
