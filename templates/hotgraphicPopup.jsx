@@ -30,14 +30,14 @@ export default function HotgraphicPopup(props) {
           _isRound && 'is-round',
           _isVisited && 'is-visited',
           _isActive && 'is-active',
-          _imageAlignment && `align-image-${_imageAlignment}`
+          _imageAlignment ? `align-image-${_imageAlignment}` : 'align-image-right'
         ])}
         key={index}
         data-index={index}
         aria-hidden={!_isActive ? true : null}
         >
 
-          {(_imageAlignment !== 'right' && _imageAlignment !== 'bottom') &&
+          {(_imageAlignment === 'left' || _imageAlignment === 'top') &&
           <templates.image {..._graphic}
             classNamePrefixSeparator='__item-'
             classNamePrefixes={['component-item', 'hotgraphic-popup']}
@@ -76,7 +76,7 @@ export default function HotgraphicPopup(props) {
             </div>
           </div>
 
-          {(_imageAlignment === 'right' || _imageAlignment === 'bottom') &&
+          {(_imageAlignment !== 'left' && _imageAlignment !== 'top') &&
           <templates.image {..._graphic}
             classNamePrefixSeparator='__item-'
             classNamePrefixes={['component-item', 'hotgraphic-popup']}
