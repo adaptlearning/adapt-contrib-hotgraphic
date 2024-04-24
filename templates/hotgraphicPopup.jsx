@@ -37,7 +37,7 @@ export default function HotgraphicPopup(props) {
         aria-hidden={!_isActive ? true : null}
         >
 
-          {(_imageAlignment === 'left' || _imageAlignment === 'top') &&
+          {(_imageAlignment !== 'right' && _imageAlignment !== 'bottom') &&
           <templates.image {..._graphic}
             classNamePrefixSeparator='__item-'
             classNamePrefixes={['component-item', 'hotgraphic-popup']}
