@@ -131,6 +131,12 @@
           "description": "If enabled, a 50% border radius will be applied to the items pop up images",
           "default": false
         },
+        "_pinOffsetOrigin": {
+          "type": "boolean",
+          "title": "Offset pin origin point",
+          "description": "If set to `true`, the pins origin point will be changed from `top left` to `center`. This option will enable the pin to remain stationary when viewing responsively. The default is `false`.",
+          "default": false
+        },
         "_items": {
           "type": "array",
           "title": "Items",
