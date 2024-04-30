@@ -20,6 +20,7 @@
         "_isNarrativeOnMobile": true,
         "_useNumberedPins": false,
         "_useGraphicsAsPins": false,
+        "_hasStaticTooltips": false,
         "_isRound": false,
         "_graphic": {
             "src": "course/en/images/example.jpg",
@@ -44,7 +45,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -63,7 +65,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -82,7 +85,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             }
         ],
