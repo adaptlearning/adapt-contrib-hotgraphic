@@ -21,6 +21,7 @@
         "_useNumberedPins": false,
         "_useGraphicsAsPins": false,
         "_isRound": false,
+        "_pinOffsetOrigin": false,
         "_graphic": {
             "src": "course/en/images/example.jpg",
             "alt": "",

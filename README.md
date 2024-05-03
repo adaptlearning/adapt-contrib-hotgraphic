@@ -83,6 +83,9 @@ If set to `true`, the image specified by `_graphic.src` will be ignored and the 
 ### \_isRound (boolean):
 If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
 
+### \_pinOffsetOrigin (boolean):
+If set to `true`, the pins origin point will be changed from `top left` to `center`. This option will enable the pin to remain stationary when viewing responsively. The default is `false`.
+
 ### \_tooltip (object):
 
 #### \_isEnabled (boolean):
