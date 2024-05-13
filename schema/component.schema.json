@@ -88,7 +88,7 @@
         "mobileInstruction": {
           "type": "string",
           "title": "Mobile instruction",
-          "description": "This instruction text is displayed on mobile devices",
+          "description": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
           "default": "Select the plus icon followed by the next arrow to find out more.",
           "_adapt": {
             "translatable": true
