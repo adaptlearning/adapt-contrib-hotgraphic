@@ -80,16 +80,22 @@ If set to `true`, the pin icons will be replaced with the item number. Useful if
 ### \_useGraphicsAsPins (boolean):
 If set to `true`, the image specified by `_graphic.src` will be ignored and the popup images specified in `_items[n]._graphic.src` will instead be laid out in a 2 item width grid system. See [example.json](example.json#L79-L115) for a working example. The default is `false`.
 
+### \_hasStaticTooltips (boolean):
+If set to `true`, tooltips (if enabled) will always be shown rather than only on hover.
+
 ### \_isRound (boolean):
 If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
 
 ### \_tooltip (object):
 
 #### \_isEnabled (boolean):
-When set to `true` the tooltip will be shown on hover over the item. The default is `false`.
+When set to `true` the tooltip will be shown on hover over the item. When `_hasStaticTooltips` is set to `true`, the tooltip will always be shown. The default is `false`.
 
 #### text (string):
 The text to display when the user hovers over the item.
+
+#### \_position (string):
+The tooltip position in relation to the pin. Can be any combination of `top`, `left`, `right`, and `bottom` (e.g. `top left` or `bottom`). The default is `bottom`.
 
 ### \_graphic (object):
 The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting is enabled). It contains the following settings:
