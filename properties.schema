@@ -183,6 +183,15 @@
       "validators": [],
       "help": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
     },
+    "_hasStaticTooltips": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "title": "Use static tooltips",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, tooltips (if themselves enabled) will always be shown rather than only on hover."
+    },
     "_isRound": {
       "type": "boolean",
       "required": false,
@@ -301,6 +310,19 @@
                 "validators": [],
                 "help": "The tooltip text to display on hover over this item",
                 "translatable": true
+              },
+              "_position": {
+                "type": "string",
+                "required": true,
+                "title": "Tooltip position",
+                "help": "The tooltip position in relation to the pin. Defaults to 'bottom'",
+                "enum": ["top", "top right", "right", "bottom right", "bottom", "bottom left", "left", "top left"],
+                "inputType": {
+                  "type": "Select",
+                  "options": ["top", "top right", "right", "bottom right", "bottom", "bottom left", "left", "top left"]
+                },
+                "default": "bottom",
+                "editorOnly": true
               }
             }
           },
