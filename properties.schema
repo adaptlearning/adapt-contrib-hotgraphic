@@ -299,7 +299,7 @@
                 "title": "Is enabled?",
                 "inputType": "Checkbox",
                 "validators": [],
-                "help": "If enabled, a tooltip will be displayed on hover over this item."
+                "help": "If enabled, a tooltip will be displayed on hover over this item. If 'Use static tooltips' is enabled, then tooltips will always be shown."
               },
               "text": {
                 "type": "string",
