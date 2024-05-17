@@ -18,6 +18,8 @@
         "_canCycleThroughPagination": false,
         "_hidePagination": false,
         "_isNarrativeOnMobile": true,
+        "_isMobileTextBelowImage": false,
+        "_isStackedOnMobile": false,
         "_useNumberedPins": false,
         "_useGraphicsAsPins": false,
         "_isRound": false,

@@ -74,6 +74,12 @@ When set to `true`, hides the "previous" and "next" icons and progress indicator
 ### \_isNarrativeOnMobile (boolean):
 When set to `false` the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in mobile view instead of being replaced by a Narrative interaction. The default is `true`.
 
+### \_isMobileTextBelowImage (boolean):
+If enabled, on mobile, the text area drops below the image instead of being behind the strapline button. When using `_isStackedOnMobile: true` or `_isNarrativeOnMobile: false`, this attribute will be ignored. The default value is `false`
+
+### \_isStackedOnMobile (boolean):
+If enabled, on mobile, text and images will be stacked vertically. No interaction will be required to view all items as the user will simply scroll down. `_isNarrativeOnMobile` must be set to `true`. The default value is `false`
+
 ### \_useNumberedPins (boolean):
 If set to `true`, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process. The default is `false`.
 

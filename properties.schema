@@ -129,6 +129,15 @@
       "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
       "translatable": true
     },
+    "_isNarrativeOnMobile": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "title": "Render as Narrative on mobile?",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction."
+    },
     "_isMobileTextBelowImage": {
       "type": "boolean",
       "required": false,
@@ -136,7 +145,16 @@
       "title": "Move text area below image on mobile device",
       "inputType": "Checkbox",
       "validators": [],
-      "help": "When Hot Graphic is displayed on a mobile device, it turns into a Narrative. If you check this box, the text content of each stage is positioned below the image. The Narrative will not use the default \"strapline\" layout."
+      "help": "If enabled, on mobile, the text area drops below the image instead of being behind the strapline button. Only applies when the Hot Graphic is configured to render as a Narrative on mobile"
+    },
+    "_isStackedOnMobile": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "title": "Stack images and text on mobile",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, on mobile, text and images will be stacked vertically. No interaction will be required to view all items as the user will simply scroll down. Only applies when the Hot Graphic is configured to render as a Narrative on mobile"
     },
     "_hidePagination": {
       "type": "boolean",
@@ -155,15 +173,6 @@
       "inputType": "Checkbox",
       "validators": [],
       "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
-    },
-    "_isNarrativeOnMobile": {
-      "type": "boolean",
-      "required": true,
-      "default": true,
-      "title": "Render as Narrative on mobile?",
-      "inputType": "Checkbox",
-      "validators": [],
-      "help": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction."
     },
     "_useNumberedPins": {
       "type": "boolean",
