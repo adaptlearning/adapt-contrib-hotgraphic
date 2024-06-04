@@ -92,7 +92,7 @@ If set to `true`, the popup images will inherit a 50% border radius. Ideal for u
 When set to `true` the tooltip will be shown on hover over the item. When `_hasStaticTooltips` is set to `true`, the tooltip will always be shown. The default is `false`.
 
 #### text (string):
-The text to display when the user hovers over the item.
+The tooltip text to display for the item.
 
 #### \_position (string):
 The tooltip position in relation to the pin. Can be any combination of `top`, `left`, `right`, and `bottom` (e.g. `top left` or `bottom`). The default is `bottom`.

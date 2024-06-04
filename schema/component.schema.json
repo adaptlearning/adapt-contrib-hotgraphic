@@ -288,7 +288,7 @@
                     "type": "string",
                     "default": "{{ariaLabel}}",
                     "title": "Tooltip text",
-                    "description": "The tooltip text to display on hover over this item",
+                    "description": "The tooltip text to display for this item",
                     "translatable": true
                   },
                   "_position": {

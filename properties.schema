@@ -308,7 +308,7 @@
                 "title": "Tooltip text",
                 "inputType": "Text",
                 "validators": [],
-                "help": "The tooltip text to display on hover over this item",
+                "help": "The tooltip text to display for this item",
                 "translatable": true
               },
               "_position": {
