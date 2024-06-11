@@ -137,6 +137,12 @@
           "description": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes",
           "default": false
         },
+        "_hasStaticTooltips": {
+          "type": "boolean",
+          "title": "Use static tooltips",
+          "description": "If enabled, tooltips (if themselves enabled) will always be shown rather than only on hover.",
+          "default": false
+        },
         "_isRound": {
           "type": "boolean",
           "title": "Use circular popup item images",
@@ -294,14 +300,33 @@
                     "type": "boolean",
                     "default": false,
                     "title": "Is enabled?",
-                    "help": "If enabled, a tooltip will be displayed on hover over this item."
+                    "description": "If enabled, a tooltip will be displayed on hover over this item. If 'Use static tooltips' is enabled, then tooltips will always be shown."
                   },
                   "text": {
                     "type": "string",
                     "default": "{{ariaLabel}}",
                     "title": "Tooltip text",
-                    "help": "The tooltip text to display on hover over this item",
+                    "description": "The tooltip text to display for this item",
                     "translatable": true
+                  },
+                  "_position": {
+                    "type": "string",
+                    "title": "Tooltip position",
+                    "default": "bottom",
+                    "description": "The tooltip position in relation to the pin. Defaults to 'bottom'",
+                    "enum": [
+                      "top",
+                      "top right",
+                      "right",
+                      "bottom right",
+                      "bottom",
+                      "bottom left",
+                      "left",
+                      "top left"
+                    ],
+                    "_adapt": {
+                      "editorOnly": true
+                    }
                   }
                 }
               }

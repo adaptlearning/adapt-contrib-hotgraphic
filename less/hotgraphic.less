@@ -36,6 +36,16 @@
     display: block;
   }
 
+  &__pin-tooltip.is-static {
+    --adapt-tooltip-distance: 0;
+    --adapt-tooltip-arrow: false;
+  
+    .tooltip__body {
+      color: @black;
+      background-color: transparent;
+    }
+  }
+
   // Hotgraphic as tiles
   // --------------------------------------------------
   &__tile-item-container {

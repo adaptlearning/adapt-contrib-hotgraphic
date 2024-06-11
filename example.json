@@ -22,6 +22,7 @@
         "_isStackedOnMobile": false,
         "_useNumberedPins": false,
         "_useGraphicsAsPins": false,
+        "_hasStaticTooltips": false,
         "_isRound": false,
         "_pinOffsetOrigin": false,
         "_graphic": {
@@ -47,7 +48,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -66,7 +68,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -85,7 +88,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             }
         ],
