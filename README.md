@@ -74,22 +74,37 @@ When set to `true`, hides the "previous" and "next" icons and progress indicator
 ### \_isNarrativeOnMobile (boolean):
 When set to `false` the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in mobile view instead of being replaced by a Narrative interaction. The default is `true`.
 
+### \_isMobileTextBelowImage (boolean):
+If enabled, on mobile, the text area drops below the image instead of being behind the strapline button. When using `_isStackedOnMobile: true` or `_isNarrativeOnMobile: false`, this attribute will be ignored. The default value is `false`
+
+### \_isStackedOnMobile (boolean):
+If enabled, on mobile, text and images will be stacked vertically. No interaction will be required to view all items as the user will simply scroll down. `_isNarrativeOnMobile` must be set to `true`. The default value is `false`
+
 ### \_useNumberedPins (boolean):
 If set to `true`, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process. The default is `false`.
 
 ### \_useGraphicsAsPins (boolean):
 If set to `true`, the image specified by `_graphic.src` will be ignored and the popup images specified in `_items[n]._graphic.src` will instead be laid out in a 2 item width grid system. See [example.json](example.json#L79-L115) for a working example. The default is `false`.
 
+### \_hasStaticTooltips (boolean):
+If set to `true`, tooltips (if enabled) will always be shown rather than only on hover.
+
 ### \_isRound (boolean):
 If set to `true`, the popup images will inherit a 50% border radius. Ideal for use with images that are square that are required to be round. The default is `false`.
+
+### \_pinOffsetOrigin (boolean):
+If set to `true`, the pins origin point will be changed from `top left` to `center`. This option will enable the pin to remain stationary when viewing responsively. The default is `false`.
 
 ### \_tooltip (object):
 
 #### \_isEnabled (boolean):
-When set to `true` the tooltip will be shown on hover over the item. The default is `false`.
+When set to `true` the tooltip will be shown on hover over the item. When `_hasStaticTooltips` is set to `true`, the tooltip will always be shown. The default is `false`.
 
 #### text (string):
-The text to display when the user hovers over the item.
+The tooltip text to display for the item.
+
+#### \_position (string):
+The tooltip position in relation to the pin. Can be any combination of `top`, `left`, `right`, and `bottom` (e.g. `top left` or `bottom`). The default is `bottom`.
 
 ### \_graphic (object):
 The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting is enabled). It contains the following settings:

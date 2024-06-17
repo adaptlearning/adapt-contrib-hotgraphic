@@ -18,9 +18,13 @@
         "_canCycleThroughPagination": false,
         "_hidePagination": false,
         "_isNarrativeOnMobile": true,
+        "_isMobileTextBelowImage": false,
+        "_isStackedOnMobile": false,
         "_useNumberedPins": false,
         "_useGraphicsAsPins": false,
+        "_hasStaticTooltips": false,
         "_isRound": false,
+        "_pinOffsetOrigin": false,
         "_graphic": {
             "src": "course/en/images/example.jpg",
             "alt": "",
@@ -44,7 +48,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -63,7 +68,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             },
             {
@@ -82,7 +88,8 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_position": ""
                 }
             }
         ],

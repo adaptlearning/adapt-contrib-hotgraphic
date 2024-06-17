@@ -19,9 +19,13 @@
   &__pin .icon {
     .icon-pin;
   }
-  
+
   &__pin.is-visited .icon {
     .icon-tick;
+  }
+
+  &__pin.offset-origin {
+    .transform(translate(-50%, -50%));
   }
 
   &__pin.has-pin-image {
@@ -30,6 +34,16 @@
 
   &__pin-number {
     display: block;
+  }
+
+  &__pin-tooltip.is-static {
+    --adapt-tooltip-distance: 0;
+    --adapt-tooltip-arrow: false;
+  
+    .tooltip__body {
+      color: @black;
+      background-color: transparent;
+    }
   }
 
   // Hotgraphic as tiles

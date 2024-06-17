@@ -129,6 +129,15 @@
       "help": "This instruction text is displayed on mobile devices when this component turns into a Narrative",
       "translatable": true
     },
+    "_isNarrativeOnMobile": {
+      "type": "boolean",
+      "required": true,
+      "default": true,
+      "title": "Render as Narrative on mobile?",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction."
+    },
     "_isMobileTextBelowImage": {
       "type": "boolean",
       "required": false,
@@ -136,7 +145,16 @@
       "title": "Move text area below image on mobile device",
       "inputType": "Checkbox",
       "validators": [],
-      "help": "When Hot Graphic is displayed on a mobile device, it turns into a Narrative. If you check this box, the text content of each stage is positioned below the image. The Narrative will not use the default \"strapline\" layout."
+      "help": "If enabled, on mobile, the text area drops below the image instead of being behind the strapline button. Only applies when the Hot Graphic is configured to render as a Narrative on mobile"
+    },
+    "_isStackedOnMobile": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "title": "Stack images and text on mobile",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, on mobile, text and images will be stacked vertically. No interaction will be required to view all items as the user will simply scroll down. Only applies when the Hot Graphic is configured to render as a Narrative on mobile"
     },
     "_hidePagination": {
       "type": "boolean",
@@ -156,15 +174,6 @@
       "validators": [],
       "help": "If enabled, the popup navigation buttons will cycle continuously through the popup items (i.e. clicking next whilst on the last item will cause the first item to be shown."
     },
-    "_isNarrativeOnMobile": {
-      "type": "boolean",
-      "required": true,
-      "default": true,
-      "title": "Render as Narrative on mobile?",
-      "inputType": "Checkbox",
-      "validators": [],
-      "help": "If disabled, the Hotgraphic will render a scaled down 'desktop' version (pins over image / tiles) of the component in 'mobile' view instead of being replaced by a Narrative interaction."
-    },
     "_useNumberedPins": {
       "type": "boolean",
       "required": true,
@@ -183,6 +192,15 @@
       "validators": [],
       "help": "If enabled, the main graphic will be hidden and pins will be displayed as images which can be positioned using classes"
     },
+    "_hasStaticTooltips": {
+      "type": "boolean",
+      "required": true,
+      "default": false,
+      "title": "Use static tooltips",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If enabled, tooltips (if themselves enabled) will always be shown rather than only on hover."
+    },
     "_isRound": {
       "type": "boolean",
       "required": false,
@@ -191,6 +209,15 @@
       "inputType": "Checkbox",
       "validators": [],
       "help": "If enabled, a 50% border radius will be applied to the items pop up images."
+    },
+    "_pinOffsetOrigin": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "title": "Offset pin origin point",
+      "inputType": "Checkbox",
+      "validators": [],
+      "help": "If set to `true`, the pins origin point will be changed from `top left` to `center`. This option will enable the pin to remain stationary when viewing responsively. The default is `false`."
     },
     "_items": {
       "type": "array",
@@ -205,7 +232,7 @@
             "required": true,
             "default": "",
             "inputType": "Text",
-            "validators": [],
+            "validators": ["required"],
             "help": "Title displayed in the popup",
             "translatable": true
           },
@@ -290,7 +317,7 @@
                 "title": "Is enabled?",
                 "inputType": "Checkbox",
                 "validators": [],
-                "help": "If enabled, a tooltip will be displayed on hover over this item."
+                "help": "If enabled, a tooltip will be displayed on hover over this item. If 'Use static tooltips' is enabled, then tooltips will always be shown."
               },
               "text": {
                 "type": "string",
@@ -299,8 +326,21 @@
                 "title": "Tooltip text",
                 "inputType": "Text",
                 "validators": [],
-                "help": "The tooltip text to display on hover over this item",
+                "help": "The tooltip text to display for this item",
                 "translatable": true
+              },
+              "_position": {
+                "type": "string",
+                "required": true,
+                "title": "Tooltip position",
+                "help": "The tooltip position in relation to the pin. Defaults to 'bottom'",
+                "enum": ["top", "top right", "right", "bottom right", "bottom", "bottom left", "left", "top left"],
+                "inputType": {
+                  "type": "Select",
+                  "options": ["top", "top right", "right", "bottom right", "bottom", "bottom left", "left", "top left"]
+                },
+                "default": "bottom",
+                "editorOnly": true
               }
             }
           },

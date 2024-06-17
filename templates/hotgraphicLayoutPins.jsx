@@ -10,6 +10,7 @@ export default function HotgraphicLayoutPins(props) {
     _items,
     _graphic,
     _useNumberedPins,
+    _pinOffsetOrigin,
     _tooltip,
     onPinClicked
   } = props;
@@ -52,7 +53,8 @@ export default function HotgraphicLayoutPins(props) {
                   `item-${_index}`,
                   _graphic._classes,
                   _isVisited && 'is-visited',
-                  _pin.src && 'has-pin-image'
+                  _pin.src && 'has-pin-image',
+                  _pinOffsetOrigin && `offset-origin`
                 ])}
                 data-index={_index}
                 onClick={onPinClicked}
