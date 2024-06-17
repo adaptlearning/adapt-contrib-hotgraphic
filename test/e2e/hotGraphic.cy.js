@@ -36,9 +36,9 @@ describe('Hot Graphic', function () {
 
   it('should display the hot graphic component', function () {
     const hotGraphicComponents = this.data.components.filter(component => component._component === 'hotgraphic');
+    const stripHtml = cy.helpers.stripHtml;
     hotGraphicComponents.forEach(hotGraphicComponent => {
       cy.visit(`/#/preview/${hotGraphicComponent._id}`);
-      const stripHtml = cy.helpers.stripHtml;
 
       cy.testContainsOrNotExists('.hotgraphic__body', stripHtml(hotGraphicComponent.body));
       cy.testContainsOrNotExists('.hotgraphic__title', stripHtml(hotGraphicComponent.displayTitle));
