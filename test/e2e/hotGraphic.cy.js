@@ -38,7 +38,9 @@ describe('Hot Graphic', function () {
     if (!canCycle) {
       cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist');
     } else {
-      cy.get('.hotgraphic-popup__controls.back').should('exist');
+      cy.get('.hotgraphic-popup__controls.back')
+        .should('exist')
+        .and('not.have.class', 'is-disabled')
     }
   };
 
