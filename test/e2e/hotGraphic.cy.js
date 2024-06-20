@@ -26,7 +26,9 @@ describe('Hot Graphic', function () {
     if (!canCycle) {
       cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist');
     } else {
-      cy.get('.hotgraphic-popup__controls.next').should('exist');
+      cy.get('.hotgraphic-popup__controls.next')
+        .should('exist')
+        .and('not.have.class', 'is-disabled')
     }
 
     items.forEach(item => {
