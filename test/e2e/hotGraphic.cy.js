@@ -1,9 +1,10 @@
 describe('Hot Graphic', function () {
   function loopThroughHotGraphic(hotGraphicComponent) {
     const items = hotGraphicComponent._items;
+    const canCycle = hotGraphicComponent._canCycleThroughPagination;
     cy.get('.hotgraphic__pin-item').should('have.length', items.length);
     // Check each pin works correctly
-    items.forEach((item, index) =>  {
+    items.forEach((item, index) => {
       cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('not.exist');
       cy.get('.notify__popup.hotgraphic').should('not.exist');
       cy.get(`.hotgraphic__pin-item .item-${index}`).click();
@@ -16,18 +17,33 @@ describe('Hot Graphic', function () {
 
     // Check pin popup navigation works as expected
     cy.get('.hotgraphic__pin-item .item-0').click();
-    items.forEach(item =>  {
+    items.forEach(item => {
       cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title);
       cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body);
       cy.get('.hotgraphic-popup__controls.next').click();
-    })
-    cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist');
-    items.forEach(item =>  {
+    });
+
+    if (!canCycle) {
+      cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist');
+    } else {
+      cy.get('.hotgraphic-popup__controls.next')
+        .should('exist')
+        .and('not.have.class', 'is-disabled')
+    }
+
+    items.forEach(item => {
       cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title);
       cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body);
       cy.get('.hotgraphic-popup__controls.back').click();
-    })
-    cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist');
+    });
+
+    if (!canCycle) {
+      cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist');
+    } else {
+      cy.get('.hotgraphic-popup__controls.back')
+        .should('exist')
+        .and('not.have.class', 'is-disabled')
+    }
   };
 
   beforeEach(function () {
