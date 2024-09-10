@@ -49,6 +49,7 @@
                 "_tooltip": {
                     "_isEnabled": false,
                     "text": "{{ariaLabel}}",
+                    "_classes": "",
                     "_position": ""
                 }
             },
@@ -69,6 +70,7 @@
                 "_tooltip": {
                     "_isEnabled": false,
                     "text": "{{ariaLabel}}",
+                    "_classes": "",
                     "_position": ""
                 }
             },
@@ -89,6 +91,7 @@
                 "_tooltip": {
                     "_isEnabled": false,
                     "text": "{{ariaLabel}}",
+                    "_classes": "",
                     "_position": ""
                 }
             }
@@ -168,7 +171,9 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_classes": "",
+                    "_position": ""
                 },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
@@ -191,7 +196,9 @@
                 },
                 "_tooltip": {
                     "_isEnabled": false,
-                    "text": "{{ariaLabel}}"
+                    "text": "{{ariaLabel}}",
+                    "_classes": "",
+                    "_position": ""
                 },
                 "_pin": {
                     "src": "course/en/images/example.jpg",
