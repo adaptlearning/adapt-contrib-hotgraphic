@@ -106,6 +106,9 @@ The tooltip text to display for the item.
 #### \_position (string):
 The tooltip position in relation to the pin. Can be any combination of `top`, `left`, `right`, and `bottom` (e.g. `top left` or `bottom`). The default is `bottom`.
 
+#### \_classes (string):
+CSS class name(s) to be applied to the pin. The class must be predefined in one of the Less files. Separate multiple classes with a space.
+
 ### \_graphic (object):
 The graphic object that defines the image over which the hot spots are rendered (except when the [_useGraphicsAsPins](#_usegraphicsaspins-boolean) setting is enabled). It contains the following settings:
 
