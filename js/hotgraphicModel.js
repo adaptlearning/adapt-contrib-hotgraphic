@@ -21,7 +21,10 @@ export default class HotgraphicModel extends ItemsComponentModel {
       const tooltip = child.get('_tooltip');
       if (!tooltip?._isEnabled) return;
       tooltip._id = `hotgraphic-pin-${id}-${index}`;
-      tooltip._classes = (tooltip._classes || '') + ' hotgraphic__pin-tooltip';
+      tooltip._classes = [
+        tooltip._classes, 
+        'hotgraphic__pin-tooltip'
+      ].filter(Boolean).join(' ');
       const tooltipConfig = {
         _isStatic: hasStaticTooltips,
         ...child.toJSON(),
