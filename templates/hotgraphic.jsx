@@ -5,7 +5,6 @@ export default function Hotgraphic(props) {
 
   const {
     _graphic,
-    _useNumberedPins,
     _useGraphicsAsPins
   } = props;
 
@@ -17,7 +16,6 @@ export default function Hotgraphic(props) {
       <div className={classes([
         'component__widget hotgraphic__widget',
         _useGraphicsAsPins ? 'is-tile' : 'is-pin',
-        _useNumberedPins && 'has-numbered-pins',
         _graphic.attribution && 'has-attribution'
       ])}>
 
