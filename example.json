@@ -109,12 +109,9 @@
         "_useGraphicsAsPins": true,
         "_items": [
             {
-                "_top": 25,
-                "_left": 25,
                 "title": "Hotspot 1 title",
                 "body": "This is display text 1.",
                 "strapline": "Hotspot 1 strapline",
-                "_imageAlignment": "right",
                 "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
@@ -128,12 +125,9 @@
                 }
             },
             {
-                "_top": 50,
-                "_left": 50,
                 "title": "Hotspot 2 title",
                 "body": "This is display text 2.",
                 "strapline": "Hotspot 2 strapline",
-                "_imageAlignment": "right",
                 "_classes": "",
                 "_graphic": {
                     "src": "course/en/images/example.jpg",
