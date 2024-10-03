@@ -73,11 +73,11 @@ export default function HotgraphicLayoutPins(props) {
                   <img className="hotgraphic__pin-image is-default" src={_pin.src} aria-hidden="true" />
 
                   {_pin.srcHover &&
-                    <img className="hotgraphic__item-image is-hover" src={_pin.srcHover} />
+                    <img className="hotgraphic__pin-image is-hover" src={_pin.srcHover} />
                   }
 
                   {_pin.srcVisited &&
-                    <img className="hotgraphic__item-image is-visited" src={_pin.srcVisited} />
+                    <img className="hotgraphic__pin-image is-visited" src={_pin.srcVisited} />
                   }
                 </span>
                 }
