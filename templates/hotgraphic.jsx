@@ -16,7 +16,7 @@ export default function Hotgraphic(props) {
       <div className={classes([
         'component__widget hotgraphic__widget',
         _useGraphicsAsPins ? 'is-tile' : 'is-pin',
-        _graphic.attribution && 'has-attribution'
+        _graphic?.attribution && 'has-attribution'
       ])}>
 
         {_useGraphicsAsPins &&
