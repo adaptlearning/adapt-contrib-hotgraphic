@@ -1,4 +1,4 @@
-    // Regular hotgraphic
+    // Standard Hot Graphic
     // --------------------------------------------------
     {
         "_id": "c-05",
@@ -101,9 +101,9 @@
         }
     }
 
-    // Example using graphics as pins
-    // The following example lays out the item graphics (_items._graphic)
-    // in a 2x2 grid.
+    // Tile / grid layout
+    // This layout uses graphics as pin "tiles" and lays out the 
+    // item graphics (_items._graphic) in a 2 column grid.
     // --------------------------------------------------
     {
         "_useGraphicsAsPins": true,
@@ -149,11 +149,12 @@
         ]
     }
 
-    // Example using graphic pins
-    // In the following example there is a background image and each pin
-    // is an image rather than a pin icon
+    // Graphic pins
+    // This layout uses a background image where each pin item
+    // is an image rather than a pin icon.
     // --------------------------------------------------
     {
+        "_useGraphicsAsPins": false,
         "_items": [
             {
                 "_left": 25,
