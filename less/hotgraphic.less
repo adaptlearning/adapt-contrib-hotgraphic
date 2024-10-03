@@ -1,80 +1,78 @@
-.hotgraphic {
-  &__widget {
-    position: relative;
+.hotgraphic__widget {
+  position: relative;
+}
+
+// Hotgraphic as pins
+// --------------------------------------------------
+.hotgraphic__pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: @icon-padding / 2;
+
+  @media (min-width: @device-width-medium) {
+    padding: @icon-padding;
   }
+}
 
-  // Hotgraphic as pins
-  // --------------------------------------------------
-  &__pin {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: @icon-padding / 2;
+.hotgraphic__pin .icon {
+  .icon-pin;
+}
 
-    @media (min-width: @device-width-medium) {
-      padding: @icon-padding;
-    }
+.hotgraphic__pin.is-visited .icon {
+  .icon-tick;
+}
+
+.hotgraphic__pin.offset-origin {
+  .transform(translate(-50%, -50%));
+}
+
+.hotgraphic__pin.has-pin-image {
+  padding: 0;
+}
+
+.hotgraphic__pin-number {
+  display: block;
+}
+
+.hotgraphic__pin-tooltip.is-static {
+  --adapt-tooltip-distance: 0;
+  --adapt-tooltip-arrow: false;
+
+  .tooltip__body {
+    color: @black;
+    background-color: transparent;
   }
+}
 
-  &__pin .icon {
-    .icon-pin;
+// Hotgraphic as tiles
+// --------------------------------------------------
+.hotgraphic__tile-item-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hotgraphic__tile-item {
+  width: 50%;
+  line-height: 0;
+}
+
+.hotgraphic__tile {
+  position: relative;
+  width: 100%;
+}
+
+.hotgraphic__tile .icon {
+  position: absolute;
+  bottom: 1.0rem;
+  right: 1.0rem;
+  padding: @icon-padding / 2;
+
+  @media (min-width: @device-width-medium) {
+    padding: @icon-padding;
   }
+}
 
-  &__pin.is-visited .icon {
-    .icon-tick;
-  }
-
-  &__pin.offset-origin {
-    .transform(translate(-50%, -50%));
-  }
-
-  &__pin.has-pin-image {
-    padding: 0;
-  }
-
-  &__pin-number {
-    display: block;
-  }
-
-  &__pin-tooltip.is-static {
-    --adapt-tooltip-distance: 0;
-    --adapt-tooltip-arrow: false;
-  
-    .tooltip__body {
-      color: @black;
-      background-color: transparent;
-    }
-  }
-
-  // Hotgraphic as tiles
-  // --------------------------------------------------
-  &__tile-item-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  &__tile-item {
-    width: 50%;
-    line-height: 0;
-  }
-
-  &__tile {
-    position: relative;
-    width: 100%;
-  }
-
-  &__tile .icon {
-    position: absolute;
-    bottom: 1.0rem;
-    right: 1.0rem;
-    padding: @icon-padding / 2;
-
-    @media (min-width: @device-width-medium) {
-      padding: @icon-padding;
-    }
-  }
-
-  &__tile.is-visited .icon {
-    .icon-tick;
-  }
+.hotgraphic__tile.is-visited .icon {
+  .icon-tick;
 }
