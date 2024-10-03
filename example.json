@@ -177,7 +177,9 @@
                     "_position": ""
                 },
                 "_pin": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/pin.png",
+                    "srcHover": "course/en/images/pin-hover.png",
+                    "srcVisited": "course/en/images/pin-visited.png",
                     "alt": ""
                 }
             },
@@ -202,7 +204,9 @@
                     "_position": ""
                 },
                 "_pin": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/pin.png",
+                    "srcHover": "course/en/images/pin-hover.png",
+                    "srcVisited": "course/en/images/pin-visited.png",
                     "alt": ""
                 }
             }
