@@ -45,6 +45,39 @@
   }
 }
 
+// Pin image states
+// --------------------------------------------------
+.pin-state-mixin(default, hover, visited);
+.pin-state-mixin(hover, default, visited);
+.pin-state-mixin(visited, default, hover);
+
+.pin-state-mixin(@active-state, @inactive-state-one, @inactive-state-two) {
+  .pin-state.is-@{active-state} {
+    .hotgraphic__pin-image.is-@{active-state} {
+      display: block;
+    }
+
+    .hotgraphic__pin-image.is-@{inactive-state-one},
+    .hotgraphic__pin-image.is-@{inactive-state-two} {
+      display: none;
+    }
+  }
+}
+
+// Application of pin image states
+// --------------------------------------------------
+.hotgraphic__pin.has-pin-image {
+  .pin-state.is-default;
+
+  .no-touch &:hover {
+    .pin-state.is-hover;
+  }
+}
+
+.hotgraphic__pin.has-pin-image.is-visited {
+  .pin-state.is-visited;
+}
+
 // Hotgraphic as tiles
 // --------------------------------------------------
 .hotgraphic__tile-item-container {
