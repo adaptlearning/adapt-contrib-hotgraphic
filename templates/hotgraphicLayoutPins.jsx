@@ -54,6 +54,7 @@ export default function HotgraphicLayoutPins(props) {
                   _graphic._classes,
                   _isVisited && 'is-visited',
                   _pin.src && 'has-pin-image',
+                  (_pin.src && _pin.srcHover && _pin.srcVisited) && 'has-pin-image-states',
                   _useNumberedPins && 'is-numbered-pin',
                   _pinOffsetOrigin && 'offset-origin'
                 ])}
