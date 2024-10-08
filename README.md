@@ -84,7 +84,7 @@ If enabled, on mobile, text and images will be stacked vertically. No interactio
 If set to `true`, the pin icons will be replaced with the item number. Useful if you want pins to be visited in a set order or show steps in a process. The default is `false`.
 
 ### \_useGraphicsAsPins (boolean):
-If set to `true`, the image specified by `_graphic.src` will be ignored and the popup images specified in `_items[n]._graphic.src` will instead be laid out in a 2 item width grid system. See [example.json](example.json#L79-L115) for a working example. The default is `false`.
+If set to `true`, the image specified by `_graphic.src` will be ignored and the popup images specified in `_items[n]._graphic.src` will instead be laid out in a 2 column grid system. See [example.json](example.json) for a working example. The default is `false`.
 
 ### \_hasStaticTooltips (boolean):
 If set to `true`, tooltips (if enabled) will always be shown rather than only on hover.
