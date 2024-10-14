@@ -1,29 +1,30 @@
 describe('Hot Graphic', function () {
+  const stripHtml = cy.helpers.stripHtml;
+
   function loopThroughHotGraphic(hotGraphicComponent) {
-    const items = hotGraphicComponent._items;
-    const canCycle = hotGraphicComponent._canCycleThroughPagination;
-    cy.get('.hotgraphic__pin-item').should('have.length', items.length);
+    const { _items, _canCycleThroughPagination } = hotGraphicComponent;
+    cy.get('.hotgraphic__pin-item').should('have.length', _items.length);
     // Check each pin works correctly
-    items.forEach((item, index) => {
+    _items.forEach((item, index) => {
       cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('not.exist');
       cy.get('.notify__popup.hotgraphic').should('not.exist');
       cy.get(`.hotgraphic__pin-item .item-${index}`).click();
       cy.get('.notify__popup.hotgraphic').should('be.visible');
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title);
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body);
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', stripHtml(item.title));
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', stripHtml(item.body));
       cy.get('button.hotgraphic-popup__close').click();
       cy.get(`.hotgraphic__pin-item .item-${index}.is-visited`).should('exist');
     });
 
     // Check pin popup navigation works as expected
     cy.get('.hotgraphic__pin-item .item-0').click();
-    items.forEach(item => {
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title);
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body);
+    _items.forEach(item => {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', stripHtml(item.title));
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', stripHtml(item.body));
       cy.get('.hotgraphic-popup__controls.next').click();
     });
 
-    if (!canCycle) {
+    if (!_canCycleThroughPagination) {
       cy.get('.hotgraphic-popup__controls.next.is-disabled').should('exist');
     } else {
       cy.get('.hotgraphic-popup__controls.next')
@@ -31,13 +32,13 @@ describe('Hot Graphic', function () {
         .and('not.have.class', 'is-disabled')
     }
 
-    items.forEach(item => {
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', item.title);
-      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', item.body);
+    _items.forEach(item => {
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-title-inner', stripHtml(item.title));
+      cy.testContainsOrNotExists('.hotgraphic-popup__item-body-inner', stripHtml(item.body));
       cy.get('.hotgraphic-popup__controls.back').click();
     });
 
-    if (!canCycle) {
+    if (!_canCycleThroughPagination) {
       cy.get('.hotgraphic-popup__controls.back.is-disabled').should('exist');
     } else {
       cy.get('.hotgraphic-popup__controls.back')
@@ -52,7 +53,6 @@ describe('Hot Graphic', function () {
 
   it('should display the hot graphic component', function () {
     const hotGraphicComponents = this.data.components.filter(component => component._component === 'hotgraphic');
-    const stripHtml = cy.helpers.stripHtml;
     hotGraphicComponents.forEach(hotGraphicComponent => {
       cy.visit(`/#/preview/${hotGraphicComponent._id}`);
 
