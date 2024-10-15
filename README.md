@@ -125,10 +125,10 @@ Optional text to be displayed as an [attribution](https://wiki.creativecommons.o
 Multiple items may be created. Each entry in the array should be an object, containing the following settings:
 
 #### \_top (number):
-Each item must contain `_top` and `_left` coordinates to define its position over the main graphic. Enter a percentage value (0-100) that this item should be from the top border of the main graphic.
+Each item must contain `_top` and `_left` coordinates to define its position over the main graphic. Enter a percentage value (0-100) that this item should be from the top border of the main graphic. Not required for tile/grid layout.
 
 #### \_left (number):
-Enter a percentage value (0-100) that this item should be from the left border of the main graphic.
+Enter a percentage value (0-100) that this item should be from the left border of the main graphic. Not required for tile/grid layout.
 
 #### title (string):
 This is the title text for the hot spot's pop-up.
@@ -140,12 +140,18 @@ This is the main text for a hot spot pop-up.
 This text is displayed when `device.screenSize` is `small` (i.e. when viewed on mobile devices, except when the [_isNarrativeOnMobile](#_isnarrativeonmobile-boolean) setting is set to `false`). It is presented in a title bar above the image.
 
 #### \_imageAlignment (string):
-Defines the alignment of the item image in the pop up. Left: Image aligned to the left of the text area. Top: Image aligned above the text area. Right: Image aligned to the right of the text area. Bottom: Image aligned below the text area. The default alignment is `right`.
+Defines the alignment of the item image in the pop up. The default alignment is `right`. Not required for tile/grid layout.
+
+* `"left"`: Image aligned to the left of the text area
+* `"top"`: Image aligned above the text area
+* `"right"`: Image aligned to the right of the text area
+* `"bottom"`: Image aligned below the text area
 
 #### \_classes (string):
 CSS class name(s) to be applied to the popup item. Classes available by default are:
-* `"hide-desktop-image"` (hides the pop up image in desktop view)
-* `"hide-popup-image"` (hides the pop up image for all screen sizes)
+
+* `"hide-desktop-image"`: Hides the pop up image in desktop view
+* `"hide-popup-image"`: Hides the pop up image for all screen sizes
 
 Any other classes need to be predefined in one of the Less files. Separate multiple classes with a space.
 

@@ -26,9 +26,9 @@
         "_isRound": false,
         "_pinOffsetOrigin": false,
         "_graphic": {
-            "src": "course/en/images/example.jpg",
+            "src": "course/en/images/background.jpg",
             "alt": "",
-            "attribution": "Copyright © 2019"
+            "attribution": "Copyright © 2024"
         },
         "_items": [
             {
@@ -41,9 +41,9 @@
                 "_comment": "Supported classes = 'hide-desktop-image' | 'hide-popup-image'. Additional classes can be used but they must be predefined in one of the Less files",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-1.jpg",
                     "alt": "",
-                    "attribution": "Copyright © 2019",
+                    "attribution": "Copyright © 2024",
                     "_classes": ""
                 },
                 "_tooltip": {
@@ -62,7 +62,7 @@
                 "_imageAlignment": "left",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-2.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
@@ -78,12 +78,12 @@
                 "_top": 75,
                 "_left": 75,
                 "title": "Hotspot 3 title",
-                "body": "This is display text 3.",
+                "body": "This is display text 3 with a right aligned image.",
                 "strapline": "Hotspot 3 strapline",
                 "_imageAlignment": "right",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-3.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
@@ -109,17 +109,14 @@
         "_useGraphicsAsPins": true,
         "_items": [
             {
-                "_top": 25,
-                "_left": 25,
-                "title": "Hotspot 1 title",
+                "title": "Tile 1 title",
                 "body": "This is display text 1.",
-                "strapline": "Hotspot 1 strapline",
-                "_imageAlignment": "right",
+                "strapline": "Tile 1 strapline",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-1.jpg",
                     "alt": "",
-                    "attribution": "Copyright © 2019",
+                    "attribution": "Copyright © 2024",
                     "_classes": ""
                 },
                 "_tooltip": {
@@ -128,15 +125,12 @@
                 }
             },
             {
-                "_top": 50,
-                "_left": 50,
-                "title": "Hotspot 2 title",
+                "title": "Tile 2 title",
                 "body": "This is display text 2.",
-                "strapline": "Hotspot 2 strapline",
-                "_imageAlignment": "right",
+                "strapline": "Tile 2 strapline",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-2.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""
@@ -165,9 +159,9 @@
                 "_imageAlignment": "right",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-1.jpg",
                     "alt": "",
-                    "attribution": "Copyright © 2019",
+                    "attribution": "Copyright © 2024",
                     "_classes": ""
                 },
                 "_tooltip": {
@@ -192,7 +186,7 @@
                 "_imageAlignment": "right",
                 "_classes": "",
                 "_graphic": {
-                    "src": "course/en/images/example.jpg",
+                    "src": "course/en/images/hotgraphic-2.jpg",
                     "alt": "",
                     "attribution": "",
                     "_classes": ""

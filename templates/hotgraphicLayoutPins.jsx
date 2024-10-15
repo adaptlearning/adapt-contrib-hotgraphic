@@ -18,6 +18,7 @@ export default function HotgraphicLayoutPins(props) {
   return (
     <div className="hotgraphic__pins">
 
+      {_graphic &&
       <img
         className="hotgraphic__image"
         src={_graphic.src}
@@ -25,8 +26,9 @@ export default function HotgraphicLayoutPins(props) {
         aria-hidden={!_graphic.alt || null}
         data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
       />
+      }
 
-      {_graphic.attribution &&
+      {_graphic?.attribution &&
       <div className="component__attribution hotgraphic__attribution">
         <div className="component__attribution-inner hotgraphic__attribution-inner">
           {_graphic.attribution}
@@ -51,7 +53,7 @@ export default function HotgraphicLayoutPins(props) {
                 className={classes([
                   'btn-icon hotgraphic__pin',
                   `item-${_index}`,
-                  _graphic._classes,
+                  _graphic?._classes,
                   _isVisited && 'is-visited',
                   _pin.src && 'has-pin-image',
                   (_pin.src && _pin.srcHover && _pin.srcVisited) && 'has-pin-image-states',
