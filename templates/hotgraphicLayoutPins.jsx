@@ -56,6 +56,7 @@ export default function HotgraphicLayoutPins(props) {
                   _graphic?._classes,
                   _isVisited && 'is-visited',
                   _pin.src && 'has-pin-image',
+                  (_pin.src && _pin.srcHover && _pin.srcVisited) && 'has-pin-image-states',
                   _useNumberedPins && 'is-numbered-pin',
                   _pinOffsetOrigin && 'offset-origin'
                 ])}
@@ -72,7 +73,15 @@ export default function HotgraphicLayoutPins(props) {
                   'hotgraphic__pin-image-container',
                   `item-${_index}`
                 ])}>
-                  <img className="hotgraphic__pin-image" src={_pin.src} aria-hidden="true" />
+                  <img className="hotgraphic__pin-image is-default" src={_pin.src} aria-hidden="true" />
+
+                  {_pin.srcHover &&
+                    <img className="hotgraphic__pin-image is-hover" src={_pin.srcHover} />
+                  }
+
+                  {_pin.srcVisited &&
+                    <img className="hotgraphic__pin-image is-visited" src={_pin.srcVisited} />
+                  }
                 </span>
                 }
 

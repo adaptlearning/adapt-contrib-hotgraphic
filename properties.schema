@@ -347,7 +347,7 @@
           "_pin": {
             "type": "object",
             "required": false,
-            "title": "Item Pin",
+            "title": "Pin",
             "properties": {
               "src": {
                 "type": "string",
@@ -355,7 +355,26 @@
                 "default": "",
                 "inputType": "Asset:image",
                 "validators": [] ,
-                "help": "This is the pin image, leave blank for default"
+                "title": "Pin image (default)",
+                "help": "This is the pin image. Leave blank to use the default icon."
+              },
+              "srcHover": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "title": "Pin image (hover)",
+                "help": "This is the pin image hover state  (optional)."
+              },
+              "srcVisited": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "inputType": "Asset:image",
+                "validators": [] ,
+                "title": "Pin image (visited)",
+                "help": "This is the pin image visited state  (optional)."
               },
               "alt": {
                 "type": "string",
