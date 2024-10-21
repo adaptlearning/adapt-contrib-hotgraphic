@@ -13,35 +13,35 @@
   @media (min-width: @device-width-medium) {
     padding: @icon-padding;
   }
-}
 
-.hotgraphic__pin .icon {
-  .icon-pin;
-}
+  .icon {
+    .icon-pin;
+  }
 
-.hotgraphic__pin.is-visited .icon {
-  .icon-tick;
-}
+  &.is-visited .icon {
+    .icon-tick;
+  }
 
-.hotgraphic__pin.offset-origin {
-  .transform(translate(-50%, -50%));
-}
+  &.offset-origin {
+    .transform(translate(-50%, -50%));
+  }
 
-.hotgraphic__pin.has-pin-image {
-  padding: 0;
-}
+  &.has-pin-image {
+    padding: 0;
+  }
 
-.hotgraphic__pin-number {
-  display: block;
-}
+  &-number {
+    display: block;
+  }
 
-.hotgraphic__pin-tooltip.is-static {
-  --adapt-tooltip-distance: 0;
-  --adapt-tooltip-arrow: false;
+  &-tooltip.is-static {
+    --adapt-tooltip-distance: 0;
+    --adapt-tooltip-arrow: false;
 
-  .tooltip__body {
-    color: @black;
-    background-color: transparent;
+    .tooltip__body {
+      color: @black;
+      background-color: transparent;
+    }
   }
 }
 
@@ -72,40 +72,40 @@
   .no-touch &:hover {
     .pin-state.is-hover;
   }
-}
 
-.hotgraphic__pin.has-pin-image-states.is-visited {
-  .pin-state.is-visited;
+  &.is-visited {
+    .pin-state.is-visited;
+  }
 }
 
 // Hotgraphic as tiles
 // --------------------------------------------------
-.hotgraphic__tile-item-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.hotgraphic__tile-item {
-  width: 50%;
-  line-height: 0;
-}
-
 .hotgraphic__tile {
   position: relative;
   width: 100%;
-}
 
-.hotgraphic__tile .icon {
-  position: absolute;
-  bottom: 1.0rem;
-  right: 1.0rem;
-  padding: @icon-padding / 2;
-
-  @media (min-width: @device-width-medium) {
-    padding: @icon-padding;
+  &-item-container {
+    display: flex;
+    flex-wrap: wrap;
   }
-}
 
-.hotgraphic__tile.is-visited .icon {
-  .icon-tick;
+  &-item {
+    width: 50%;
+    line-height: 0;
+  }
+
+  .icon {
+    position: absolute;
+    bottom: 1.0rem;
+    right: 1.0rem;
+    padding: @icon-padding / 2;
+
+    @media (min-width: @device-width-medium) {
+      padding: @icon-padding;
+    }
+  }
+
+  &.is-visited .icon {
+    .icon-tick;
+  }
 }
