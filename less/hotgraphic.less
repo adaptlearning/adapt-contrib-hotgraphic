@@ -1,69 +1,100 @@
-.hotgraphic {
-  &__widget {
-    position: relative;
+.hotgraphic__widget {
+  position: relative;
+}
+
+// Hotgraphic as pins
+// --------------------------------------------------
+.hotgraphic__pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: @icon-padding / 2;
+
+  @media (min-width: @device-width-medium) {
+    padding: @icon-padding;
   }
 
-  // Hotgraphic as pins
-  // --------------------------------------------------
-  &__pin {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: @icon-padding / 2;
-
-    @media (min-width: @device-width-medium) {
-      padding: @icon-padding;
-    }
-  }
-
-  &__pin .icon {
+  .icon {
     .icon-pin;
   }
 
-  &__pin.is-visited .icon {
+  &.is-visited .icon {
     .icon-tick;
   }
 
-  &__pin.offset-origin {
+  &.offset-origin {
     .transform(translate(-50%, -50%));
   }
 
-  &__pin.has-pin-image {
+  &.has-pin-image {
     padding: 0;
   }
 
-  &__pin-number {
+  &-number {
     display: block;
   }
 
-  &__pin-tooltip.is-static {
+  &-tooltip.is-static {
     --adapt-tooltip-distance: 0;
     --adapt-tooltip-arrow: false;
-  
+
     .tooltip__body {
       color: @black;
       background-color: transparent;
     }
   }
+}
 
-  // Hotgraphic as tiles
-  // --------------------------------------------------
-  &__tile-item-container {
+// Pin image states
+// --------------------------------------------------
+.pin-state-mixin(default, hover, visited);
+.pin-state-mixin(hover, default, visited);
+.pin-state-mixin(visited, default, hover);
+
+.pin-state-mixin(@active-state, @inactive-state-one, @inactive-state-two) {
+  .pin-state.is-@{active-state} {
+    .hotgraphic__pin-image.is-@{active-state} {
+      display: block;
+    }
+
+    .hotgraphic__pin-image.is-@{inactive-state-one},
+    .hotgraphic__pin-image.is-@{inactive-state-two} {
+      display: none;
+    }
+  }
+}
+
+// Application of pin image states
+// --------------------------------------------------
+.hotgraphic__pin.has-pin-image-states {
+  .pin-state.is-default;
+
+  .no-touch &:hover {
+    .pin-state.is-hover;
+  }
+
+  &.is-visited {
+    .pin-state.is-visited;
+  }
+}
+
+// Hotgraphic as tiles
+// --------------------------------------------------
+.hotgraphic__tile {
+  position: relative;
+  width: 100%;
+
+  &-item-container {
     display: flex;
     flex-wrap: wrap;
   }
 
-  &__tile-item {
+  &-item {
     width: 50%;
     line-height: 0;
   }
 
-  &__tile {
-    position: relative;
-    width: 100%;
-  }
-
-  &__tile .icon {
+  .icon {
     position: absolute;
     bottom: 1.0rem;
     right: 1.0rem;
@@ -74,7 +105,7 @@
     }
   }
 
-  &__tile.is-visited .icon {
+  &.is-visited .icon {
     .icon-tick;
   }
 }
