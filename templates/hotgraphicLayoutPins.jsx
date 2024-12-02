@@ -30,9 +30,10 @@ export default function HotgraphicLayoutPins(props) {
 
       {_graphic?.attribution &&
       <div className="component__attribution hotgraphic__attribution">
-        <div className="component__attribution-inner hotgraphic__attribution-inner">
-          {_graphic.attribution}
-        </div>
+        <div 
+          className="component__attribution-inner hotgraphic__attribution-inner"
+          dangerouslySetInnerHTML={{ __html: compile(_graphic.attribution, _graphic) }}
+        />
       </div>
       }
 
