@@ -47,7 +47,6 @@
           "properties": {
             "src": {
               "type": "string",
-              "isObjectId": true,
               "title": "Source",
               "description": "This is the image that appears behind the pins",
               "_backboneForms": {
@@ -216,7 +215,6 @@
                 "properties": {
                   "src": {
                     "type": "string",
-                    "isObjectId": true,
                     "title": "Source",
                     "description": "Image to be displayed in a popup when this item is selected",
                     "_backboneForms": {
@@ -257,7 +255,6 @@
                 "properties": {
                   "src": {
                     "type": "string",
-                    "isObjectId": true,
                     "title": "Pin image (default)",
                     "description": "This is the pin image. Leave blank to use the default icon.",
                     "_backboneForms": {
@@ -267,7 +264,6 @@
                   },
                   "srcHover": {
                     "type": "string",
-                    "isObjectId": true,
                     "title": "Pin image (hover)",
                     "description": "This is the pin image hover state (optional).",
                     "_backboneForms": {
@@ -277,7 +273,6 @@
                   },
                   "srcVisited": {
                     "type": "string",
-                    "isObjectId": true,
                     "title": "Pin image (visited)",
                     "description": "This is the pin image visited state (optional).",
                     "_backboneForms": {
