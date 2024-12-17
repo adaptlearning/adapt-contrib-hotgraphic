@@ -92,7 +92,7 @@ export default function HotgraphicLayoutPins(props) {
                   </span>
                 }
 
-                {(!_useNumberedPins || _isVisited) &&
+                {((!_pin.src && !_useNumberedPins) || _isVisited) &&
                   <span className="icon" aria-hidden="true" />
                 }
 
