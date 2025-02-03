@@ -34,6 +34,14 @@
     display: block;
   }
 
+  &.has-pin-image &-number,
+  &.has-pin-image.is-visited .icon {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+  }
+
   &-tooltip.is-static {
     --adapt-tooltip-distance: 0;
     --adapt-tooltip-arrow: false;
