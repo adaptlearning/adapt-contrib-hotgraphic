@@ -342,6 +342,13 @@
                     "_adapt": {
                       "editorOnly": true
                     }
+                  },
+                  "_classes": {
+                    "type": "string",
+                    "default": "",
+                    "title": "Classes",
+                    "description": "Allows you to specify custom CSS classes to be applied to the tooltip.",
+                    "translatable": false
                   }
                 }
               }
