@@ -23,10 +23,10 @@ describe('Hot Graphic - v2.1.2 to v3.0.0', async () => {
     return true;
   });
   checkContent('Hot Graphic - check globals scrollAriaLabel attribute', async content => {
-    if (courseHotgraphicGlobals?.scrollAriaLabel === undefined || courseHotgraphicGlobals.scrollAriaLabel !== '{{itemNumber}} / {{totalItems}}') {
+    if (courseHotgraphicGlobals?.scrollAriaLabel !== '{{itemNumber}} / {{totalItems}}') {
       throw new Error('Hot Graphic - globals scrollAriaLabel invalid');
     }
     return true;
   });
-  updatePlugin('Hot Graphic - update to vX.X.X', { name: 'adapt-contrib-hotgraphic', version: '3.0.0', framework: '>=3.0.0' });
+  updatePlugin('Hot Graphic - update to v3.0.0', { name: 'adapt-contrib-hotgraphic', version: '3.0.0', framework: '>=3.0.0' });
 });

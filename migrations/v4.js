@@ -15,7 +15,7 @@ describe('Hot Graphic - v3.0.0 to v4.0.0', async () => {
     return true;
   });
   checkContent('Hot Graphic - check globals ariaPopupLabel', async content => {
-    if (courseHotgraphicGlobals.ariaPopupLabel !== undefined) throw new Error('Hot Graphic - globals _hotgraphic ariaPopupLabel invalid');
+    if (courseHotgraphicGlobals?.ariaPopupLabel !== undefined) throw new Error('Hot Graphic - globals _hotgraphic ariaPopupLabel invalid');
     return true;
   });
   updatePlugin('Hot Graphic - update to v4.0.0', { name: 'adapt-contrib-hotgraphic', version: '4.0.0', framework: '>=3.3.0' });
@@ -33,7 +33,7 @@ describe('Hot Graphic - v4.0.0 to v4.1.0', async () => {
     return true;
   });
   checkContent('Hot Graphic - check _setCompletionOn attribute', async content => {
-    const isValid = hotgraphics.every((hotgraphic) => hotgraphic._setCompletionOn !== undefined && hotgraphic._setCompletionOn === 'allItems');
+    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?._setCompletionOn === 'allItems');
     if (!isValid) throw new Error('Hot Graphic - _setCompletionOn attribute invalid');
     return true;
   });
