@@ -1,6 +1,8 @@
 import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
 import _ from 'lodash';
 
+let hotgraphics;
+
 describe('Hot Graphic - v2.1.2 to v3.0.0', async () => {
   let hotgraphics, course, courseHotgraphicGlobals;
   whereFromPlugin('Hot Graphic - from v2.1.2', { name: 'adapt-contrib-hotgraphic', version: '<3.0.0' });
@@ -22,9 +24,9 @@ describe('Hot Graphic - v2.1.2 to v3.0.0', async () => {
     if (courseHotgraphicGlobals === undefined) throw new Error('Hot Graphic - globals _hotgraphic invalid');
     return true;
   });
-  checkContent('Hot Graphic - check globals popupPagination attribute', async content => {
-    if (courseHotgraphicGlobals?.popupPagination === undefined) { throw new Error('Hot Graphic - globals popupPagination invalid'); }
+  checkContent('Hot Graphic - check globals scrollAriaLabel attribute', async content => {
+    if (courseHotgraphicGlobals?.scrollAriaLabel === undefined) { throw new Error('Hot Graphic - globals scrollAriaLabel invalid'); }
     return true;
   });
-  updatePlugin('Hot Graphic - update to v3.0.0', { name: 'adapt-contrib-hotgraphic', version: '3.0.0', framework: '>=3.0.0' });
+  updatePlugin('Hot Graphic - update to vX.X.X', { name: 'adapt-contrib-hotgraphic', version: '3.0.0', framework: '>=3.0.0' });
 });
