@@ -50,21 +50,15 @@ describe('Hot Graphic - v4.1.0 to v4.2.0', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - add _pin object', async (content) => {
-    hotgraphics.forEach(({ _items }) => {
-      _items.forEach(item => { _.set(item, '_pin', {}); });
-    });
+    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { _.set(item, '_pin', {}); }); });
     return true;
   });
   mutateContent('Hot Graphic - add _pin.src attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => {
-      _items.forEach(({ _pin }) => { _.set(_pin, 'src', ''); });
-    });
+    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'src', ''); }); });
     return true;
   });
   mutateContent('Hot Graphic - add _pin.alt attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => {
-      _items.forEach(({ _pin }) => { _.set(_pin, 'alt', ''); });
-    });
+    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'alt', ''); }); });
     return true;
   });
   checkContent('Hot Graphic - check item _pin attribute', async content => {
@@ -94,9 +88,7 @@ describe('Hot Graphic - v4.2.0 to v4.2.1', async () => {
   });
   mutateContent('Hot Graphic - remove item _graphic.title', async (content) => {
     hotgraphics.forEach(({ _items }) => {
-      _items.forEach(item => {
-        if (_.has(item._graphic, 'title')) { delete item._graphic.title; }
-      });
+      _items.forEach(item => { if (_.has(item._graphic, 'title')) { delete item._graphic.title; } });
     });
     return true;
   });
