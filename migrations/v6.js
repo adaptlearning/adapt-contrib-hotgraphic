@@ -92,7 +92,28 @@ describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
   });
-
+  mutateContent('Hot Graphic - update instruction ', async (content) => {
+    hotgraphics.forEach(({ instruction }) => {
+      if (instruction === '') instruction = 'Select the icons to find out more.';
+    });
+    return true;
+  });
+  mutateContent('Hot Graphic - update mobileInstruction ', async (content) => {
+    hotgraphics.forEach(({ mobileInstruction }) => {
+      if (mobileInstruction === '') mobileInstruction = 'Select the plus icon followed by the next arrow to find out more.';
+    });
+    return true;
+  });
+  checkContent('Hot Graphic - check instruction attribute', async content => {
+    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.instruction === 'Select the icons to find out more.');
+    if (!isValid) throw new Error('Hot Graphic - instruction attribute invalid');
+    return true;
+  });
+  checkContent('Hot Graphic - check mobileInstruction attribute', async content => {
+    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.mobileInstruction === 'Select the plus icon followed by the next arrow to find out more.');
+    if (!isValid) throw new Error('Hot Graphic - mobileInstruction attribute invalid');
+    return true;
+  });
   updatePlugin('Hot Graphic - update to v6.6.0', { name: 'adapt-contrib-hotgraphic', version: '6.6.0', framework: '>=5.19.1' });
 });
 
