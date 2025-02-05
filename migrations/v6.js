@@ -41,18 +41,51 @@ describe('Hot Graphic - v6.1.0 to v6.5.0', async () => {
   updatePlugin('Hot Graphic - update to v6.5.0', { name: 'adapt-contrib-hotgraphic', version: '6.5.0', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.5.0 to v6.5.1', async () => {
-  let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v6.5.0', { name: 'adapt-contrib-hotgraphic', version: '<6.5.1' });
+describe('Hot Graphic - v6.5.0 to v6.5.2', async () => {
+  let hotgraphics, course, courseHotgraphicGlobals;
+  whereFromPlugin('Hot Graphic - from v6.5.0', { name: 'adapt-contrib-hotgraphic', version: '<6.5.2' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
   });
-
-  updatePlugin('Hot Graphic - update to v6.5.1', { name: 'adapt-contrib-hotgraphic', version: '6.5.1', framework: '>=5.19.1' });
+  mutateContent('Hot Graphic - add globals item attribute', async content => {
+    course = content.find(({ _type }) => _type === 'course');
+    courseHotgraphicGlobals = course._globals._components._hotgraphic;
+    courseHotgraphicGlobals.item = 'Item {{itemNumber}} of {{totalItems}}';
+    return true;
+  });
+  mutateContent('Hot Graphic - add globals previous attribute', async content => {
+    courseHotgraphicGlobals.previous = '{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}';
+    return true;
+  });
+  mutateContent('Hot Graphic - add globals next attribute', async content => {
+    courseHotgraphicGlobals.next = '{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}';
+    return true;
+  });
+  checkContent('Hot Graphic - check globals item attribute', async content => {
+    course = content.find(({ _type }) => _type === 'course');
+    courseHotgraphicGlobals = course._globals._components._hotgraphic;
+    if (courseHotgraphicGlobals?.item !== 'Item {{itemNumber}} of {{totalItems}}') {
+      throw new Error('Hot Graphic - globals item invalid');
+    }
+    return true;
+  });
+  checkContent('Hot Graphic - check globals previous attribute', async content => {
+    if (courseHotgraphicGlobals?.previous !== '{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}') {
+      throw new Error('Hot Graphic - globals previous invalid');
+    }
+    return true;
+  });
+  checkContent('Hot Graphic - check globals next attribute', async content => {
+    if (courseHotgraphicGlobals?.next !== '{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}') {
+      throw new Error('Hot Graphic - globals next invalid');
+    }
+    return true;
+  });
+  updatePlugin('Hot Graphic - update to v6.5.2', { name: 'adapt-contrib-hotgraphic', version: '6.5.2', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.5.1 to v6.6.0', async () => {
+describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
   let hotgraphics;
   whereFromPlugin('Hot Graphic - from v6.5.1', { name: 'adapt-contrib-hotgraphic', version: '<6.6.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
@@ -112,7 +145,7 @@ describe('Hot Graphic - v6.7.0 to v6.11.0', async () => {
 });
 
 describe('Hot Graphic - v6.11.0 to v6.12.0', async () => {
-  let hotgraphics;
+  let hotgraphics, course, courseHotgraphicGlobals;
   whereFromPlugin('Hot Graphic - from v6.11.0', { name: 'adapt-contrib-hotgraphic', version: '<6.12.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
@@ -124,9 +157,22 @@ describe('Hot Graphic - v6.11.0 to v6.12.0', async () => {
     });
     return true;
   });
+  mutateContent('Hot Graphic - update globals item attribute', async content => {
+    course = content.find(({ _type }) => _type === 'course');
+    courseHotgraphicGlobals = course._globals._components._hotgraphic;
+    if (courseHotgraphicGlobals?.item === 'Item {{{itemNumber}}} of {{{totalItems}}}') {
+      courseHotgraphicGlobals.item = 'Item {{itemNumber}} of {{totalItems}}';
+    }
+    return true;
+  });
   checkContent('Hot Graphic - check _pinOffsetOrigin attribute', async content => {
     const isValid = hotgraphics.every((hotgraphic) => hotgraphic?._pinOffsetOrigin === false);
     if (!isValid) throw new Error('Hot Graphic - _pinOffsetOrigin attribute invalid');
+    return true;
+  });
+  checkContent('Hot Graphic - check updated globals item attribute', async content => {
+    const isValid = (courseHotgraphicGlobals?.item === 'Item {{itemNumber}} of {{totalItems}}');
+    if (!isValid) throw new Error('Hot Graphic - globals item attribute invalid');
     return true;
   });
   updatePlugin('Hot Graphic - update to v6.12.0', { name: 'adapt-contrib-hotgraphic', version: '6.12.0', framework: '>=5.33.10' });
@@ -166,9 +212,18 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
     });
     return true;
   });
+  mutateContent('Hot Graphic - add item _tooltip._position attribute', async (content) => {
+    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _tooltip }) => { _.set(_tooltip, '_position', ''); }); });
+    return true;
+  });
   checkContent('Hot Graphic - check _hasStaticTooltips attribute', async content => {
     const isValid = hotgraphics.every((hotgraphic) => hotgraphic?._hasStaticTooltips === false);
     if (!isValid) throw new Error('Hot Graphic - _hasStaticTooltips attribute invalid');
+    return true;
+  });
+  checkContent('Hot Graphic - check item _tooltip._position attribute', async content => {
+    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?._position === ''));
+    if (!isValid) throw new Error('Hot Graphic - item _tooltip._position attribute invalid');
     return true;
   });
   updatePlugin('Hot Graphic - update to v6.13.1', { name: 'adapt-contrib-hotgraphic', version: '6.13.1', framework: '>=5.39.12' });
@@ -181,6 +236,23 @@ describe('Hot Graphic - v6.13.1 to v6.15.0', async () => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
   });
-
+  mutateContent('Hot Graphic - add _pin.srcHover attribute', async (content) => {
+    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'srcHover', ''); }); });
+    return true;
+  });
+  mutateContent('Hot Graphic - add _pin.srcVisited attribute', async (content) => {
+    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'srcVisited', ''); }); });
+    return true;
+  });
+  checkContent('Hot Graphic - check item _pin.srcHover attribute', async content => {
+    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._pin?.srcHover === ''));
+    if (!isValid) throw new Error('Hot Graphic - item _pin.srcHover attribute invalid');
+    return true;
+  });
+  checkContent('Hot Graphic - check item _pin.srcVisited attribute', async content => {
+    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._pin?.srcVisited === ''));
+    if (!isValid) throw new Error('Hot Graphic - item _pin.srcVisited attribute invalid');
+    return true;
+  });
   updatePlugin('Hot Graphic - update to v6.15.0', { name: 'adapt-contrib-hotgraphic', version: '6.15.0', framework: '>=5.39.12' });
 });

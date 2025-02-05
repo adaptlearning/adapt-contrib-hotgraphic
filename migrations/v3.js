@@ -14,7 +14,7 @@ describe('Hot Graphic - v2.1.2 to v3.0.0', async () => {
     courseHotgraphicGlobals = course._globals._components._hotgraphic;
     return true;
   });
-  mutateContent('Hot Graphic - add popupPagination attribute', async content => {
+  mutateContent('Hot Graphic - add globals popupPagination attribute', async content => {
     courseHotgraphicGlobals.popupPagination = '{{itemNumber}} / {{totalItems}}';
     return true;
   });
