@@ -22,9 +22,9 @@ describe('Hot Graphic - v2.1.2 to v3.0.0', async () => {
     if (courseHotgraphicGlobals === undefined) throw new Error('Hot Graphic - globals _hotgraphic invalid');
     return true;
   });
-  checkContent('Hot Graphic - check globals scrollAriaLabel attribute', async content => {
-    if (courseHotgraphicGlobals?.scrollAriaLabel !== '{{itemNumber}} / {{totalItems}}') {
-      throw new Error('Hot Graphic - globals scrollAriaLabel invalid');
+  checkContent('Hot Graphic - check globals popupPagination attribute', async content => {
+    if (courseHotgraphicGlobals?.popupPagination !== '{{itemNumber}} / {{totalItems}}') {
+      throw new Error('Hot Graphic - globals popupPagination invalid');
     }
     return true;
   });
