@@ -86,3 +86,26 @@ describe('Hot Graphic - v4.1.0 to v4.2.0', async () => {
   });
   updatePlugin('Hot Graphic - update to v4.2.0', { name: 'adapt-contrib-hotgraphic', version: '4.2.0', framework: '>=3.3.0' });
 });
+
+describe('Hot Graphic - v4.2.0 to v4.2.1', async () => {
+  let hotgraphics;
+  whereFromPlugin('Hot Graphic - from v4.2.0', { name: 'adapt-contrib-hotgraphic', version: '<4.2.1' });
+  whereContent('Hot Graphic - where hotgraphic', async content => {
+    hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
+    return hotgraphics.length;
+  });
+  mutateContent('Hot Graphic - remove item _graphic.title', async (content) => {
+    hotgraphics.forEach(({ _items }) => {
+      _items.forEach(item => {
+        if (_.has(item._graphic, 'title')) { delete item._graphic.title; }
+      });
+    });
+    return true;
+  });
+  checkContent('Hot Graphic - check item _graphic.title', async content => {
+    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._graphic.title === undefined));
+    if (!isValid) throw new Error('Hot Graphic - item _graphic.title attribute invalid');
+    return true;
+  });
+  updatePlugin('Hot Graphic - update to v4.2.1', { name: 'adapt-contrib-hotgraphic', version: '4.2.1', framework: '>=3.3.0' });
+});
