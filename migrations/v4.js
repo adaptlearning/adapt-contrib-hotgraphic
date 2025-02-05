@@ -30,9 +30,7 @@ describe('Hot Graphic - v4.0.0 to v4.1.0', async () => {
   });
   mutateContent('Hot Graphic - add _setCompletionOn', async (content) => {
     hotgraphics.forEach(hotgraphic => {
-      if (!_.has(hotgraphic, '_setCompletionOn')) {
-        _.set(hotgraphic, '_setCompletionOn', 'allItems');
-      };
+      if (!_.has(hotgraphic, '_setCompletionOn')) _.set(hotgraphic, '_setCompletionOn', 'allItems');
     });
     return true;
   });
