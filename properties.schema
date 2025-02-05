@@ -346,7 +346,7 @@
                 "type": "string",
                 "required": false,
                 "default": "",
-                "title": "Classes",
+                "title": "Tooltip classes",
                 "inputType": "Text",
                 "validators": [],
                 "help": "Allows you to specify custom CSS classes to be applied to the tooltip.",

@@ -346,7 +346,7 @@
                   "_classes": {
                     "type": "string",
                     "default": "",
-                    "title": "Classes",
+                    "title": "Tooltip classes",
                     "description": "Allows you to specify custom CSS classes to be applied to the tooltip.",
                     "translatable": false
                   }
