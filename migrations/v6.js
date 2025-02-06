@@ -87,6 +87,8 @@ describe('Hot Graphic - v6.5.0 to v6.5.2', async () => {
 
 describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
   let hotgraphics;
+  const originalInstructionDefault = '';
+  const originalMobileInstructionDefault = '';
   whereFromPlugin('Hot Graphic - from v6.5.1', { name: 'adapt-contrib-hotgraphic', version: '<6.6.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
@@ -94,25 +96,23 @@ describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
   });
   mutateContent('Hot Graphic - update instruction ', async (content) => {
     hotgraphics.forEach(({ instruction }) => {
-      const originalInstructionDefault = '';
       if (instruction === originalInstructionDefault) instruction = 'Select the icons to find out more.';
     });
     return true;
   });
   mutateContent('Hot Graphic - update mobileInstruction ', async (content) => {
     hotgraphics.forEach(({ mobileInstruction }) => {
-      const originalMobileInstructionDefault = '';
       if (mobileInstruction === originalMobileInstructionDefault) mobileInstruction = 'Select the plus icon followed by the next arrow to find out more.';
     });
     return true;
   });
   checkContent('Hot Graphic - check instruction attribute', async content => {
-    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.instruction === 'Select the icons to find out more.');
+    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.instruction !== originalInstructionDefault);
     if (!isValid) throw new Error('Hot Graphic - instruction attribute invalid');
     return true;
   });
   checkContent('Hot Graphic - check mobileInstruction attribute', async content => {
-    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.mobileInstruction === 'Select the plus icon followed by the next arrow to find out more.');
+    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.mobileInstruction !== originalMobileInstructionDefault);
     if (!isValid) throw new Error('Hot Graphic - mobileInstruction attribute invalid');
     return true;
   });
