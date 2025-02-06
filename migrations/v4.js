@@ -87,9 +87,7 @@ describe('Hot Graphic - v4.2.0 to v4.2.1', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - remove item _graphic.title', async (content) => {
-    hotgraphics.forEach(({ _items }) => {
-      _items.forEach(item => { if (_.has(item._graphic, 'title')) { delete item._graphic.title; } });
-    });
+    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { delete item._graphic.title; }); });
     return true;
   });
   checkContent('Hot Graphic - check item _graphic.title', async content => {
