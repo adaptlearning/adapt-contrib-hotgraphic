@@ -95,14 +95,18 @@ describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - update instruction ', async (content) => {
-    hotgraphics.forEach(({ instruction }) => {
-      if (instruction === originalInstructionDefault) instruction = 'Select the icons to find out more.';
+    hotgraphics.forEach((hotgraphic) => {
+      if (hotgraphic.instruction === originalInstructionDefault) {
+        hotgraphic.instruction = 'Select the icons to find out more.';
+      }
     });
     return true;
   });
   mutateContent('Hot Graphic - update mobileInstruction ', async (content) => {
-    hotgraphics.forEach(({ mobileInstruction }) => {
-      if (mobileInstruction === originalMobileInstructionDefault) mobileInstruction = 'Select the plus icon followed by the next arrow to find out more.';
+    hotgraphics.forEach((hotgraphic) => {
+      if (hotgraphic.mobileInstruction === originalMobileInstructionDefault) {
+        hotgraphic.mobileInstruction = 'Select the plus icon followed by the next arrow to find out more.';
+      }
     });
     return true;
   });
