@@ -30,11 +30,15 @@ describe('Hot Graphic - v6.1.0 to v6.5.0', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - add item _imageAlignment attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { _.set(item, '_imageAlignment', 'right'); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(item => { _.set(item, '_imageAlignment', 'right'); });
+    });
     return true;
   });
   checkContent('Hot Graphic - check item _imageAlignment attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every(item => item?._imageAlignment === 'right'));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every(item => item?._imageAlignment === 'right');
+    });
     if (!isValid) throw new Error('Hot Graphic - item _imageAlignment attribute invalid');
     return true;
   });
@@ -111,12 +115,16 @@ describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
     return true;
   });
   checkContent('Hot Graphic - check instruction attribute', async content => {
-    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.instruction !== originalInstructionDefault);
+    const isValid = hotgraphics.every((hotgraphic) => {
+      return hotgraphic?.instruction !== originalInstructionDefault;
+    });
     if (!isValid) throw new Error('Hot Graphic - instruction attribute invalid');
     return true;
   });
   checkContent('Hot Graphic - check mobileInstruction attribute', async content => {
-    const isValid = hotgraphics.every((hotgraphic) => hotgraphic?.mobileInstruction !== originalMobileInstructionDefault);
+    const isValid = hotgraphics.every((hotgraphic) => {
+      return hotgraphic?.mobileInstruction !== originalMobileInstructionDefault;
+    });
     if (!isValid) throw new Error('Hot Graphic - mobileInstruction attribute invalid');
     return true;
   });
@@ -131,29 +139,41 @@ describe('Hot Graphic - v6.6.0 to v6.7.0', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - add item _tooltip object', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { _.set(item, '_tooltip', {}); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(item => { _.set(item, '_tooltip', {}); });
+    });
     return true;
   });
   mutateContent('Hot Graphic - add item _tooltip._isEnabled attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _tooltip }) => { _.set(_tooltip, '_isEnabled', false); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(({ _tooltip }) => { _.set(_tooltip, '_isEnabled', false); });
+    });
     return true;
   });
   mutateContent('Hot Graphic - add item _tooltip.text attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _tooltip }) => { _.set(_tooltip, 'text', '{{ariaLabel}}'); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(({ _tooltip }) => { _.set(_tooltip, 'text', '{{ariaLabel}}'); });
+    });
     return true;
   });
   checkContent('Hot Graphic - check item _tooltip attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip !== undefined));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._tooltip !== undefined);
+    });
     if (!isValid) throw new Error('Hot Graphic - item _tooltip attribute invalid');
     return true;
   });
   checkContent('Hot Graphic - check item _tooltip._isEnabled attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?._isEnabled === false));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._tooltip?._isEnabled === false);
+    });
     if (!isValid) throw new Error('Hot Graphic - item _tooltip._isEnabled attribute invalid');
     return true;
   });
   checkContent('Hot Graphic - check item _tooltip.text attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?.text === '{{ariaLabel}}'));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._tooltip?.text === '{{ariaLabel}}');
+    });
     if (!isValid) throw new Error('Hot Graphic - item _tooltip.text attribute invalid');
     return true;
   });
@@ -171,7 +191,7 @@ describe('Hot Graphic - v6.7.0 to v6.11.0', async () => {
     course = content.find(({ _type }) => _type === 'course');
     courseHotgraphicGlobals = course._globals._components._hotgraphic;
     if (courseHotgraphicGlobals?.item === 'Item {{{itemNumber}}} of {{{totalItems}}}') {
-      courseHotgraphicGlobals.item = 'Item {{itemNumber}} of {{totalItems}}';
+      courseHotgraphicGlobals.item = 'Item {{itemNumber}} of {{totalItems}}'; // remove extra brackets
     }
     return true;
   });
@@ -239,7 +259,9 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
     return true;
   });
   mutateContent('Hot Graphic - add item _tooltip._position attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _tooltip }) => { _.set(_tooltip, '_position', ''); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(({ _tooltip }) => { _.set(_tooltip, '_position', ''); });
+    });
     return true;
   });
   checkContent('Hot Graphic - check _hasStaticTooltips attribute', async content => {
@@ -248,7 +270,9 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
     return true;
   });
   checkContent('Hot Graphic - check item _tooltip._position attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?._position === ''));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._tooltip?._position === '');
+    });
     if (!isValid) throw new Error('Hot Graphic - item _tooltip._position attribute invalid');
     return true;
   });
@@ -263,20 +287,28 @@ describe('Hot Graphic - v6.13.1 to v6.15.0', async () => {
     return hotgraphics.length;
   });
   mutateContent('Hot Graphic - add _pin.srcHover attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'srcHover', ''); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(({ _pin }) => { _.set(_pin, 'srcHover', ''); });
+    });
     return true;
   });
   mutateContent('Hot Graphic - add _pin.srcVisited attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(({ _pin }) => { _.set(_pin, 'srcVisited', ''); }); });
+    hotgraphics.forEach(({ _items }) => {
+      return _items.forEach(({ _pin }) => { _.set(_pin, 'srcVisited', ''); });
+    });
     return true;
   });
   checkContent('Hot Graphic - check item _pin.srcHover attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._pin?.srcHover === ''));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._pin?.srcHover === '');
+    });
     if (!isValid) throw new Error('Hot Graphic - item _pin.srcHover attribute invalid');
     return true;
   });
   checkContent('Hot Graphic - check item _pin.srcVisited attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._pin?.srcVisited === ''));
+    const isValid = hotgraphics.every(({ _items }) => {
+      return _items.every((item) => item?._pin?.srcVisited === '');
+    });
     if (!isValid) throw new Error('Hot Graphic - item _pin.srcVisited attribute invalid');
     return true;
   });
