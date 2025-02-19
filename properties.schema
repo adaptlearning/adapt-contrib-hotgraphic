@@ -341,6 +341,16 @@
                 },
                 "default": "bottom",
                 "editorOnly": true
+              },
+              "_classes": {
+                "type": "string",
+                "required": false,
+                "default": "",
+                "title": "Tooltip classes",
+                "inputType": "Text",
+                "validators": [],
+                "help": "Allows you to specify custom CSS classes to be applied to the tooltip.",
+                "translatable": false
               }
             }
           },
