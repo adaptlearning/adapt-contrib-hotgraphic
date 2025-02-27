@@ -1,9 +1,9 @@
 import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
 import _ from 'lodash';
 
-describe('Hot Graphic - v4.2.1 to v5.0.0', async () => {
+describe('Hot Graphic - v4.3.0 to v5.0.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v4.2.1', { name: 'adapt-contrib-hotgraphic', version: '<5.0.0' });
+  whereFromPlugin('Hot Graphic - from v4.3.0', { name: 'adapt-contrib-hotgraphic', version: '<5.0.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -29,9 +29,9 @@ describe('Hot Graphic - v4.2.1 to v5.0.0', async () => {
   updatePlugin('Hot Graphic - update to v5.0.0', { name: 'adapt-contrib-hotgraphic', version: '5.0.0', framework: '>=5.0.0' });
 });
 
-describe('Hot Graphic - v5.0.0 to v5.2.0', async () => {
+describe('Hot Graphic - v5.1.1 to v5.2.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v5.0.0', { name: 'adapt-contrib-hotgraphic', version: '<5.2.0' });
+  whereFromPlugin('Hot Graphic - from v5.1.1', { name: 'adapt-contrib-hotgraphic', version: '<5.2.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;

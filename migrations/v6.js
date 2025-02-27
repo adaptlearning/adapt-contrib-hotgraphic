@@ -1,9 +1,9 @@
 import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
 import _ from 'lodash';
 
-describe('Hot Graphic - v5.3.0 to v6.1.0', async () => {
+describe('Hot Graphic - v6.0.0 to v6.1.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v5.3.0', { name: 'adapt-contrib-hotgraphic', version: '<6.1.0' });
+  whereFromPlugin('Hot Graphic - from v6.0.0', { name: 'adapt-contrib-hotgraphic', version: '<6.1.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -22,9 +22,9 @@ describe('Hot Graphic - v5.3.0 to v6.1.0', async () => {
   updatePlugin('Hot Graphic - update to v6.1.0', { name: 'adapt-contrib-hotgraphic', version: '6.1.0', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.1.0 to v6.5.0', async () => {
+describe('Hot Graphic - v6.4.0 to v6.5.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v6.1.0', { name: 'adapt-contrib-hotgraphic', version: '<6.5.0' });
+  whereFromPlugin('Hot Graphic - from v6.4.0', { name: 'adapt-contrib-hotgraphic', version: '<6.5.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -45,9 +45,9 @@ describe('Hot Graphic - v6.1.0 to v6.5.0', async () => {
   updatePlugin('Hot Graphic - update to v6.5.0', { name: 'adapt-contrib-hotgraphic', version: '6.5.0', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.5.0 to v6.5.2', async () => {
+describe('Hot Graphic - v6.5.1 to v6.5.2', async () => {
   let hotgraphics, course, courseHotgraphicGlobals;
-  whereFromPlugin('Hot Graphic - from v6.5.0', { name: 'adapt-contrib-hotgraphic', version: '<6.5.2' });
+  whereFromPlugin('Hot Graphic - from v6.5.1', { name: 'adapt-contrib-hotgraphic', version: '<6.5.2' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -89,11 +89,11 @@ describe('Hot Graphic - v6.5.0 to v6.5.2', async () => {
   updatePlugin('Hot Graphic - update to v6.5.2', { name: 'adapt-contrib-hotgraphic', version: '6.5.2', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
+describe('Hot Graphic - v6.5.5 to v6.6.0', async () => {
   let hotgraphics;
   const originalInstructionDefault = '';
   const originalMobileInstructionDefault = '';
-  whereFromPlugin('Hot Graphic - from v6.5.1', { name: 'adapt-contrib-hotgraphic', version: '<6.6.0' });
+  whereFromPlugin('Hot Graphic - from v6.5.5', { name: 'adapt-contrib-hotgraphic', version: '<6.6.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -131,9 +131,9 @@ describe('Hot Graphic - v6.5.2 to v6.6.0', async () => {
   updatePlugin('Hot Graphic - update to v6.6.0', { name: 'adapt-contrib-hotgraphic', version: '6.6.0', framework: '>=5.19.1' });
 });
 
-describe('Hot Graphic - v6.6.0 to v6.7.0', async () => {
+describe('Hot Graphic - v6.6.4 to v6.7.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v6.6.0', { name: 'adapt-contrib-hotgraphic', version: '<6.7.0' });
+  whereFromPlugin('Hot Graphic - from v6.6.4', { name: 'adapt-contrib-hotgraphic', version: '<6.7.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -180,9 +180,9 @@ describe('Hot Graphic - v6.6.0 to v6.7.0', async () => {
   updatePlugin('Hot Graphic - update to v6.7.0', { name: 'adapt-contrib-hotgraphic', version: '6.7.0', framework: '>=5.30.2' });
 });
 
-describe('Hot Graphic - v6.7.0 to v6.11.0', async () => {
+describe('Hot Graphic - v6.10.1 to v6.11.0', async () => {
   let hotgraphics, course, courseHotgraphicGlobals;
-  whereFromPlugin('Hot Graphic - from v6.7.0', { name: 'adapt-contrib-hotgraphic', version: '<6.11.0' });
+  whereFromPlugin('Hot Graphic - from v6.10.1', { name: 'adapt-contrib-hotgraphic', version: '<6.11.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -203,9 +203,9 @@ describe('Hot Graphic - v6.7.0 to v6.11.0', async () => {
   updatePlugin('Hot Graphic - update to v6.11.0', { name: 'adapt-contrib-hotgraphic', version: '6.11.0', framework: '>=5.33.10' });
 });
 
-describe('Hot Graphic - v6.11.0 to v6.12.0', async () => {
+describe('Hot Graphic - v6.11.3 to v6.12.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v6.11.0', { name: 'adapt-contrib-hotgraphic', version: '<6.12.0' });
+  whereFromPlugin('Hot Graphic - from v6.11.3', { name: 'adapt-contrib-hotgraphic', version: '<6.12.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
@@ -279,9 +279,9 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
   updatePlugin('Hot Graphic - update to v6.13.1', { name: 'adapt-contrib-hotgraphic', version: '6.13.1', framework: '>=5.39.12' });
 });
 
-describe('Hot Graphic - v6.13.1 to v6.15.0', async () => {
+describe('Hot Graphic - v6.14.2 to v6.15.0', async () => {
   let hotgraphics;
-  whereFromPlugin('Hot Graphic - from v6.13.1', { name: 'adapt-contrib-hotgraphic', version: '<6.15.0' });
+  whereFromPlugin('Hot Graphic - from v6.14.2', { name: 'adapt-contrib-hotgraphic', version: '<6.15.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;

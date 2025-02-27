@@ -1,9 +1,9 @@
 import { describe, whereContent, whereFromPlugin, mutateContent, checkContent, updatePlugin } from 'adapt-migrations';
 import _ from 'lodash';
 
-describe('Hot Graphic - v3.0.0 to v4.0.0', async () => {
+describe('Hot Graphic - v3.0.1 to v4.0.0', async () => {
   let hotgraphics, course, courseHotgraphicGlobals;
-  whereFromPlugin('Hot Graphic - from v3.0.0', { name: 'adapt-contrib-hotgraphic', version: '<4.0.0' });
+  whereFromPlugin('Hot Graphic - from v3.0.1', { name: 'adapt-contrib-hotgraphic', version: '<4.0.0' });
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = content.filter(({ _component }) => _component === 'hotgraphic');
     return hotgraphics.length;
