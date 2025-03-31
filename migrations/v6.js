@@ -384,7 +384,7 @@ describe('Hot Graphic - v6.11.3 to v6.12.0', async () => {
     fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.11.0' }],
     content: [
       { _id: 'c-100', _component: 'hotgraphic' },
-      { _type: 'course', _globals: { _components: { _hotgraphic: {} } } }
+      { _type: 'course', _globals: { _components: { _hotgraphic: { item: originalItem } } } }
     ]
   });
 
@@ -430,7 +430,7 @@ describe('Hot Graphic - v6.12.0 to v6.12.1', async () => {
     fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.12.0' }],
     content: [
       { _id: 'c-100', _component: 'hotgraphic' },
-      { _id: 'c-105', _component: 'hotgraphic' },
+      { _id: 'c-105', _component: 'hotgraphic', _isStackedOnMobile: false },
       { _type: 'course' }
     ]
   });

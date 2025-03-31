@@ -11,7 +11,7 @@ describe('Hot Graphic - v4.3.0 to v5.0.0', async () => {
     return hotgraphics.length;
   });
 
-  mutateContent('Hot Graphic - remove item _graphic.title', async (content) => {
+  mutateContent('Hot Graphic - add _isRound attribute', async (content) => {
     hotgraphics.forEach(hotgraphic => _.set(hotgraphic, '_isRound', false));
     return true;
   });
