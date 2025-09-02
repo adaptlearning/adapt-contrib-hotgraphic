@@ -99,9 +99,7 @@ class HotGraphicView extends ComponentView {
   }
 
   onPinEnter(e) {
-    const hasStaticTooltips = this.model.get('_hasStaticTooltips');
-    if (!hasStaticTooltips) return;
-
+    if (!this.model.get('_hasStaticTooltips')) return;
     const itemId = this.model.get('_id');
     const itemIndex = $(e.currentTarget).data('index');
     const $tooltip = $(`#tooltip-hotgraphic-pin-${itemId}-${itemIndex}.is-static`);
@@ -110,9 +108,7 @@ class HotGraphicView extends ComponentView {
   }
 
   onPinLeave(e) {
-    const hasStaticTooltips = this.model.get('_hasStaticTooltips');
-    if (!hasStaticTooltips) return;
-
+    if (!this.model.get('_hasStaticTooltips')) return;
     const itemId = this.model.get('_id');
     const itemIndex = $(e.currentTarget).data('index');
     const $tooltip = $(`#tooltip-hotgraphic-pin-${itemId}-${itemIndex}.is-static`);
