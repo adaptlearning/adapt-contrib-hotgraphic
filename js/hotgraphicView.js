@@ -12,7 +12,7 @@ class HotGraphicView extends ComponentView {
     super.initialize(...args);
 
     this.onPinClicked = this.onPinClicked.bind(this);
-    this.onPinHover = this.onPinHover.bind(this);
+    this.onPinEnter = this.onPinEnter.bind(this);
     this.onPinLeave = this.onPinLeave.bind(this);
 
     this.setUpViewData();
@@ -98,7 +98,7 @@ class HotGraphicView extends ComponentView {
     this.openPopup();
   }
 
-  onPinHover(e) {
+  onPinEnter(e) {
     const hasStaticTooltips = this.model.get('_hasStaticTooltips');
     if (!hasStaticTooltips) return;
 

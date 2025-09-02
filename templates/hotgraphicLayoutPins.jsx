@@ -13,7 +13,7 @@ export default function HotgraphicLayoutPins(props) {
     _pinOffsetOrigin,
     _tooltip,
     onPinClicked,
-    onPinHover,
+    onPinEnter,
     onPinLeave
   } = props;
 
@@ -65,7 +65,7 @@ export default function HotgraphicLayoutPins(props) {
                 ])}
                 data-index={_index}
                 onClick={onPinClicked}
-                onMouseEnter={onPinHover}
+                onMouseEnter={onPinEnter}
                 onMouseLeave={onPinLeave}
                 style={{ top: _top + '%', left: _left + '%' }}
                 data-tooltip-id={_tooltip?._id}
