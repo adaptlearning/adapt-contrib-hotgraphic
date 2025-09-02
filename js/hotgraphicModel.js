@@ -5,14 +5,15 @@ export default class HotgraphicModel extends ItemsComponentModel {
 
   defaults() {
     return ItemsComponentModel.resultExtend('defaults', {
-      _canCycleThroughPagination: false
+      _canCycleThroughPagination: false,
+      _hasStaticTooltips: false
     });
   }
 
   setUpItems() {
     super.setUpItems();
     const id = this.get('_id');
-    const hasStaticTooltips = this.get('_hasStaticTooltips') ?? false;
+    const hasStaticTooltips = this.get('_hasStaticTooltips');
     this.getChildren().forEach((child, index) => {
 
       // Set _pin for the item if undefined

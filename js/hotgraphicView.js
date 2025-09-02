@@ -12,6 +12,8 @@ class HotGraphicView extends ComponentView {
     super.initialize(...args);
 
     this.onPinClicked = this.onPinClicked.bind(this);
+    this.onPinHover = this.onPinHover.bind(this);
+    this.onPinLeave = this.onPinLeave.bind(this);
 
     this.setUpViewData();
     this.setUpEventListeners();
@@ -88,12 +90,34 @@ class HotGraphicView extends ComponentView {
     this.setupInviewCompletion('.hotgraphic__widget');
   }
 
-  onPinClicked (e) {
+  onPinClicked(e) {
     const item = this.model.getItem($(e.currentTarget).data('index'));
 
     item.toggleActive(true);
     item.toggleVisited(true);
     this.openPopup();
+  }
+
+  onPinHover(e) {
+    const hasStaticTooltips = this.model.get('_hasStaticTooltips');
+    if (!hasStaticTooltips) return;
+
+    const itemId = this.model.get('_id');
+    const itemIndex = $(e.currentTarget).data('index');
+    const $tooltip = $(`#tooltip-hotgraphic-pin-${itemId}-${itemIndex}.is-static`);
+    if (!$tooltip.length) return;
+    $tooltip.addClass('is-active');
+  }
+
+  onPinLeave(e) {
+    const hasStaticTooltips = this.model.get('_hasStaticTooltips');
+    if (!hasStaticTooltips) return;
+
+    const itemId = this.model.get('_id');
+    const itemIndex = $(e.currentTarget).data('index');
+    const $tooltip = $(`#tooltip-hotgraphic-pin-${itemId}-${itemIndex}.is-static`);
+    if (!$tooltip.length) return;
+    $tooltip.removeClass('is-active');
   }
 
   openPopup() {
