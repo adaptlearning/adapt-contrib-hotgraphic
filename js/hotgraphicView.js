@@ -3,6 +3,7 @@ import components from 'core/js/components';
 import data from 'core/js/data';
 import device from 'core/js/device';
 import notify from 'core/js/notify';
+import tooltips from 'core/js/tooltips';
 import ComponentView from 'core/js/views/componentView';
 import HotgraphicPopupView from './hotgraphicPopupView';
 
@@ -12,6 +13,8 @@ class HotGraphicView extends ComponentView {
     super.initialize(...args);
 
     this.onPinClicked = this.onPinClicked.bind(this);
+    this.onPinEnter = this.onPinEnter.bind(this);
+    this.onPinLeave = this.onPinLeave.bind(this);
 
     this.setUpViewData();
     this.setUpEventListeners();
@@ -88,12 +91,34 @@ class HotGraphicView extends ComponentView {
     this.setupInviewCompletion('.hotgraphic__widget');
   }
 
-  onPinClicked (e) {
+  onPinClicked(e) {
     const item = this.model.getItem($(e.currentTarget).data('index'));
 
     item.toggleActive(true);
     item.toggleVisited(true);
     this.openPopup();
+  }
+
+  onPinEnter(e) {
+    if (!this.model.get('_hasStaticTooltips')) return;
+    const itemId = this.model.get('_id');
+    const itemIndex = $(e.currentTarget).data('index');
+    const tooltipModel = tooltips.getTooltip(`hotgraphic-pin-${itemId}-${itemIndex}`);
+    if (!tooltipModel) return;
+    const classes = new Set(tooltipModel.get('_classes').split(' '));
+    classes.add('is-active');
+    tooltipModel.set('_classes', [...classes].join(' '));
+  }
+
+  onPinLeave(e) {
+    if (!this.model.get('_hasStaticTooltips')) return;
+    const itemId = this.model.get('_id');
+    const itemIndex = $(e.currentTarget).data('index');
+    const tooltipModel = tooltips.getTooltip(`hotgraphic-pin-${itemId}-${itemIndex}`);
+    if (!tooltipModel) return;
+    const classes = new Set(tooltipModel.get('_classes').split(' '));
+    classes.delete('is-active');
+    tooltipModel.set('_classes', [...classes].join(' '));
   }
 
   openPopup() {
