@@ -69,6 +69,7 @@ export default function HotgraphicLayoutPins(props) {
                 onMouseLeave={onPinLeave}
                 style={{ top: _top + '%', left: _left + '%' }}
                 data-tooltip-id={_tooltip?._id}
+                aria-haspopup="dialog"
               >
 
                 <span className="aria-label" dangerouslySetInnerHTML={{ __html: compile(ariaLabel) }} />
