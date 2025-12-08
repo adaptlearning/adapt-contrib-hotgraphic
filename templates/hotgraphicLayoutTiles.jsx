@@ -33,6 +33,7 @@ export default function HotgraphicLayoutTiles(props) {
               ])}
               data-index={_index}
               onClick={onPinClicked}
+              aria-haspopup="dialog"
             >
 
               <span className="aria-label">{ariaLabel}</span>
