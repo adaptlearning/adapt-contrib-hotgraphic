@@ -23,9 +23,8 @@ export default function HotgraphicLayoutPins(props) {
       {_graphic &&
       <img
         className="hotgraphic__image"
-        src={_graphic.src}
-        aria-label={_graphic.alt || null}
-        aria-hidden={!_graphic.alt || null}
+        src={_graphic?.src}
+        alt={_graphic?.alt}
         data-tooltip-id={_tooltip?._isEnabled && _tooltip?._id}
       />
       }
