@@ -585,3 +585,70 @@ describe('Hot Graphic - v6.14.2 to v6.15.0', async () => {
     fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.15.0' }]
   });
 });
+
+describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
+  let hotgraphics, course, courseHotgraphicGlobals;
+  const originalPrevious = '{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}';
+  const updatedPrevious = '{{#if isAtStart}}{{_globals._accessibility._ariaLabels.previous}}{{else}}{{#if title}}Back to {{{title}}}{{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}} (item {{itemNumber}} of {{totalItems}}){{/if}}';
+  const originalNext = '{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}';
+  const updatedNext = '{{#if isAtEnd}}{{_globals._accessibility._ariaLabels.next}}{{else}}{{#if title}}Forward to {{{title}}}{{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}} (item {{itemNumber}} of {{totalItems}}){{/if}}';
+
+  whereFromPlugin('Hot Graphic - from @@CURRENT_VERSION', { name: 'adapt-contrib-hotgraphic', version: '<@@RELEASE_VERSION' });
+
+  whereContent('Hot Graphic - where hotgraphic', async content => {
+    hotgraphics = getComponents('hotgraphic');
+    return hotgraphics.length;
+  });
+
+  mutateContent('Hot Graphic - update globals previous attribute', async content => {
+    course = getCourse();
+    courseHotgraphicGlobals = course._globals?._components?._hotgraphic;
+    if (courseHotgraphicGlobals?.previous === originalPrevious) courseHotgraphicGlobals.previous = updatedPrevious;
+    return true;
+  });
+
+  mutateContent('Hot Graphic - update globals next attribute', async content => {
+    if (courseHotgraphicGlobals?.next === originalNext) courseHotgraphicGlobals.next = updatedNext;
+    return true;
+  });
+
+  checkContent('Hot Graphic - check globals previous attribute', async content => {
+    if (courseHotgraphicGlobals?.previous === originalPrevious) throw new Error('Hot Graphic - globals previous not updated');
+    return true;
+  });
+
+  checkContent('Hot Graphic - check globals next attribute', async content => {
+    if (courseHotgraphicGlobals?.next === originalNext) throw new Error('Hot Graphic - globals next not updated');
+    return true;
+  });
+
+  updatePlugin('Hot Graphic - update to @@RELEASE_VERSION', { name: 'adapt-contrib-hotgraphic', version: '@@RELEASE_VERSION', framework: '>=5.39.12' });
+
+  testSuccessWhere('hotgraphic component with original globals', {
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    content: [
+      { _id: 'c-100', _component: 'hotgraphic' },
+      { _type: 'course', _globals: { _components: { _hotgraphic: { previous: originalPrevious, next: originalNext } } } }
+    ]
+  });
+
+  testSuccessWhere('hotgraphic component with empty course._globals', {
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    content: [
+      { _id: 'c-100', _component: 'hotgraphic' },
+      { _type: 'course', _globals: { _components: { _hotgraphic: {} } } }
+    ]
+  });
+
+  testStopWhere('no hotgraphic components', {
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    content: [
+      { _component: 'other' },
+      { _type: 'course' }
+    ]
+  });
+
+  testStopWhere('incorrect version', {
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@RELEASE_VERSION' }]
+  });
+});
