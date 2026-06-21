@@ -466,7 +466,7 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
   });
 
   mutateContent('Hot Graphic - add item _tooltip._position attribute', async (content) => {
-    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { _.set(item, '_tooltip._position', ''); }); });
+    hotgraphics.forEach(({ _items }) => { _items.forEach(item => { _.set(item, '_tooltip._position', 'bottom'); }); });
     return true;
   });
 
@@ -477,7 +477,7 @@ describe('Hot Graphic - v6.12.1 to v6.13.1', async () => {
   });
 
   checkContent('Hot Graphic - check item _tooltip._position attribute', async content => {
-    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?._position === ''));
+    const isValid = hotgraphics.every(({ _items }) => _items.every((item) => item?._tooltip?._position === 'bottom'));
     if (!isValid) throw new Error('Hot Graphic - item _tooltip._position attribute invalid');
     return true;
   });
