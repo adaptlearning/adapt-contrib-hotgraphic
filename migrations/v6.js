@@ -586,14 +586,14 @@ describe('Hot Graphic - v6.14.2 to v6.15.0', async () => {
   });
 });
 
-describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
+describe('Hot Graphic - 6.20.2 to 6.21.0', async () => {
   let hotgraphics, course, courseHotgraphicGlobals;
   const originalPrevious = '{{#if title}}Back to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}}';
   const updatedPrevious = '{{#if isAtStart}}{{_globals._accessibility._ariaLabels.previous}}{{else}}{{#if title}}Back to {{{title}}}{{else}}{{_globals._accessibility._ariaLabels.previous}}{{/if}} (item {{itemNumber}} of {{totalItems}}){{/if}}';
   const originalNext = '{{#if title}}Forward to {{{title}}} (item {{itemNumber}} of {{totalItems}}){{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}}';
   const updatedNext = '{{#if isAtEnd}}{{_globals._accessibility._ariaLabels.next}}{{else}}{{#if title}}Forward to {{{title}}}{{else}}{{_globals._accessibility._ariaLabels.next}}{{/if}} (item {{itemNumber}} of {{totalItems}}){{/if}}';
 
-  whereFromPlugin('Hot Graphic - from @@CURRENT_VERSION', { name: 'adapt-contrib-hotgraphic', version: '<@@RELEASE_VERSION' });
+  whereFromPlugin('Hot Graphic - from 6.20.2', { name: 'adapt-contrib-hotgraphic', version: '<6.21.0' });
 
   whereContent('Hot Graphic - where hotgraphic', async content => {
     hotgraphics = getComponents('hotgraphic');
@@ -622,10 +622,10 @@ describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
     return true;
   });
 
-  updatePlugin('Hot Graphic - update to @@RELEASE_VERSION', { name: 'adapt-contrib-hotgraphic', version: '@@RELEASE_VERSION', framework: '>=5.39.12' });
+  updatePlugin('Hot Graphic - update to 6.21.0', { name: 'adapt-contrib-hotgraphic', version: '6.21.0', framework: '>=5.39.12' });
 
   testSuccessWhere('hotgraphic component with original globals', {
-    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.20.2' }],
     content: [
       { _id: 'c-100', _component: 'hotgraphic' },
       { _type: 'course', _globals: { _components: { _hotgraphic: { previous: originalPrevious, next: originalNext } } } }
@@ -633,7 +633,7 @@ describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
   });
 
   testSuccessWhere('hotgraphic component with empty course._globals', {
-    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.20.2' }],
     content: [
       { _id: 'c-100', _component: 'hotgraphic' },
       { _type: 'course', _globals: { _components: { _hotgraphic: {} } } }
@@ -641,7 +641,7 @@ describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
   });
 
   testStopWhere('no hotgraphic components', {
-    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@CURRENT_VERSION' }],
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.20.2' }],
     content: [
       { _component: 'other' },
       { _type: 'course' }
@@ -649,6 +649,6 @@ describe('Hot Graphic - @@CURRENT_VERSION to @@RELEASE_VERSION', async () => {
   });
 
   testStopWhere('incorrect version', {
-    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '@@RELEASE_VERSION' }]
+    fromPlugins: [{ name: 'adapt-contrib-hotgraphic', version: '6.21.0' }]
   });
 });
