@@ -34,7 +34,7 @@ export default class HotgraphicModel extends ItemsComponentModel {
       tooltipConfig._position = tooltipConfig._position || 'outside bottom middle middle';
       tooltip._position = tooltipConfig._position;
       const tooltipModel = tooltips.register(tooltipConfig);
-      child.on('change', () => {
+      this.listenTo(child, 'change', () => {
         tooltipModel.set({
           ...child.toJSON(),
           ...tooltip,
