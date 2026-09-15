@@ -209,9 +209,6 @@
                 "type": "object",
                 "title": "Graphic",
                 "default": {},
-                "required": [
-                  "src"
-                ],
                 "properties": {
                   "src": {
                     "type": "string",
